@@ -7,6 +7,11 @@
 }
 .nav li {
     display: inline;
-    }  
+}  
+.header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color:#222;
+}
 
 

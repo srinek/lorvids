@@ -1,0 +1,31 @@
+.home-section{
+    
+}
+.row-section{
+  margin-bottom: 5px;
+  margin-top: 5px;
+  background-color: #f1f7f9;
+}
+.jumbotron {
+    height: 500px;
+    background-size: cover;
+    background-color: #333;
+    background-position: center center;
+  }
+
+  .container .jumbotron {
+    position: relative;
+    
+  }
+  
+  .jumbotron h1 {
+    color: #fff;
+    font-size: 48px;  
+    font-family: 'Shift', sans-serif;
+    font-weight: bold;
+  }
+  
+  .jumbotron p {
+    font-size: 20px;
+    color: #fff;
+  }
