@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AppointmentService} from '../../service/appointment.service';
+import {Business} from '../../model/business.model';
 
 @Component({
   selector: 'app-recently-visited',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentlyVisitedComponent implements OnInit {
 
-  constructor() { }
+  public recentlyVisitedBusiness : Business[] = [];
+
+  constructor(private appointmentService : AppointmentService) { }
 
   ngOnInit() {
+    this.recentlyVisitedBusiness = this.appointmentService.getTredingBusiness();
   }
 
 }

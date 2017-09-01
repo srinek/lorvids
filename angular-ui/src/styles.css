@@ -32,3 +32,9 @@ hr {
 .div-inline{
     float:left;
 }
+.simple-panel{
+    height : 100px;
+    width : 225px;
+    /*background-color: #ffffff;
+    margin: 5px;*/
+  }

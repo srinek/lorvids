@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AppointmentService} from '../../service/appointment.service';
+import {Business} from '../../model/business.model';
 
 @Component({
   selector: 'app-trending',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrendingComponent implements OnInit {
 
-  constructor() { }
+  public trendingBusiness : Business[] = [];
+
+  constructor(private appointmentService : AppointmentService) { }
 
   ngOnInit() {
+     this.trendingBusiness = this.appointmentService.getTredingBusiness();
   }
 
+  // public getTrendingBusiness() : Business[] {
+  //   return this.appointmentService.getTredingBusiness();
+  // }
 }

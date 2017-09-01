@@ -1,10 +1,15 @@
 .home-section{
     
 }
+.home-panel{
+  height : 100px;
+  /*background-color: #ffffff;
+  margin: 5px;*/
+}
 .row-section{
   margin-bottom: 5px;
   margin-top: 5px;
-  background-color: #f1f7f9;
+  background-color: #ffffff;
 }
 .jumbotron {
     height: 500px;

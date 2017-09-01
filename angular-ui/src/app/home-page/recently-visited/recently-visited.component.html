@@ -3,17 +3,26 @@
         RECENTLY VISITED
   </div>  
   <div class="row">
-    <div class="col-xs-3">
-              first salon
-    </div>
-    <div class="col-xs-3">
-        doctors office
-    </div>
-    <div class="col-xs-3">
-        appliance repair
-    </div>
-    <div class="col-xs-3">
-        dentist office
+    <div class="col-xs-3" *ngFor="let business of recentlyVisitedBusiness">
+        <div class="panel panel-default simple-panel text-center">
+            <div class="panel-body">
+              <div>
+                 {{business.name}}
+              </div>
+              <div>
+                 {{business.address}}
+              </div>
+              <br>
+              <div>
+               <div class="div-inline pull-right">
+                   <a [routerLink]="['appointment', business.id]"> book appointment </a>
+               </div>
+               <div class="div-inline">
+                 <a [routerLink]="['review', business.id]"> write review </a>
+                </div>
+              </div>
+            </div>
+         </div>
     </div>
   </div>
   <div>

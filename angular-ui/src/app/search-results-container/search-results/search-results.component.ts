@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
+import { AppointmentService} from '../../service/appointment.service';
+import {Business} from '../../model/business.model';
 
 @Component({
   selector: 'app-search-results',
@@ -7,9 +11,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
 
-  constructor() { }
+  public searchResults : Business[] = [];
+  public searchTerm : string = "";
+  
+  constructor(private appointmentService : AppointmentService,
+              private route : ActivatedRoute,
+              private router : Router
+              ) {
+
+  }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      (params: Params) => {
+         this.searchTerm = params['searchFor'];
+         this.searchResults = this.appointmentService.getSearchResults(this.searchTerm);
+      }
+    );
+    
   }
+
 
 }

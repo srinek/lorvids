@@ -7,18 +7,27 @@
   <div class="row m-bot-3 h4">
         TRENDING
   </div>  
-  <div class="row row-section">
-    <div class="col-sm-3">
-              first salon
-    </div>
-    <div class="col-sm-3">
-        doctors office
-    </div>
-    <div class="col-sm-3">
-        appliance repair
-    </div>
-    <div class="col-sm-3">
-        dentist office
+  <div class="row">
+    <div class="col-sm-3" *ngFor="let business of trendingBusiness">
+        <div class="panel panel-default simple-panel text-center">
+           <div class="panel-body">
+             <div>
+                {{business.name}}
+             </div>
+             <div>
+                {{business.address}}
+             </div>
+             <br>
+             <div>
+              <div class="div-inline pull-right">
+                  <a [routerLink]="['appointment', business.id]"> book appointment </a>
+              </div>
+              <div class="div-inline">
+                <a [routerLink]="['review', business.id]"> write review </a>
+               </div>
+             </div>
+           </div>
+        </div>
     </div>
   </div>
   <div>

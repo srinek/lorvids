@@ -13,7 +13,8 @@ import { PageNotFound404Component } from './page-not-found-404/page-not-found-40
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchResultsContainerComponent } from './search-results-container/search-results-container.component';
-
+import {AppointmentService} from './service/appointment.service';
+import {Logger} from './service/logger.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { SearchResultsContainerComponent } from './search-results-container/sear
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [AppointmentService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
