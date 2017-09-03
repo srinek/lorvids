@@ -1,4 +1,13 @@
-.search-box{
-    margin-bottom: 18px;
-    align-content: center;
+#search-input{
+    height: 50px;
+    width: 426px;
+    position: relative;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+  }
+
+#search-btn{
+    float: right;
+    height: 50px;
+    border-radius: 0px;
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
@@ -9,7 +9,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class SearchBoxComponent implements OnInit {
 
-  private searchFor : string = "searchfor";
 
   constructor(private route: ActivatedRoute,
     private router: Router) { }
@@ -17,8 +16,8 @@ export class SearchBoxComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSearch() : void{
-    this.router.navigate(['/search/'+this.searchFor],{relativeTo:this.route});
+  onSearch(searchVal) : void{
+    this.router.navigate(['/search/', searchVal],{relativeTo:this.route});
   }
 
 }

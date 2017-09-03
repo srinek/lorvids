@@ -25,6 +25,7 @@ export class SearchResultsComponent implements OnInit {
     this.route.params.subscribe(
       (params: Params) => {
          this.searchTerm = params['searchFor'];
+         console.log("searchFor "+this.searchTerm);
          this.searchResults = this.appointmentService.getSearchResults(this.searchTerm);
       }
     );

@@ -32,9 +32,29 @@ hr {
 .div-inline{
     float:left;
 }
-.simple-panel{
-    height : 100px;
-    width : 225px;
-    /*background-color: #ffffff;
-    margin: 5px;*/
-  }
+
+
+textarea, input[type='date'], input[type='datetime'], input[type='datetime-local'], input[type='email'], input[type='month'], input[type='number'], input[type='password'], input[type='search'], input[type='tel'], input[type='text'], input[type='time'], input[type='url'], input[type='week'] {
+    -webkit-appearance: none;
+    background-color: #fff;
+    font: 400 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #777777;
+    border: 1px #b2b2b2 solid;
+    padding: 6px 7px 7px 7px;
+    margin: 0;
+    resize: none;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+input, textarea, select {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+input, select {
+    vertical-align: middle;
+}
+button, input, select, textarea {
+    margin: 0;
+    padding: 0;
+}
