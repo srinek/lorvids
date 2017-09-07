@@ -3,6 +3,7 @@ body {
     position: relative;
     margin: 0;
     padding-bottom: 21rem;
+    background-color: #f7f7f7 !important;
 }
 hr {
     margin-top: 15px;

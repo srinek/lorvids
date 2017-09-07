@@ -5,10 +5,10 @@
   yelp reviews
   google reviews
   -->
-<div class="container search-result">
-  <div class="row" *ngFor="let business of searchResults">
+<div class="container search-result" *ngFor="let business of searchResults">
+  <div class="row">
       
-      <div class="col-md-12 m-top-2">
+      <div class="col-xs-12 m-top-2">
         <div class="media-photo-badge div-inline m-right-5">
             <span href="/users/show/nanda_profile_num" class="media-photo media-round">
                 <img alt="{{business.name}}" height="115" width="115" data-pin-nopin="true" src="{{business.imageurl}}" title="{{business.name}}">
