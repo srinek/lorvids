@@ -8,7 +8,8 @@ import { SearchResultsContainerComponent } from './search-results-container/sear
 
 
 const appRoutes : Routes = [
-    {path:'', component : HomePageComponent},
+    {path:'', component : HomePageComponent, pathMatch: 'full'},
+    {path:'search', component : SearchResultsContainerComponent},
     {path:'search/:searchFor', component : SearchResultsContainerComponent}/* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];

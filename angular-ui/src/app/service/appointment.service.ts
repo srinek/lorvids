@@ -1,10 +1,13 @@
 import { Injectable }    from '@angular/core';
+import {Subject} from 'rxjs/Subject';
 
 import {Business} from '../model/business.model';
 import {Logger} from './logger.service';
 
 @Injectable()
 export class AppointmentService {
+
+    mainPageUnLoaded = new Subject<boolean>();
 
     constructor(private logger: Logger){
 
@@ -42,6 +45,11 @@ export class AppointmentService {
     }
 
     public getSearchResults(searchTerm : string) : Business[] {
+        this.mainPageUnLoaded.next(true);
         return this.searchResults;
+    }
+
+    public triggerMainPageLoaded(){
+        this.mainPageUnLoaded.next(false);
     }
 }

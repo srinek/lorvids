@@ -27,7 +27,7 @@ hr {
     margin-top: 24px;
 }
 .m-right-5{
-    margin-right: 30px;
+    margin-right: 30px !important;
 }
 .div-inline{
     float:left;
@@ -57,4 +57,31 @@ input, select {
 button, input, select, textarea {
     margin: 0;
     padding: 0;
+}
+
+#home-page form #search-input{
+    height: 50px;
+    width: 426px;
+    position: relative;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+}
+
+#home-page form #search-btn{
+    float: right;
+    height: 50px;
+    border-radius: 0px;
+}
+
+#header-search form #search-input{
+    height: 50px;
+    width: 426px;
+    position: relative;
+    -webkit-transition: opacity .2s;
+    transition: opacity .2s;
+}
+#header-search form #search-btn{
+    float: right;
+    height: 50px;
+    border-radius: 0px;
 }
