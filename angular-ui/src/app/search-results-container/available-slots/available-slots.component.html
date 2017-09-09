@@ -1,0 +1,22 @@
+<div class="m-top-2 staff-container">
+  <div class="row m-top-2 text-center" >
+      <div class="col-sm-2"></div>
+      <div class="col-sm-5" *ngFor="let appointment of staff.availableSlots">{{appointment.date}} </div>
+  </div>
+  <div class="row m-top-2 text-center">
+      <div class="col-sm-2">{{staff.name}}</div>
+      <div class="col-sm-5" *ngFor="let appointment of staff.availableSlots">
+          <div class="appointment-slot-container" *ngFor="let slot of appointment.slots">
+              <a class="btn btn-info btn-xs">{{slot}}</a>
+          </div>
+          <div class="appointment-slot-container more-slots">
+              <a class="btn btn-info btn-xs">More Slots</a>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-sm-12">
+        <hr>
+      </div>
+  </div> 
+</div>

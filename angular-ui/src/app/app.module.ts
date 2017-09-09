@@ -16,6 +16,7 @@ import { SearchResultsContainerComponent } from './search-results-container/sear
 import {AppointmentService} from './service/appointment.service';
 import {Logger} from './service/logger.service';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { BookAppointmentComponent } from './book-appointment/book-appointment.co
     ErrorPageComponent,
     HomePageComponent,
     SearchResultsContainerComponent,
-    BookAppointmentComponent
+    BookAppointmentComponent,
+    AvailableSlotsComponent
   ],
   imports: [
     BrowserModule,

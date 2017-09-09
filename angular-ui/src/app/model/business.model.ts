@@ -1,3 +1,4 @@
+import {Staff} from './staff';
 
 export class Business{
 
@@ -6,6 +7,6 @@ export class Business{
     address : string;
     imageurl : string;
     rating : number[];
-
+    staff? : Staff[];
 
 }

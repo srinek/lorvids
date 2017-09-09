@@ -3,26 +3,6 @@
     margin-top: 20px;
     background-color: #fff;
 }
-.staff-container{
-    width : 70%;
-}
-
-.appointment-slot-container{
-    float: left;
-    padding: 3px 25px;
-    width : 90px;
-    height : 24px;
-    text-align: center;
-    vertical-align: middle;
-}
-
-hr{
-    size: 10px;
-}
-
-.more-slots{
-   padding-top: 10px;    
-}
 
 .text-muted {
     color: #757575;

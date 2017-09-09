@@ -8,89 +8,31 @@
 <div class="container search-result" *ngFor="let business of searchResults">
   <div class="row">
       
-      <div class="col-xs-12 m-top-2">
+      <div class="col-sm-2">
         <div class="media-photo-badge div-inline m-right-5">
-            <span href="/users/show/nanda_profile_num" class="media-photo media-round">
-                <img alt="{{business.name}}" height="115" width="115" data-pin-nopin="true" src="{{business.imageurl}}" title="{{business.name}}">
-            </span>
+                <span href="/users/show/nanda_profile_num" class="media-photo media-round">
+                    <img alt="{{business.name}}" height="115" width="115" data-pin-nopin="true" src="{{business.imageurl}}" title="{{business.name}}">
+                </span>
         </div>
-        <div>
-           <h3 id="prod_name" class="m-bot-1"> {{business.name}}</h3>
-        </div>
-        <div>
-            <span class="badge">20</span> Reviews
-            <span class="glyphicon glyphicon-star review-icon icon-beach" *ngFor="let r of business.rating"></span>
-        </div>
-        <div id="address" class="m-bot-2 text-muted">
-          {{business.address}}.
-        </div>
-        <div>
-            <div class="container m-top-2 staff-container">
-                <div class="row m-top-2 text-center">
-                    <div class="col-sm-offset-4 col-sm-4">Thursday, 17 Sep 2017 </div>
-                    <div class="col-sm-4">Friday, 18 Sep 2017</div>
-                </div>
-                <div class="row m-top-2 text-center">
-                    <div class="col-sm-4">Dr. Naveen</div>
-                    <div class="col-sm-4">
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">10:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">10:30 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">11:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">11:30 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">12:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">12:30 AM</a>
-                        </div>
-                        <a class="btn btn-xs btn-primary more-slots">More Slots</a>
-                    </div>
-                    <div class="col-sm-4">
+      </div>
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12">
-                      <hr>
-                    </div>
-                </div> 
-                <div class="row m-top-2 text-center">
-                    <div class="col-sm-4">Dr. pompi</div>
-                    <div class="col-sm-4">
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">10:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">10:30 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">11:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">11:30 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">12:00 AM</a>
-                        </div>
-                        <div class="appointment-slot-container">
-                            <a class="btn btn-info btn-xs">12:30 AM</a>
-                        </div>
-                        <a class="btn btn-xs btn-primary more-slots">More Slots</a>
-                    </div>
-                    <div class="col-sm-4">
-                        
-                    </div>
-                </div>
+      <div class="col-sm-2">
+            <div>
+                <h3 class="m-bot-1"> {{business.name}}</h3>
             </div>
-        </div>
+            <div>
+                <span class="badge">20</span> Reviews
+                <span class="glyphicon glyphicon-star review-icon icon-beach" *ngFor="let r of business.rating"></span>
+            </div>
+            <div id="address" class="m-bot-2 text-muted">
+                {{business.address}}.
+            </div>
+      </div>
+
+      <div class="col-sm-8">
+            <div *ngFor="let staff of business.staff">
+                    <app-available-slots [staff]="staff"> </app-available-slots>
+            </div>
       </div>
      
 	</div>
