@@ -35,6 +35,12 @@ hr {
 .m-right-5{
     margin-right: 30px !important;
 }
+.m-left-1{
+    margin-left: 6px;
+}
+.m-left-2{
+    margin-left: 12px;
+}
 .div-inline{
     float:left;
 }

@@ -11,9 +11,8 @@
         </div>
     </div> 
     <div class="row">
-        <div class="panel booking-container">
-            <div class="panel-header"> <h3> Appointment For </h3></div>
-            <div class="panel-content">
+        <div class="panel col-sm-7">
+            <div class="panel-content m-top-2">
                 <form>
                     <div class="form-group">
                         <label for="id-name" class="col-2 col-form-label"> Name </label>
@@ -28,17 +27,23 @@
                         </div>
                     </div>
                     <div class="form-group">
-                            <label for="id-phone" class="col-2 col-form-label">Phone</label>
-                            <div class="col-10">
-                                <input name="u-phone" id="id-phone" class="form-control">
-                            </div>
+                        <label for="id-phone" class="col-2 col-form-label">Phone</label>
+                        <div class="col-10">
+                            <input name="u-phone" id="id-phone" class="form-control">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="id-spl-instr" class="col-2 col-form-label">Special Insructions (Optional)</label>
+                        <div class="col-10">
+                            <textarea name="u-phone" name="spl-instr" id="id-spl-instr" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="row">
-        <div class="panel booking-container">
+        <div class="panel col-sm-7">
             <div class="panel-header">
                  <h3>Appointment Details</h3>
             </div>
@@ -49,7 +54,7 @@
                     <div>
                         <h4 class="m-bot-1"> Dr. Naveen</h4>
                     </div>
-                    <div><h4>Pediatrician</h4></div>
+                    <div><h4>Doctor visit</h4></div>
                     <div id="address" class="m-bot-2 text-muted">
                         1024 Waterford Drive,
                         <br>
@@ -60,8 +65,27 @@
             </div>
         </div>
         
-    </div>    
+    </div>  
     <div class="row">
-         <a class="btn btn-md btn-primary booking-container"> Book Appointment</a>
+        <div class="panel col-sm-7">
+            <div class="panel-header">
+                <h3>Special Notes : </h3>
+            </div>
+            <div class="panel-content m-left-2 m-top-2">
+                <ul class="list-group">
+                    <li class="list-item">
+                        Please carry insurance details during visit.
+                    </li>
+                    <li class="list-item">
+                        cash required for copyament
+                    </li>
+                </ul>
+            </div>    
+        </div>
+    </div>  
+    <div class="row">
+        <div class="col-sm-7">
+           <a class="btn btn-md btn-primary booking-btn"> Book Appointment</a>
+        </div>
     </div>
 </div>
