@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router, Params} from '@angular/router';
 
 @Component({
   selector: 'app-book-appointment',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BookAppointmentComponent implements OnInit {
 
-  constructor() { }
+  private bookingId : string = "";
+
+  constructor(
+    private route : ActivatedRoute,
+    private router : Router
+  ) { 
+
+  }
 
   ngOnInit() {
+    this.route.params.subscribe(
+      (params : Params) => {
+          this.bookingId = params['bookingId'];
+      }
+    )
   }
 
 }

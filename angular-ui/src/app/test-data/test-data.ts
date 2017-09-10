@@ -13,27 +13,27 @@ export const searchResults :  Business[] = [
                     {
                         date : new Date("09/10/2017"),
                         slots : [
-                            "10:00 AM",
-                            "10:30 AM",
-                            "11:00 AM",
-                            "11:30 AM",
-                            "12:00 AM",
-                            "12:30 AM",
-                            "01:00 AM",
-                            "01:30 AM",
+                            {bookingId:'b1s1s1', slotTime : "10:00 AM"},
+                            {bookingId:'b1s1s2', slotTime : "10:30 AM"},
+                            {bookingId:'b1s1s3', slotTime : "11:00 AM"},
+                            {bookingId:'b1s1s4', slotTime : "11:30 AM"},
+                            {bookingId:'b1s1s5', slotTime : "12:00 AM"},
+                            {bookingId:'b1s1s6', slotTime : "12:30 AM"},
+                            {bookingId:'b1s1s7', slotTime : "01:00 AM"},
+                            {bookingId:'b1s1s8', slotTime : "01:30 AM"}
                         ]
                     },
                     {
                         date : new Date("09/11/2017"),
                         slots : [
-                            "10:00 AM",
-                            "10:30 AM",
-                            "11:00 AM",
-                            "11:30 AM",
-                            "12:00 AM",
-                            "12:30 AM",
-                            "01:00 AM",
-                            "01:30 AM",
+                            {bookingId:'b1s2s1', slotTime : "10:00 AM"},
+                            {bookingId:'b1s2s1', slotTime : "10:30 AM"},
+                            {bookingId:'b1s2s1', slotTime : "11:00 AM"},
+                            {bookingId:'b1s2s1', slotTime : "11:30 AM"},
+                            {bookingId:'b1s2s1', slotTime : "12:00 AM"},
+                            {bookingId:'b1s2s1', slotTime : "12:30 AM"},
+                            {bookingId:'b1s2s1', slotTime : "01:00 AM"},
+                            {bookingId:'b1s2s1', slotTime : "01:30 AM"},
                         ]
                     }
                 ]
@@ -44,27 +44,27 @@ export const searchResults :  Business[] = [
                     {
                         date : new Date("09/10/2017"),
                         slots : [
-                            "10:00 AM",
-                            "10:30 AM",
-                            "11:00 AM",
-                            "11:30 AM",
-                            "12:00 AM",
-                            "12:30 AM",
-                            "01:00 AM",
-                            "01:30 AM",
+                            {bookingId:'b1s2s1', slotTime : "10:00 AM"},
+                            {bookingId:'b1s2s2', slotTime : "10:30 AM"},
+                            {bookingId:'b1s2s3', slotTime : "11:00 AM"},
+                            {bookingId:'b1s2s4', slotTime : "11:30 AM"},
+                            {bookingId:'b1s2s5', slotTime : "12:00 AM"},
+                            {bookingId:'b1s2s6', slotTime : "12:30 AM"},
+                            {bookingId:'b1s2s7', slotTime : "01:00 AM"},
+                            {bookingId:'b1s2s8', slotTime : "01:30 AM"},
                         ]
                     },
                     {
                         date : new Date("09/11/2017"),
                         slots : [
-                            "10:00 AM",
-                            "10:30 AM",
-                            "11:00 AM",
-                            "11:30 AM",
-                            "12:00 AM",
-                            "12:30 AM",
-                            "01:00 AM",
-                            "01:30 AM",
+                            {bookingId:'b1s2s9', slotTime : "10:00 AM"},
+                            {bookingId:'b1s2s10', slotTime : "10:30 AM"},
+                            {bookingId:'b1s2s11', slotTime : "11:00 AM"},
+                            {bookingId:'b1s2s12', slotTime : "11:30 AM"},
+                            {bookingId:'b1s2s13', slotTime : "12:00 AM"},
+                            {bookingId:'b1s2s14', slotTime : "12:30 AM"},
+                            {bookingId:'b1s2s15', slotTime : "01:00 AM"},
+                            {bookingId:'b1s2s16', slotTime : "01:30 AM"},
                         ]
                     }
                 ]

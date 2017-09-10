@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import {Staff} from '../../model/Staff';
+import {Staff} from '../../model/staff.model';
 
 @Component({
   selector: 'app-available-slots',

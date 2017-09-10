@@ -1,4 +1,4 @@
-import {Appointment} from './appointment';
+import {AvailableSlots} from './available-slots.model';
 
 export class Staff {
 
@@ -6,5 +6,5 @@ export class Staff {
     name : string;
     rating? : number;
     about? : string;
-    availableSlots : Appointment[];
+    availableSlots : AvailableSlots[];
 }
