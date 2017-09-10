@@ -1,5 +1,8 @@
 .booking-container{
-    width: 800px;
+    width: 600px;
     padding-left: 20px;
 }
 
+.col-10{
+    width: 500px;
+}
