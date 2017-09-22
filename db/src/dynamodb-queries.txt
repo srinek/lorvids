@@ -1,0 +1,93 @@
+-------------------------------------------------------------------------
+User 
+-------------------------------------------------------------------------
+aws dynamodb delete-table --table-name User
+aws dynamodb create-table --table-name User --attribute-definitions AttributeName=UserId,AttributeType=S --key-schema AttributeName=UserId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1 
+
+--endpoint-url http://localhost:8001
+
+-----------------------------------------------------------------------------
+Appointments  
+-----------------------------------------------------------------------------
+aws dynamodb delete-table --table-name Appointments
+aws dynamodb create-table --table-name Appointments --attribute-definitions AttributeName=BusId,AttributeType=S AttributeName=UserId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH AttributeName=UserId,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1 
+
+	AttributeName=Time,AttributeType=S 
+	AttributeName=TimeZone,AttributeType=S  
+	AttributeName=SpecialInstructions,AttributeType=S
+--endpoint-url http://localhost:8001
+
+-----------------------------------------------------------------------------
+Business
+-----------------------------------------------------------------------------
+aws dynamodb delete-table --table-name Business
+aws dynamodb create-table --table-name Business --attribute-definitions AttributeName=BusId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1
+
+aws dynamodb create-table --table-name Business --attribute-definitions AttributeName=BusId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1 --endpoint-url http://localhost:8001
+
+AttributeName=Name,AttributeType=S AttributeName=Address,AttributeType=S AttributeName=Email,AttributeType=S  AttributeName=Phone,AttributeType=S AttributeName=ImageUrl,AttributeType=S
+--endpoint-url http://localhost:8001
+
+--------------------------------------------------------------------------------
+Employees  
+--------------------------------------------------------------------------------
+aws dynamodb delete-table --table-name Employees
+
+aws dynamodb create-table --table-name Employees --attribute-definitions AttributeName=BusId,AttributeType=S AttributeName=EmpId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH AttributeName=EmpId,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+
+aws dynamodb create-table --table-name Employees --attribute-definitions AttributeName=BusId,AttributeType=S AttributeName=EmpId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH AttributeName=EmpId,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1  --endpoint-url http://localhost:8001
+
+--endpoint-url http://localhost:8001
+AttributeName=BusId,AttributeType=S  AttributeName=Name,AttributeType=S AttributeName=Email,AttributeType=S  AttributeName=Phone,AttributeType=S AttributeName=ImageUrl,AttributeType=S 
+
+
+
+
+
+
+
+
+
+
+
+
+Business
+--------
+Name
+address 
+category 
+appoitnmentDuration
+phoneNumber
+StatementCaption
+StatementNotes
+SpecializeIn
+AppoitnmentInstructions
+Awards
+ImageUrl
+Website
+
+BUSNIESS_SERVICES
+-----------------
+BUS_ID
+SERVICE_NAME
+SERVICE_DURATION
+COST
+
+
+HEALTH_BUSINESS
+---------------
+BUS_ID
+BUS_ALIANCE_ID
+
+
+
+EMPLOYEE
+--------
+EMP_ID
+BUS_ID
+NAME
+LanguagesSpoken
+ProfessionalMemberships
+Awards
+ImageUrl
+Website
