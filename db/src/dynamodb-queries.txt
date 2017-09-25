@@ -56,11 +56,10 @@ Business
 Name
 address 
 category 
-appoitnmentDuration
 phoneNumber
 StatementCaption
 StatementNotes
-SpecializeIn
+SpecializedIn
 AppoitnmentInstructions
 Awards
 ImageUrl

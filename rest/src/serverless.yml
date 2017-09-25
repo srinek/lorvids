@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: search-service
+service: epokly-service
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,10 +20,17 @@ service: search-service
 provider:
   name: aws
   runtime: nodejs6.10
-
+  iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 # you can overwrite defaults here
-#  stage: dev
-#  region: us-east-1
+  stage: dev
+  region: us-east-1
 
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
@@ -55,16 +62,34 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
-
-#    The following are a few example events you can configure
-#    NOTE: Please make sure to change your handler code to work with those events
-#    Check the event documentation for details
+  getBusiness:
+    handler: business/getBusiness.getBusiness
+    description : get business by Id
     events:
-       - http:
-          path: users/create
+      - http:
+          path: business/{busId}
           method: get
+  saveBusiness:
+    handler: business/saveBusiness.saveBusiness
+    description : save single business
+    iamRoleStatements: # permissions for all of your functions can be set here
+    - Effect: Allow
+      Action: # Gives permission to DynamoDB tables in a specific region
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
+    events:
+      - http:
+          path: business/save
+          method: post
+
+
+
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

@@ -1,0 +1,23 @@
+{
+  "name": "epokly-rest",
+  "version": "1.0.0",
+  "description": "rest services for epokly",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.122.0"
+  },
+  "devDependencies": {
+    "json-loader": "^0.5.7",
+    "webpack": "^3.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srinek/our_project/tree/master/rest"
+  },
+  "author": "",
+  "license": "ISC"
+}
