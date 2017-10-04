@@ -1,0 +1,83 @@
+curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/json' -d'
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "bus_std": {
+                    "type":      "standard",
+                    "stopwords": "_english_"
+                }
+            }
+        }
+    },
+	"mappings" : {
+	    "business_type" : {
+			"properties" : {
+                  "Bus_Name" : {
+                      "type" :  "text"
+			      },
+				  "Address" : {
+					 "type" :  "text"
+				  },
+				  "Phone" : {
+					 "type" :  "long"
+				  },
+				  "Category" : {
+					 "type" :  "text"
+				  },
+				  "Statement Caption" : {
+					 "type" :  "text"
+				  },
+				  "Statement Notes" : {
+					 "type" :  "text"
+				  },
+				  "SpecializedIn" : {
+					 "type" :  "text"
+				  },
+				  "AppointmentInstructions" : {
+					 "type" :  "text"
+				  },
+				  "Awards" : {
+					 "type" :  "text"
+				  }
+			}
+		}
+	}
+}'
+
+
+curl -XDELETE 'localhost:9200/business_docs?pretty'
+
+
+
+
+
+
+curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type: application/json' -d'
+{
+     "Bus_Name" : "Smile Dental",
+	 "Address" : "110 Main Street, Edison, NJ 08817",
+	 "Phone" : "7871111211",
+	 "Category" : "Health Care",
+	 "Statement Caption" : "Our Mission",
+	 "Statement Notes" : "we treat your smile special",
+	 "SpecializedIn" : "General Dentistry",
+	 "AppointmentInstructions" : "insurance not required. walk-ins welcome",
+	 "Awards" : "NJ Best Dental 2015"
+}'
+
+POST /business_docs/business_type
+{
+	 "Bus_Name" : "Rainbow Pediatrics",
+	 "Address" : "220 Second Street, Piscataway, NJ 08854",
+	 "Phone" : "9890001111",
+	 "Category" : "Health Care",
+	 "Statement Caption" : "Practice Mission",
+	 "Statement Notes" : "kids are gods",
+	 "SpecializedIn" : "pediatric needs",
+	 "AppointmentInstructions" : "insurance required. appointments needed",
+	 "Awards" : ""
+}
+
+
+curl -XGET "http://localhost:9200/_search"

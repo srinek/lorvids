@@ -5,11 +5,11 @@ ddb = new DynamoDB(configDynamodb.options);
 
 module.exports.getBusiness = (event, context, callback) => {
     // Create the DynamoDB service object
-    console.log("business id "+event.busId);
+    console.log("business *** "+ JSON.stringify(event));
     var params = {
       TableName: 'Business',
       Key: {
-        'BusId' : {S: event.busId}
+        'BusId' : {S: event.pathParameters.busId}
       }
     };
     
