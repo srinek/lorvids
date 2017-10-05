@@ -20,7 +20,7 @@ export class SearchService{
     public invokeSearch(searchTerm : string) : Observable<Business[]>{
         this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         var businessList : Business[] = [];
-        return this.http.get(this.searchUrl).map(
+        return this.http.post(this.searchUrl, '{"query" : { "match" : { "_all" : "'+searchTerm+'" } } }').map(
            (response : Response) => {
                 for(const hit of response.json().hits.hits){
                     var business = new Business();
