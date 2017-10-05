@@ -13,6 +13,8 @@ export class SearchResultsComponent implements OnInit {
 
   public searchResults : Business[] = [];
   public searchTerm : string = "";
+  public error : boolean = false;
+  public errorMessage : string = "";
   
   constructor(private appointmentService : AppointmentService,
               private route : ActivatedRoute,
@@ -26,7 +28,16 @@ export class SearchResultsComponent implements OnInit {
       (params: Params) => {
          this.searchTerm = params['searchFor'];
          console.log("searchFor "+this.searchTerm);
-         this.searchResults = this.appointmentService.getSearchResults(this.searchTerm);
+         this.appointmentService.getSearchResults(this.searchTerm)
+            .subscribe(
+                (searchResults : Business[]) => {
+                    this.searchResults = searchResults;
+                },
+                (error : string) => {
+                  this.error = true;
+                  this.errorMessage = "Yikes!!! something cramped our service "+error;
+                }
+              )
       }
     );
     

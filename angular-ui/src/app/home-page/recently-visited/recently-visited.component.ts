@@ -14,7 +14,7 @@ export class RecentlyVisitedComponent implements OnInit {
   constructor(private appointmentService : AppointmentService) { }
 
   ngOnInit() {
-    this.recentlyVisitedBusiness = this.appointmentService.getTredingBusiness();
+    this.recentlyVisitedBusiness = this.appointmentService.getTrendingBusiness();
   }
 
 }

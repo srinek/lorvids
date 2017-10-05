@@ -14,7 +14,7 @@ export class TrendingComponent implements OnInit {
   constructor(private appointmentService : AppointmentService) { }
 
   ngOnInit() {
-     this.trendingBusiness = this.appointmentService.getTredingBusiness();
+     this.trendingBusiness = this.appointmentService.getTrendingBusiness();
   }
 
   // public getTrendingBusiness() : Business[] {

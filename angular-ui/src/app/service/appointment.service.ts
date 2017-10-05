@@ -2,29 +2,30 @@ import { Injectable }    from '@angular/core';
 
 import {Business} from '../model/business.model';
 import {Logger} from './logger.service';
-import { URLSearchParams, Http, Response } from '@angular/http';
+import {SearchService} from './search.service';
+import { Response } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
 //test imports
-import {trendingBusiness,recentlyVisitedBusiness, searchResults} from '../test-data/test-data';
+import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 
 @Injectable()
 export class AppointmentService {
 
     mainPageUnLoaded = new Subject<boolean>();
-    searchResults : Business[] = searchResults;
-    restUrl : string = "";
+    searchResults : Business[];
+    
 
     constructor(private logger: Logger,
-                private http : Http){
+                private searchService : SearchService){
 
     }
 
     private rating : number[] = [0 , 0 , 0 ,0 ];
 
-    public getTredingBusiness() : Business[] {
+    public getTrendingBusiness() : Business[] {
         return trendingBusiness;
     }
 
@@ -32,16 +33,12 @@ export class AppointmentService {
         return recentlyVisitedBusiness;
     }
 
-    public getSearchResults(searchTerm : string) : Business[] {
+    public getSearchResults(searchTerm : string) : Observable<Business[]> {
         this.mainPageUnLoaded.next(true);
-        this.http.get(this.restUrl+"").map(
-            (response : Response) => {
-                this.logger.log(response.json());
-                this.searchResults = JSON.parse(response.json());
-            }
-        )
-        return this.searchResults;
+        return this.searchService.invokeSearch(searchTerm);
     }
+
+    
 
     public triggerMainPageLoaded(){
         this.mainPageUnLoaded.next(false);
