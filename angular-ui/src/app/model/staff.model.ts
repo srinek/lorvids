@@ -1,10 +1,19 @@
-import {AvailableSlots} from './available-slots.model';
+import {Slots} from './slots.model';
+import {AppointmentSlot} from './appointment-slot.model';
 
 export class Staff {
 
-    id? : number;
-    name : string;
+    staff_id : number;
+    staff_name : string;
     rating? : number;
-    about? : string;
-    availableSlots : AvailableSlots[];
+    tags : string;
+    service_time : string;
+    bus_hours : any = {};
+    holidays : string = "";
+
+    public getAvailableSlots(onDate : Date) : AppointmentSlot[]{
+        //find booked slots
+        //compute available slots
+        return null;
+    }
 }

@@ -25,7 +25,7 @@
 
         <div class="col-sm-2">
                 <div>
-                    <h3 class="m-bot-1"> {{business.name}}</h3>
+                    <h3 class="m-bot-1"> {{business.bus_name}}</h3>
                 </div>
                 <div>
                     <span class="badge">20</span> Reviews
@@ -38,7 +38,8 @@
 
         <div class="col-sm-8">
                 <div *ngFor="let staff of business.staff">
-                        <app-available-slots [staff]="staff"> </app-available-slots>
+                        <app-available-slots [business]="business" 
+                        [staff]="staff"> </app-available-slots>
                 </div>
         </div>
         

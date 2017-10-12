@@ -45,6 +45,9 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 				  "awards" : {
 					 "type" :  "text"
 				  },
+				  "bus_time_zone" : {
+				      "type" : "text"
+				  },
 				  "bus_hours" : {
 					 "type" : "nested",
 					 "properties" : {
@@ -57,7 +60,15 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 					 }
 				  },
 				  "holidays" : {
-					  "type" : "text"
+					  "type" : "nested",
+					  "properties" : {
+						   "weekdays" : {
+						        "type" : "short"
+						   },
+						   "dates" : {
+						        "type" : "date"
+						   }
+					  }
 				  },
 				  "staff" : {
 				       "type" : "nested",
@@ -108,6 +119,7 @@ curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type
 	 "specialized_in" : "General Dentistry",
 	 "appointment_instructions" : "insurance not required. walk-ins welcome",
 	 "awards" : "NJ Best Dental 2015",
+	 "bus_time_zone" : "EST",
 	 "bus_hours" : [
 		{ 
 	     "day" : "ALL"
@@ -118,7 +130,12 @@ curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type
 		 "time" : "9AM - 1PM"
 		}
 	 ],
-	 "holidays" : ["SUN", "WED"],
+	 "holidays" : [
+		   {
+		      "weekdays" : [0 ,3],
+			  "dates": ['01/01', '07/04','12/25']
+		   }
+	 ],
 	 "staff" : [
 		{
 			"staff_id" : "b-test-01-s-01",
@@ -158,6 +175,7 @@ POST /business_docs/business_type
 	 "specialized_in" : "pediatric needs",
 	 "appointment_instructions" : "insurance required. appointments needed",
 	 "awards" : "NJ Best Dental 2017",
+	 "bus_time_zone" : "EST",
 	 "bus_hours" : [
 		{ 
 	     "day" : "ALL"

@@ -1,6 +1,6 @@
 import {AppointmentSlot} from './appointment-slot.model';
 
-export class AvailableSlots{
+export class Slots{
     date : Date;
     slots : AppointmentSlot[];
 }

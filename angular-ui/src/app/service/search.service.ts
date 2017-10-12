@@ -20,14 +20,13 @@ export class SearchService{
     public invokeSearch(searchTerm : string) : Observable<Business[]>{
         this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         var businessList : Business[] = [];
-        return this.http.post(this.searchUrl, '{"query" : { "match" : { "_all" : "'+searchTerm+'" } } }').map(
-           (response : Response) => {
+        return this.http.post(this.searchUrl, 
+                            '{"query" : { "match" : { "_all" : "'+searchTerm+'" } } }'
+                        ).map((response : Response) => {
                 for(const hit of response.json().hits.hits){
                     var business = new Business();
-                    business.name = hit._source.Bus_Name;
-                    business.address = hit._source.Address;
+                    business.map(hit._source);
                     business.imageurl = "../../assets/trendy_looks.jpg";
-                    business.staff = staff;
                     business.rating = [0 , 0 , 0 ,0 ];
                     businessList[businessList.length] = business;
                 }

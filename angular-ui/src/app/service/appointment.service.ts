@@ -1,12 +1,15 @@
 import { Injectable }    from '@angular/core';
-
-import {Business} from '../model/business.model';
-import {Logger} from './logger.service';
-import {SearchService} from './search.service';
 import { Response } from '@angular/http';
 import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
+
+import {Business} from '../model/business.model';
+import {Staff} from '../model/staff.model';
+import {Slots} from '../model/slots.model';
+import {AppointmentSlot} from '../model/appointment-slot.model';
+import {Logger} from './logger.service';
+import {SearchService} from './search.service';
 
 //test imports
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
@@ -38,8 +41,28 @@ export class AppointmentService {
         return this.searchService.invokeSearch(searchTerm);
     }
 
-    
+    public getAppointmentSlots(business : Business, staff : Staff) : Observable<Slots> {
+        var slots = new Slots();
+        var nextdate = business.getNextBusinessDayDefault();
+        slots.date = nextdate
+        slots.slots = business.getAvailableSlots(staff, nextdate);
+        this.logger.log(JSON.stringify(slots));
+        return null;
+    }
 
+    public getAvailableSlots(business : Business, staff : Staff) : AppointmentSlot[] {
+        var slots = [];
+        var date = new Date();
+        var hours = date.getHours();
+        for(var i = 0; i < 6; i++){
+            var appointmentSlot = new AppointmentSlot();
+            var time = hours +":"+ ( i * parseInt(staff.service_time.substring(0,2)));
+            appointmentSlot.slotTime = time;
+            slots[slots.length] = appointmentSlot;
+        }
+        return slots;
+    }
+    
     public triggerMainPageLoaded(){
         this.mainPageUnLoaded.next(false);
     }
