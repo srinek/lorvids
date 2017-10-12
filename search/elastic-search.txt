@@ -1,3 +1,5 @@
+curl -XDELETE 'localhost:9200/business_docs?pretty'
+
 curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/json' -d'
 {
     "settings": {
@@ -13,32 +15,80 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 	"mappings" : {
 	    "business_type" : {
 			"properties" : {
-                  "Bus_Name" : {
+                  "bus_id" : {
                       "type" :  "text"
 			      },
-				  "Address" : {
+				  "bus_name" : {
+                      "type" :  "text"
+			      },
+				  "address" : {
 					 "type" :  "text"
 				  },
-				  "Phone" : {
+				  "phone" : {
 					 "type" :  "long"
 				  },
-				  "Category" : {
+				  "category" : {
 					 "type" :  "text"
 				  },
-				  "Statement Caption" : {
+				  "statement_caption" : {
 					 "type" :  "text"
 				  },
-				  "Statement Notes" : {
+				  "statement_notes" : {
 					 "type" :  "text"
 				  },
-				  "SpecializedIn" : {
+				  "specialized_in" : {
 					 "type" :  "text"
 				  },
-				  "AppointmentInstructions" : {
+				  "appointment_instructions" : {
 					 "type" :  "text"
 				  },
-				  "Awards" : {
+				  "awards" : {
 					 "type" :  "text"
+				  },
+				  "bus_hours" : {
+					 "type" : "nested",
+					 "properties" : {
+						 "day" : {
+						     "type" : "date"
+						 },
+						 "time" : {
+						      "type" : "text"
+						 }
+					 }
+				  },
+				  "holidays" : {
+					  "type" : "text"
+				  },
+				  "staff" : {
+				       "type" : "nested",
+					   "properties" : {
+					       "staff_id" : {
+						        "type" : "text"
+						   },
+						   "staff_name" : {
+								"type" : "text"
+						   },
+						   "tags" : {
+						       "type" : "text"
+						   },
+						   "bus_hours" : {
+							  "type" : "nested",
+							  "properties" : {
+								  "day" : {
+								 	 "type" : "text"
+								  },
+								  "time" : {
+									  "type" : "text"
+								  }
+							  }
+						   },
+						   "holidays" : {
+						       "type" : "text"
+						   },
+						   "service_time" : {
+						       "type" : "text"
+						   }
+					   }
 				  }
 			}
 		}
@@ -46,38 +96,186 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 }'
 
 
-curl -XDELETE 'localhost:9200/business_docs?pretty'
-
-
-
-
-
-
 curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type: application/json' -d'
 {
-     "Bus_Name" : "Smile Dental",
-	 "Address" : "110 Main Street, Edison, NJ 08817",
-	 "Phone" : "7871111211",
-	 "Category" : "Health Care",
-	 "Statement Caption" : "Our Mission",
-	 "Statement Notes" : "we treat your smile special",
-	 "SpecializedIn" : "General Dentistry",
-	 "AppointmentInstructions" : "insurance not required. walk-ins welcome",
-	 "Awards" : "NJ Best Dental 2015"
+     "bus_id" : "b-test-01",
+	 "bus_name" : "Smile Dental",
+	 "address" : "110 Main Street, Edison, NJ 08817",
+	 "phone" : "7871111211",
+	 "category" : "Health Care",
+	 "statement_caption" : "Our Mission",
+	 "statement_notes" : "we treat your smile special",
+	 "specialized_in" : "General Dentistry",
+	 "appointment_instructions" : "insurance not required. walk-ins welcome",
+	 "awards" : "NJ Best Dental 2015",
+	 "bus_hours" : [
+		{ 
+	     "day" : "ALL"
+		 "time" : "10AM - 5PM"
+		},
+		{ 
+	     "day" : "SAT"
+		 "time" : "9AM - 1PM"
+		}
+	 ],
+	 "holidays" : ["SUN", "WED"],
+	 "staff" : [
+		{
+			"staff_id" : "b-test-01-s-01",
+			"staff_name" : "Dr. Susan",
+			"tags" : "DDS from NYU, 20 years experience",
+			"service_time" : "30m",
+			"bus_hours" : [
+				{ 
+				 "day" : "ALL"
+				 "time" : "10AM - 5PM"
+				},
+				{ 
+				 "day" : "MON"
+				 "time" : "12AM - 5PM"
+				}
+			 ],
+		},
+		{
+			"staff_id" : "b-test-01-s-02",
+			"staff_name" : "Dr. Devi",
+			"tags" : "DDS from RSDM, fellow in oro facial pain",
+			"holidays" : ["SAT"],
+			"service_time" : "30m"
+		}
+	 ]
 }'
 
 POST /business_docs/business_type
 {
-	 "Bus_Name" : "Rainbow Pediatrics",
-	 "Address" : "220 Second Street, Piscataway, NJ 08854",
-	 "Phone" : "9890001111",
-	 "Category" : "Health Care",
-	 "Statement Caption" : "Practice Mission",
-	 "Statement Notes" : "kids are gods",
-	 "SpecializedIn" : "pediatric needs",
-	 "AppointmentInstructions" : "insurance required. appointments needed",
-	 "Awards" : ""
+	 "bus_id" : "b-test-02",
+	 "bus_name" : "Rainbow Pediatrics",
+	 "address" : "220 Second Street, Piscataway, NJ 08854",
+	 "phone" : "9890001111",
+	 "category" : "Health Care",
+	 "statement_caption" : "Practice Mission",
+	 "statement_notes" : "kids are gods",
+	 "specialized_in" : "pediatric needs",
+	 "appointment_instructions" : "insurance required. appointments needed",
+	 "awards" : "NJ Best Dental 2017",
+	 "bus_hours" : [
+		{ 
+	     "day" : "ALL"
+		 "time" : "10AM - 5PM"
+		},
+		{ 
+	     "day" : "SAT"
+		 "time" : "9AM - 1PM"
+		}
+	 ],
+	 "holidays" : ["SUN", "WED"],
+	 "staff" : [
+		{
+			"staff_id" : "b-test-02-s-01",
+			"staff_name" : "Dr. Kartheek",
+			"tags" : "DDS from NYU, 20 years experience",
+			"service_time" : "30m"
+		},
+		{
+			"staff_id" : "b-test-02-s-01",
+			"staff_name" : "Dr. Navin",
+			"tags" : "Pediatrician from RSDM, chadis, whole child etc",
+			"service_time" : "30m"
+		}
+	 ]
 }
 
 
 curl -XGET "http://localhost:9200/_search"
+{
+	"query" : {
+		"match" : {
+			"_all" : "best"
+		}
+	}
+}
+
+curl -XDELETE 'localhost:9200/appointment_docs?pretty'
+
+curl -XPUT "http://localhost:9200/appointment_docs" -H 'Content-Type: application/json' -d'
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "bus_std": {
+                    "type":      "standard",
+                    "stopwords": "_english_"
+                }
+            }
+        }
+    },
+	"mappings" : {
+	    "appointments_type" : {
+			"properties" : {
+            "staff_id" : {
+                "type" :  "text"
+	        },
+			"slots" : {
+			  "type" :  "nested",
+			  "properties" : {
+					"date" : {
+						"type" : "date"
+					},
+					"slot" : {
+					   "type" : "nested",
+					   "properties" : {
+							"slot_id" : {
+								 "type" : "text"
+							},
+							"slot_time" : {
+								 "type" : "text"
+							}
+					   }
+					}
+			   }
+		  }
+			}
+		}
+	}
+}'
+
+POST /appointment_docs/appointments_type
+{
+	 "staff_id" : "b-test-01-s-01",
+	 "slots" : [
+		{
+		   "date" : "10/10/2017",
+		   "slot" : [
+		       {
+				  "slot_id" : "b-test-01-s-01-s-1000AM",
+				  "slot_time" : "10:00 AM"
+			   },
+			   {
+				  "slot_id" : "b-test-01-s-01-s-1130AM",
+				  "slot_time" : "11:30 AM"
+			   }
+		   ]
+		}
+	 ]
+}
+
+
+POST /appointment_docs/appointments_type
+{
+	 "staff_id" : "b-test-01-s-02",
+	 "slots" : [
+		{
+		   "date" : "10/10/2017",
+		   "slot" : [
+		       {
+				  "slot_id" : "b-test-01-s-02-s-1030AM",
+				  "slot_time" : "10:30 AM"
+			   },
+			   {
+				  "slot_id" : "b-test-01-s-02-s-0100PM",
+				  "slot_time" : "01:00 PM"
+			   }
+		   ]
+		}
+	 ]
+}
