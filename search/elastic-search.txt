@@ -1,6 +1,8 @@
 curl -XDELETE 'localhost:9200/business_docs?pretty'
+DELETE /business_docs?pretty
 
 curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/json' -d'
+PUT /business_docs
 {
     "settings": {
         "analysis": {
@@ -52,7 +54,7 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 					 "type" : "nested",
 					 "properties" : {
 						 "day" : {
-						     "type" : "date"
+						     "type" : "text"
 						 },
 						 "time" : {
 						      "type" : "text"
@@ -104,10 +106,11 @@ curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/j
 			}
 		}
 	}
-}'
+}
 
 
 curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type: application/json' -d'
+POST /business_docs/business_type
 {
      "bus_id" : "b-test-01",
 	 "bus_name" : "Smile Dental",
@@ -122,20 +125,18 @@ curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type
 	 "bus_time_zone" : "EST",
 	 "bus_hours" : [
 		{ 
-	     "day" : "ALL"
+	     "day" : "ALL",
 		 "time" : "10AM - 5PM"
 		},
 		{ 
-	     "day" : "SAT"
+	     "day" : "SAT",
 		 "time" : "9AM - 1PM"
 		}
 	 ],
-	 "holidays" : [
-		   {
+	 "holidays" : {
 		      "weekdays" : [0 ,3],
-			  "dates": ['01/01', '07/04','12/25']
-		   }
-	 ],
+			  "dates": [1507825795220, 1507825795221, 1507825795222]
+	 },
 	 "staff" : [
 		{
 			"staff_id" : "b-test-01-s-01",
@@ -144,14 +145,14 @@ curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type
 			"service_time" : "30m",
 			"bus_hours" : [
 				{ 
-				 "day" : "ALL"
+				 "day" : "ALL",
 				 "time" : "10AM - 5PM"
 				},
 				{ 
-				 "day" : "MON"
+				 "day" : "MON",
 				 "time" : "12AM - 5PM"
 				}
-			 ],
+			 ]
 		},
 		{
 			"staff_id" : "b-test-01-s-02",
@@ -161,7 +162,7 @@ curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type
 			"service_time" : "30m"
 		}
 	 ]
-}'
+}
 
 POST /business_docs/business_type
 {
@@ -178,15 +179,18 @@ POST /business_docs/business_type
 	 "bus_time_zone" : "EST",
 	 "bus_hours" : [
 		{ 
-	     "day" : "ALL"
+	     "day" : "ALL",
 		 "time" : "10AM - 5PM"
 		},
 		{ 
-	     "day" : "SAT"
+	     "day" : "SAT",
 		 "time" : "9AM - 1PM"
 		}
 	 ],
-	 "holidays" : ["SUN", "WED"],
+	 "holidays" : {
+		      "weekdays" : [0 ,4],
+			  "dates": [1507825795220, 1507825795221, 1507825795222]
+	 },
 	 "staff" : [
 		{
 			"staff_id" : "b-test-02-s-01",
@@ -205,6 +209,7 @@ POST /business_docs/business_type
 
 
 curl -XGET "http://localhost:9200/_search"
+POST /business_docs/_search
 {
 	"query" : {
 		"match" : {
@@ -214,8 +219,10 @@ curl -XGET "http://localhost:9200/_search"
 }
 
 curl -XDELETE 'localhost:9200/appointment_docs?pretty'
+DELETE /appointment_docs?pretty
 
 curl -XPUT "http://localhost:9200/appointment_docs" -H 'Content-Type: application/json' -d'
+PUT /appointment_docs
 {
     "settings": {
         "analysis": {
@@ -236,9 +243,6 @@ curl -XPUT "http://localhost:9200/appointment_docs" -H 'Content-Type: applicatio
 			"slots" : {
 			  "type" :  "nested",
 			  "properties" : {
-					"date" : {
-						"type" : "date"
-					},
 					"slot" : {
 					   "type" : "nested",
 					   "properties" : {
@@ -252,17 +256,17 @@ curl -XPUT "http://localhost:9200/appointment_docs" -H 'Content-Type: applicatio
 					}
 			   }
 		  }
-			}
 		}
 	}
-}'
+  }
+}
 
 POST /appointment_docs/appointments_type
 {
 	 "staff_id" : "b-test-01-s-01",
 	 "slots" : [
 		{
-		   "date" : "10/10/2017",
+		   "date" : 1507825795220,
 		   "slot" : [
 		       {
 				  "slot_id" : "b-test-01-s-01-s-1000AM",

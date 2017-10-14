@@ -41,13 +41,13 @@ export class AppointmentService {
         return this.searchService.invokeSearch(searchTerm);
     }
 
-    public getAppointmentSlots(business : Business, staff : Staff) : Observable<Slots> {
+    public getAppointmentSlots(business : Business, staff : Staff) : Slots {
         var slots = new Slots();
         var nextdate = business.getNextBusinessDayDefault();
         slots.date = nextdate
         slots.slots = business.getAvailableSlots(staff, nextdate);
         this.logger.log(JSON.stringify(slots));
-        return null;
+        return slots;
     }
 
     public getAvailableSlots(business : Business, staff : Staff) : AppointmentSlot[] {

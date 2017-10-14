@@ -8,7 +8,7 @@ export class Business{
     address : string;
     imageurl : string;
     rating : number[];
-    staff? : Staff[];
+    staff? : Staff[] =[];
     bus_time_zone? : string = "America/new_york";
     bus_hours? : any = {};
     holidays? : any = {};
@@ -32,7 +32,7 @@ export class Business{
         var options = {weekday : 'short' , timeZone : this.bus_time_zone,  timeZoneName: 'short' };
         this.holidays.weekdays.forEach(weekholiday => {
             if(weekholiday === nextDay.getDay()){
-                return this.getNextBusinessDay(nextDay);
+                nextDay = this.getNextBusinessDay(nextDay);
             }
         });
         return nextDay;
@@ -46,5 +46,12 @@ export class Business{
         this.bus_name = src.bus_name;
         this.address = src.address;
         this.bus_id = src.bus_id;
+        
+        src.staff.forEach((staffObj) => {
+            var staff = new Staff();
+            staff.map(staffObj);
+            this.staff.push(staff);
+        });
+        this.holidays = src.holidays;
     }
 }

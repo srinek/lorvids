@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 
 import {AppointmentService} from '../../service/appointment.service';
 import {Staff} from '../../model/staff.model';
 import {Business} from '../../model/business.model';
+import {Slots} from '../../model/slots.model';
 
 @Component({
   selector: 'app-available-slots',
@@ -15,10 +16,12 @@ export class AvailableSlotsComponent implements OnInit {
 
   @Input() business : Business;
 
+  slots : Slots;
+
   constructor(private appointmentService : AppointmentService) { }
 
   ngOnInit() {
-     this.appointmentService.getAppointmentSlots(this.business, this.staff);
+     this.slots = this.appointmentService.getAppointmentSlots(this.business, this.staff);
   }
 
 }
