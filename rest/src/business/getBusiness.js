@@ -9,7 +9,7 @@ module.exports.getBusiness = (event, context, callback) => {
     var params = {
       TableName: 'Business',
       Key: {
-        'BusId' : {S: event.pathParameters.busId}
+        'bus_id' : {S: event.pathParameters.busId}
       }
     };
     

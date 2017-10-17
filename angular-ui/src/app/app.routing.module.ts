@@ -11,7 +11,7 @@ const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
     {path:'search', component : SearchResultsContainerComponent},
     {path:'search/:searchFor', component : SearchResultsContainerComponent},
-    {path:'reviewbooking/:bookingId', component : BookAppointmentComponent}/* ,
+    {path:'reviewbooking/:staffId/:bookingId', component : BookAppointmentComponent}/* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];
 
