@@ -1,0 +1,37 @@
+{
+    "bus_id" : "b-test-01",
+    "staff_id" : "b-test-01-s-01",
+    "staff_name" : "Dr. Susan",
+    "tags" : "DDS from NYU, 20 years experience",
+    "service_time" : "30m",
+    "bus_hours" : [
+        { 
+            "day" : "ALL",
+            "time" : "10AM - 5PM"
+        },
+        { 
+            "day" : "MON",
+            "time" : "12AM - 5PM"
+        }
+        ]
+}
+
+
+{
+    "bus_id" : "b-test-01",
+    "staff_id" : "b-test-01-s-02",
+    "staff_name" : "Dr. Devi",
+    "tags" : "DDS from RSDM, fellow in oro facial pain",
+    "holidays" : ["SAT"],
+    "service_time" : "30m"
+}
+
+
+{
+    "bus_id" : "b-test-01",
+    "staff_id" : "b-test-01-s-02",
+    "staff_name" : "Dr. Devi",
+    "tags" : "DDS from RSDM, fellow in oro facial pain",
+    "holidays" : ["SAT"],
+    "service_time" : "30m"
+}

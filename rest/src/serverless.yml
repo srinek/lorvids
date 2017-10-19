@@ -79,9 +79,20 @@ functions:
       - http:
           path: business/save
           method: post
-
-
-
+  getStaff:
+    handler: staff/getStaff.getStaff
+    description : get staff by Id
+    events:
+      - http:
+          path: staff/{busId}/{staffId}
+          method: get
+  saveStaff:
+    handler: staff/saveStaff.saveStaff
+    description : save single staff
+    events:
+      - http:
+          path: staff/save
+          method: post
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

@@ -1,19 +1,22 @@
-// Load the AWS SDK for Node.js
 var DynamoDB = require('aws-sdk/clients/dynamodb');
 var configDynamodb = require('../config/config-dynamodb');
 ddb = new DynamoDB(configDynamodb.options);
 
-module.exports.getBusiness = (event, context, callback) => {
+module.exports.getStaff = (event, context, callback) => {
     // Create the DynamoDB service object
-    //console.log("business *** "+ JSON.stringify(event));
+    console.log("staff *** "+ JSON.stringify(event));
+   
     var params = {
-      TableName: 'Business',
+      TableName: 'Staff',
       Key: {
-        'bus_id' : {S: event.pathParameters.busId}
+        'bus_id' : {S: event.pathParameters.busId},
+        'staff_id' : {S: event.pathParameters.staffId}
       }
-    };
+    }; 
     
-    // Call DynamoDB to add the item to the table
+    console.log(params);
+    
+    // Call DynamoDB to get the item from the table
     ddb.getItem(params, function(err, data) {
       if (err) {
         console.log("error "+err);
