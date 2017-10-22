@@ -93,6 +93,13 @@ functions:
       - http:
           path: staff/save
           method: post
+  saveAppointment:
+    handler: appointment/saveAppointment.saveAppointment
+    description : save appointment
+    events:
+      - http:
+          path: appointment/save
+          method: post
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

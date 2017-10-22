@@ -2,7 +2,7 @@
 User 
 -------------------------------------------------------------------------
 aws dynamodb delete-table --table-name User
-aws dynamodb create-table --table-name User --attribute-definitions AttributeName=UserId,AttributeType=S --key-schema AttributeName=UserId,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1 
+aws dynamodb create-table --table-name User --attribute-definitions AttributeName=UserEmail,AttributeType=S --key-schema AttributeName=UserEmail,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 
 
 --endpoint-url http://localhost:8001
 
@@ -10,7 +10,7 @@ aws dynamodb create-table --table-name User --attribute-definitions AttributeNam
 Appointments  
 -----------------------------------------------------------------------------
 aws dynamodb delete-table --table-name Appointments
-aws dynamodb create-table --table-name Appointments --attribute-definitions AttributeName=BusId,AttributeType=S AttributeName=UserId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH AttributeName=UserId,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,	WriteCapacityUnits=1 
+aws dynamodb create-table --table-name Appointments --attribute-definitions AttributeName=StaffId,AttributeType=S AttributeName=UserEmail,AttributeType=S --key-schema AttributeName=StaffId,KeyType=HASH AttributeName=UserEmail,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 
 
 	AttributeName=Time,AttributeType=S 
 	AttributeName=TimeZone,AttributeType=S  

@@ -5,15 +5,16 @@ var configDynamodb = require('../config/config-dynamodb');
 // ddb = new DynamoDB({apiVersion: '2012-10-08', region:'us-east-1', endpoint : 'http://localhost:8001'});
 docClient = new DynamoDB.DocumentClient(configDynamodb.options);
     
-module.exports.saveStaff = (event, context, callback) => {
+module.exports.saveUser = (event, context, callback) => {
 
-  
-    var params = {
-      TableName: 'Staff',
-      Item: JSON.parse(event.body)
-    };
+  console.log(event);
+  let reqBody = JSON.parse(event.body);
+  var params = {
+    TableName: 'User',
+    Item: reqBody.user
+  };
  
- console.log("params "+  JSON.stringify(params));
+ console.log("params_user "+  JSON.stringify(params));
     
     // Call DynamoDB to add the item to the table
     docClient.put(params, function(err, data) {
