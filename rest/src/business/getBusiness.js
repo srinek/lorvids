@@ -23,9 +23,11 @@ module.exports.getBusiness = (event, context, callback) => {
         };
         callback(null, response);
       } else {
+        console.log(DynamoDB.Converter.unmarshall(data.Item));
         const response = {
           statusCode: 200,
-          body: JSON.stringify(data),
+          headers : {"Access-Control-Allow-Origin" : "*"},
+          body: JSON.stringify(DynamoDB.Converter.unmarshall(data.Item)),
         };
         callback(null, response);
       }

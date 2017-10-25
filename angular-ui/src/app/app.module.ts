@@ -16,6 +16,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { SearchResultsContainerComponent } from './search-results-container/search-results-container.component';
 import {AppointmentService} from './service/appointment.service';
 import {SearchService} from './service/search.service';
+import {BusinessService} from './service/business.service';
+import {StaffService} from './service/staff.service';
 import {Logger} from './service/logger.service';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
@@ -41,7 +43,7 @@ import { AvailableSlotsComponent } from './search-results-container/available-sl
     AppRoutingModule,
     HttpModule
   ],
-  providers: [AppointmentService, SearchService, Logger],
+  providers: [AppointmentService, SearchService, BusinessService, StaffService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,6 +12,17 @@ export class Business{
     bus_time_zone? : string = "America/new_york";
     bus_hours? : any = {};
     holidays? : any = {};
+    statement_caption? : string = "";
+    statement_notes? : string = "";
+    specialized_in? : string = "";
+    awards? : string = "";
+    appointment_instructions? : string[] = [];
+
+    constructor(private json? : string){
+        if(json){
+            this.map(json);
+        }
+    }
 
     public getNextBusinessDayDefault() : Date {
         var options = {weekday : 'short' , timeZone : this.bus_time_zone,  timeZoneName: 'short' };
@@ -47,11 +58,15 @@ export class Business{
         this.address = src.address;
         this.bus_id = src.bus_id;
         
-        src.staff.forEach((staffObj) => {
-            var staff = new Staff();
-            staff.map(staffObj);
-            this.staff.push(staff);
-        });
+        if(src.staff){
+           src.staff.forEach((staffObj) => {
+              var staff = new Staff(staffObj);
+              this.staff.push(staff);
+           });
+        }
         this.holidays = src.holidays;
+        this.specialized_in = src.specialized_in;
+        this.appointment_instructions = src.appointment_instructions.split(',');
+        this.awards = src.awards;
     }
 }

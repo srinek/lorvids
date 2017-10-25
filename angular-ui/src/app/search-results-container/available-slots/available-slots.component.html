@@ -7,7 +7,8 @@
       <div class="col-sm-4 staffName">{{staff.staff_name}}</div>
       <div class="col-sm-8">
           <div class="appointment-slot-container" *ngFor="let slot of slots.slots">
-              <a [routerLink]="['/reviewbooking', staff.staff_id, slot.bookingId]" class="btn btn-info btn-sm" title="{{slot.specialInstruction}}">
+              <a class="btn btn-info btn-sm" 
+              title="{{slot.specialInstruction}}" (click)="bookAppointment()">
                  {{slot.slotTime}} 
               </a>
           </div>

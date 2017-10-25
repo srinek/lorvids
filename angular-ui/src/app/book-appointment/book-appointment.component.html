@@ -52,15 +52,11 @@
                         <h4 class="m-bot-1">10:30 AM EST, Monday, September 10, 2017</h4>
                     </div>
                     <div>
-                        <h4 class="m-bot-1"> Dr. Naveen</h4>
+                        <h4 class="m-bot-1" *ngIf="staff"> {{staff.staff_name}}</h4>
                     </div>
-                    <div><h4>Doctor visit</h4></div>
-                    <div id="address" class="m-bot-2 text-muted">
-                        1024 Waterford Drive,
-                        <br>
-                        Edison,
-                        <br>
-                        NJ 08817.
+                    <div><h4>Service Selected or default service by staff</h4></div>
+                    <div id="address" class="m-bot-2 text-muted" *ngIf="business">
+                        {{business.address}}
                     </div>
             </div>
         </div>
@@ -72,12 +68,9 @@
                 <h3>Special Notes : </h3>
             </div>
             <div class="panel-content m-left-2 m-top-2">
-                <ul class="list-group">
-                    <li class="list-item">
-                        Please carry insurance details during visit.
-                    </li>
-                    <li class="list-item">
-                        cash required for copyament
+                <ul class="list-group" *ngIf="business">
+                    <li class="list-item" *ngFor="let instruction of business.appointment_instructions">
+                        {{instruction}}
                     </li>
                 </ul>
             </div>    

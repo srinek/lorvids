@@ -35,3 +35,19 @@
     "holidays" : ["SAT"],
     "service_time" : "30m"
 }
+
+{
+    "bus_id" : "b-test-02",
+    "staff_id" : "b-test-02-s-01",
+    "staff_name" : "Sara",
+    "tags" : "hair cut, hair wash, nails",
+    "service_time" : "30m"
+}
+
+{
+    "bus_id" : "b-test-02",
+    "staff_id" : "b-test-02-s-01",
+    "staff_name" : "Nanda",
+    "tags" : "hair cut, hair wash, nails",
+    "service_time" : "30m"
+}

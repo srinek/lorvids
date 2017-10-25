@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import {AppointmentService} from '../../service/appointment.service';
 import {Staff} from '../../model/staff.model';
@@ -18,10 +19,19 @@ export class AvailableSlotsComponent implements OnInit {
 
   slots : Slots;
 
-  constructor(private appointmentService : AppointmentService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private appointmentService : AppointmentService) { }
 
   ngOnInit() {
      this.slots = this.appointmentService.getAppointmentSlots(this.business, this.staff);
+  }
+
+  bookAppointment(){
+    //[routerLink]="['/reviewbooking', business.bus_id, staff.staff_id, slot.bookingId]" 
+    this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id, ""],
+        {relativeTo:this.route});
+    this.appointmentService.triggerBusinessSubject(this.business);
   }
 
 }

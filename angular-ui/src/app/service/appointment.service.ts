@@ -10,6 +10,8 @@ import {Slots} from '../model/slots.model';
 import {AppointmentSlot} from '../model/appointment-slot.model';
 import {Logger} from './logger.service';
 import {SearchService} from './search.service';
+import {BusinessService} from './business.service';
+import {StaffService} from './staff.service';
 
 //test imports
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
@@ -19,14 +21,25 @@ export class AppointmentService {
 
     mainPageUnLoaded = new Subject<boolean>();
     searchResults : Business[];
-    
+    businessSubject = new Subject<Business>();
 
     constructor(private logger: Logger,
-                private searchService : SearchService){
+                private searchService : SearchService,
+                private businessService : BusinessService,
+                private staffService : StaffService
+               ){
 
     }
 
     private rating : number[] = [0 , 0 , 0 ,0 ];
+
+    public getBusiness(busId : string) : Observable<Business> {
+        return this.businessService.getBusiness(busId);
+    }
+
+    public getStaff(busId : string, staffId : string) : Observable<Staff> {
+        return this.staffService.getStaff(busId, staffId);
+    }
 
     public getTrendingBusiness() : Business[] {
         return trendingBusiness;
@@ -65,5 +78,9 @@ export class AppointmentService {
     
     public triggerMainPageLoaded(){
         this.mainPageUnLoaded.next(false);
+    }
+
+    public triggerBusinessSubject(business : Business){
+        this.businessSubject.next(business);
     }
 }

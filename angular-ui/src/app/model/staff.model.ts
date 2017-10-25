@@ -11,6 +11,12 @@ export class Staff {
     bus_hours : any = {};
     holidays : string = "";
 
+    constructor(src?){
+        if(src){
+            this.map(src);
+        }
+    }
+
     public getAvailableSlots(onDate : Date) : AppointmentSlot[]{
         //find booked slots
         //compute available slots

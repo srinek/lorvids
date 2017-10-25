@@ -37,7 +37,7 @@ export class SearchResultsComponent implements OnInit {
                   this.error = true;
                   this.errorMessage = "Yikes!!! something cramped our service "+error;
                 }
-              )
+            )
       }
     );
     

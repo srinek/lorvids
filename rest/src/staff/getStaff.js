@@ -28,7 +28,8 @@ module.exports.getStaff = (event, context, callback) => {
       } else {
         const response = {
           statusCode: 200,
-          body: JSON.stringify(data),
+          headers : {"Access-Control-Allow-Origin" : "*"},
+          body: JSON.stringify(DynamoDB.Converter.unmarshall(data.Item))
         };
         callback(null, response);
       }

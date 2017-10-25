@@ -24,8 +24,7 @@ export class SearchService{
                             '{"query" : { "match" : { "_all" : "'+searchTerm+'" } } }'
                         ).map((response : Response) => {
                 for(const hit of response.json().hits.hits){
-                    var business = new Business();
-                    business.map(hit._source);
+                    var business = new Business(hit._source);
                     business.imageurl = "../../assets/trendy_looks.jpg";
                     business.rating = [0 , 0 , 0 ,0 ];
                     businessList[businessList.length] = business;
