@@ -28,8 +28,10 @@ module.exports.saveAppointment = (event, context, callback) => {
       } else {
         const response = {
           statusCode: 200,
+          headers : {"Access-Control-Allow-Origin" : "*"},
           body: JSON.stringify(data),
         };
+        console.log("data saved "+ data);
         if(save_user){
             User.saveUser(event, context, callback);
         }

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -17,10 +18,12 @@ import { SearchResultsContainerComponent } from './search-results-container/sear
 import {AppointmentService} from './service/appointment.service';
 import {SearchService} from './service/search.service';
 import {BusinessService} from './service/business.service';
+import {ApptService} from './service/appt.service';
 import {StaffService} from './service/staff.service';
 import {Logger} from './service/logger.service';
 import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
 import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
+import { ConfirmAppointmentComponent } from './confirm-appointment/confirm-appointment.component';
 
 @NgModule({
   declarations: [
@@ -36,14 +39,16 @@ import { AvailableSlotsComponent } from './search-results-container/available-sl
     HomePageComponent,
     SearchResultsContainerComponent,
     BookAppointmentComponent,
-    AvailableSlotsComponent
+    AvailableSlotsComponent,
+    ConfirmAppointmentComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpModule
   ],
-  providers: [AppointmentService, SearchService, BusinessService, StaffService, Logger],
+  providers: [AppointmentService, SearchService, BusinessService, StaffService, ApptService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

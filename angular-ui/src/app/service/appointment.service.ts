@@ -12,6 +12,7 @@ import {Logger} from './logger.service';
 import {SearchService} from './search.service';
 import {BusinessService} from './business.service';
 import {StaffService} from './staff.service';
+import {ApptService} from './appt.service';
 
 //test imports
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
@@ -26,7 +27,8 @@ export class AppointmentService {
     constructor(private logger: Logger,
                 private searchService : SearchService,
                 private businessService : BusinessService,
-                private staffService : StaffService
+                private staffService : StaffService,
+                private apptService : ApptService
                ){
 
     }
@@ -39,6 +41,10 @@ export class AppointmentService {
 
     public getStaff(busId : string, staffId : string) : Observable<Staff> {
         return this.staffService.getStaff(busId, staffId);
+    }
+
+    public saveAppointment(appt : any) : Observable<string>{
+        return this.apptService.saveAppointment(appt);
     }
 
     public getTrendingBusiness() : Business[] {

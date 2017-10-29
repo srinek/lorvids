@@ -27,9 +27,9 @@ export class AvailableSlotsComponent implements OnInit {
      this.slots = this.appointmentService.getAppointmentSlots(this.business, this.staff);
   }
 
-  bookAppointment(){
+  bookAppointment(bookingId : string){
     //[routerLink]="['/reviewbooking', business.bus_id, staff.staff_id, slot.bookingId]" 
-    this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id, ""],
+    this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id, bookingId],
         {relativeTo:this.route});
     this.appointmentService.triggerBusinessSubject(this.business);
   }

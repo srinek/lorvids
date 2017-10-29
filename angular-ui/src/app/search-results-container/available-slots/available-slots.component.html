@@ -8,7 +8,7 @@
       <div class="col-sm-8">
           <div class="appointment-slot-container" *ngFor="let slot of slots.slots">
               <a class="btn btn-info btn-sm" 
-              title="{{slot.specialInstruction}}" (click)="bookAppointment()">
+              title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.bookingId)">
                  {{slot.slotTime}} 
               </a>
           </div>

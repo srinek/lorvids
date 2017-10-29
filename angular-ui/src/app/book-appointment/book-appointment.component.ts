@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
+import { NgForm } from '@angular/forms';
+
 import { AppointmentService} from '../service/appointment.service';
+import {Logger} from '../service/logger.service';
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
 
@@ -13,13 +16,16 @@ export class BookAppointmentComponent implements OnInit {
 
   business : Business;
   staff : Staff;
+  bookingId : string;
   public error : boolean = false;
   public errorMessage : string = "";
+  @ViewChild('appointmentForm') appointmentForm : NgForm;
 
   constructor(
     private appointmentService : AppointmentService,
     private route : ActivatedRoute,
-    private router : Router
+    private router : Router,
+    private logger: Logger
   ) { 
 
   }
@@ -27,7 +33,7 @@ export class BookAppointmentComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params : Params) => {
-          let bookingId = params['bookingId'];
+          this.bookingId = params['bookingId'];
           let staffId = params['staffId'];
           let businessId = params['busId'];
           this.appointmentService.getBusiness(businessId)
@@ -66,4 +72,40 @@ export class BookAppointmentComponent implements OnInit {
     );
   }
 
+  bookAppointment(){
+    let apptData : any = {};
+    let user : any = {};
+    console.log(this.appointmentForm);
+    user.UserEmail = this.appointmentForm.value.uemail;
+    user.name = this.appointmentForm.value.uname;
+    user.phone = this.appointmentForm.value.uphone;
+    let appointment : any = {};
+    appointment.StaffId = this.staff.staff_id;
+    appointment.UserEmail = this.appointmentForm.value.uemail;
+    appointment.apptId = this.bookingId;
+    appointment.busId = this.business.bus_id;
+    appointment.location = this.business.address;
+    if(this.appointmentForm.value.splInstr){
+      appointment.notes = this.appointmentForm.value.splInstr;
+    }
+    appointment.service = "Service Selected";
+    apptData.user = user;
+    apptData.appt = appointment;
+
+    this.appointmentService.saveAppointment(apptData).subscribe(
+      (success : string) => {
+        this.logger.log(success);
+        this.router.navigate(
+          ['/confirm', this.business.bus_id, this.staff.staff_id, this.bookingId ],
+          {relativeTo:this.route}
+        );
+      },
+      (error : string) => {
+        this.error = true;
+        this.errorMessage = "Yikes!!! something cramped our service "+error;
+      }
+    )
+
+    
+  }
 }

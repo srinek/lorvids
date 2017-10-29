@@ -25,10 +25,13 @@ module.exports.saveUser = (event, context, callback) => {
         };
         callback(null, response);
       } else {
+        console.log("data saved "+ data);
         const response = {
           statusCode: 200,
+          headers : {"Access-Control-Allow-Origin" : "*"},
           body: JSON.stringify(data),
         };
+        console.log("response "+ response);
         callback(null, response);
       }
     });

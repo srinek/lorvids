@@ -98,8 +98,9 @@ functions:
     description : save appointment
     events:
       - http:
-          path: appointment/save
+          path: appt
           method: post
+          cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
