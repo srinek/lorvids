@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-import { AppointmentService} from '../../service/appointment.service';
+import { FacadeService} from '../../service/facade.service';
 import {Business} from '../../model/business.model';
 
 @Component({
@@ -16,7 +16,7 @@ export class SearchResultsComponent implements OnInit {
   public error : boolean = false;
   public errorMessage : string = "";
   
-  constructor(private appointmentService : AppointmentService,
+  constructor(private facadeService : FacadeService,
               private route : ActivatedRoute,
               private router : Router
               ) {
@@ -28,7 +28,7 @@ export class SearchResultsComponent implements OnInit {
       (params: Params) => {
          this.searchTerm = params['searchFor'];
          console.log("searchFor "+this.searchTerm);
-         this.appointmentService.getSearchResults(this.searchTerm)
+         this.facadeService.getSearchResults(this.searchTerm)
             .subscribe(
                 (searchResults : Business[]) => {
                     this.searchResults = searchResults;

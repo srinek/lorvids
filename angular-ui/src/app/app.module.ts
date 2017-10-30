@@ -15,15 +15,15 @@ import { PageNotFound404Component } from './page-not-found-404/page-not-found-40
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { SearchResultsContainerComponent } from './search-results-container/search-results-container.component';
-import {AppointmentService} from './service/appointment.service';
+import {FacadeService} from './service/facade.service';
 import {SearchService} from './service/search.service';
 import {BusinessService} from './service/business.service';
 import {ApptService} from './service/appt.service';
 import {StaffService} from './service/staff.service';
 import {Logger} from './service/logger.service';
-import { BookAppointmentComponent } from './book-appointment/book-appointment.component';
+import { ReviewBookingComponent } from './review-booking/review-booking.component';
 import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
-import { ConfirmAppointmentComponent } from './confirm-appointment/confirm-appointment.component';
+import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,9 @@ import { ConfirmAppointmentComponent } from './confirm-appointment/confirm-appoi
     ErrorPageComponent,
     HomePageComponent,
     SearchResultsContainerComponent,
-    BookAppointmentComponent,
+    ReviewBookingComponent,
     AvailableSlotsComponent,
-    ConfirmAppointmentComponent
+    ConfirmBookingComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { ConfirmAppointmentComponent } from './confirm-appointment/confirm-appoi
     FormsModule,
     HttpModule
   ],
-  providers: [AppointmentService, SearchService, BusinessService, StaffService, ApptService, Logger],
+  providers: [FacadeService, SearchService, BusinessService, StaffService, ApptService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

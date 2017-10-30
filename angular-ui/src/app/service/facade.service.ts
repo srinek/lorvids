@@ -18,7 +18,7 @@ import {ApptService} from './appt.service';
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 
 @Injectable()
-export class AppointmentService {
+export class FacadeService {
 
     mainPageUnLoaded = new Subject<boolean>();
     searchResults : Business[];

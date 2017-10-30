@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
-import { AppointmentService} from '../service/appointment.service';
+import { FacadeService} from '../service/facade.service';
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
 
 @Component({
   selector: 'app-confirm-appointment',
-  templateUrl: './confirm-appointment.component.html',
-  styleUrls: ['./confirm-appointment.component.css']
+  templateUrl: './confirm-booking.component.html',
+  styleUrls: ['./confirm-booking.component.css']
 })
-export class ConfirmAppointmentComponent implements OnInit {
+export class ConfirmBookingComponent implements OnInit {
 
   business : Business;
   staff : Staff;
@@ -18,7 +18,7 @@ export class ConfirmAppointmentComponent implements OnInit {
   public errorMessage : string = "";
   
   constructor(
-    private appointmentService : AppointmentService,
+    private facadeService : FacadeService,
     private route : ActivatedRoute,
     private router : Router
   ) { }
@@ -29,7 +29,7 @@ export class ConfirmAppointmentComponent implements OnInit {
           this.bookingId = params['bookingId'];
           let staffId = params['staffId'];
           let businessId = params['busId'];
-          this.appointmentService.getBusiness(businessId)
+          this.facadeService.getBusiness(businessId)
           .subscribe(
               (business : Business) => {
                   this.business = business;
@@ -40,7 +40,7 @@ export class ConfirmAppointmentComponent implements OnInit {
                 this.errorMessage = "Yikes!!! something cramped our service "+error;
               }
           )
-          this.appointmentService.getStaff(businessId, staffId)
+          this.facadeService.getStaff(businessId, staffId)
           .subscribe(
               (staff : Staff) => {
                   this.staff = staff;

@@ -2,17 +2,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import { NgForm } from '@angular/forms';
 
-import { AppointmentService} from '../service/appointment.service';
+import {FacadeService} from '../service/facade.service';
 import {Logger} from '../service/logger.service';
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
 
 @Component({
   selector: 'app-book-appointment',
-  templateUrl: './book-appointment.component.html',
-  styleUrls: ['./book-appointment.component.css']
+  templateUrl: './review-booking.component.html',
+  styleUrls: ['./review-booking.component.css']
 })
-export class BookAppointmentComponent implements OnInit {
+export class ReviewBookingComponent implements OnInit {
 
   business : Business;
   staff : Staff;
@@ -22,7 +22,7 @@ export class BookAppointmentComponent implements OnInit {
   @ViewChild('appointmentForm') appointmentForm : NgForm;
 
   constructor(
-    private appointmentService : AppointmentService,
+    private facadeService : FacadeService,
     private route : ActivatedRoute,
     private router : Router,
     private logger: Logger
@@ -36,7 +36,7 @@ export class BookAppointmentComponent implements OnInit {
           this.bookingId = params['bookingId'];
           let staffId = params['staffId'];
           let businessId = params['busId'];
-          this.appointmentService.getBusiness(businessId)
+          this.facadeService.getBusiness(businessId)
           .subscribe(
               (business : Business) => {
                   this.business = business;
@@ -47,7 +47,7 @@ export class BookAppointmentComponent implements OnInit {
                 this.errorMessage = "Yikes!!! something cramped our service "+error;
               }
           )
-          this.appointmentService.getStaff(businessId, staffId)
+          this.facadeService.getStaff(businessId, staffId)
           .subscribe(
               (staff : Staff) => {
                   this.staff = staff;
@@ -58,7 +58,7 @@ export class BookAppointmentComponent implements OnInit {
                 this.errorMessage = "Yikes!!! something cramped our service "+error;
               }
           )
-          /* this.appointmentService.businessSubject.subscribe(
+          /* this.facadeService.businessSubject.subscribe(
             (business : Business) => {
               this.business = business;
               console.log("business loaded through subject ", this.business);
@@ -92,7 +92,7 @@ export class BookAppointmentComponent implements OnInit {
     apptData.user = user;
     apptData.appt = appointment;
 
-    this.appointmentService.saveAppointment(apptData).subscribe(
+    this.facadeService.saveAppointment(apptData).subscribe(
       (success : string) => {
         this.logger.log(success);
         this.router.navigate(

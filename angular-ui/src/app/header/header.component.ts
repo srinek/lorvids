@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AppointmentService} from '../service/appointment.service';
+import { FacadeService} from '../service/facade.service';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -13,12 +13,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private mainPageUnloadedSubscription : Subscription;
 
-  constructor(private appointmentService : AppointmentService) {
+  constructor(private facadeService : FacadeService) {
 
    }
 
   ngOnInit() {
-      this.mainPageUnloadedSubscription = this.appointmentService.mainPageUnLoaded.subscribe(
+      this.mainPageUnloadedSubscription = this.facadeService.mainPageUnLoaded.subscribe(
          (mainPageUnloaded : boolean) => {
            this.isMainPage = !mainPageUnloaded;
          }

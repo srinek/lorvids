@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AppointmentService} from '../service/appointment.service';
+import {FacadeService} from '../service/facade.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,10 +9,10 @@ import { AppointmentService} from '../service/appointment.service';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private appointmentService : AppointmentService) { }
+  constructor(private facadeService : FacadeService) { }
 
   ngOnInit() {
-      this.appointmentService.triggerMainPageLoaded();
+      this.facadeService.triggerMainPageLoaded();
   }
 
 }

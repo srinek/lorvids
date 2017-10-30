@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AppointmentService} from '../../service/appointment.service';
+import {FacadeService} from '../../service/facade.service';
 import {Business} from '../../model/business.model';
 
 @Component({
@@ -11,10 +11,10 @@ export class RecentlyVisitedComponent implements OnInit {
 
   public recentlyVisitedBusiness : Business[] = [];
 
-  constructor(private appointmentService : AppointmentService) { }
+  constructor(private facadeService : FacadeService) { }
 
   ngOnInit() {
-    this.recentlyVisitedBusiness = this.appointmentService.getTrendingBusiness();
+    this.recentlyVisitedBusiness = this.facadeService.getTrendingBusiness();
   }
 
 }

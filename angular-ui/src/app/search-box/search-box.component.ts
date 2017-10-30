@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { AppointmentService} from '../service/appointment.service';
+import { FacadeService} from '../service/facade.service';
 
 @Component({
   selector: 'app-search-box',
@@ -14,7 +14,7 @@ export class SearchBoxComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private appointmentService : AppointmentService) { }
+    private facadeService : FacadeService) { }
 
   ngOnInit() {
   }
