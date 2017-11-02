@@ -6,6 +6,9 @@ export class Business{
     bus_id : number;
     bus_name : string;
     address : string;
+    phone : number;
+    email : string;
+    website : string;
     imageurl : string;
     rating : number[];
     staff? : Staff[] =[];

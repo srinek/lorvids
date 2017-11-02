@@ -19,6 +19,7 @@ module.exports.getBusiness = (event, context, callback) => {
         console.log("error "+err);
         const response = {
           statusCode: 500,
+          headers : {"Access-Control-Allow-Origin" : "*"},
           body: JSON.stringify(err),
         };
         callback(null, response);

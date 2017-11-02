@@ -10,7 +10,7 @@ import {Staff} from '../model/staff.model';
 @Injectable()
 export class StaffService{
 
-    api : string = "https://eg8guymbvl.execute-api.us-east-1.amazonaws.com/dev/";
+    api : string = "https://htb4u6t274.execute-api.us-east-1.amazonaws.com/dev/";// "https://eg8guymbvl.execute-api.us-east-1.amazonaws.com/dev/";
     endpoint : string = "staff";
 
     constructor(private http : Http,

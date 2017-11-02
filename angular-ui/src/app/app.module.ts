@@ -24,6 +24,7 @@ import {Logger} from './service/logger.service';
 import { ReviewBookingComponent } from './review-booking/review-booking.component';
 import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
+import { AddBusinessComponent } from './add-business/add-business.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.compo
     SearchResultsContainerComponent,
     ReviewBookingComponent,
     AvailableSlotsComponent,
-    ConfirmBookingComponent
+    ConfirmBookingComponent,
+    AddBusinessComponent
   ],
   imports: [
     BrowserModule,

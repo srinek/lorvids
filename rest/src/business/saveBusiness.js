@@ -9,7 +9,7 @@ module.exports.saveBusiness = (event, context, callback) => {
     
     var params = {
       TableName: 'Business',
-      Item: JSON.parse(event.body)
+      Item: JSON.parse(event)
     };
  
  console.log("params "+  JSON.stringify(params));
@@ -19,12 +19,14 @@ module.exports.saveBusiness = (event, context, callback) => {
       if (err) {
         const response = {
           statusCode: 500,
+          headers : {"Access-Control-Allow-Origin" : "*"},
           body: JSON.stringify(err),
         };
         callback(null, response);
       } else {
         const response = {
           statusCode: 200,
+          headers : {"Access-Control-Allow-Origin" : "*"},
           body: JSON.stringify(data),
         };
         callback(null, response);

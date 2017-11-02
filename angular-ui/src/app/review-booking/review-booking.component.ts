@@ -75,7 +75,6 @@ export class ReviewBookingComponent implements OnInit {
   bookAppointment(){
     let apptData : any = {};
     let user : any = {};
-    console.log(this.appointmentForm);
     user.UserEmail = this.appointmentForm.value.uemail;
     user.name = this.appointmentForm.value.uname;
     user.phone = this.appointmentForm.value.uphone;

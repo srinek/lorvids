@@ -8,7 +8,12 @@ export class Logger {
     console.log(message);
   }
 
-  public consoleLog(message: string){
-    console.log(message);
+  public consoleLog(message: string, obj? : any){
+    if(obj){
+      console.log(message, obj);
+    }
+    else{
+      console.log(message);
+    }
   }
 }

@@ -39,6 +39,10 @@ export class FacadeService {
         return this.businessService.getBusiness(busId);
     }
 
+    public saveBusiness(business : Business) : Observable<string> {
+        return this.businessService.saveBusiness(business);
+    }
+
     public getStaff(busId : string, staffId : string) : Observable<Staff> {
         return this.staffService.getStaff(busId, staffId);
     }

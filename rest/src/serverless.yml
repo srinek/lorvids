@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: epokly-service
+service: epokly-service-v1
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -65,20 +65,22 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  getBusiness:
-    handler: business/getBusiness.getBusiness
+  get:
+    handler: api/business.get
     description : get business by Id
     events:
       - http:
           path: business/{busId}
           method: get
-  saveBusiness:
-    handler: business/saveBusiness.saveBusiness
+          cors: true
+  save:
+    handler: api/business.save
     description : save single business
     events:
       - http:
-          path: business/save
+          path: business
           method: post
+          cors: true
   getStaff:
     handler: staff/getStaff.getStaff
     description : get staff by Id
