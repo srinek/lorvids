@@ -65,12 +65,11 @@ let testSaveObj2 =
       "specialized_in": "",
       "awards": "",
       "appointment_instructions": [],
-      "bus_id": "b-test-07",
-      "bus_name": "test business from UI",
-      "address": "115 Main Street, SouthPlainfield, NJ, 08854",
-      "email": "bus@bus.com",
+      "bus_name": "test business 222",
+      "address": "116 Main Street, SouthPlainfield, NJ, 08854",
+      "email": "bus11@bus.com",
       "phone": "6787876767",
-      "website": "www.some.com"
+      "website": "www.some11.com"
   })
 };
 //console.log("in test "+JSON.stringify(testSaveObj2) +"end");

@@ -8,6 +8,7 @@ import { SearchResultsContainerComponent } from './search-results-container/sear
 import {ReviewBookingComponent} from './review-booking/review-booking.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 import {AddBusinessComponent} from './add-business/add-business.component';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
@@ -15,7 +16,8 @@ const appRoutes : Routes = [
     {path:'search/:searchFor', component : SearchResultsContainerComponent},
     {path:'reviewbooking/:busId/:staffId/:bookingId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
-    {path:'addbusiness', component : AddBusinessComponent}/* ,
+    {path:'addbusiness', component : AddBusinessComponent},
+    {path:'addstaff/:busId', component : AddStaffComponent}/* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];
 

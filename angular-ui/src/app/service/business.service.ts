@@ -34,12 +34,12 @@ export class BusinessService {
         return this.http.post(this.api + this.endpoint, business).map(
             (response : Response) => {
                 let result : string;
-                let json = response.json();
-                if(json.statusCode === 200){
-                    return "success";
+                if(response.status === 200){
+                    let json = response.json();
+                    return json.Item.bus_id;
                 }
-                this.logger.consoleLog("error in save business ", json.body);
-                return json.body;
+                this.logger.consoleLog("error in save business ", response.json());
+                return response.json();
             }
         );
     }

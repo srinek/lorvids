@@ -36,12 +36,12 @@ export class AddBusinessComponent implements OnInit {
     business.phone = this.busForm.value.busPhone;
     business.website = this.busForm.value.busWs;
     this.facadeService.saveBusiness(business).subscribe(
-      (success : string) => {
-        this.logger.log(success);
-        /* this.router.navigate(
-          ['/confirm', this.business.bus_id, this.staff.staff_id, this.bookingId ],
+      (busId : string) => {
+        this.logger.log(busId);
+        this.router.navigate(
+          ['/addstaff', busId],
           {relativeTo:this.route}
-        ); */
+        );
       },
       (error : string) => {
         this.error = true;

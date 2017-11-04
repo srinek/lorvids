@@ -25,6 +25,7 @@ import { ReviewBookingComponent } from './review-booking/review-booking.componen
 import { AvailableSlotsComponent } from './search-results-container/available-slots/available-slots.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 import { AddBusinessComponent } from './add-business/add-business.component';
+import { AddStaffComponent } from './add-staff/add-staff.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AddBusinessComponent } from './add-business/add-business.component';
     ReviewBookingComponent,
     AvailableSlotsComponent,
     ConfirmBookingComponent,
-    AddBusinessComponent
+    AddBusinessComponent,
+    AddStaffComponent
   ],
   imports: [
     BrowserModule,

@@ -37,10 +37,14 @@ aws dynamodb create-table --table-name Staff --attribute-definitions AttributeNa
 
 aws dynamodb create-table --table-name Employees --attribute-definitions AttributeName=BusId,AttributeType=S AttributeName=EmpId,AttributeType=S --key-schema AttributeName=BusId,KeyType=HASH AttributeName=EmpId,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1  --endpoint-url http://localhost:8001
 
---endpoint-url http://localhost:8001
-AttributeName=BusId,AttributeType=S  AttributeName=Name,AttributeType=S AttributeName=Email,AttributeType=S  AttributeName=Phone,AttributeType=S AttributeName=ImageUrl,AttributeType=S 
+## --endpoint-url http://localhost:8001
+## AttributeName=BusId,AttributeType=S  AttributeName=Name,AttributeType=S AttributeName=Email,AttributeType=S  AttributeName=Phone,AttributeType=S AttributeName=ImageUrl,AttributeType=S 
 
-
+----------------------------------------------------------------------------------
+NxtId
+------------------------------------------------------------------------------------
+aws dynamodb delete-table --table-name NxtId
+aws dynamodb create-table --table-name NxtId --attribute-definitions AttributeName=id,AttributeType=N --key-schema AttributeName=id,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
 
 

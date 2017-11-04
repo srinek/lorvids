@@ -7,8 +7,14 @@ module.exports.save = (event, context, callback) => {
       TableName: 'Business',
       Item: JSON.parse(event.body, util.sanitizeDBValue)
     };
-    console.log("params "+  JSON.stringify(params));
-    db.saveData(params, callback);
+    db.nxtId(
+       (generatedId) => {
+          params.Item.bus_id = "b-test-"+generatedId;
+          console.log("params "+  JSON.stringify(params));
+          db.saveData(params, callback);
+       }
+    );
+    
 }
 
 module.exports.get = (event, context, callback) => {
