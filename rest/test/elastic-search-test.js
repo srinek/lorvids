@@ -9,7 +9,7 @@ let testRecord = {
           "ApproximateCreationDateTime": 1510049340,
           "Keys": {
             "bus_id": {
-              "S": "b-test-es-02"
+              "S": "b-test-es-03"
             }
           },
           "NewImage": {
@@ -83,7 +83,7 @@ let testRecord = {
               "S": "dental needs"
             },
             "bus_id": {
-              "S": "b-test-es-01"
+              "S": "b-test-es-03"
             },
             "category": {
               "S": "Health Care"

@@ -1,6 +1,7 @@
-var DynamoDB = require('aws-sdk/clients/dynamodb');
-var configDynamodb = require('../config/config-dynamodb');
-docClient = new DynamoDB.DocumentClient(configDynamodb.options);
+'use strict';
+let DynamoDB = require('aws-sdk/clients/dynamodb');
+let config = require('config');
+let docClient = new DynamoDB.DocumentClient(config.get('app.ddbConfig'));
 
 module.exports.saveData = (params, callback) => {
    let request =  docClient.put(params, function(err, data) {

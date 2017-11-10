@@ -1,0 +1,12 @@
+{
+    "app" : {
+        "ddbConfig": {
+            "apiVersion": "2012-10-08", 
+            "region":"us-east-1"
+            //"endpoint" : "http://localhost:8001"
+        },
+        "es" : {
+            "host" : "https://search-epokly-dev-v1-akgmth4zxz676zcoosjtnrkdfi.us-east-1.es.amazonaws.com/"
+        }
+    }
+}

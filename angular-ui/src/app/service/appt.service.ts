@@ -6,11 +6,12 @@ import {Observable} from 'rxjs/Observable';
 import {Business} from '../model/business.model';
 
 import {Logger} from './logger.service';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class ApptService {
 
-    api : string = "https://htb4u6t274.execute-api.us-east-1.amazonaws.com/dev/";//"https://eg8guymbvl.execute-api.us-east-1.amazonaws.com/dev/";
+    api : string = environment.appurl;
     endpoint : string = "appt";
 
     constructor(private http : Http,

@@ -5,12 +5,12 @@ import {Observable} from 'rxjs/Observable'
 import {Logger} from './logger.service';
 import {Business} from '../model/business.model';
 import {staff} from '../test-data/test-data';
-
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class SearchService{
 
-    searchUrl : string = "https://search-epokly-dev-v1-akgmth4zxz676zcoosjtnrkdfi.us-east-1.es.amazonaws.com/business_docs/_search";//"http://localhost:9200/business_docs/_search";
+    searchUrl : string = environment.searchurl;
 
     constructor( private http : Http,
                  private logger : Logger){
