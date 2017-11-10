@@ -31,6 +31,10 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:us-east-1:*:*"
+    - Effect: Allow
+      Action: # Gives permission to Elastic Search domain
+        - es:ESHttpPost
+      Resource: "arn:aws:es:us-east-1:820202039892:domain/epokly-dev-v1/*"
 # you can overwrite defaults here
   stage: dev
   region: us-east-1
@@ -81,6 +85,11 @@ functions:
           path: business
           method: post
           cors: true
+  ddbESBusinessIndexer:
+    handler: common/ddbEsIndexer.esBusinessIndexer
+    description: index busines docs from ddb to es
+    events:
+      -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Business/stream/2017-11-07T09:36:01.413
   getStaff:
     handler: staff/getStaff.getStaff
     description : get staff by Id

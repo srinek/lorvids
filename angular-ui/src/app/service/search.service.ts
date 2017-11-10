@@ -10,7 +10,7 @@ import {staff} from '../test-data/test-data';
 @Injectable()
 export class SearchService{
 
-    searchUrl : string = "http://localhost:9200/business_docs/_search";
+    searchUrl : string = "https://search-epokly-dev-v1-akgmth4zxz676zcoosjtnrkdfi.us-east-1.es.amazonaws.com/business_docs/_search";//"http://localhost:9200/business_docs/_search";
 
     constructor( private http : Http,
                  private logger : Logger){
