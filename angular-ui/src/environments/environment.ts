@@ -5,6 +5,6 @@
 
 export const environment = {
     production: false,
-    appurl : "https://htb4u6t274.execute-api.us-east-1.amazonaws.com/dev/",
-    searchurl : "https://search-epokly-dev-v1-akgmth4zxz676zcoosjtnrkdfi.us-east-1.es.amazonaws.com/business_docs/_search"
+    appurl : "",
+    searchurl : ""
 };
