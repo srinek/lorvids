@@ -72,6 +72,59 @@ let testSaveObj2 =
       "website": "www.some11.com"
   })
 };
+
+
+/* {
+  "body": {
+    "bus_id": "b-test-03",
+    "bus_name": "Theory Salon",
+    "address": "220 Second Street, Newark, NJ 08854",
+    "phone": "9890001111",
+    "category": "Beauty Care",
+    "statement_caption": "Practice Mission",
+    "statement_notes": "love yourself",
+    "specialized_in": "Beauty needs",
+    "appointment_instructions": "Please be on time",
+    "awards": "best beauty salon",
+    "bus_time_zone": "EST",
+    "bus_hours": [
+      {
+        "day": "ALL",
+        "time": "10AM - 5PM"
+      },
+      {
+        "day": "SAT",
+        "time": "9AM - 1PM"
+      }
+    ],
+    "holidays": {
+      "weekdays": [
+        0,
+        4
+      ],
+      "dates": [
+        1507825795220,
+        1507825795221,
+        1507825795222
+      ]
+    },
+    "staff": [
+      {
+        "staff_id": "b-test-02-s-01",
+        "staff_name": "Sara",
+        "tags": "hair cut, hair wash, nails",
+        "service_time": "30m"
+      },
+      {
+        "staff_id": "b-test-02-s-01",
+        "staff_name": "Nanda",
+        "tags": "hair cut, hair wash, nails",
+        "service_time": "30m"
+      }
+    ]
+  }
+} */
+
 //console.log("in test "+JSON.stringify(testSaveObj2) +"end");
 /* business.save(testSaveObj2, 
     null, 

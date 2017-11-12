@@ -1,5 +1,6 @@
-var db = require('../common/db');
-var util = require('../common/util');
+'use strict';
+let db = require('../common/db');
+let util = require('../common/util');
 
 module.exports.save = (event, context, callback) => {
     //console.log("new business save is called ", event);

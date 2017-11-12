@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: epokly-service-v1
+service: epokly-service-v2
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -91,21 +91,23 @@ functions:
     events:
       -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Business/stream/2017-11-07T09:36:01.413
   getStaff:
-    handler: staff/getStaff.getStaff
+    handler: api/staff.get
     description : get staff by Id
     events:
       - http:
           path: staff/{busId}/{staffId}
           method: get
+          cors: true
   saveStaff:
-    handler: staff/saveStaff.saveStaff
+    handler: api/staff.save
     description : save single staff
     events:
       - http:
-          path: staff/save
+          path: staff
           method: post
+          cors: true
   saveAppointment:
-    handler: appointment/saveAppointment.saveAppointment
+    handler: api/appointment.save
     description : save appointment
     events:
       - http:
