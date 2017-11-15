@@ -1,4 +1,5 @@
 let ddbIndexer = require('../src/common/ddbEsIndexer');
+let search = require('../src/api/search');
 
 let testRecord_bus = {
     "Records": [
@@ -139,6 +140,19 @@ let testRecord_staff = {
   ]
 };
 
-ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
+/* ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
   console.log(msg);
+}); */
+
+let searchObj = {
+  "queryStringParameters": {
+    "searchTerm": "best"
+  }
+};
+
+
+search.doSearch(searchObj, null, (error, response) => {
+  console.log('-----------------------------search RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------search RESPONSE END-----------------------------');
 });

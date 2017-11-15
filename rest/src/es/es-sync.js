@@ -9,11 +9,21 @@ module.exports.esIndex = (jsonStr, callback) => {
 }
 
 module.exports.esUpdate = (jsonStr, callback) => {
-   console.log(" update obj ", jsonStr);
-   //console.log("esCLient ", esClient);
+   console.log(" es update obj ", jsonStr);
    esClient.update(jsonStr,
         function (error, response) {
             callback(error, response);
         }
     );
+}
+
+module.exports.esSearch = (jsonStr, callback) => {
+    esClient.search(jsonStr)
+    .then(results => {
+        console.log("results %j ", results);
+        callback(null, results);
+      })
+      .catch(error => {
+        callback(error, null);
+      });
 }

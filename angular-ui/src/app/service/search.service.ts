@@ -10,7 +10,8 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class SearchService{
 
-    searchUrl : string = environment.searchurl;
+    searchUrl : string = environment.appurl;
+    endpoint : string = "search";
 
     constructor( private http : Http,
                  private logger : Logger){
@@ -20,9 +21,8 @@ export class SearchService{
     public invokeSearch(searchTerm : string) : Observable<Business[]>{
         this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         var businessList : Business[] = [];
-        return this.http.post(this.searchUrl, 
-                            '{"query" : { "match" : { "_all" : "'+searchTerm+'" } } }'
-                        ).map((response : Response) => {
+        return this.http.get(this.searchUrl+this.endpoint+"?searchTerm="+searchTerm)
+            .map((response : Response) => {
                 for(const hit of response.json().hits.hits){
                     var business = new Business(hit._source);
                     business.imageurl = "../../assets/trendy_looks.jpg";

@@ -4,16 +4,18 @@ module.exports.businessDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
   console.log("business doc indexed %j -- ", ddbJsDoc);
   let indexdoc = {};
-  setDefaults(indexdoc);
+  setDefaults(indexdoc,true);
   indexdoc.id = ddbJsDoc.bus_id;
   indexdoc.body = ddbJsDoc;
   return indexdoc;
 }
 
-var setDefaults = (indexdoc) => {
+var setDefaults = (indexdoc, refresh) => {
   indexdoc.index = "business_docs";
   indexdoc.type = 'business_type';
-  indexdoc.refresh = true;
+  if(refresh){
+    indexdoc.refresh = true;
+  }
 }
 
 module.exports.staffDocMapper = (ddbDoc) => {
@@ -21,7 +23,7 @@ module.exports.staffDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
   //console.log("staff doc indexed %j -- ", ddbJsDoc);
   let staffIndexdoc = {};
-  setDefaults(staffIndexdoc);
+  setDefaults(staffIndexdoc, true);
   
   staffIndexdoc.id = ddbJsDoc.bus_id;
   delete ddbJsDoc.bus_id;
@@ -33,4 +35,12 @@ module.exports.staffDocMapper = (ddbDoc) => {
   //staffIndexdoc.body.params = {"newstaff" : ddbJsDoc};
   console.log("staffIndexer %j ", staffIndexdoc)
   return staffIndexdoc;
+}
+
+module.exports.searchDocMapper = (searchTerm) => {
+  let searchObj = {};
+  setDefaults(searchObj, false);
+  searchObj.body = {query : {match : { _all : searchTerm}} };
+  console.log("search obj %j ", searchObj);
+  return searchObj;
 }

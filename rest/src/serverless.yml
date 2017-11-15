@@ -119,6 +119,14 @@ functions:
           path: appt
           method: post
           cors : true
+  search:
+    handler: api/search.doSearch
+    description : search api
+    events:
+      - http:
+          path: search
+          method: get
+          cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic
