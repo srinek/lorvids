@@ -7,3 +7,13 @@ module.exports.esIndex = (jsonStr, callback) => {
         }
     );
 }
+
+module.exports.esUpdate = (jsonStr, callback) => {
+   console.log(" update obj ", jsonStr);
+   //console.log("esCLient ", esClient);
+   esClient.update(jsonStr,
+        function (error, response) {
+            callback(error, response);
+        }
+    );
+}

@@ -1,6 +1,6 @@
 let ddbIndexer = require('../src/common/ddbEsIndexer');
 
-let testRecord = {
+let testRecord_bus = {
     "Records": [
       {
         "eventID": "1",
@@ -106,6 +106,39 @@ let testRecord = {
     ]
   };
 
-  ddbIndexer.esBusinessIndexer(testRecord, null, (response, msg) => {
+/* ddbIndexer.esBusinessIndexer(testRecord_bus, null, (response, msg) => {
       console.log(msg);
-  });
+}); */
+
+
+
+let testRecord_staff = {
+  "Records": [
+    {
+      "eventID": "1",
+      "eventName": "test event",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1510049340,
+        "Keys": {
+          "bus_id": {
+            "S": "b-test-01"
+          }
+        },
+        "NewImage": {
+           "bus_id": "b-test-01",
+           "service_time": "30m",
+           "staff_id": "b-test-02-s-01",
+           "staff_name": "Dr. Sara2",
+           "tags": "hair cut, hair wash, nails"
+        },
+        "SequenceNumber": "96767400000000004568984127",
+        "SizeBytes": 457,
+        "StreamViewType": "NEW_IMAGE"
+      }
+    }
+  ]
+};
+
+ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
+  console.log(msg);
+});
