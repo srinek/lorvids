@@ -94,7 +94,7 @@ functions:
     handler: common/ddbEsIndexer.esStaffIndexer
     description: index staff docs from ddb to es
     events:
-      -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Staff/stream/2017-11-15T11:09:16.570    
+      -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Staff/stream/2017-11-16T17:33:52.110    
   getStaff:
     handler: api/staff.get
     description : get staff by Id

@@ -28,10 +28,15 @@ module.exports.staffDocMapper = (ddbDoc) => {
   staffIndexdoc.id = ddbJsDoc.bus_id;
   delete ddbJsDoc.bus_id;
   staffIndexdoc.body = {};
-  staffIndexdoc.body.doc = {};
   var staffArr = [ddbJsDoc];
-  staffIndexdoc.body.doc.staff = staffArr;
-  //staffIndexdoc.body.script = "ctx._source.staff += newstaff";
+  //staffIndexdoc.body.doc.staff = staffArr;
+  staffIndexdoc.body.script = {
+    lang : "painless",
+    inline : "ctx._source.staff.add(params.newstaff)",
+    params : {
+         "newstaff" : ddbJsDoc
+    }
+  };
   //staffIndexdoc.body.params = {"newstaff" : ddbJsDoc};
   console.log("staffIndexer %j ", staffIndexdoc)
   return staffIndexdoc;

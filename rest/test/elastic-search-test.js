@@ -129,8 +129,8 @@ let testRecord_staff = {
            "bus_id": "b-test-01",
            "service_time": "30m",
            "staff_id": "b-test-02-s-01",
-           "staff_name": "Dr. Sara2",
-           "tags": "hair cut, hair wash, nails"
+           "staff_name": "Dr. Sara10",
+           "tags": "dentures, internal medicine"
         },
         "SequenceNumber": "96767400000000004568984127",
         "SizeBytes": 457,
@@ -140,9 +140,9 @@ let testRecord_staff = {
   ]
 };
 
-/* ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
+ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
   console.log(msg);
-}); */
+});
 
 let searchObj = {
   "queryStringParameters": {
@@ -151,8 +151,8 @@ let searchObj = {
 };
 
 
-search.doSearch(searchObj, null, (error, response) => {
+/* search.doSearch(searchObj, null, (error, response) => {
   console.log('-----------------------------search RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------search RESPONSE END-----------------------------');
-});
+}); */
