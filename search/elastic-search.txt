@@ -30,7 +30,10 @@ PUT /business_docs
 					 "type" :  "long"
 				  },
 				  "category" : {
-					 "type" :  "text"
+					"type" :  "text"
+				  },
+				  "keyword_category" : {
+					"type": "keyword"
 				  },
 				  "statement_caption" : {
 					 "type" :  "text"
@@ -68,7 +71,8 @@ PUT /business_docs
 						        "type" : "short"
 						   },
 						   "dates" : {
-						        "type" : "date"
+						        "type" : "date",
+								"format": "MM-dd-yyyy"
 						   }
 					  }
 				  },
@@ -117,6 +121,7 @@ POST /business_docs/business_type
 	 "address" : "110 Main Street, Edison, NJ 08817",
 	 "phone" : "7871111211",
 	 "category" : "Health Care",
+	 "keyword_category" : "Health Care",
 	 "statement_caption" : "Our Mission",
 	 "statement_notes" : "we treat your smile special",
 	 "specialized_in" : "General Dentistry",
@@ -135,7 +140,7 @@ POST /business_docs/business_type
 	 ],
 	 "holidays" : {
 		      "weekdays" : [0 ,3],
-			  "dates": [1507825795220, 1507825795221, 1507825795222]
+			  "dates": ["11-01-2017", "12-24-2017", "10-10-2017"]
 	 },
 	 "staff" : [
 		{
@@ -170,7 +175,8 @@ POST /business_docs/business_type
 	 "bus_name" : "Rainbow Pediatrics",
 	 "address" : "220 Second Street, Piscataway, NJ 08854",
 	 "phone" : "9890001111",
-	 "category" : "Health Care",
+	 "category" : "Dental",
+	 "keyword_category" : "Dental",
 	 "statement_caption" : "Practice Mission",
 	 "statement_notes" : "kids are gods",
 	 "specialized_in" : "pediatric needs",
@@ -189,7 +195,7 @@ POST /business_docs/business_type
 	 ],
 	 "holidays" : {
 		      "weekdays" : [0 ,4],
-			  "dates": [1507825795220, 1507825795221, 1507825795222]
+			  "dates": ["08-15-2017", "02-14-2017", "05-06-2017"]
 	 },
 	 "staff" : [
 		{
@@ -214,6 +220,7 @@ POST /business_docs/business_type
 	 "address" : "220 Second Street, Newark, NJ 08854",
 	 "phone" : "9890001111",
 	 "category" : "Beauty Care",
+	 "keyword_category" : "Beauty Care",
 	 "statement_caption" : "Practice Mission",
 	 "statement_notes" : "love yourself",
 	 "specialized_in" : "Beauty needs",
@@ -232,7 +239,7 @@ POST /business_docs/business_type
 	 ],
 	 "holidays" : {
 		      "weekdays" : [0 ,4],
-			  "dates": [1507825795220, 1507825795221, 1507825795222]
+			  "dates": ["12-01-2017", "01-24-2017", "03-10-2017"]
 	 },
 	 "staff" : [
 		{
@@ -257,6 +264,13 @@ POST /business_docs/_search
 	"query" : {
 		"match" : {
 			"_all" : "best"
+		}
+	},
+	"aggs": {
+		"categories" : {
+			"terms" : {
+				"field" : "keyword_category"
+			}
 		}
 	}
 }
@@ -344,3 +358,23 @@ POST /appointment_docs/appointments_type
 		}
 	 ]
 }
+
+
+
+POST /business_docs/business_type/b-test-01/_update
+{
+  "script": {
+    "lang": "painless",
+    "source": "ctx._source.staff.add(params.newstaff)",
+    "params":{
+		"newstaff": {
+        "service_time":"30m",
+        "staff_id":"b-test-02-s-02",
+        "staff_name":"Dr. Sara5",
+        "tags":"hair cut, hair wash, nails"
+         }
+	}
+  }
+}
+
+GET /business_docs/business_type/b-test-01

@@ -1,0 +1,6 @@
+search filters 
+---------------
+business category ( category)
+Gender
+date/time
+language
