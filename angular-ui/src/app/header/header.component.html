@@ -1,35 +1,23 @@
-<div class="nav">
-    <div  class="container-fluid header">
-      <div class="row">
-          <div class="container">
-              <div class="row">
-          <!--  burger menu here -->
-        
-              <div class="col-sm-8">
-                <div>
-              <ul class="nav navbar-nav">
-                  <li><a [routerLink]="['']"><img height="40px" src="../assets/logo-main.png"></a></li>
-              </ul>
-                </div>
-              <div [ngClass]='{hide : isMainPage}'>
-                <ul class="nav navbar-nav">
-                    <li><app-search-box id="header-search"></app-search-box></li>
-                </ul>
-              </div>
-              </div>
-              <!-- <div class="col-sm-6">
-              <ul class="nav navbar-nav pull-right hide">
-                  <li><app-search-box id="header-search"></app-search-box></li>
-              </ul>
-              </div> -->
-              <div class="col-sm-4">
-                  <ul class="pull-right nav navbar-nav">
-                    <li routerLinkActive="active"><a [routerLink]="['/addbusiness']">Add Business</a></li>
-                    <li><a href="#">Manage Business</a></li>
-                  </ul>
-              </div>
-          </div> 
+<div id="header">
+    <nav class="navbar container">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" [routerLink]="['']">
+                <img alt="epokly" height="30" src="../assets/logo-main.png">
+            </a>  
           </div>
-      </div>
-    </div>
-  </div>
+      
+          <div class="collapse navbar-collapse" id="id-header-navbar">
+            <app-search-box id="header-search" [ngClass]='{hide : isMainPage}'></app-search-box>
+
+            <ul class="nav navbar-nav navbar-right blue-menu">
+                <li routerLinkActive="active"><a [routerLink]="['/addbusiness']">Add Business</a></li>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Reports</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    
+
+</div>
