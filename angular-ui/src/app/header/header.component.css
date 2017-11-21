@@ -1,7 +1,7 @@
 #header {
-    /* background-color: #205081;  */
-    display: table !important;
-    width: 100% !important;
+    background-color: #205081; 
+    /* display: table !important;
+    width: 100% !important; */
 }
 
 @media (min-width: 768px) {
