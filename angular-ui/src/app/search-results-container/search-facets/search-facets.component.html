@@ -1,0 +1,58 @@
+<div>
+  <div>
+      <div class="_64jr6j7" style="width: 100%;">
+        <div class="_gpueh5e">
+          <div>
+            <div role="menubar"  class="_1rfx9h43">
+                
+
+                <span *ngFor="let facet of facets">
+                  <div class="_36rlri">
+                      <div class="_1k069il0">
+                        <div disabled="">
+                          <button role="menuitem"  
+                              class="_1gi6kpd">
+                            <div class="_17u98ky" >{{facet.name}}</div>
+                          </button>
+                          <div id="menuItemComponent-{{facet.name}}" class="d-none">
+                              <div role="menu" class="facet-popover">
+                                <div class="container">
+                                  <div class="row mb-1" *ngFor="let fValue of facet.values">
+                                      <label for="{{facet.name}}-{{fValue.key}}">
+                                        <input type="checkbox" value="{{fValue.key}}" id="{{facet.name}}-{{fValue.key}}">
+                                        {{fValue.key}}
+                                      </label>
+                                  </div>
+                                  <div class="row mb-1 float-right">
+                                    <button class="btn btn-warning mr-2">Cancel</button>
+                                    <button class="btn btn-primary mr-2">Apply</button>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>                
+                <span>
+                  <div class="_36rlri">
+                    <div class="_1k069il0">
+                      <div disabled="">
+                        <button role="menuitem"  
+                             
+                            class="_1gi6kpd">
+                          <div class="_17u98ky">Time</div>
+                        </button>
+                        <div id="menuItemComponent-date_picker">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="_1ykwubb0" style="width: 100%;"></div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.body-content{
+    position: relative !important;
+    padding-top: 64px !important;
+}
+.main-div{
+    top: 64px !important;
+    bottom: 0px !important;
+    left: 0px !important;
+    right: 0px !important;
+}

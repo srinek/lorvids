@@ -45,7 +45,42 @@ module.exports.staffDocMapper = (ddbDoc) => {
 module.exports.searchDocMapper = (searchTerm) => {
   let searchObj = {};
   setDefaults(searchObj, false);
-  searchObj.body = {query : {match : { _all : searchTerm}} };
+  searchObj.body = { 
+    query : {
+      match : { _all : searchTerm }
+    }, 
+    aggs : {
+      categories : {
+        terms : {
+          field : "keyword_category"
+        }
+      },
+      gender : {
+        nested : {
+          path : "staff"
+        },
+        aggs : {
+          gender : { 
+            terms : { 
+              field : "staff.gender" 
+            } 
+          }
+        }
+      },
+      languages : {
+        nested : {
+          path : "staff"
+        },
+        aggs : {
+          languages : { 
+            terms : { 
+              field : "staff.languages" 
+            } 
+          }
+        }
+      }
+    } 
+  };
   console.log("search obj %j ", searchObj);
   return searchObj;
 }

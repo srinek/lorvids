@@ -1,23 +1,17 @@
-<div id="header">
-    <nav class="navbar container">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" [routerLink]="['']">
-                <img alt="epokly" height="30" src="../assets/logo-main.png">
-            </a>  
-          </div>
-      
-          <div class="collapse navbar-collapse" id="id-header-navbar">
-            <app-search-box id="header-search" [ngClass]='{hide : isMainPage}'></app-search-box>
-
-            <ul class="nav navbar-nav navbar-right blue-menu">
-                <li routerLinkActive="active"><a [routerLink]="['/addbusiness']">Add Business</a></li>
-                <li><a href="#">Dashboard</a></li>
-                <li><a href="#">Reports</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    
-
-</div>
+<header>
+    <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" [routerLink]="['']">
+        <img alt="epokly" height="30" src="../assets/logo-main.png">
+      </a>  
+      <app-search-box id="header-search" [ngClass]='{"d-none" : isMainPage}'></app-search-box>
+      <div id="id-header-navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" routerLinkActive="active">
+              <a [routerLink]="['/addbusiness']">Add Business</a>
+            </li>
+            <li class="nav-item"><a href="#">Dashboard</a></li>
+            <li class="nav-item"><a href="#">Reports</a></li>
+        </ul>
+      </div>
+    </nav>
+</header>

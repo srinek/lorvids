@@ -16,6 +16,7 @@ import {ApptService} from './appt.service';
 
 //test imports
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
+import { SearchVO } from '../model/search-vo';
 
 @Injectable()
 export class FacadeService {
@@ -59,7 +60,7 @@ export class FacadeService {
         return recentlyVisitedBusiness;
     }
 
-    public getSearchResults(searchTerm : string) : Observable<Business[]> {
+    public getSearchResults(searchTerm : string) : Observable<SearchVO> {
         this.mainPageUnLoaded.next(true);
         return this.searchService.invokeSearch(searchTerm);
     }

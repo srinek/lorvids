@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 body {
-    position: relative;
-    margin: 0;
-    padding-bottom: 21rem;
-    background-color: #f7f7f7 !important;
+    font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.43;
+    color: #484848;
+    background-color: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 hr {
     margin-top: 15px;
@@ -86,7 +89,7 @@ button, input, select, textarea {
 }
 
 #header-search form #search-input{
-    height: 50px;
+    height: 34px;
     width: 426px;
     position: relative;
     -webkit-transition: opacity .2s;
@@ -94,6 +97,6 @@ button, input, select, textarea {
 }
 #header-search form #search-btn{
     float: right;
-    height: 50px;
+    height: 34px;
     border-radius: 0px;
 }

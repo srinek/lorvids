@@ -3,6 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { FacadeService} from '../../service/facade.service';
 import {Business} from '../../model/business.model';
+import { SearchVO } from '../../model/search-vo';
+import { SearchFacet } from '../../model/search-facet';
 
 @Component({
   selector: 'app-search-results',
@@ -12,6 +14,7 @@ import {Business} from '../../model/business.model';
 export class SearchResultsComponent implements OnInit {
 
   public searchResults : Business[] = [];
+  public facets : SearchFacet[] = [];
   public searchTerm : string = "";
   public error : boolean = false;
   public errorMessage : string = "";
@@ -30,8 +33,9 @@ export class SearchResultsComponent implements OnInit {
          console.log("searchFor "+this.searchTerm);
          this.facadeService.getSearchResults(this.searchTerm)
             .subscribe(
-                (searchResults : Business[]) => {
-                    this.searchResults = searchResults;
+                (searchVo : SearchVO) => {
+                    this.searchResults = searchVo.searchResults;
+                    this.facets = searchVo.facets;
                 },
                 (error : string) => {
                   this.error = true;

@@ -140,9 +140,9 @@ let testRecord_staff = {
   ]
 };
 
-ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
+/* ddbIndexer.esStaffIndexer(testRecord_staff, null, (response, msg) => {
   console.log(msg);
-});
+}); */
 
 let searchObj = {
   "queryStringParameters": {
@@ -151,8 +151,8 @@ let searchObj = {
 };
 
 
-/* search.doSearch(searchObj, null, (error, response) => {
+search.doSearch(searchObj, null, (error, response) => {
   console.log('-----------------------------search RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------search RESPONSE END-----------------------------');
-}); */
+});

@@ -85,6 +85,12 @@ PUT /business_docs
 						   "staff_name" : {
 								"type" : "text"
 						   },
+						   "gender" : {
+								"type" : "keyword"
+						   },
+						   "languages" : {
+								"type" : "keyword"
+						   },
 						   "tags" : {
 						       "type" : "text"
 						   },
@@ -146,6 +152,8 @@ POST /business_docs/business_type
 		{
 			"staff_id" : "b-test-01-s-01",
 			"staff_name" : "Dr. Susan",
+			"gender" : "female",
+			"languages" : ["english","russian"],
 			"tags" : "DDS from NYU, 20 years experience",
 			"service_time" : "30m",
 			"bus_hours" : [
@@ -162,6 +170,8 @@ POST /business_docs/business_type
 		{
 			"staff_id" : "b-test-01-s-02",
 			"staff_name" : "Dr. Devi",
+			"gender" : "female",
+			"languages" : ["english","telugu", "hindi"],
 			"tags" : "DDS from RSDM, fellow in oro facial pain",
 			"holidays" : ["SAT"],
 			"service_time" : "30m"
@@ -202,13 +212,17 @@ POST /business_docs/business_type
 			"staff_id" : "b-test-02-s-01",
 			"staff_name" : "Dr. Kartheek",
 			"tags" : "DDS from NYU, 20 years experience",
-			"service_time" : "30m"
+			"service_time" : "30m",
+			"gender" : "male",
+			"languages" : ["english","telugu", "hindi", "spanish"]
 		},
 		{
 			"staff_id" : "b-test-02-s-01",
 			"staff_name" : "Dr. Navin",
 			"tags" : "Pediatrician from RSDM, chadis, whole child etc",
-			"service_time" : "30m"
+			"service_time" : "30m",
+			"gender" : "male",
+			"languages" : ["english","telugu", "hindi"]
 		}
 	 ]
 }
@@ -246,13 +260,17 @@ POST /business_docs/business_type
 			"staff_id" : "b-test-02-s-01",
 			"staff_name" : "Sara",
 			"tags" : "hair cut, hair wash, nails",
-			"service_time" : "30m"
+			"service_time" : "30m",
+			"gender" : "female",
+			"languages" : ["english", "hindi"]
 		},
 		{
 			"staff_id" : "b-test-02-s-01",
 			"staff_name" : "Nanda",
 			"tags" : "hair cut, hair wash, nails",
-			"service_time" : "30m"
+			"service_time" : "30m",
+			"gender" : "male",
+			"languages" : ["english","telugu", "hindi"]
 		}
 	 ]
 }
@@ -270,6 +288,30 @@ POST /business_docs/_search
 		"categories" : {
 			"terms" : {
 				"field" : "keyword_category"
+			}
+		},
+		"gender" : {
+			"nested" : {
+				"path" : "staff"
+			},
+			"aggs" : {
+				"gender" : { 
+					"terms" : { 
+						"field" : "staff.gender" 
+					} 
+				}
+			}
+        },
+		"languages" : {
+			"nested" : {
+				"path" : "staff"
+			},
+			"aggs" : {
+				"languages" : { 
+					"terms" : { 
+						"field" : "staff.languages" 
+					} 
+				}
 			}
 		}
 	}

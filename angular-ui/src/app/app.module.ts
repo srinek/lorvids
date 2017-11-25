@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
 import { SearchResultsComponent } from './search-results-container/search-results/search-results.component';
+import { SearchFacetsComponent } from './search-results-container/search-facets/search-facets.component';
 import { RecentlyVisitedComponent } from './home-page/recently-visited/recently-visited.component';
 import { TrendingComponent } from './home-page/trending/trending.component';
 import { FooterComponent } from './footer/footer.component';
@@ -44,7 +45,8 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
     AvailableSlotsComponent,
     ConfirmBookingComponent,
     AddBusinessComponent,
-    AddStaffComponent
+    AddStaffComponent,
+    SearchFacetsComponent
   ],
   imports: [
     BrowserModule,
