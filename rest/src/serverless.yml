@@ -127,6 +127,14 @@ functions:
           path: search
           method: get
           cors : true
+  filter:
+    handler: api/search.doFacetSearch
+    description : facet search api
+    events:
+      - http:
+          path: facetfilter
+          method: post
+          cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

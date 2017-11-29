@@ -420,3 +420,28 @@ POST /business_docs/business_type/b-test-01/_update
 }
 
 GET /business_docs/business_type/b-test-01
+
+
+
+
+POST /business_docs/_search
+{
+  "query" : {
+      "bool": {
+    	   "must" : [
+    	       {
+    	         "match" : {
+    			        "_all" : "best"
+    		       }
+    	       }
+    	   ],
+    	   "filter": [
+            {
+              "term":  { 
+                "keyword_category": "Dental" 
+              }
+            } 
+          ]
+      }
+	}
+}

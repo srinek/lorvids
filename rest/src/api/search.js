@@ -20,3 +20,24 @@ module.exports.doSearch = (event, context, callback) => {
           }
     });
 }
+
+module.exports.doFacetSearch = (event, context, callback) => {
+    const searchTerm = event.queryStringParameters.searchTerm;
+    console.log("body", event.body);
+    const facets = JSON.parse(event.body);
+    console.log("facets", facets);
+    let esObj = docMapper.facetSearchDocMapper(searchTerm, facets);
+    es.esSearch(esObj, (error, result) => {
+        if (error) {
+            let response = util.error();
+            response.body = JSON.stringify(error);
+            console.log("error callback ", response);
+            callback(null, response);
+          } else {
+            let response = util.success();
+            response.body = JSON.stringify(result);
+            console.log("success callback ", response);
+            callback(null, response);
+          }
+    });
+}

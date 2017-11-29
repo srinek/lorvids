@@ -144,7 +144,7 @@ let testRecord_staff = {
   console.log(msg);
 }); */
 
-let searchObj = {
+/* let searchObj = {
   "queryStringParameters": {
     "searchTerm": "best"
   }
@@ -155,4 +155,19 @@ search.doSearch(searchObj, null, (error, response) => {
   console.log('-----------------------------search RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------search RESPONSE END-----------------------------');
+}); */
+
+
+let facetSearchObj = {
+  "queryStringParameters": {
+    "searchTerm": "best"
+  },
+  "body" : "{\"key\" : \"keyword_category\", \"values\" : [\"Dental\", \"Beauty Care\"]}"
+};
+
+
+search.doFacetSearch(facetSearchObj, null, (error, response) => {
+  console.log('-----------------------------Facet RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------Facet RESPONSE END-----------------------------');
 });

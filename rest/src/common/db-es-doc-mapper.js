@@ -1,4 +1,5 @@
 var DynamoDB = require('aws-sdk/clients/dynamodb');
+const elBuilder = require('elastic-builder');
 
 module.exports.businessDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
@@ -83,4 +84,22 @@ module.exports.searchDocMapper = (searchTerm) => {
   };
   console.log("search obj %j ", searchObj);
   return searchObj;
+}
+
+module.exports.facetSearchDocMapper = (searchTerm, facet) => {
+  let facetSearchObj = {};
+  setDefaults(facetSearchObj, false);
+  const requestBody = elBuilder.requestBodySearch()
+  .query(
+    elBuilder.boolQuery()
+    .must(elBuilder.matchQuery('_all', searchTerm))
+    .filter(buildTermsQueries(facet))
+  );
+  facetSearchObj.body = requestBody.toJSON();
+  console.log("search obj %j ", facetSearchObj.body);
+  return facetSearchObj;
+}
+
+var buildTermsQueries = (facet) => {
+   return elBuilder.termsQuery(facet.key , facet.values);
 }
