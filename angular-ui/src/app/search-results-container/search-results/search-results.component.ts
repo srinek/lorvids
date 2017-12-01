@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { FacadeService} from '../../service/facade.service';
 import {Business} from '../../model/business.model';
@@ -16,6 +16,7 @@ export class SearchResultsComponent implements OnInit {
   public searchResults : Business[] = [];
   public facets : SearchFacet[] = [];
   public searchTerm : string = "";
+  public filterBy : Map<string, string[]> = new Map<string, string[]>();
   public error : boolean = false;
   public errorMessage : string = "";
   
@@ -27,15 +28,22 @@ export class SearchResultsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(
-      (params: Params) => {
-         this.searchTerm = params['searchFor'];
+    this.route.queryParamMap.subscribe(
+      (paramMap: ParamMap) => {
+         this.searchTerm = paramMap.get('look_for');
+         paramMap.keys.forEach((key) => {
+            if(key === 'look_for'){
+              return;
+            }
+            this.filterBy.set(key, paramMap.getAll(key));
+         })
          console.log("searchFor "+this.searchTerm);
-         this.facadeService.getSearchResults(this.searchTerm)
+         this.facadeService.getFacetedSearchResults(this.searchTerm, this.filterBy)
             .subscribe(
                 (searchVo : SearchVO) => {
                     this.searchResults = searchVo.searchResults;
                     this.facets = searchVo.facets;
+                    console.log(this.facets);
                 },
                 (error : string) => {
                   this.error = true;

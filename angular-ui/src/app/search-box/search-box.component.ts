@@ -20,7 +20,7 @@ export class SearchBoxComponent implements OnInit {
   }
 
   onSearch(searchVal) : void{
-    this.router.navigate(['/search/', searchVal],{relativeTo:this.route});
+    this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {'look_for' : searchVal}});
   }
 
 }

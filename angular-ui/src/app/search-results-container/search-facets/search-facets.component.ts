@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { SearchFacet } from '../../model/search-facet';
 
 @Component({
@@ -10,9 +10,10 @@ export class SearchFacetsComponent implements OnInit {
 
   @Input() facets : SearchFacet[] = [];
 
-  constructor() { }
+  @Input() searchTerm : string = "";
    
-
+  constructor() { }
+  
   ngOnInit() {
 
   }

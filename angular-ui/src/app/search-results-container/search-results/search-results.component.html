@@ -25,9 +25,9 @@
             </div>
         </div>  -->
         <div class="row">
-            <app-search-facets [facets]="facets"></app-search-facets>
+            <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
         </div>
-        <div class="row">
+        <div class="row" >
             <div class="container-fluid search-result" *ngFor="let business of searchResults">
                 <div class="row">
                     <div class="col-sm-2">

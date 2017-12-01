@@ -13,7 +13,7 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
     {path:'search', component : SearchResultsContainerComponent},
-    {path:'search/:searchFor', component : SearchResultsContainerComponent},
+    //{path:'search/:searchFor', component : SearchResultsContainerComponent},
     {path:'reviewbooking/:busId/:staffId/:bookingId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
     {path:'addbusiness', component : AddBusinessComponent},

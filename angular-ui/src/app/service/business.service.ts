@@ -42,6 +42,10 @@ export class BusinessService {
                 this.logger.consoleLog("error in save business ", response.json());
                 return response.json();
             }
+        ).catch(
+            (error: Response) => {
+              return Observable.throw(error);
+            }
         );
     }
 }

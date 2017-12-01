@@ -101,5 +101,5 @@ module.exports.facetSearchDocMapper = (searchTerm, facet) => {
 }
 
 var buildTermsQueries = (facet) => {
-   return elBuilder.termsQuery(facet.key , facet.values);
+   return elBuilder.termsQuery(facet.key , facet.value);
 }

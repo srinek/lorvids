@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -27,6 +30,9 @@ import { AvailableSlotsComponent } from './search-results-container/available-sl
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 import { AddBusinessComponent } from './add-business/add-business.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
+import { LanguageFacetDropDownDirective } from './search-results-container/search-facets/language-facet-dropdown.directive';
+import { SearchFacetComponent } from './search-results-container/search-facets/search-facet/search-facet.component';
+import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
 
 @NgModule({
   declarations: [
@@ -46,15 +52,22 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
     ConfirmBookingComponent,
     AddBusinessComponent,
     AddStaffComponent,
-    SearchFacetsComponent
-  ],
+    SearchFacetsComponent,
+    LanguageFacetDropDownDirective,
+    SearchFacetComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    NgbModalModule.forRoot(),
+    CalendarModule.forRoot(),
+    NgbModule.forRoot()
   ],
-  providers: [FacadeService, SearchService, BusinessService, StaffService, ApptService, Logger],
+  providers: [FacadeService, SearchService, 
+    BusinessService, StaffService, 
+    ApptService, Logger, NgbDropdownConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

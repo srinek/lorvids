@@ -65,6 +65,13 @@ export class FacadeService {
         return this.searchService.invokeSearch(searchTerm);
     }
 
+    public getFacetedSearchResults(searchTerm : string, facetMap : Map<string, string[]>) : Observable<SearchVO> {
+        if(facetMap && facetMap.size > 0){
+            return this.searchService.facetFilter(searchTerm, facetMap);
+        }
+        return this.getSearchResults(searchTerm);
+    }
+
     public getAppointmentSlots(business : Business, staff : Staff) : Slots {
         var slots = new Slots();
         var nextdate = business.getNextBusinessDayDefault();
