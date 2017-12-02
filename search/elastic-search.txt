@@ -445,3 +445,70 @@ POST /business_docs/_search
       }
 	}
 }
+
+
+
+POST /business_docs/_search
+{
+   "_source": {
+          "excludes": [ "staff.name"]
+    },
+    "query": {
+      "bool": {
+        "must": {
+                "match": {
+                    "_all": "dental"
+                }
+        },
+        "filter": {
+            "nested" : {
+                "path" : "staff",
+                "query" : {
+                    "terms": {
+                      "staff.languages": [
+                          "russian",
+                          "spanish"
+                      ]
+                    }
+                }
+            }
+        }
+      }
+    },
+    "aggs": {
+		"categories" : {
+			"terms" : {
+				"field" : "keyword_category"
+			}
+		},
+		"gender" : {
+       "nested" : {
+           "path" : "staff"
+       },
+       "aggs" : {
+           "gender" : { 
+             "terms" : { 
+                 "field" : "staff.gender" 
+             } 
+           },
+           "languages" : { 
+             "terms" : { 
+                 "field" : "staff.languages1" 
+             } 
+           }
+       }
+    },
+    "languages" : {
+       "nested" : {
+           "path" : "staff"
+       },
+       "aggs" : {
+           "languages" : { 
+             "terms" : { 
+                 "field" : "staff.languages1" 
+             } 
+           }
+       }
+    }
+	}
+}

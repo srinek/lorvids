@@ -89,17 +89,37 @@ module.exports.searchDocMapper = (searchTerm) => {
 module.exports.facetSearchDocMapper = (searchTerm, facet) => {
   let facetSearchObj = {};
   setDefaults(facetSearchObj, false);
-  const requestBody = elBuilder.requestBodySearch()
-  .query(
-    elBuilder.boolQuery()
-    .must(elBuilder.matchQuery('_all', searchTerm))
-    .filter(buildTermsQueries(facet))
-  );
+  const requestBody = elBuilder.requestBodySearch();
+  requestBody.query(buildQueryObj(searchTerm, facet));
+  requestBody.aggs(buildAggObj());
   facetSearchObj.body = requestBody.toJSON();
   console.log("search obj %j ", facetSearchObj.body);
   return facetSearchObj;
 }
 
+var buildQueryObj = (searchTerm, facet) => {
+  var queryObj = elBuilder.boolQuery()
+  .must(elBuilder.matchQuery('_all', searchTerm));
+  if(facet.key === "staff.languages" || facet.key === "staff.gender"){ // TODO : fix this when facet key is fixed in UI
+    queryObj.filter(elBuilder.nestedQuery(buildTermsQueries(facet), "staff"));
+  }
+  else{
+    queryObj.filter(buildTermsQueries(facet));
+  }
+  return queryObj;
+}
+
+var buildAggObj = () => {
+  var aggs = [];
+  aggs.push(buildTermsAggregation("categories", "keyword_category"));
+  aggs.push(elBuilder.nestedAggregation("languages", "staff").agg(buildTermsAggregation("languages","staff.languages")));
+  aggs.push(elBuilder.nestedAggregation("gender", "staff").agg(buildTermsAggregation("gender","staff.gender")));
+  return aggs;
+}
+
+var buildTermsAggregation = (name, field) => {
+  return elBuilder.termsAggregation(name, field);
+}
 var buildTermsQueries = (facet) => {
-   return elBuilder.termsQuery(facet.key , facet.value);
+   return elBuilder.termsQuery(facet.key , facet.values);
 }

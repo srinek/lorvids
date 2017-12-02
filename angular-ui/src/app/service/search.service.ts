@@ -72,7 +72,7 @@ export class SearchService{
         if(response.json().aggregations){
             var langAggrs = response.json().aggregations.languages.languages.buckets;
             if(langAggrs.length > 0){
-                var langFacet = new SearchFacet("Languages");
+                var langFacet = new SearchFacet("staff.languages");
                 for(const langAggr of langAggrs){
                     langFacet.addValue(langAggr.key, langAggr.doc_count);
                 }
@@ -80,7 +80,7 @@ export class SearchService{
             }
             var genderAggrs = response.json().aggregations.gender.gender.buckets;
             if(genderAggrs.length > 0){
-                var genderFacet = new SearchFacet("Gender");
+                var genderFacet = new SearchFacet("staff.gender");
                 for(const genderAggr of genderAggrs){
                     genderFacet.addValue(genderAggr.key, genderAggr.doc_count);
                 }

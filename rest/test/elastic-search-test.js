@@ -165,8 +165,14 @@ let facetSearchObj = {
   "body" : "{\"key\" : \"keyword_category\", \"values\" : [\"Dental\", \"Beauty Care\"]}"
 };
 
+let facetSearchObj2 = {
+  "queryStringParameters": {
+    "searchTerm": "best"
+  },
+  "body" : "{\"key\" : \"staff.languages\", \"values\" : [\"english\", \"telugu\"]}"
+};
 
-search.doFacetSearch(facetSearchObj, null, (error, response) => {
+search.doFacetSearch(facetSearchObj2, null, (error, response) => {
   console.log('-----------------------------Facet RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------Facet RESPONSE END-----------------------------');

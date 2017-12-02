@@ -44,7 +44,14 @@ export class SearchFacetComponent implements OnInit {
 
   onClickApply(facetName) {
      //this.facadeService.getFacetedSearchResults("", facetName, this.selectedFacets)
-     this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {"look_for":this.searchTerm , "keyword_category" : this.selectedFacets}});
+     console.log(facetName);
+     var fName : string = "" + facetName;
+     console.log("fname:", fName);
+     var qp = {}
+     qp["look_for"] = this.searchTerm;
+     qp[fName] = this.selectedFacets;
+     console.log("qp:", qp);
+     this.router.navigate(['/search'],{relativeTo:this.route, queryParams : qp});
   }
   
 }
