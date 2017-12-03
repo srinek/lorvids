@@ -1,3 +1,9 @@
+.search-results-container{
+    margin-top: 42px;
+}
+.search-results{
+    margin-top: 20px;
+}
 .search-result{
     margin-bottom: 10px;
     margin-top: 20px;

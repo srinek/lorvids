@@ -1,4 +1,4 @@
-<div ngbDropdown class="d-inline-block">
+<div ngbDropdown #dropDown="ngbDropdown" class="d-inline-block">
   <button class="btn btn-outline-primary" id="menuItemComponent-{{facet.name}}" 
   ngbDropdownToggle 
   value="{{facet.name}}"
@@ -13,9 +13,9 @@
             {{fValue.key}}
           </label>
       </div>
-      <div class="row mb-1 float-right">
-          <button class="btn btn-warning mr-2" >Cancel</button>
-          <button class="btn btn-primary mr-2" (click)="onClickApply(facetButton.value)">Apply</button>
+      <div class="dropdown-item mb-1 float-right ">
+          <button class="btn btn-sm btn-warning mr-2" (click)="dropDown.close();">Cancel</button>
+          <button class="btn btn-sm btn-primary mr-2" (click)="onClickApply(facetButton.value); dropDown.close();">Apply</button>
       </div>
   </div>
 </div>

@@ -1,19 +1,8 @@
-<div *ngIf="facets.length > 0">
-  <div>
-      <div class="_64jr6j7" style="width: 100%;">
-        <div class="_gpueh5e">
-          <div>
-            <div role="menubar"  class="_1rfx9h43">
-                
 
-                <span *ngFor="let facet of facets">
-                  <app-search-facet [facet]="facet" [searchTerm]="searchTerm"></app-search-facet>
-                </span>                
-                
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="_1ykwubb0" style="width: 100%;"></div>
+<div class="search-facets-container" style="width: 100%;" *ngIf="facets.length > 0">
+  <div role="menubar"  class="pt-3">
+    <span *ngFor="let facet of facets">
+      <app-search-facet [facet]="facet" [searchTerm]="searchTerm"></app-search-facet>
+    </span>                
   </div>
 </div>

@@ -16,10 +16,10 @@ export class SearchFacetComponent implements OnInit {
   @Input() searchTerm : string = "";
   
 
-  constructor(private config: NgbDropdownConfig, 
+  constructor(private config: NgbDropdownConfig,
     private route: ActivatedRoute,
     private router: Router) {
-    config.autoClose = false;
+    config.autoClose = "outside";
   }
 
   ngOnInit() {
@@ -43,14 +43,9 @@ export class SearchFacetComponent implements OnInit {
   }
 
   onClickApply(facetName) {
-     //this.facadeService.getFacetedSearchResults("", facetName, this.selectedFacets)
-     console.log(facetName);
-     var fName : string = "" + facetName;
-     console.log("fname:", fName);
      var qp = {}
      qp["look_for"] = this.searchTerm;
-     qp[fName] = this.selectedFacets;
-     console.log("qp:", qp);
+     qp[facetName] = this.selectedFacets;
      this.router.navigate(['/search'],{relativeTo:this.route, queryParams : qp});
   }
   
