@@ -77,7 +77,7 @@ export class FacadeService {
         var nextdate = business.getNextBusinessDayDefault();
         slots.date = nextdate
         slots.slots = business.getAvailableSlots(staff, nextdate);
-        this.logger.log(JSON.stringify(slots));
+        //this.logger.log(JSON.stringify(slots));
         return slots;
     }
 

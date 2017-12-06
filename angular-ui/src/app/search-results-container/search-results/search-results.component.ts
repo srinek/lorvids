@@ -43,7 +43,6 @@ export class SearchResultsComponent implements OnInit {
                 (searchVo : SearchVO) => {
                     this.searchResults = searchVo.searchResults;
                     this.facets = searchVo.facets;
-                    console.log(this.facets);
                 },
                 (error : string) => {
                   this.error = true;

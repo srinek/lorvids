@@ -22,7 +22,7 @@ export class SearchService{
     }
 
     public invokeSearch(searchTerm : string) : Observable<SearchVO>{
-        this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
+        //this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         
         return this.http.get(this.searchUrl+this.searchEndpoint+"?searchTerm="+searchTerm)
             .map((response : Response) => {
@@ -37,15 +37,15 @@ export class SearchService{
     }
 
     public facetFilter(searchTerm : string, facetMap: Map<string, string[]>) : Observable<SearchVO>{
-        console.log("search invoked ", this.searchUrl, searchTerm, facetMap);
+        //console.log("search invoked ", this.searchUrl, searchTerm, facetMap);
         //let data : object[] = [];
         let data : object = {};
         facetMap.forEach((v, k) => {
-            console.log(v, k);
+            //console.log(v, k);
             //data.push({key : k, values : v});
             data = {key : k, values : v};
         });
-        console.log(data);
+        //console.log(data);
         return this.http.post(this.searchUrl+this.facetEndpoint+"?searchTerm="+searchTerm, 
         data).map( (response : Response) => {
                     return this.parseESResponse(response);

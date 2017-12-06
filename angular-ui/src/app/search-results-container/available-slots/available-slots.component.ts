@@ -13,10 +13,9 @@ import {Slots} from '../../model/slots.model';
 })
 export class AvailableSlotsComponent implements OnInit {
 
-  @Input() staff : Staff;
+  staff : Staff;
 
   @Input() business : Business;
-
   slots : Slots;
 
   constructor(private route: ActivatedRoute,
@@ -24,7 +23,8 @@ export class AvailableSlotsComponent implements OnInit {
     private facadeService : FacadeService) { }
 
   ngOnInit() {
-     this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff);
+    this.staff = this.business.staff[0];
+    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff);
   }
 
   bookAppointment(bookingId : string){

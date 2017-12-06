@@ -28,15 +28,46 @@
             <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
         </div>
         <div class="row search-results pt-5" >
-            <div class="search-result" *ngFor="let business of searchResults">
-                <div class="row">
-                    <div class="col-sm-2">
-                            <div class="media-photo-badge div-inline m-right-5">
-                                <span href="/users/show/nanda_profile_num" class="media-photo media-round">
-                                    <img alt="{{business.name}}" height="115" width="115" data-pin-nopin="true" 
-                                    src="{{business.imageurl}}" title="{{business.name}}">
-                                </span>
+            <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-wrap">
+                            <div class="col-sm-4 pl-4 pb-2">
+                                <div class="row">
+                                    <h4 class="pl-4">{{business.bus_name}}</h4>                
+                                </div>
+                                <div class="row">
+                                    <div style="width:100%">
+                                        <span href="/users/show/nanda_profile_num" >
+                                            <img alt="{{business.name}}" height="100%" width="100%" 
+                                            src="{{business.imageurl}}" title="{{business.name}}"
+                                            class="rounded">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                      reviews come here
+                                </div>
+                                <div class="row">
+                                    <address>
+                                            {{business.address}}.
+                                    </address>
+                                </div>
                             </div>
+                            <div class="col-sm-8 pl-4 pb-2">
+                               <app-available-slots [business]="business"> </app-available-slots>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-sm-2">
+                        <div class="media-photo-badge div-inline m-right-5">
+                            <span href="/users/show/nanda_profile_num" class="media-photo media-round">
+                                <img alt="{{business.name}}" height="115" width="115" data-pin-nopin="true" 
+                                src="{{business.imageurl}}" title="{{business.name}}">
+                            </span>
+                        </div>
                     </div>
                     <div class="col-sm-2">
                             <div>
@@ -57,7 +88,7 @@
                                     [staff]="staff"> </app-available-slots>
                             </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 </div>

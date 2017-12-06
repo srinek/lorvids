@@ -21,7 +21,7 @@ export class Staff {
         //find booked slots
         //compute available slots
         let slots = [];
-        for(var i = 0; i < 20; i++){
+        for(var i = 0; i < 9; i++){
             let slot = new AppointmentSlot();
             slot.bookingId = this.staff_id+"-slot-"+i;
             slot.isAvailable = true;
