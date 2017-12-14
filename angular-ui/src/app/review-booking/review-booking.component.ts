@@ -20,6 +20,7 @@ export class ReviewBookingComponent implements OnInit {
   public error : boolean = false;
   public errorMessage : string = "";
   @ViewChild('appointmentForm') appointmentForm : NgForm;
+  svcSelected : string;
 
   constructor(
     private facadeService : FacadeService,
@@ -40,7 +41,6 @@ export class ReviewBookingComponent implements OnInit {
           .subscribe(
               (business : Business) => {
                   this.business = business;
-                  console.log(this.business);
               },
               (error : string) => {
                 this.error = true;
@@ -51,7 +51,6 @@ export class ReviewBookingComponent implements OnInit {
           .subscribe(
               (staff : Staff) => {
                   this.staff = staff;
-                  console.log(this.staff);
               },
               (error : string) => {
                 this.error = true;

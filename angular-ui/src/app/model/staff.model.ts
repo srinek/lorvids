@@ -17,17 +17,20 @@ export class Staff {
         }
     }
 
-    public getAvailableSlots(onDate : Date) : AppointmentSlot[]{
+    public getAvailableSlots(onDate : Date, offset : number, size : number) : AppointmentSlot[]{
         //find booked slots
         //compute available slots
         let slots = [];
-        for(var i = 0; i < 9; i++){
+        for(var i = offset; i < offset + size; i++){
             let slot = new AppointmentSlot();
             slot.bookingId = this.staff_id+"-slot-"+i;
             slot.isAvailable = true;
             slot.slotTime = (2.00 + i ) +" PM";
             slot.specialInstruction = "be on time";
             slots.push(slot);
+            if(i >= 22){
+                break;
+            }
         }
         return slots;
     }

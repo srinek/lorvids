@@ -20,6 +20,7 @@ export class Business{
     specialized_in? : string = "";
     awards? : string = "";
     appointment_instructions? : string[] = [];
+    services? : string[] = [];
 
     constructor(private json? : string){
         if(json){
@@ -52,8 +53,9 @@ export class Business{
         return nextDay;
     }
 
-    public getAvailableSlots(staff : Staff, onDate : Date) : AppointmentSlot[]{
-        return staff.getAvailableSlots(onDate);
+    public getAvailableSlots(staff : Staff, onDate : Date, 
+        offset : number, size : number) : AppointmentSlot[]{
+        return staff.getAvailableSlots(onDate, offset, size);
     }
 
     public map(src) : void {
@@ -71,5 +73,7 @@ export class Business{
         this.specialized_in = src.specialized_in;
         this.appointment_instructions = src.appointment_instructions.split(',');
         this.awards = src.awards;
+        this.imageurl = "../../assets/trendy_looks.jpg";
+        this.services = src.services;
     }
 }

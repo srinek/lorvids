@@ -1,3 +1,29 @@
-.slots-container{
-    width : 300px;
+.btn-more-slots{
+   position : absolute !important;
+   -webkit-transform: translateY(-50%) !important;
+   transform: translateY(-50%) !important;
+   z-index : 10;
+   top : 50%;
+   right: -23px;
+}
+
+.btn-prev-slots{
+   position : absolute !important;
+   -webkit-transform: translateY(-50%) !important;
+   transform: translateY(-50%) !important;
+   z-index : 10;
+   top : 50%;
+   left: -26px;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    background-color: #ffffff;
+    border: 3px solid lightblue;
 }

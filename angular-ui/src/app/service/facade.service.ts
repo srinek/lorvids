@@ -72,11 +72,14 @@ export class FacadeService {
         return this.getSearchResults(searchTerm);
     }
 
-    public getAppointmentSlots(business : Business, staff : Staff) : Slots {
+    public getAppointmentSlots(business : Business, staff : Staff, 
+        selectedDate : Date, offset : number, size : number) : Slots {
         var slots = new Slots();
-        var nextdate = business.getNextBusinessDayDefault();
-        slots.date = nextdate
-        slots.slots = business.getAvailableSlots(staff, nextdate);
+        if(!selectedDate){
+            selectedDate = business.getNextBusinessDayDefault();
+        }
+        slots.date = selectedDate;
+        slots.slots = business.getAvailableSlots(staff, selectedDate, offset, size);
         //this.logger.log(JSON.stringify(slots));
         return slots;
     }

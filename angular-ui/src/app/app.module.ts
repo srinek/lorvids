@@ -33,6 +33,7 @@ import { AddStaffComponent } from './add-staff/add-staff.component';
 import { LanguageFacetDropDownDirective } from './search-results-container/search-facets/language-facet-dropdown.directive';
 import { SearchFacetComponent } from './search-results-container/search-facets/search-facet/search-facet.component';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,7 @@ import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, Logger, NgbDropdownConfig],
+    ApptService, Logger],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
