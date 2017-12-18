@@ -34,6 +34,9 @@ import { LanguageFacetDropDownDirective } from './search-results-container/searc
 import { SearchFacetComponent } from './search-results-container/search-facets/search-facet/search-facet.component';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BusinessPageComponent } from './business-page/business-page.component';
+import { StaffSlotsComponent } from './common/staff-slots/staff-slots.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,9 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker'
     AddStaffComponent,
     SearchFacetsComponent,
     LanguageFacetDropDownDirective,
-    SearchFacetComponent
+    SearchFacetComponent,
+    BusinessPageComponent,
+    StaffSlotsComponent
    ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker'
     HttpModule,
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 

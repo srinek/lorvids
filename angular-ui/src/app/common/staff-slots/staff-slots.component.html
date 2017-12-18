@@ -1,0 +1,18 @@
+
+<div class="d-flex flex-wrap text-center">
+  <div class="col-12" *ngIf="!selectedDate"><h4>Select Time</h4></div>
+  <div class="col-12" *ngIf="selectedDate"><h4>{{ selectedDate | date:'fullDate'}}</h4></div>
+  <div class="col-6">
+    <div class="d-inline-block">
+      <datepicker [(ngModel)]="selectedDate" [showWeeks]="false" (ngModelChange)="onDateChange($event)"></datepicker>
+    </div>
+  </div>
+  <div class="col-6 d-flex flex-wrap text-center">
+    <div class="mr-1 col-xs-2" *ngFor="let slot of slots.slots; i as index">
+      <a class="btn btn-sm btn-info align-self-start w-100"
+      title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.bookingId)">
+          {{slot.slotTime}} 
+      </a>
+    </div>
+  </div>
+</div>

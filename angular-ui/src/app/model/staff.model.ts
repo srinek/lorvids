@@ -28,9 +28,7 @@ export class Staff {
             slot.slotTime = (2.00 + i ) +" PM";
             slot.specialInstruction = "be on time";
             slots.push(slot);
-            if(i >= 22){
-                break;
-            }
+            
         }
         return slots;
     }

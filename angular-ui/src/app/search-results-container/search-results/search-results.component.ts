@@ -54,5 +54,9 @@ export class SearchResultsComponent implements OnInit {
     
   }
 
+  gotoBusiness(business : Business){
+    this.router.navigate(['/bushome', business.bus_id],
+    {relativeTo:this.route});
+  }
 
 }

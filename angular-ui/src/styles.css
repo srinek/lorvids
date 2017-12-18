@@ -104,3 +104,15 @@ button, input, select, textarea {
 .position-relative{
     position: relative !important;
 }
+
+
+
+/*---- global styles --------------- */
+a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+a {
+    background-color: transparent;
+}

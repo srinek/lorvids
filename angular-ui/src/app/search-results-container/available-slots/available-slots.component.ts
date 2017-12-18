@@ -37,7 +37,6 @@ export class AvailableSlotsComponent implements OnInit {
       null, this.offset, this.size);
     this.showhideMoreSlots();
     this.dateSelected = {"day":"10", "month":"01", "year":"2018"};
-    console.log("date selected", this.dateSelected);
   }
 
 
