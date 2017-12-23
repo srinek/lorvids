@@ -1,32 +1,38 @@
 'use strict';
-let db = require('../common/db');
+let businessService = require('../services/business-service');
 let util = require('../common/util');
 
 module.exports.save = (event, context, callback) => {
     //console.log("new business save is called ", event);
-    var params = {
-      TableName: 'Business',
-      Item: JSON.parse(event.body, util.sanitizeDBValue)
-    };
-    db.nxtId(
-       (generatedId) => {
-          params.Item.bus_id = "b-test-"+generatedId;
-          console.log("params "+  JSON.stringify(params));
-          db.saveData(params, callback);
-       }
-    );
-    
+    let saveDataPromise = businessService.saveBusiness(event.body, callback);
+    saveDataPromise.then( (result) => {
+        let response = util.success();
+        response.body = JSON.stringify(result);
+        console.log("success callback ", response);
+        callback(null, response);
+      }
+    ).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
+      }
+    )
 }
 
 module.exports.get = (event, context, callback) => {
-
-    //console.log("business *** "+ JSON.stringify(event));
-    var params = {
-      TableName: 'Business',
-      Key: {
-        'bus_id' : event.pathParameters.busId
-      }
-    };
-    console.log("params "+  JSON.stringify(params));
-    db.getData(params, callback);
+    businessService
+    .getBusinessById(event.pathParameters.busId)
+    .then( (data) => {
+        console.log("data ", data);
+        let response = util.success();
+        response.body = JSON.stringify(data);
+        callback(null, response);
+    })
+    .catch((error) => {
+        console.log("error "+error);
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        callback(null, response);
+    });
 }

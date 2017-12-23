@@ -1,69 +1,69 @@
 <ng-container *ngIf="businessLoaded">
-        <div class="container-fluid d-flex flex-wrap">
-                <div class="col-md-4 align-items-stretch">
-                    <div class="card">
-                       <div class="card-body">
-                           <div class="m-2 font-weight-bold col-12" >
-                               {{business.bus_name}} 
-                           </div>
-                           <div class=" m-2 col-12 w-100" >
-                               <span>
-                                   <img alt="{{business.bus_name}}" height="100%" width="100%" 
-                                   src="{{business.imageurl}}" title="{{business.bus_name}}"
-                                   class="rounded">
-                               </span>
-                           </div>
-                           <div class="m-2 text-muted col-12">
-                               {{business.address}} 
-                           </div>
-                           <div class="m-2 text-muted col-12">
-                             Phone : {{business.phone}}
-                           </div>
-                           <div class="m-2 text-muted col-12">
-                            E-mail : {{business.email}}
-                           </div>
-                           <div class="m-2 text-muted col-12">
-                            website : {{business.website}}
-                           </div>
-                           <div class="m-2 text-muted col-12">
-                            Hours : (Open Today) {{business.bus_hours}}
-                           </div>
-                       </div>
-                    </div>      
+    <div class="container-fluid d-flex flex-wrap">
+        <div class="col-md-4 align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    <div class="m-2 font-weight-bold col-12" >
+                        {{business.bus_name}} 
+                    </div>
+                    <div class=" m-2 col-12 w-100" >
+                        <span>
+                            <img alt="{{business.bus_name}}" height="100%" width="100%" 
+                            src="{{business.imageurl}}" title="{{business.bus_name}}"
+                            class="rounded">
+                        </span>
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                        {{business.address}} 
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                        Phone : {{business.phone}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                    E-mail : {{business.email}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                    website : {{business.website}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                    Hours : (Open Today) {{business.bus_hours}}
+                    </div>
                 </div>
-                <div class="col-md-8 align-items-stretch ">
-                    <div class="d-flex flex-wrap btn-group justify-content-center" 
-                    ngbRadioGroup 
-                    name="radioBasic" 
-                    [(ngModel)]="staffSelected">
-                        <h4 *ngIf="!staffSelected">Select Staff</h4>
-                        <div *ngIf="staffSelected" class="col-12 text-center">
-                            <h4>Staff Selected</h4>
-                            <div class="text-center">
-                                <a href="chef-profile.html" class="">    
-                                    <img src="../../assets/profile.jpg" height="115" width="115" 
-                                         class="img-round img-photo d-inline-block " alt="">
-                                </a>
-                            </div>
-                            <div class="text-center">
-                                <a href="../../assets/profile.jpg" class="">{{staffSelected.staff_name}}</a>
-                            </div>
-                        </div>
-                        <div class="w-100"></div>
-                        <div ngbButtonLabel class="col-md-2 btn btn-info  m-1" *ngFor="let estaff of business.staff;">
-                            <label  class="">
-                                <input ngbButton type="radio" [value]="estaff" class=""> {{estaff.staff_name}}
-                            </label>
-                        </div>
+            </div>      
+        </div>
+        <div class="col-md-8 align-items-stretch ">
+            <div class="d-flex flex-wrap btn-group justify-content-center" 
+            ngbRadioGroup 
+            name="radioBasic" 
+            [(ngModel)]="staffSelected">
+                <h4 *ngIf="!staffSelected">Select Staff</h4>
+                <div *ngIf="staffSelected" class="col-12 text-center">
+                    <h4>Staff Selected</h4>
+                    <div class="text-center">
+                        <a href="chef-profile.html" class="">    
+                            <img src="../../assets/profile.jpg" height="115" width="115" 
+                                    class="img-round img-photo d-inline-block " alt="">
+                        </a>
                     </div>
-                    <div>
-                        <hr>
+                    <div class="text-center">
+                        <a href="../../assets/profile.jpg" class="">{{staffSelected.staff_name}}</a>
                     </div>
-                    <div>
-                        <app-staff-slots [business]="business" [staff]="staffSelected"></app-staff-slots>
-                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div ngbButtonLabel class="col-md-2 btn btn-info  m-1" *ngFor="let estaff of business.staff;">
+                    <label  class="">
+                        <input ngbButton type="radio" [value]="estaff" class=""> {{estaff.staff_name}}
+                    </label>
                 </div>
             </div>
+            <div>
+                <hr>
+            </div>
+            <div>
+                <app-staff-slots [business]="business" [staff]="staffSelected"></app-staff-slots>
+            </div>
+        </div>
+    </div>
 </ng-container>
 <ng-container *ngIf="!businessLoaded">
     <h1>

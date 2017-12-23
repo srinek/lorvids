@@ -37,6 +37,7 @@ import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker'
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BusinessPageComponent } from './business-page/business-page.component';
 import { StaffSlotsComponent } from './common/staff-slots/staff-slots.component';
+import { StaffPageComponent } from './staff-page/staff-page.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { StaffSlotsComponent } from './common/staff-slots/staff-slots.component'
     LanguageFacetDropDownDirective,
     SearchFacetComponent,
     BusinessPageComponent,
-    StaffSlotsComponent
+    StaffSlotsComponent,
+    StaffPageComponent
    ],
   imports: [
     BrowserModule,

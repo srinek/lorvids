@@ -10,6 +10,7 @@ import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.compo
 import {AddBusinessComponent} from './add-business/add-business.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { BusinessPageComponent } from './business-page/business-page.component';
+import { StaffPageComponent } from './staff-page/staff-page.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
@@ -19,7 +20,8 @@ const appRoutes : Routes = [
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
     {path:'addbusiness', component : AddBusinessComponent},
     {path:'addstaff/:busId', component : AddStaffComponent},
-    {path:'bushome/:busId', component : BusinessPageComponent}/* ,
+    {path:'bushome/:busId', component : BusinessPageComponent},
+    {path:'staff/:staffId', component : StaffPageComponent}/* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];
 

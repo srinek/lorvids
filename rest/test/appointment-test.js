@@ -1,5 +1,5 @@
-var saveAppointment = require('./saveAppointment');
-saveAppointment.saveAppointment(
+//var saveAppointment = require('./saveAppointment');
+/* saveAppointment.saveAppointment(
   {
     "queryStringParameters": {
       "saveuser": "true"
@@ -27,4 +27,16 @@ saveAppointment.saveAppointment(
         console.log(response);
         console.log('-----------------------------SAVE RESPONSE END-----------------------------');
     }
-);
+); */
+
+let appointment = require('../src/api/appointment');
+//console.log("all slots", appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01'));
+ appointment.getAllAppoitnments(
+  {"pathParameters" : {"busId" : "b-test-01", "staffId":"b-test-01-s-01"}}, 
+   null, 
+   (error, response) => {
+    console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+    console.log(response);
+    console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+  }
+); 

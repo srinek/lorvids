@@ -13,6 +13,7 @@ export class StaffService{
 
     api : string = environment.appurl;
     endpoint : string = "staff";
+    staffsEndpoint : string = "staffs";
 
     constructor(private http : Http,
         private logger : Logger){
@@ -21,6 +22,17 @@ export class StaffService{
 
     public getStaff(busid : string, staffId : string) : Observable<Staff>{
         return this.http.get(this.api + this.endpoint+"/"+busid +"/" + staffId).map(
+            (response : Response) => {
+                let staff : Staff;
+                let staffObj = response.json();
+                staff = new Staff(staffObj);
+                return staff;
+            }
+        );
+    }
+
+    public getStaffById(staffId : string) : Observable<Staff>{
+        return this.http.get(this.api + this.staffsEndpoint+"/"+ staffId).map(
             (response : Response) => {
                 let staff : Staff;
                 let staffObj = response.json();

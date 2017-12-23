@@ -48,6 +48,11 @@ export class FacadeService {
         return this.staffService.getStaff(busId, staffId);
     }
 
+    public getStaffById(staffId : string) : Observable<Staff> {
+        let staff = this.staffService.getStaffById(staffId);
+        return staff;
+    }
+
     public saveAppointment(appt : any) : Observable<string>{
         return this.apptService.saveAppointment(appt);
     }
@@ -73,30 +78,10 @@ export class FacadeService {
     }
 
     public getAppointmentSlots(business : Business, staff : Staff, 
-        selectedDate : Date, offset : number, size : number) : Slots {
-        var slots = new Slots();
-        if(!selectedDate){
-            selectedDate = business.getNextBusinessDayDefault();
-        }
-        slots.date = selectedDate;
-        slots.slots = business.getAvailableSlots(staff, selectedDate, offset, size);
-        //this.logger.log(JSON.stringify(slots));
-        return slots;
+        selectedDate : Date) : Observable<AppointmentSlot[]> {
+        return this.apptService.findAvailableSlots(business.bus_id, staff.staff_id, selectedDate.getTime());
     }
 
-    public getAvailableSlots(business : Business, staff : Staff) : AppointmentSlot[] {
-        var slots = [];
-        var date = new Date();
-        var hours = date.getHours();
-        for(var i = 0; i < 6; i++){
-            var appointmentSlot = new AppointmentSlot();
-            var time = hours +":"+ ( i * parseInt(staff.service_time.substring(0,2)));
-            appointmentSlot.slotTime = time;
-            slots[slots.length] = appointmentSlot;
-        }
-        return slots;
-    }
-    
     public triggerMainPageLoaded(){
         this.mainPageUnLoaded.next(false);
     }

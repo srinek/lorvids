@@ -13,35 +13,38 @@
             "day" : "MON",
             "time" : "12AM - 5PM"
         }
-        ]
-}
-
-
-{
-    "bus_id" : "b-test-01",
-    "staff_id" : "b-test-01-s-02",
-    "staff_name" : "Dr. Devi",
-    "tags" : "DDS from RSDM, fellow in oro facial pain",
-    "holidays" : ["SAT"],
-    "service_time" : "30m"
-}
-
-
-{
-    "bus_id" : "b-test-01",
-    "staff_id" : "b-test-01-s-02",
-    "staff_name" : "Dr. Devi",
-    "tags" : "DDS from RSDM, fellow in oro facial pain",
-    "holidays" : ["SAT"],
-    "service_time" : "30m"
+    ],
+    "imageUrl" : ["profile.jpg"]
 }
 
 {
     "bus_id" : "b-test-02",
-    "staff_id" : "b-test-02-s-01",
-    "staff_name" : "Sara",
+    "staff_id" : "b-test-01-s-01",
+    "staff_name" : "Dr. Devi",
+    "tags" : "DDS from RSDM, fellow in oro facial pain",
+    "holidays" : ["SAT"],
+    "service_time" : "30m",
+    "imageUrl" : ["profile.jpg"]
+}
+
+{
+    "bus_id" : "b-test-01",
+    "staff_id" : "b-test-01-s-02",
+    "staff_name" : "Dr. Devi",
+    "tags" : "DDS from RSDM, fellow in oro facial pain",
+    "holidays" : ["SAT"],
+    "service_time" : "30m",
+    "imageUrl" : ["profile.jpg"]
+}
+
+
+{
+    "bus_id" : "b-test-01",
+    "staff_id" : "b-test-01-s-03",
+    "staff_name" : "Dr. Sara",
     "tags" : "hair cut, hair wash, nails",
-    "service_time" : "30m"
+    "service_time" : "30m",
+    "imageUrl" : ["profile.jpg"]
 }
 
 {
@@ -49,5 +52,15 @@
     "staff_id" : "b-test-02-s-01",
     "staff_name" : "Nanda",
     "tags" : "hair cut, hair wash, nails",
-    "service_time" : "30m"
+    "service_time" : "30m",
+    "imageUrl" : ["profile.jpg"]
+}
+
+{
+    "bus_id" : "b-test-03",
+    "staff_id" : "b-test-03-s-01",
+    "staff_name" : "Kartheek",
+    "tags" : "general practiotioner",
+    "service_time" : "30m",
+    "imageUrl" : ["profile.jpg"]
 }

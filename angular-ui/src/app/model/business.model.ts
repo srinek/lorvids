@@ -3,7 +3,7 @@ import {AppointmentSlot} from './appointment-slot.model';
 
 export class Business{
 
-    bus_id : number;
+    bus_id : string;
     bus_name : string;
     address : string;
     phone : number;
@@ -26,31 +26,6 @@ export class Business{
         if(json){
             this.map(json);
         }
-    }
-
-    public getNextBusinessDayDefault() : Date {
-        var options = {weekday : 'short' , timeZone : this.bus_time_zone,  timeZoneName: 'short' };
-        let utcDate = new Date();
-        utcDate.setTime(Date.UTC(utcDate.getFullYear(), utcDate.getMonth(), utcDate.getDay()));
-        this.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === utcDate.getDay()){
-                return this.getNextBusinessDay(utcDate);
-            }
-        });
-        // add logic for other holidays
-        return utcDate;
-    }
-
-    public getNextBusinessDay(from : Date) : Date {
-        let nextDay = new Date();
-        nextDay.setTime(Date.UTC(from.getFullYear(), from.getMonth(), from.getDay()+1));
-        var options = {weekday : 'short' , timeZone : this.bus_time_zone,  timeZoneName: 'short' };
-        this.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === nextDay.getDay()){
-                nextDay = this.getNextBusinessDay(nextDay);
-            }
-        });
-        return nextDay;
     }
 
     public getAvailableSlots(staff : Staff, onDate : Date, 

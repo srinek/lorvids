@@ -2,6 +2,7 @@
 let db = require('../common/db');
 let util = require('../common/util');
 let user = require('./user');
+let appointmentService = require('../services/appointment-service');
 
 module.exports.save = (event, context, callback) => {
     
@@ -33,4 +34,20 @@ module.exports.save = (event, context, callback) => {
            });
         }
      );
+}
+
+module.exports.getAllAppoitnments = (event, context, callback) => {
+   let bus_id = event.pathParameters.busId;
+   let staff_id = event.pathParameters.staffId;
+   appointmentService.findAvailableSlots(bus_id, staff_id).then((result) => {
+      let response = util.success();
+      response.body = JSON.stringify(result);
+      console.log("success callback ", response);
+      callback(null, response);
+   }).catch( (error) => {
+      let response = util.error();
+      response.body = JSON.stringify(error);
+      console.log("error callback ", response);
+      callback(null, response);
+   });
 }

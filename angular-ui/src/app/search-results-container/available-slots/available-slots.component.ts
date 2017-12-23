@@ -8,6 +8,7 @@ import {Slots} from '../../model/slots.model';
 import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-input';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-struct';
+import { AppointmentSlot } from '../../model/appointment-slot.model';
 
 @Component({
   selector: 'app-available-slots',
@@ -18,13 +19,17 @@ export class AvailableSlotsComponent implements OnInit {
 
   staff : Staff;
   @Input() business : Business;
-  slots : Slots;
-  size : number = 15;
+  slots : AppointmentSlot[] = [];
+  displaySlots : AppointmentSlot[] = [];
+  size : number = 9;
   offset : number = 0;
+  prevOffset : number = 0;
   havePrevSlots : boolean = false;
-  haveNextSlots : boolean = true;
+  haveNextSlots : boolean = false;
   dateSelected;
-  @ViewChild('dp') datePicker : NgbInputDatepicker;
+  public error : boolean = false;
+  public errorMessage : string = "";
+  testTime = Date.now();
   
 
   constructor(private route: ActivatedRoute,
@@ -33,9 +38,20 @@ export class AvailableSlotsComponent implements OnInit {
 
   ngOnInit() {
     this.staff = this.business.staff[0];
-    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      null, this.offset, this.size);
-    this.showhideMoreSlots();
+    this.facadeService.getAppointmentSlots(this.business, this.staff, 
+      new Date()).subscribe(
+        (appointmentSlots : AppointmentSlot[]) => {
+          this.slots = appointmentSlots;
+          this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+          this.showhideMoreSlots();
+          this.prevOffset = this.offset;
+          this.offset = this.offset+this.size;
+        },
+        (error : string) => {
+          this.error = true;
+          this.errorMessage = "Yikes!!! something cramped our service "+error;
+        }
+    );
     this.dateSelected = {"day":"10", "month":"01", "year":"2018"};
   }
 
@@ -49,23 +65,24 @@ export class AvailableSlotsComponent implements OnInit {
   }
 
   moreNextSlots(){
-    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.getSelectedDate(), this.offset+this.size, this.size);
+    this.displaySlots = this.slots.slice(this.offset, this.offset+this.size); 
     this.showhideMoreSlots();
-    this.offset += this.size;
     this.showHidePrevSlots();
+    this.prevOffset = this.offset;    
+    this.offset += this.size;
   }
 
   morePrevSlots(){
-    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.getSelectedDate(), this.offset-this.size, this.size);
-    this.offset -= this.size;
+    this.displaySlots = this.slots.slice(this.prevOffset-this.size, this.size);
     this.showHidePrevSlots();
     this.showhideMoreSlots();
+    this.offset = this.prevOffset;
+    this.prevOffset -= this.size;
+    
   }
 
   showhideMoreSlots(){
-    if(this.slots.slots.length < this.size){
+    if(this.offset + this.size  >= this.slots.length){
       this.haveNextSlots = false;
     }
     else{
@@ -83,18 +100,45 @@ export class AvailableSlotsComponent implements OnInit {
   }
 
   onChangeStaff(staffSelected : Staff){
-     this.staff = staffSelected;
-     this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.getSelectedDate(), this.offset, this.size);
-     this.showhideMoreSlots();
-     this.showHidePrevSlots();
+      this.staff = staffSelected;
+      this.offset = 0;
+      this.prevOffset = 0;
+      this.facadeService.getAppointmentSlots(this.business, this.staff, 
+      this.getSelectedDate()).subscribe(
+        (appointmentSlots : AppointmentSlot[]) => {
+          this.slots = appointmentSlots;
+          this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+          this.showhideMoreSlots();
+          this.showHidePrevSlots();
+          this.prevOffset = this.offset;
+          this.offset = this.offset+this.size;
+        },
+        (error : string) => {
+          this.error = true;
+          this.errorMessage = "Yikes!!! something cramped our service "+error;
+        }
+      );
   }
 
   onDateChange(date: NgbDateStruct){
-      this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-        this.getSelectedDate(), this.offset, this.size);
-      this.showhideMoreSlots();
-      this.showHidePrevSlots();
+      this.offset = 0;
+      this.prevOffset = 0;
+      this.facadeService.getAppointmentSlots(this.business, this.staff, 
+          this.getSelectedDate()).subscribe(
+            (appointmentSlots : AppointmentSlot[]) => {
+              this.slots = appointmentSlots;
+              this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+              this.showhideMoreSlots();
+              this.showHidePrevSlots();
+              this.prevOffset = this.offset;
+              this.offset = this.offset+this.size;
+            },
+            (error : string) => {
+              this.error = true;
+              this.errorMessage = "Yikes!!! something cramped our service "+error;
+            }
+      );
+      
   }
 
   getSelectedDate(){

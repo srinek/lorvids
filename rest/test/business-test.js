@@ -6,14 +6,14 @@ let testGetObj = { "pathParameters" :
                     }   
                  };
 
-business.get(testGetObj  , 
+/* business.get(testGetObj  , 
      null, 
      (error, response) => {
         console.log('-----------------------------GET RESPONSE START-----------------------------');
         console.log(response);
         console.log('-----------------------------GET RESPONSE END-----------------------------');
      }
-);
+); */
 
 let testSaveObj = {
     "body" : 
@@ -126,11 +126,11 @@ let testSaveObj2 =
 } */
 
 //console.log("in test "+JSON.stringify(testSaveObj2) +"end");
-/* business.save(testSaveObj2, 
+business.save(testSaveObj2, 
     null, 
     (error, response) => {
         console.log('-----------------------------SAVE RESPONSE START-----------------------------');
         console.log(response);
         console.log('-----------------------------SAVE RESPONSE END-----------------------------');
     }
-); */
+); 

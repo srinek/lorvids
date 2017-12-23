@@ -1,0 +1,73 @@
+<ng-container *ngIf="staffLoaded">
+    <div class="container-fluid d-flex flex-wrap">
+        <div class="col-md-4 align-items-stretch">
+            <div class="card">
+                <div class="card-body">
+                    <div class="m-2 font-weight-bold col-12" >
+                        {{staff.staff_name}} 
+                    </div>
+                    <div class=" m-2 col-12 w-100" >
+                        <span>
+                            <img alt="{{staff.staff_name}}" height="100%" width="100%" 
+                            src="../../assets/{{staff.image}}" title="{{staff.staff_name}}"
+                            class="rounded">
+                        </span>
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                        Affliations : {{staff.affliations}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                        Awards : {{staff.awards}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                       website : {{staff.website}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                       Hours : (Open Today) {{practiceSelected?.bus_hours}}
+                    </div>
+                    <div class="m-2 text-muted col-12">
+                            {{staff.about}} 
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="col-md-8 align-items-stretch " *ngIf="selectedBusiness">
+            <div class="d-flex flex-wrap btn-group justify-content-center" 
+            ngbRadioGroup 
+            name="radioBasic" 
+            [(ngModel)]="practiceSelected">
+                <h4 *ngIf="!practiceSelected">Select Practice</h4>
+                <div *ngIf="practiceSelected" class="col-12 text-center cursor-pointer" 
+                     (click)="gotoBusiness()">
+                    <h4>Practice Selected</h4>
+                    <div class="text-center">
+                        <a href="chef-profile.html" class="">    
+                            <img src="../../assets/{{selectedBusiness.imageurl}}" 
+                            height="115" width="115" class="img-round img-photo d-inline-block" 
+                            alt="">
+                        </a>
+                    </div>
+                    <div class="text-center">
+                        {{selectedBusiness.bus_name}}
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div ngbButtonLabel class="col-md-2 btn btn-info  m-1" *ngFor="let practice of staff.practices;">
+                    <label  class="">
+                        <input ngbButton type="radio" [value]="practice" class=""> {{selectedBusiness.bus_name}}
+                    </label>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div>
+                <app-staff-slots [business]="selectedBusiness" [staff]="staff"></app-staff-slots>
+            </div>
+      </div>
+      <div *ngIf="!selectedBusiness"> loading business details</div>
+    </div>
+</ng-container>
+<ng-container *ngIf="!staffLoaded">
+     Loading staff details
+</ng-container>

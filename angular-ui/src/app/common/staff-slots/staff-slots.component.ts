@@ -4,6 +4,7 @@ import { Staff } from '../../model/staff.model';
 import { Business } from '../../model/business.model';
 import { Slots } from '../../model/slots.model';
 import { FacadeService } from '../../service/facade.service';
+import { AppointmentSlot } from '../../model/appointment-slot.model';
 
 @Component({
   selector: 'app-staff-slots',
@@ -14,8 +15,10 @@ export class StaffSlotsComponent implements OnInit {
   
   @Input() staff : Staff;
   @Input() business : Business;
-  slots : Slots;
+  slots : AppointmentSlot[];
   selectedDate : Date;
+  public error : boolean = false;
+  public errorMessage : string = "";
   
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -34,15 +37,31 @@ export class StaffSlotsComponent implements OnInit {
   }
 
   onDateChange(date: Date){
-    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.selectedDate, 0, 60);
+     this.facadeService.getAppointmentSlots(this.business, this.staff, 
+      this.selectedDate).subscribe(
+        (appointmentSlots : AppointmentSlot[]) => {
+          this.slots = appointmentSlots;
+        },
+        (error : string) => {
+          this.error = true;
+          this.errorMessage = "Yikes!!! something cramped our service "+error;
+        }
+      );
   }
 
   ngOnChanges(changes : {staff : SimpleChange}){
     //console.log("", changes.staff);
     //console.log("", changes.staff.currentValue);
     this.staff = changes.staff.currentValue;
-    this.slots = this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      null, 0, 60);
+    this.facadeService.getAppointmentSlots(this.business, this.staff, 
+      null).subscribe(
+        (appointmentSlots : AppointmentSlot[]) => {
+          this.slots = appointmentSlots;
+        },
+        (error : string) => {
+          this.error = true;
+          this.errorMessage = "Yikes!!! something cramped our service "+error;
+        }
+      );
   }
 }

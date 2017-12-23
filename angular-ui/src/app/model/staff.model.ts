@@ -1,18 +1,26 @@
 import {Slots} from './slots.model';
 import {AppointmentSlot} from './appointment-slot.model';
+import { Business } from './business.model';
+import { StaffPractice } from './staff-practice.model';
 
 export class Staff {
 
-    staff_id : number;
+    staff_id : string;
     staff_name : string;
     rating? : number;
     tags : string;
-    service_time : string;
-    bus_hours : any = {};
-    holidays : string = "";
+    practices : StaffPractice[] = [];
+    images : string[] = [];
+    image : string;
+    about : string;
+    affliations : string;
+    awards : string;
 
     constructor(src?){
-        if(src){
+        if(Array.isArray(src)){
+            this.mapArray(src);
+        }
+        else if(src){
             this.map(src);
         }
     }
@@ -21,15 +29,7 @@ export class Staff {
         //find booked slots
         //compute available slots
         let slots = [];
-        for(var i = offset; i < offset + size; i++){
-            let slot = new AppointmentSlot();
-            slot.bookingId = this.staff_id+"-slot-"+i;
-            slot.isAvailable = true;
-            slot.slotTime = (2.00 + i ) +" PM";
-            slot.specialInstruction = "be on time";
-            slots.push(slot);
-            
-        }
+        
         return slots;
     }
 
@@ -37,8 +37,18 @@ export class Staff {
         this.staff_id = src.staff_id;
         this.staff_name = src.staff_name;
         this.tags = src.tags;
-        this.service_time = src.service_time;
-        this.bus_hours = src.bus_hours;
-        this.holidays = src.holidays;
+        this.images = src.imageUrl;
+        if(src.imageUrl && src.imageUrl.length > 0){
+            this.image = src.imageUrl[0];
+        }
+        let practice = new StaffPractice(src);
+        this.practices.push(practice);
+        this.about = src.profStatement;
+    }
+
+    public mapArray(src) : void {
+        src.forEach(element => {
+            this.map(element);
+        });
     }
 }

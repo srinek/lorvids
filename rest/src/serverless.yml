@@ -97,10 +97,18 @@ functions:
       -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Staff/stream/2017-11-16T17:33:52.110    
   getStaff:
     handler: api/staff.get
-    description : get staff by Id
+    description : get staff by Id and bus id
     events:
       - http:
           path: staff/{busId}/{staffId}
+          method: get
+          cors: true
+  getStaffALL:
+    handler: api/staff.getAll
+    description : get all staff by Id
+    events:
+      - http:
+          path: staffs/{staffId}
           method: get
           cors: true
   saveStaff:
@@ -118,6 +126,14 @@ functions:
       - http:
           path: appt
           method: post
+          cors : true
+  getAllAppoitnments:
+    handler: api/appointment.getAllAppoitnments
+    description : available appointments
+    events:
+      - http:
+          path: slots/{busId}/{staffId}
+          method: get
           cors : true
   search:
     handler: api/search.doSearch
