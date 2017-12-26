@@ -85,6 +85,9 @@
                     rows="3" ngModel></textarea>
                 </div>
             </div>
+            <div class="alert alert-danger" role="alert" *ngIf="error">
+                {{errorMessage}}
+            </div>
             <div class="form-group">
                 <div class="col-12">
                    <a  class="btn btn-md btn-primary w-100" (click)="bookAppointment()">Book Appointment</a>
@@ -111,10 +114,10 @@
                     </div>
                     <div class="m-3">
                         <div class="font-weight-bold">
-                            Appoitment Summary
+                            Appointment Summary
                         </div>
                         <div class="m-1">
-                            10:30 AM EST, Monday, Sep 10, 2017
+                            {{bookingTime}}<!-- 10:30 AM EST, Monday, Sep 10, 2017 -->
                         </div>
                         <ng-container *ngIf="staff">
                             <div class="m-1">{{staff.staff_name}}</div>

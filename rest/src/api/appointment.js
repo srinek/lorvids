@@ -8,7 +8,25 @@ module.exports.save = (event, context, callback) => {
     
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
-    var params_appt = {
+    appointmentService.saveAppointment(reqBody.appt).then( (result) => {
+        if(save_user){
+            user.save(event, context, callback);
+         }
+         else{
+            let response = util.success();
+            response.body = JSON.stringify(result);
+            console.log("success callback ", response);
+            callback(null, response);
+         }
+    }).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
+    });
+
+
+    /* var params_appt = {
       TableName: 'Appointments',
       Item: reqBody.appt
     };
@@ -33,10 +51,10 @@ module.exports.save = (event, context, callback) => {
               }
            });
         }
-     );
+     ); */
 }
 
-module.exports.getAllAppoitnments = (event, context, callback) => {
+module.exports.getAllAppointments = (event, context, callback) => {
    let bus_id = event.pathParameters.busId;
    let staff_id = event.pathParameters.staffId;
    appointmentService.findAvailableSlots(bus_id, staff_id).then((result) => {

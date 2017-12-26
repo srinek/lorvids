@@ -127,8 +127,8 @@ functions:
           path: appt
           method: post
           cors : true
-  getAllAppoitnments:
-    handler: api/appointment.getAllAppoitnments
+  getAllAppointments:
+    handler: api/appointment.getAllAppointments
     description : available appointments
     events:
       - http:

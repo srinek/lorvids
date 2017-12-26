@@ -21,6 +21,7 @@ export class ReviewBookingComponent implements OnInit {
   public errorMessage : string = "";
   @ViewChild('appointmentForm') appointmentForm : NgForm;
   svcSelected : string;
+  bookingTime : Date = new Date();
 
   constructor(
     private facadeService : FacadeService,
@@ -35,6 +36,8 @@ export class ReviewBookingComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
           this.bookingId = params['bookingId'];
+          let splitBookingId = this.bookingId.split("-");
+          this.bookingTime.setTime(+splitBookingId[splitBookingId.length-1]);
           let staffId = params['staffId'];
           let businessId = params['busId'];
           this.facadeService.getBusiness(businessId)
@@ -79,14 +82,15 @@ export class ReviewBookingComponent implements OnInit {
     user.phone = this.appointmentForm.value.uphone;
     let appointment : any = {};
     appointment.StaffId = this.staff.staff_id;
-    appointment.UserEmail = this.appointmentForm.value.uemail;
-    appointment.apptId = this.bookingId;
-    appointment.busId = this.business.bus_id;
+    appointment.userEmail = this.appointmentForm.value.uemail;
+    appointment.AppointmentId = this.bookingId;
+    appointment.BusId = this.business.bus_id;
     appointment.location = this.business.address;
+    appointment.time = this.bookingTime;
     if(this.appointmentForm.value.splInstr){
       appointment.notes = this.appointmentForm.value.splInstr;
     }
-    appointment.service = "Service Selected";
+    appointment.service = this.svcSelected;
     apptData.user = user;
     apptData.appt = appointment;
 
@@ -100,7 +104,7 @@ export class ReviewBookingComponent implements OnInit {
       },
       (error : string) => {
         this.error = true;
-        this.errorMessage = "Yikes!!! something cramped our service "+error;
+        this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
       }
     )
 

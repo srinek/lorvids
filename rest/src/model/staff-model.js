@@ -43,8 +43,13 @@ class Staff{
         let endTime = moment(onDate).hour(splitTimes[0]).minute(splitTimes[1]);
         let slot = startTime;
         while(slot.isBefore(endTime)){
-            returnSlots.push({"time" : slot.format("MM-D-YYYY hh:mm:ss a"), 
-            "available" : true, "staffid":self.staff_id, 
+            let slotTimeFormatted = slot.format("MM-D-YYYY hh:mm:ss a");
+            let slotid = new Date(slotTimeFormatted).getTime();
+            returnSlots.push({
+            "appointmentId" : self.staff_id+"-"+slotid,
+            "time" : slotTimeFormatted, 
+            "available" : true, 
+            "staffid":self.staff_id, 
             "busid" : self.bus_id});
             slot = slot.add(self.service_time, 'm');
         }

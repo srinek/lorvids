@@ -1,4 +1,5 @@
 export class AppointmentSlot{
+    appointmentId : string;
     slotTime : Date;
     isAvailable : boolean;
     staffId : string;
@@ -11,6 +12,7 @@ export class AppointmentSlot{
     }
 
     public map(src){
+        this.appointmentId = src.appointmentId;
         this.slotTime = new Date(src.time);//;
         this.isAvailable = src.available;
         this.staffId = src.staffId;

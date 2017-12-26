@@ -64,7 +64,8 @@
     <div class="d-flex flex-wrap justify-content-center">
         <div class="mr-1" style="width:80px" *ngFor="let slot of displaySlots">
             <a class="btn btn-sm btn-info align-self-start w-100"
-            title="{{slot.slotTime}}" (click)="bookAppointment(slot)">
+            title="{{slot.slotTime}}" 
+            (click)="bookAppointment(slot.appointmentId)">
                 {{slot.slotTime | date:'hh:mm a'}} 
             </a>
         </div>
