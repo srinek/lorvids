@@ -81,10 +81,10 @@ export class ReviewBookingComponent implements OnInit {
     user.name = this.appointmentForm.value.uname;
     user.phone = this.appointmentForm.value.uphone;
     let appointment : any = {};
-    appointment.StaffId = this.staff.staff_id;
+    appointment.staffId = this.staff.staff_id;
     appointment.userEmail = this.appointmentForm.value.uemail;
     appointment.AppointmentId = this.bookingId;
-    appointment.BusId = this.business.bus_id;
+    appointment.busId = this.business.bus_id;
     appointment.location = this.business.address;
     appointment.time = this.bookingTime;
     if(this.appointmentForm.value.splInstr){

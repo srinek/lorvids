@@ -1,7 +1,9 @@
 'use strict';
 let DynamoDB = require('aws-sdk/clients/dynamodb');
 let config = require('config');
-let docClient = new DynamoDB.DocumentClient(config.get('app.ddbConfig'));
+//let docClient = new DynamoDB.DocumentClient(config.get('app.ddbConfig'));
+let docClient = new DynamoDB.DocumentClient({"apiVersion": "2012-10-08", "region":"us-east-1"});
+
 let util = require('./util');
 
 module.exports.saveData = (params) => {

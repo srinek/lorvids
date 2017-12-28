@@ -1,5 +1,6 @@
 'use strict'
-let moment = require('moment');
+var moment = require('moment-timezone');
+let appointmentService = require('../services/appointment-service');
 
 class Staff{
     constructor(src){
@@ -31,19 +32,26 @@ class Staff{
         return true;
     }
 
-    getAvailableSlots(onDate){
+    getAvailableSlots(onDate, bookedSlots, timezone){
         let self = this;
         let returnSlots = [];
         console.log("find slots for ", onDate);
-        console.log("service time ", self.service_time);
+        //console.log("service time ", self.service_time);
         let hoursOfOperation = self.findBusinessHours(onDate);
         let splitTimes = hoursOfOperation.startTime.split(":");
-        let startTime = moment(onDate).hour(splitTimes[0]).minute(splitTimes[1]);
+        let startTime =  onDate.clone();
+        let endTime =  onDate.clone();
+        startTime.hour(splitTimes[0]).minute(splitTimes[1]).seconds(0).millisecond(0);
         splitTimes = hoursOfOperation.endTime.split(":");
-        let endTime = moment(onDate).hour(splitTimes[0]).minute(splitTimes[1]);
+        endTime.hour(splitTimes[0]).minute(splitTimes[1]).seconds(0).millisecond(0);
+        let currentTime = moment.tz(new Date(), timezone);
         let slot = startTime;
-        while(slot.isBefore(endTime)){
-            let slotTimeFormatted = slot.format("MM-D-YYYY hh:mm:ss a");
+        while(slot.isBetween(currentTime, endTime)){
+            if(self.isSlotBooked(slot, bookedSlots, timezone)){
+                slot = slot.add(self.service_time, 'm');
+                continue;
+            }
+            let slotTimeFormatted = slot.tz(timezone).format("MM-D-YYYY hh:mm:ss a");
             let slotid = new Date(slotTimeFormatted).getTime();
             returnSlots.push({
             "appointmentId" : self.staff_id+"-"+slotid,
@@ -59,10 +67,26 @@ class Staff{
         return returnSlots;
     }
 
+    isSlotBooked(slot, bookedSlots, timezone){
+       //console.log("++++++++++++++++ ", slot.format());
+       //console.log("================ ", slot.toDate().getTime());
+       //console.log("================ ");
+       let bookedSlot = bookedSlots.find((element) => {
+          let bookedTime = moment.tz(element.time, timezone).seconds(0).millisecond(0);
+          //console.log("----------------- ", bookedTime.toDate().getTime());
+          return bookedTime.toDate().getTime() === slot.toDate().getTime();
+       });
+       if(bookedSlot){
+          //console.log("booked slot@@@@@@@@@@@@@@ returning false ", bookedSlot);
+          return true;
+       }
+       return false;
+    }
+
     findBusinessHours(onDate){
         let self = this;
         let retBusinessHours = self.bus_hours.find((elem) => {
-            if(elem.day == onDate.getDay()){
+            if(elem.day == onDate.day()){
                 return true;
             }
             return false;

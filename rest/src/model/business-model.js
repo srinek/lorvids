@@ -1,4 +1,5 @@
 'use strict'
+var moment = require('moment-timezone');
 class Business{
     
     constructor(src){
@@ -29,39 +30,50 @@ class Business{
 
     getNextBusinessDayDefault(){
         let self = this;
-        var options = {weekday : 'short' , timeZone : self.bus_time_zone,  timeZoneName: 'short' };
-        let utcDate = new Date();
-        utcDate.setTime(Date.UTC(utcDate.getFullYear(), utcDate.getMonth(), utcDate.getDate()));
+        let defaultDate = moment.tz(this.bus_time_zone);
         self.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === utcDate.getDay()){
-                return self.getNextBusinessDay(utcDate);
+            if(weekholiday === defaultDate.day()){
+                return self.getNextBusinessDay(defaultDate);
             }
         });
-        // add logic for other holidays
+        // TODO : add logic for other holidays
         
-        return utcDate;
+        return defaultDate;
     }
 
     getNextBusinessDay(from){
         let self = this;
-        let nextDay = new Date();
-        nextDay.setTime(Date.UTC(from.getFullYear(), from.getMonth(), from.getDay()+1));
-        var options = {weekday : 'short' , timeZone : self.bus_time_zone,  timeZoneName: 'short' };
+        let nextDay = from.clone();
+        nextDay.add(1, 'd');
         self.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === nextDay.getDay()){
+            if(weekholiday === nextDay.day()){
                 nextDay = self.getNextBusinessDay(nextDay);
             }
         });
         return nextDay;
     }
 
-    getAvailableSlots(staffobj){
+    getAvailableSlots(staffobj, bookedSlots, selecteddate){
         let self = this;
-        let nextDay = self.getNextBusinessDayDefault(); 
-        while(!staffobj.isStaffWorkingDay(nextDay)){
-            nextDay = self.getNextBusinessDay(nextDay);
+        if(self.isGivenDateHoliday(selecteddate)){
+            return [];
         }
-        return staffobj.getAvailableSlots(nextDay);
+        if(!selecteddate){
+            selecteddate = self.getNextBusinessDayDefault();
+        }
+        else{
+            let tempDate = new Date(selecteddate);
+            selecteddate = moment.tz(tempDate, this.bus_time_zone);
+            console.log("selecteddate ", selecteddate);
+        }
+        while(!staffobj.isStaffWorkingDay(selecteddate)){
+            selecteddate = self.getNextBusinessDay(selecteddate);
+        }
+        return staffobj.getAvailableSlots(selecteddate, bookedSlots, this.bus_time_zone);
+    }
+
+    isGivenDateHoliday(date){
+        return false;  //TODO
     }
 }
 

@@ -57,7 +57,8 @@ module.exports.save = (event, context, callback) => {
 module.exports.getAllAppointments = (event, context, callback) => {
    let bus_id = event.pathParameters.busId;
    let staff_id = event.pathParameters.staffId;
-   appointmentService.findAvailableSlots(bus_id, staff_id).then((result) => {
+   const date = parseInt(event.queryStringParameters.d, 10);
+   appointmentService.findAvailableSlots(bus_id, staff_id, date).then((result) => {
       let response = util.success();
       response.body = JSON.stringify(result);
       console.log("success callback ", response);

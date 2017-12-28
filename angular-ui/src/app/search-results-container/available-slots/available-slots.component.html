@@ -1,10 +1,4 @@
 <div class="row">
-    <!-- <div class="mx-1" *ngFor="let estaff of business.staff; first as isFirst">
-        <a class="btn btn-sm btn-info m-3 w-100"
-           [class.active]="isFirst"> 
-            {{estaff.staff_name}}
-        </a>
-    </div> -->
     <div class="btn-group btn-group-sm mt-1 ml-3">
        <button type="button" class="btn btn-info">{{staff?.staff_name}}</button>
        <div class="btn-group" ngbDropdown role="group" aria-label="Please select a staff">
@@ -18,43 +12,28 @@
           </div>
        </div>
     </div>
-    <!-- <select name="name_staff" id="staff_selected">
-      <option value="{{estaff.staff_name}}" *ngFor="let estaff of business.staff">{{estaff.staff_name}}</option>
-   </select> -->
 </div>
 <div class="row">
     <div class="ml-3">
-        
-            <form class="form-inline">
-                    <div class="form-group">
-                      <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd"
-                               name="datePicker" [(ngModel)]="dateSelected" 
-                               value="{{dateSelected}}"
-                               ngbDatepicker #dp="ngbDatepicker"
-                               (ngModelChange)="onDateChange($event)">
-                        <button class="input-group-addon" (click)="dp.toggle()" type="button">
-                                <i class="material-icons">date_range</i>
-                        </button>
-                        <!-- <span (click)="d.toggle()">
-                                <i class="material-icons">date_range</i>
-                        </span> -->
-                      </div>
-                    </div>
-                  </form>
-                  <!-- <input class="d-none" placeholder="yyyy-mm-dd"
-                  name="dp" [(ngModel)]="dateSelected" ngbDatepicker #d="ngbDatepicker"> -->
-          
-        
-
-        <!-- <span [(ngModel)]="dateSelected" ngbDatepicker #d="ngbDatepicker">
-            {{slots.date | date:'EEEE, MMM dd y'}}
-        </span>
-        <span (click)="d.toggle()">
-            <i class="material-icons">date_range</i>
-        </span> -->
+        <form class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                        name="datePicker" [(ngModel)]="dateSelected" 
+                        value="{{dateSelected}}"
+                        ngbDatepicker #dp="ngbDatepicker"
+                        (ngModelChange)="onDateChange($event)">
+                    <button class="input-group-addon" (click)="dp.toggle()" type="button">
+                        <i class="material-icons">date_range</i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div> 
 </div>
+<!-- <div class="row">
+    <div class="col-4"></div>
+</div> -->
 <div class="row position-relative">
     <div class="btn-prev-slots" *ngIf="havePrevSlots">
         <button type="button" class="btn btn-circle" (click)="morePrevSlots()"> 
@@ -76,31 +55,3 @@
         </button>
     </div>
 </div>
-
-
-
-<!-- <div class="m-top-2 staff-container">
-  <div class="row m-top-2 text-center" >
-      <div class="col-sm-4"></div>
-      <div class="col-sm-8 appointment-date-text">{{slots.date | date:'EEEE, MMM dd y'}} </div>
-  </div>
-  <div class="row m-top-2 text-center">
-      <div class="col-sm-4 staffName">{{staff.staff_name}}</div>
-      <div class="col-sm-8">
-          <div class="appointment-slot-container" *ngFor="let slot of slots.slots">
-              <a class="btn btn-info btn-sm" 
-              title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.bookingId)">
-                 {{slot.slotTime}} 
-              </a>
-          </div>
-          commented <div class="appointment-slot-container more-slots">
-              <a class="btn btn-info btn-sm" title="click to see more slots on {{appointment.date | date:yMMMMEEEEd}}">More Slots</a>
-          </div> commented
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-sm-12">
-        <hr>
-      </div>
-  </div> 
-</div> -->

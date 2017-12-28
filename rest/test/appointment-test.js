@@ -1,4 +1,8 @@
 let appointment = require('../src/api/appointment');
+let appointmentService = require('../src/services/appointment-service');
+
+//appointmentService.findBookedSlots('b-test-01', 'b-test-01-s-01').then((result) => { console.log(result);});
+
 
 let reqBody = {
   "appt": {
@@ -23,11 +27,11 @@ let saveObj = {
   },
   "body": JSON.stringify(reqBody)
 };
-appointment.save(saveObj , null, (error, response) => {
+/* appointment.save(saveObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-});
+}); */
 //var saveAppointment = require('./saveAppointment');
 /* saveAppointment.saveAppointment(
   , 
@@ -39,13 +43,18 @@ appointment.save(saveObj , null, (error, response) => {
     }
 ); */
 
-//console.log("all slots", appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01'));
-/* appointment.getAllAppoitnments(
-  {"pathParameters" : {"busId" : "b-test-01", "staffId":"b-test-01-s-01"}}, 
+/* appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01').then((result) => {
+  console.log("all slots", result);
+}); */
+appointment.getAllAppointments(
+  {
+    "queryStringParameters": { "d": "1514467285039" },
+    "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
+    }, 
    null, 
    (error, response) => {
     console.log('-----------------------------SAVE RESPONSE START-----------------------------');
     console.log(response);
     console.log('-----------------------------SAVE RESPONSE END-----------------------------');
   }
-); */ 
+); 
