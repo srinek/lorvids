@@ -46,7 +46,15 @@ class Staff{
         endTime.hour(splitTimes[0]).minute(splitTimes[1]).seconds(0).millisecond(0);
         let currentTime = moment.tz(new Date(), timezone);
         let slot = startTime;
-        while(slot.isBetween(currentTime, endTime)){
+        console.log("slot ", slot.format());
+        console.log("current time ", currentTime.format());
+        console.log("end time ", endTime.format());
+        console.log("first slot is between start and end time ", currentTime.isAfter(slot));
+        while(slot.isBefore(endTime)){
+            if(slot.isBefore(currentTime)){
+                slot = slot.add(self.service_time, 'm');
+                continue;
+            }
             if(self.isSlotBooked(slot, bookedSlots, timezone)){
                 slot = slot.add(self.service_time, 'm');
                 continue;

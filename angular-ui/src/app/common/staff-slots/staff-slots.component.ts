@@ -19,14 +19,17 @@ export class StaffSlotsComponent implements OnInit {
   selectedDate : Date;
   public error : boolean = false;
   public errorMessage : string = "";
+  slotsLoaded : boolean = false;
+  
   
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private facadeService : FacadeService) { }
+    private facadeService : FacadeService) {
+
+  }
 
   ngOnInit() {
-    
-    
+    this.loadNewSlots();
   }
 
   bookAppointment(bookingId : string){
@@ -37,26 +40,24 @@ export class StaffSlotsComponent implements OnInit {
   }
 
   onDateChange(date: Date){
-     this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.selectedDate).subscribe(
-        (appointmentSlots : AppointmentSlot[]) => {
-          this.slots = appointmentSlots;
-        },
-        (error : string) => {
-          this.error = true;
-          this.errorMessage = "Yikes!!! something cramped our service "+error;
-        }
-      );
+     this.selectedDate = date;
+     this.loadNewSlots();
   }
 
   ngOnChanges(changes : {staff : SimpleChange}){
     //console.log("", changes.staff);
     //console.log("", changes.staff.currentValue);
     this.staff = changes.staff.currentValue;
+    this.loadNewSlots();
+  }
+
+  loadNewSlots(){
+    this.slotsLoaded = false;
     this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      null).subscribe(
+      this.selectedDate).subscribe(
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
+          this.slotsLoaded = true;
         },
         (error : string) => {
           this.error = true;

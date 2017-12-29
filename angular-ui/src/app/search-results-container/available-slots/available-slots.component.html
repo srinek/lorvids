@@ -31,10 +31,44 @@
         </form>
     </div> 
 </div>
-<!-- <div class="row">
-    <div class="col-4"></div>
-</div> -->
-<div class="row position-relative">
+<div class="row">
+<ng-container *ngIf="slotsLoaded">
+    <ng-container *ngIf="displaySlots.length > 0">
+        <!-- <div class="d-flex justify-content-center"> -->
+            <div class="row" *ngFor="let row of rows; odd as oddrow">
+                <div class="col-4 position-relative" *ngFor="let slot of displaySlots | slice:(row*3):(row+1)*3; first as isFirst; last as isLast">
+                    <ng-container *ngIf="oddrow && isFirst">
+                        <div class="btn-prev-slots" *ngIf="havePrevSlots">
+                            <button type="button" class="btn btn-circle" (click)="morePrevSlots()"> 
+                                <i class="material-icons">chevron_left</i> 
+                            </button>
+                        </div>
+                    </ng-container>
+                    <a class="btn btn-sm btn-info w-100"
+                        title="{{slot.slotTime}}" 
+                        (click)="bookAppointment(slot.appointmentId)">
+                            {{slot.slotTime | date:'hh:mm a'}} 
+                    </a>
+                    <ng-container *ngIf="oddrow && isLast">
+                        <div class="btn-more-slots" *ngIf="haveNextSlots">
+                            <button type="button" class="btn btn-circle" (click)="moreNextSlots()"> 
+                                <i class="material-icons">chevron_right</i> 
+                            </button>
+                        </div>
+                    </ng-container>
+                </div>
+            </div> `
+        <!-- </div> -->
+    </ng-container>
+    <ng-container *ngIf="displaySlots.length === 0">
+        No Slots Available. Change Date.
+    </ng-container>
+</ng-container>
+<ng-container *ngIf="!slotsLoaded">
+    loading slots ...
+</ng-container>
+</div>
+<!-- <div class="row position-relative">
     <div class="btn-prev-slots" *ngIf="havePrevSlots">
         <button type="button" class="btn btn-circle" (click)="morePrevSlots()"> 
             <i class="material-icons">chevron_left</i> 
@@ -54,4 +88,4 @@
             <i class="material-icons">chevron_right</i> 
         </button>
     </div>
-</div>
+</div> -->

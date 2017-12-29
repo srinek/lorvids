@@ -35,63 +35,58 @@ export class BusinessPageComponent implements OnInit {
                   var staff1 = new Staff({
                     "bus_hours": [
                       {
-                        "day": "ALL",
-                        "time": "10AM - 5PM"
+                        "day": -1,
+                        "endTime": "17:00",
+                        "startTime": "10:00"
                       },
                       {
-                        "day": "MON",
-                        "time": "12AM - 5PM"
+                        "day": 1,
+                        "endTime": "17:00",
+                        "startTime": "12:00"
                       }
                     ],
                     "bus_id": "b-test-01",
-                    "service_time": "30m",
-                    "staff_id": "b-test-01-s-05",
-                    "staff_name": "Dr. Kartheek",
-                    "tags": "DDS from NYU, 20 years experience"
+                    "imageUrl": [
+                      "profile.jpg"
+                    ],
+                    "service_time": "30",
+                    "staff_id": "b-test-01-s-01",
+                    "staff_name": "Dr. Devi",
+                    "tags": "DDS from RSDM, fellow in oro facial pain"
                   });
                   var staff2 = new Staff({
-                    "bus_hours": [
-                      {
-                        "day": "ALL",
-                        "time": "10AM - 5PM"
-                      },
-                      {
-                        "day": "MON",
-                        "time": "12AM - 5PM"
-                      }
-                    ],
                     "bus_id": "b-test-01",
-                    "service_time": "30m",
-                    "staff_id": "b-test-01-s-04",
-                    "staff_name": "Dr. Nan",
-                    "tags": "DDS from NYU, 20 years experience"
+                    "imageUrl": [
+                      "profile.jpg"
+                    ],
+                    "service_time": "30",
+                    "staff_id": "b-test-01-s-03",
+                    "staff_name": "Dr. Sara",
+                    "tags": "hair cut, hair wash, nails"
                   });
                   var staff3 = new Staff({
-                    "bus_hours": [
-                      {
-                        "day": "ALL",
-                        "time": "10AM - 5PM"
-                      },
-                      {
-                        "day": "MON",
-                        "time": "12AM - 5PM"
-                      }
-                    ],
                     "bus_id": "b-test-01",
-                    "service_time": "30m",
-                    "staff_id": "b-test-01-s-03",
-                    "staff_name": "Dr. Sam",
-                    "tags": "DDS from NYU, 20 years experience"
+                    "holidays": [
+                      "SAT"
+                    ],
+                    "imageUrl": [
+                      "profile.jpg"
+                    ],
+                    "service_time": "30",
+                    "staff_id": "b-test-01-s-02",
+                    "staff_name": "Dr. Susan",
+                    "tags": "DDS from NYU"
                   });
                   this.business.staff.push(staff1);
                   this.business.staff.push(staff2);
                   this.business.staff.push(staff3);
+                  this.staffSelected = staff1;
                   this.businessLoaded = true;
-                  this.staffSelected = staff3;
               },
               (error : string) => {
                 this.error = true;
                 this.errorMessage = "Yikes!!! something cramped our service "+error;
+                throw error;
               }
           )
       }

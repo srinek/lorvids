@@ -31,7 +31,13 @@ export class ApptService {
         );
     }
 
-    public findAvailableSlots(busId : string, staffId: string,  date:number) : Observable<AppointmentSlot[]>{
+    public findAvailableSlots(busId : string, staffId: string,  date) : Observable<AppointmentSlot[]>{
+        if(!date){
+            date = "";
+        }
+        else{
+            date = date.getTime();
+        }
         return this.http.get(this.api + this.endpointslots+"/"+busId+"/"+staffId+"?d="+date).map(
             (response : Response) => {
                 let res = response.json();

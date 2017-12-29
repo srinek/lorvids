@@ -16,13 +16,71 @@ class Business{
         self.staff = [];
         self.holidays = src.holidays;
         self.specialized_in = src.specialized_in;
-        self.appointment_instructions = src.appointment_instructions.split(',');
+        self.appointment_instructions = src.appointment_instructions;
         self.awards = src.awards;
         self.imageurl = src.imageurl;
         self.services = src.services;
         self.bus_time_zone = src.bus_time_zone;
+        self.phone = src.phone;
+        self.bus_hours = src.bus_hours;
+        self.open = self.isOpenNow();
+        self.startTime = self.opensAt();
+        self.endTime = self.closesAt();
+        self.allhours = self.getAllHours();
     }
 
+    isOpenNow(){
+        let self = this;
+        let today = moment.tz(new Date(), this.bus_time_zone);
+        if(self.isGivenDateHoliday(today)){
+            return false;
+        }
+        return true;
+    }
+    opensAt(){
+        let self = this;
+        let today = moment.tz(new Date(), this.bus_time_zone);
+        let retBusinessHours = self.getCurrentDay(today);
+        let startTime = moment(today);
+        startTime.hour(retBusinessHours.startTime.split(":")[0])
+        .minute(retBusinessHours.startTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        return startTime.format("MM-D-YYYY hh:mm:ss a");
+    }
+    getCurrentDay(today){
+        let self = this;
+        let retBusinessHours = self.bus_hours.find((elem) => {
+            if(elem.day == today.day()){
+                return true;
+            }
+            return false;
+        });
+        if(!retBusinessHours){
+            retBusinessHours = self.bus_hours.find((elem) => {
+                if(elem.day == "-1"){
+                    return true;
+                }
+                return false;
+            });
+        }
+        return retBusinessHours;
+    }
+    closesAt(){
+        let self = this;
+        let today = moment.tz(new Date(), this.bus_time_zone);
+        let retBusinessHours = self.getCurrentDay(today);
+        let endTime = moment(today);
+        endTime.hour(retBusinessHours.endTime.split(":")[0])
+        .minute(retBusinessHours.endTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        return endTime.format("MM-D-YYYY hh:mm:ss a");
+    }
+    getAllHours(){
+        let self = this;
+        return {};
+    }
     addStaff(staff) {
         let self = this;
         self.staff.push(staff);
@@ -50,30 +108,42 @@ class Business{
                 nextDay = self.getNextBusinessDay(nextDay);
             }
         });
+        // TODO : add logic for other holidays
         return nextDay;
     }
 
     getAvailableSlots(staffobj, bookedSlots, selecteddate){
         let self = this;
-        if(self.isGivenDateHoliday(selecteddate)){
-            return [];
-        }
-        if(!selecteddate){
+        if(!selecteddate){  // when date is not selected by user
             selecteddate = self.getNextBusinessDayDefault();
+            while(!staffobj.isStaffWorkingDay(selecteddate)){
+                selecteddate = self.getNextBusinessDay(selecteddate);
+            }
         }
         else{
             let tempDate = new Date(selecteddate);
             selecteddate = moment.tz(tempDate, this.bus_time_zone);
-            console.log("selecteddate ", selecteddate);
-        }
-        while(!staffobj.isStaffWorkingDay(selecteddate)){
-            selecteddate = self.getNextBusinessDay(selecteddate);
+            if(self.isGivenDateHoliday(selecteddate)){
+                return [];
+            }
         }
         return staffobj.getAvailableSlots(selecteddate, bookedSlots, this.bus_time_zone);
     }
 
-    isGivenDateHoliday(date){
-        return false;  //TODO
+    isGivenDateHoliday(selectedDate){
+        let self = this;
+        let isHoliday = false;
+        self.holidays.weekdays.forEach(weekholiday => {
+            if(weekholiday === selectedDate.day()){
+                //console.log(" selectedDate %s is holiday", selectedDate);
+                isHoliday = true;
+            }
+        });
+        return isHoliday;  //TODO
+    }
+
+    toJson(){
+        return this;
     }
 }
 

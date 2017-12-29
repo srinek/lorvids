@@ -1,5 +1,6 @@
 let db = require('../common/db');
 let util = require('../common/util');
+let Business = require('../model/business-model');
 
 module.exports.getBusinessById = (busId) => {
    var params = {
@@ -9,7 +10,11 @@ module.exports.getBusinessById = (busId) => {
     }
    };
   console.log("get Business params "+  JSON.stringify(params));
-  return db.getData(params);
+  let businessData = db.getData(params).then( (result) => {
+    let business = new Business(result);
+    return business.toJson();
+  });
+  return businessData;
 }
 
 module.exports.saveBusiness = (busData) => {

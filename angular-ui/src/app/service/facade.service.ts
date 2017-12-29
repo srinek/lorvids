@@ -79,7 +79,7 @@ export class FacadeService {
 
     public getAppointmentSlots(business : Business, staff : Staff, 
         selectedDate : Date) : Observable<AppointmentSlot[]> {
-        return this.apptService.findAvailableSlots(business.bus_id, staff.staff_id, selectedDate.getTime());
+        return this.apptService.findAvailableSlots(business.bus_id, staff.staff_id, selectedDate);
     }
 
     public triggerMainPageLoaded(){

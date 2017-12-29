@@ -25,13 +25,7 @@ export class Staff {
         }
     }
 
-    public getAvailableSlots(onDate : Date, offset : number, size : number) : AppointmentSlot[]{
-        //find booked slots
-        //compute available slots
-        let slots = [];
-        
-        return slots;
-    }
+    
 
     public map(src) : void {
         this.staff_id = src.staff_id;

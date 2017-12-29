@@ -26,7 +26,8 @@
                     website : {{business.website}}
                     </div>
                     <div class="m-2 text-muted col-12">
-                    Hours : (Open Today) {{business.bus_hours}}
+                    Hours : <span *ngIf="business.isOpenNow"> Open </span> <span *ngIf="!business.isOpenNow"> Closed </span> 
+                    <span>({{business.openTime | date:'hh:mma'}}</span> - <span>{{business.closeTime | date:'hh:mma'}})</span>
                     </div>
                 </div>
             </div>      

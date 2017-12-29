@@ -29,7 +29,8 @@ export class AvailableSlotsComponent implements OnInit {
   dateSelected;
   public error : boolean = false;
   public errorMessage : string = "";
-  testTime = Date.now();
+  rows : number[] = [0, 1, 2];
+  slotsLoaded: boolean = false;
   
 
   constructor(private route: ActivatedRoute,
@@ -39,10 +40,11 @@ export class AvailableSlotsComponent implements OnInit {
   ngOnInit() {
     this.staff = this.business.staff[0];
     this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      new Date()).subscribe(
+      null).subscribe(
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
           this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+          this.slotsLoaded = true;
           this.showhideMoreSlots();
           this.prevOffset = this.offset;
           this.offset = this.offset+this.size;
