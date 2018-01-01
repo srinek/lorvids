@@ -48,7 +48,7 @@ let saveObj = {
 }); */
 appointment.getAllAppointments(
   {
-    "queryStringParameters": { "d": "1514523600000" },
+    "queryStringParameters": { "d": "1514782800000" },
     "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
     }, 
    null, 

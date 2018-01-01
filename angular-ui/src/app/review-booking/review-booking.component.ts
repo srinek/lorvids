@@ -38,6 +38,7 @@ export class ReviewBookingComponent implements OnInit {
           this.bookingId = params['bookingId'];
           let splitBookingId = this.bookingId.split("-");
           this.bookingTime.setTime(+splitBookingId[splitBookingId.length-1]);
+          console.log("bookingTime ", this.bookingTime);
           let staffId = params['staffId'];
           let businessId = params['busId'];
           this.facadeService.getBusiness(businessId)

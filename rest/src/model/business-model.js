@@ -35,7 +35,21 @@ class Business{
         if(self.isGivenDateHoliday(today)){
             return false;
         }
-        return true;
+        let retBusinessHours = self.getCurrentDay(today);
+        let startTime = moment(today);
+        startTime.hour(retBusinessHours.startTime.split(":")[0])
+        .minute(retBusinessHours.startTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        let endTime = moment(today);
+        endTime.hour(retBusinessHours.endTime.split(":")[0])
+        .minute(retBusinessHours.endTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        if(today.isBetween(startTime, endTime)){
+            return true;
+        }
+        return false;
     }
     opensAt(){
         let self = this;
