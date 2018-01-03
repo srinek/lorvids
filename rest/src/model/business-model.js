@@ -99,7 +99,7 @@ class Business{
         let self = this;
         self.staff.push(staff);
     }
-
+    
     getNextBusinessDayDefault(){
         let self = this;
         let defaultDate = moment.tz(this.bus_time_zone);
@@ -108,6 +108,9 @@ class Business{
                 return self.getNextBusinessDay(defaultDate);
             }
         });
+        if(!self.isOpenNow()){
+            return self.getNextBusinessDay(defaultDate);
+        }
         // TODO : add logic for other holidays
         
         return defaultDate;
