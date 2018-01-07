@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row my-1" *ngFor="let day of weekdays">
+    <div style="width:70px" class="pl-1 py-1">
+      {{day}}
+    </div>
+    <div style="width:110px" class="mr-2">
+        <ng-select [items]="beginItems"
+          [active]="beginItems">
+        </ng-select>
+    </div>
+    <div style="width:110px">
+        <ng-select [items]="endItems"
+            [active]="endItems">
+        </ng-select>
+    </div>
+  </div>
+</div>

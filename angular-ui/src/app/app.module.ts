@@ -5,6 +5,10 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
+import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
+import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 
 import { AppComponent } from './app.component';
@@ -32,12 +36,13 @@ import { AddBusinessComponent } from './add-business/add-business.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { LanguageFacetDropDownDirective } from './search-results-container/search-facets/language-facet-dropdown.directive';
 import { SearchFacetComponent } from './search-results-container/search-facets/search-facet/search-facet.component';
-import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BusinessPageComponent } from './business-page/business-page.component';
 import { StaffSlotsComponent } from './common/staff-slots/staff-slots.component';
 import { StaffPageComponent } from './staff-page/staff-page.component';
+import { AddServiceComponent } from './add-service/add-service.component';
+import { BusinessHoursComponent } from './common/business-hours/business-hours.component';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +67,9 @@ import { StaffPageComponent } from './staff-page/staff-page.component';
     SearchFacetComponent,
     BusinessPageComponent,
     StaffSlotsComponent,
-    StaffPageComponent
+    StaffPageComponent,
+    AddServiceComponent,
+    BusinessHoursComponent
    ],
   imports: [
     BrowserModule,
@@ -72,7 +79,9 @@ import { StaffPageComponent } from './staff-page/staff-page.component';
     NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
     NgbModule.forRoot(),
-    DatepickerModule.forRoot()
+    DatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
+    SelectModule
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 

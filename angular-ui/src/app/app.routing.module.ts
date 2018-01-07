@@ -11,6 +11,7 @@ import {AddBusinessComponent} from './add-business/add-business.component';
 import { AddStaffComponent } from './add-staff/add-staff.component';
 import { BusinessPageComponent } from './business-page/business-page.component';
 import { StaffPageComponent } from './staff-page/staff-page.component';
+import { AddServiceComponent } from './add-service/add-service.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
@@ -18,7 +19,8 @@ const appRoutes : Routes = [
     //{path:'search/:searchFor', component : SearchResultsContainerComponent},
     {path:'reviewbooking/:busId/:staffId/:bookingId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
-    {path:'addbusiness', component : AddBusinessComponent},
+    {path:'addb', component : AddBusinessComponent},
+    {path:'addsvc/:busId', component : AddServiceComponent},
     {path:'addstaff/:busId', component : AddStaffComponent},
     {path:'bushome/:busId', component : BusinessPageComponent},
     {path:'staff/:staffId', component : StaffPageComponent}/* ,
