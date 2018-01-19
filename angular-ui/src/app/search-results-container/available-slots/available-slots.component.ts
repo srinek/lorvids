@@ -5,9 +5,7 @@ import {FacadeService} from '../../service/facade.service';
 import {Staff} from '../../model/staff.model';
 import {Business} from '../../model/business.model';
 import {Slots} from '../../model/slots.model';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
-import { NgbInputDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker-input';
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-date-struct';
+
 import { AppointmentSlot } from '../../model/appointment-slot.model';
 
 @Component({
@@ -122,7 +120,7 @@ export class AvailableSlotsComponent implements OnInit {
       );
   }
 
-  onDateChange(date: NgbDateStruct){
+  /* onDateChange(date: NgbDateStruct){
       this.offset = 0;
       this.prevOffset = 0;
       this.facadeService.getAppointmentSlots(this.business, this.staff, 
@@ -141,7 +139,7 @@ export class AvailableSlotsComponent implements OnInit {
             }
       );
       
-  }
+  } */
 
   getSelectedDate(){
     return new Date(this.dateSelected.year,this.dateSelected.month, this.dateSelected.day);

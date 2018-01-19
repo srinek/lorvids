@@ -3,11 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap/modal/modal.module';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
-import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
-import { NgbDatepicker } from '@ng-bootstrap/ng-bootstrap/datepicker/datepicker';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 
@@ -43,6 +39,23 @@ import { StaffPageComponent } from './staff-page/staff-page.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { BusinessHoursComponent } from './common/business-hours/business-hours.component';
 
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { AdminReportsComponent } from './admin/admin-reports/admin-reports.component';
+import { AdminStaffComponent } from './admin/admin-staff/admin-staff.component';
+import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.component';
+import { AdminStaffCountComponent } from './admin/admin-staff-count/admin-staff-count.component';
+import { AdminExpenseTrackerComponent } from './admin/admin-expense-tracker/admin-expense-tracker.component';
+import { AdminStaffDetailsComponent } from './admin/admin-staff-details/admin-staff-details.component';
+import { AdminDetailComponent } from './admin/admin-detail/admin-detail.component';
+import { AppointmentCalendarComponent } from './admin/appointment-calendar/appointment-calendar.component';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+
+
+//charts plugin
+import { ChartsModule } from 'ng2-charts';
+//date picker plugin
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+
 
 @NgModule({
   declarations: [
@@ -69,19 +82,31 @@ import { BusinessHoursComponent } from './common/business-hours/business-hours.c
     StaffSlotsComponent,
     StaffPageComponent,
     AddServiceComponent,
-    BusinessHoursComponent
+    BusinessHoursComponent,
+   // admin components   
+    AdminDetailComponent,
+    AppointmentCalendarComponent,
+    AdminHeaderComponent,
+    AdminDashboardComponent,
+    AdminReportsComponent,
+    AdminStaffComponent,
+    AdminSettingsComponent,
+    AdminStaffCountComponent,
+    AdminExpenseTrackerComponent,
+    AdminStaffDetailsComponent
+    
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpModule,
-    NgbModalModule.forRoot(),
     CalendarModule.forRoot(),
-    NgbModule.forRoot(),
     DatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    SelectModule
+    SelectModule,
+    ChartsModule,
+    NgxMyDatePickerModule.forRoot()
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 

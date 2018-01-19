@@ -1,0 +1,11 @@
+.mt-30 {
+    margin-top: 5rem;
+}
+
+.detail-form-wrapper label {
+    font-weight: bold;
+}
+
+.wrap-right {
+    float: right;
+}

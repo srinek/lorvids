@@ -1,0 +1,13 @@
+
+<div class="container">
+    <app-admin-staff-count></app-admin-staff-count>
+
+    <div class="d-flex row">
+        <div [ngClass]="(!eventClicked)?'col-md-12':'col-md-8'" >
+            <app-appointment-calendar (eventClicked)="onEventClicked($event)"></app-appointment-calendar>
+        </div>
+        <div  [ngClass]="{}" *ngIf="eventClicked" class="col-md-4">
+            <app-admin-detail></app-admin-detail>
+        </div>
+    </div>
+</div>

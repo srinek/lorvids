@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SearchFacet } from '../../../model/search-facet';
-import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap/dropdown/dropdown-config';
+
 import { FacadeService } from '../../../service/facade.service';
 
 @Component({
@@ -16,10 +16,10 @@ export class SearchFacetComponent implements OnInit {
   @Input() searchTerm : string = "";
   
 
-  constructor(private config: NgbDropdownConfig,
+  constructor(
     private route: ActivatedRoute,
     private router: Router) {
-    config.autoClose = "outside";
+
   }
 
   ngOnInit() {

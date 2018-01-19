@@ -22,7 +22,8 @@
         "styles.css",
         "ng2-select.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/material-design-icons/iconfont/material-icons.css"
+        "../node_modules/material-design-icons/iconfont/material-icons.css",
+        "../node_modules/angular-calendar/css/angular-calendar.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

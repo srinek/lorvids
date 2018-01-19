@@ -70,3 +70,21 @@ module.exports.getAllAppointments = (event, context, callback) => {
       callback(null, response);
    });
 }
+
+
+module.exports.findBookedSlots = (event, context, callback) => {
+    let bus_id = event.pathParameters.busId;
+    let staff_id = event.pathParameters.staffId;
+    const date = parseInt(event.queryStringParameters.d, 10);
+    appointmentService.findBookedSlots(bus_id, staff_id).then((result) => {
+       let response = util.success();
+       response.body = JSON.stringify(result);
+       console.log("success callback ", response);
+       callback(null, response);
+    }).catch( (error) => {
+       let response = util.error();
+       response.body = JSON.stringify(error);
+       console.log("error callback ", response);
+       callback(null, response);
+    });
+ }

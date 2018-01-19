@@ -1,0 +1,122 @@
+<!-- <ul class="nav nav-tabs my-account" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" href="#staff" role="tab" data-toggle="tab">Staff <span class="badge badge-pill badge-staff">2</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#services" role="tab" data-toggle="tab">Services <span class="badge badge-pill badge-services">6</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#clients" role="tab" data-toggle="tab">Clients <span class="badge badge-pill badge-clients">50</span></a>
+    </li>
+  </ul>
+  
+  <div class="tab-content tab-box">
+    <div role="tabpanel" class="tab-pane active" id="profile">
+        This is the staff component...
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="buzz">bbb</div>
+    <div role="tabpanel" class="tab-pane fade" id="references">ccc</div>
+  </div> -->
+  <div class="row">
+  <div class="col-lg-3">
+      <div class="sidebar">
+          <nav class="sidebar-nav">
+            <ul class="nav">
+              <li class="nav-title text-center">
+                <span>Manage Account</span>
+              </li>
+              <li class="nav-item nav-dropdown">
+                <a class="nav-link" href="#"><i class="icon-puzzle"></i> Staff <span class="badge badge-info">4</span> </a>
+              </li>
+              <li class="nav-item nav-dropdown">
+                <a class="nav-link" href="#"><i class="icon-note"></i> Services <span class="badge badge-info">5</span> </a>
+              </li>
+              <li class="nav-item nav-dropdown open">
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-code"></i> Client Portal</a>
+                <ul class="nav-dropdown-items">
+                  <li class="nav-item">
+                    <a class="nav-link" href="editors-code-editor.html"><i class="icon-note"></i> Clients  <span class="badge badge-info">50</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="editors-text-editors.html"><i class="icon-note"></i> Client &amp; Staff Info</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+<div class="col-lg-9">
+    <div class="card">
+        <div class="card-header">
+          <i class="fa fa-align-justify"></i> Staff
+          <button type="submit" class="btn btn-sm btn-primary pull-right" (click)="addNewStaff()" ><i class="fa fa-dot-circle-o"></i> Add New </button>
+        </div>
+        <div class="card-body">
+          <table class="table table-responsive-sm table-striped">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a class="clickable" (click)="loadStaffDetails()">Yiorgos Avraamu</a></td>
+                <td>test@test.com</td>
+                <td>+1 873 3839 3939</td>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Avram Tarasios</td>
+                <td>test@test.com</td>
+                <td>+1 873 3839 3939</td>
+                <td>
+                  <span class="badge badge-danger">Banned</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Quintin Ed</td>
+                <td>test@test.com</td>
+                <td>+1 873 3839 3939</td>
+                <td>
+                  <span class="badge badge-secondary">Inactive</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Enéas Kwadwo</td>
+                <td>test@test.com</td>
+                <td>+1 873 3839 3939</td>
+                <td>
+                  <span class="badge badge-warning">Pending</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Agapetus Tadeáš</td>
+                <td>test@test.com</td>
+                <td>+1 873 3839 3939</td>
+                <td>
+                  <span class="badge badge-success">Active</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+            <li class="page-item active">
+              <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </div>
+      </div>
+</div>  
+</div>

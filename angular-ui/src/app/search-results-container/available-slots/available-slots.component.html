@@ -21,7 +21,6 @@
                     <input class="form-control" placeholder="yyyy-mm-dd"
                         name="datePicker" [(ngModel)]="dateSelected" 
                         value="{{dateSelected}}"
-                        ngbDatepicker #dp="ngbDatepicker"
                         (ngModelChange)="onDateChange($event)">
                     <button class="input-group-addon" (click)="dp.toggle()" type="button">
                         <i class="material-icons">date_range</i>

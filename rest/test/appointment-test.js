@@ -1,7 +1,39 @@
 let appointment = require('../src/api/appointment');
 let appointmentService = require('../src/services/appointment-service');
 
-//appointmentService.findBookedSlots('b-test-01', 'b-test-01-s-01').then((result) => { console.log(result);});
+appointmentService.findBookedSlots('b-test-01', 'b-test-01-s-01').then((result) => { console.log(result);});
+
+
+/* 
+
+Input params: businessId, string(month/week/day),Date object
+
+output: {
+  slots: {
+    businessid :eee
+    staffs : [
+        {
+         staff: id
+         staff Name: sdsds
+         appointments: [
+            appointmnet:id
+            appointment service:cavity
+            appointment date:
+            customer: {
+              name:
+              email,
+              phone
+            }
+
+         ] 
+        }
+    ]
+  }
+
+}
+
+ */
+appointmentService.findBusinessBookedSlots('b-test-01', 'day', 1516107407118).then((result) => { console.log(result);});
 
 
 let reqBody = {
@@ -46,15 +78,15 @@ let saveObj = {
 /* appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01').then((result) => {
   console.log("all slots", result);
 }); */
-appointment.getAllAppointments(
-  {
-    "queryStringParameters": { "d": "" },
-    "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
-    }, 
-   null, 
-   (error, response) => {
-    console.log('-----------------------------SAVE RESPONSE START-----------------------------');
-    console.log(response);
-    console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-  }
-); 
+// appointment.getAllAppointments(
+//   {
+//     "queryStringParameters": { "d": "" },
+//     "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
+//     }, 
+//    null, 
+//    (error, response) => {
+//     console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+//     console.log(response);
+//     console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+//   }
+// ); 
