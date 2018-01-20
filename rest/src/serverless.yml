@@ -35,6 +35,10 @@ provider:
       Action: # Gives permission to Elastic Search domain
         - es:ESHttpPost
       Resource: "arn:aws:es:us-east-1:820202039892:domain/epokly-dev-v1/*"
+    - Effect: Allow
+      Action: # Gives permission to Elastic Search domain
+        - s3:*
+      Resource: "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 # you can overwrite defaults here
   stage: dev
   region: us-east-1
@@ -158,6 +162,22 @@ functions:
       - http:
           path: facetfilter
           method: post
+          cors : true
+  uploadpic:
+    handler: api/imageapi.upload
+    description : upload to s3
+    events:
+      - http:
+          path: savepic/{picid}
+          method: post
+          cors : true
+  deletepic:
+    handler: api/imageapi.delete
+    description : delete file from s3
+    events:
+      - http:
+          path: pic/{picid}
+          method: delete
           cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
