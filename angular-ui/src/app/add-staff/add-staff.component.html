@@ -22,12 +22,6 @@
     <form class="form-horizontal" 
         (ngSubmit)="addStaff()" 
         #addStaffForm="ngForm">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Default checkbox
-            </label>
-          </div>
       <div class="row">
           <div class="col-md-6">
               <div class="row form-group">
@@ -39,7 +33,7 @@
                       placeholder="Staff Name"
                       #staffName="ngModel"
                       ngModel required>
-                    <span class="help-block" 
+                    <span class="form-text text-muted" 
                           *ngIf="!staffName.valid && staffName.touched">
                         Business Name is required
                     </span>
@@ -69,32 +63,61 @@
               </div>
               <div class="row form-group">
                 <div class="col">
-                    list services as checkboxes
+                    <div>
+                        <label class="">Available Services: </label>
+                        <ul class="nav d-flex flex-wrap">
+                            <li class="nav-item flex-column align-items-start"
+                                *ngFor="let service of availableServices">
+                                <div>
+                                    <label class="custom-control custom-checkbox" >
+                                        <input type="checkbox" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                        <span class="custom-control-description">{{service.name}}</span>
+                                    </label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col">
+                    <div>
+                        <label class="">Upload Images: </label>
+                        <image-upload 
+                           url="https://kdmgdajlje.execute-api.us-east-1.amazonaws.com/dev/savepic/b-test-01"
+                           (removed)="onImageRemoved($event)"
+                           [headers]="awsHeaders"
+                           [beforeUpload]="onBeforeUpload"
+                           [uploadedFiles]="images">
+                        </image-upload>
+                    </div>
                 </div>
               </div>
           </div>
           <div class="col-md-6">
-            <div class="row">
-              working hours
-            </div>
-            
-            <div class="row">
-               
-              <div class="form-check">
-                <input type="checkbox"
-                  class="form-check-input"
-                  id="id-same-as-bus" 
-                  name="busHours"
-                  #busHours="ngModel"
-                  ngModel>
-                <label class="form-check-label" for="id-same-as-bus">
-                      Default checkbox
+            <div class="d-flex flex-column align-items-center">
+                <div>
+                    <h6>working hours</h6>
+                </div>
+                <div class="w-50"><hr></div>
+                <div>
+                    <label class="custom-control custom-checkbox" >
+                      <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">Same as business hours</span>
                     </label>
-              </div>
+                </div>
+            
+                <div>
+                    <app-business-hours 
+                       [startTime]="startTime"
+                       [endTime]="endTime"
+                       #busHours>
+                    </app-business-hours>
+                </div>
+                
             </div>
-            <app-business-hours [startTime]="startTime" [endTime]="endTime">
-            </app-business-hours>
-              
           </div>
       </div>
       <div class="row form-group">

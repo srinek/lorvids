@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import 'rxjs/Rx';
-import {Observable} from 'rxjs/Observable'
+import {Observable} from 'rxjs/Observable';
 import {Logger} from './logger.service';
 import {Business} from '../model/business.model';
 import {staff} from '../test-data/test-data';

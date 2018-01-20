@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import {FacadeService} from '../service/facade.service';
 import {Logger} from '../service/logger.service';
 import {Business} from '../model/business.model';
+import { BusinessHoursComponent } from '../common/business-hours/business-hours.component';
 
 @Component({
   selector: 'app-add-business',
@@ -13,7 +14,8 @@ import {Business} from '../model/business.model';
 })
 export class AddBusinessComponent implements OnInit {
 
-  @ViewChild('addBusinessForm') busForm : NgForm;
+  @ViewChild('addBusinessForm') private busForm : NgForm;
+  
   public error : boolean = false;
   public errorMessage : string = "";
 
@@ -53,5 +55,8 @@ export class AddBusinessComponent implements OnInit {
       }
     ); */
   }
+
+
+ 
 
 }

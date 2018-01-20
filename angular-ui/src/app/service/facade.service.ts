@@ -17,6 +17,7 @@ import {ApptService} from './appt.service';
 //test imports
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 import { SearchVO } from '../model/search-vo';
+import { S3ImageService } from './s3image.service';
 
 @Injectable()
 export class FacadeService {
@@ -29,7 +30,8 @@ export class FacadeService {
                 private searchService : SearchService,
                 private businessService : BusinessService,
                 private staffService : StaffService,
-                private apptService : ApptService
+                private apptService : ApptService,
+                private s3ImageService : S3ImageService
                ){
 
     }
@@ -80,6 +82,10 @@ export class FacadeService {
     public getAppointmentSlots(business : Business, staff : Staff, 
         selectedDate : Date) : Observable<AppointmentSlot[]> {
         return this.apptService.findAvailableSlots(business.bus_id, staff.staff_id, selectedDate);
+    }
+
+    public deleteFile(fileName : string) : Observable<String> {
+        return this.s3ImageService.deleteFile(fileName);
     }
 
     public triggerMainPageLoaded(){

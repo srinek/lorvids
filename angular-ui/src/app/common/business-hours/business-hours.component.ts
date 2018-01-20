@@ -12,11 +12,11 @@ export class BusinessHoursComponent implements OnInit {
   public beginItems:Array<string> = [];
   public endItems:Array<string> = [];
   public weekdays : Array<string> = ["Sun", "Mon", "Tue", "Wed","Thu", "Fri", "Sat"];
+  private disabled : boolean = false;
 
   constructor() { }
 
   ngOnInit() {
-
     let newTime = this.startTime;
     this.beginItems.push(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
     this.endItems.unshift(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
@@ -25,7 +25,13 @@ export class BusinessHoursComponent implements OnInit {
       this.beginItems.push(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
       this.endItems.unshift(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
     }
-
   }
+
+  toggleDisabled(){
+    this.disabled = !this.disabled;
+    console.log("diabled called ", this.disabled);
+  }
+
+
 
 }
