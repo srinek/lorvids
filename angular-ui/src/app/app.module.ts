@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
+import { ChartsModule } from 'ng2-charts'; 
+import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
+import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -49,13 +52,7 @@ import { AdminStaffDetailsComponent } from './admin/admin-staff-details/admin-st
 import { AdminDetailComponent } from './admin/admin-detail/admin-detail.component';
 import { AppointmentCalendarComponent } from './admin/appointment-calendar/appointment-calendar.component';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
-
-
-//charts plugin
-import { ChartsModule } from 'ng2-charts';
-//date picker plugin
-import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
-
+import { S3ImageService } from './service/s3image.service';
 
 @NgModule({
   declarations: [
@@ -94,8 +91,7 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     AdminStaffCountComponent,
     AdminExpenseTrackerComponent,
     AdminStaffDetailsComponent
-    
-   ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -106,11 +102,12 @@ import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
     TimepickerModule.forRoot(),
     SelectModule,
     ChartsModule,
-    NgxMyDatePickerModule.forRoot()
+    NgxMyDatePickerModule.forRoot(),
+    ImageUploadModule.forRoot()
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, Logger],
-  bootstrap: [AppComponent]
+    ApptService, S3ImageService, Logger],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
