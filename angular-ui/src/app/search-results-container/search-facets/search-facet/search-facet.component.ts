@@ -3,11 +3,13 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SearchFacet } from '../../../model/search-facet';
 
 import { FacadeService } from '../../../service/facade.service';
+import { BsDropdownConfig } from 'ngx-bootstrap/dropdown/bs-dropdown.config';
 
 @Component({
   selector: 'app-search-facet',
   templateUrl: './search-facet.component.html',
-  styleUrls: ['./search-facet.component.css']
+  styleUrls: ['./search-facet.component.css'],
+  providers: [{ provide: BsDropdownConfig, useValue: { autoClose: false } }]
 })
 export class SearchFacetComponent implements OnInit {
 
@@ -23,7 +25,7 @@ export class SearchFacetComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log("facet ", this.facet);
+      //console.log("facet ", this.facet);
   }
 
   onClickFacetValue(facetValue, facetChecked) {
@@ -35,7 +37,7 @@ export class SearchFacetComponent implements OnInit {
       var elemIndex = this.findIndexOfUnSelectedValue(facetValue);
       this.selectedFacets.splice(elemIndex, 1);
     }
-    console.log("this.selectedFacets ", this.selectedFacets);
+    //console.log("this.selectedFacets ", this.selectedFacets);
   }
 
   findIndexOfUnSelectedValue(facetValue){

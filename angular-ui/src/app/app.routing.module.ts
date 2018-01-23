@@ -4,7 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { PageNotFound404Component } from './page-not-found-404/page-not-found-404.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
-import { SearchResultsContainerComponent } from './search-results-container/search-results-container.component';
 import {ReviewBookingComponent} from './review-booking/review-booking.component';
 import { ConfirmBookingComponent } from './confirm-booking/confirm-booking.component';
 import {AddBusinessComponent} from './add-business/add-business.component';
@@ -18,10 +17,11 @@ import { AdminStaffComponent } from './admin/admin-staff/admin-staff.component';
 import { AdminStaffDetailsComponent } from './admin/admin-staff-details/admin-staff-details.component';
 import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.component';
 import { AdminExpenseTrackerComponent } from './admin/admin-expense-tracker/admin-expense-tracker.component';
+import { SearchResultsComponent } from './search-results-container/search-results/search-results.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
-    {path:'search', component : SearchResultsContainerComponent},
+    {path:'search', component : SearchResultsComponent},
     //{path:'search/:searchFor', component : SearchResultsContainerComponent},
     {path:'reviewbooking/:busId/:staffId/:bookingId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},

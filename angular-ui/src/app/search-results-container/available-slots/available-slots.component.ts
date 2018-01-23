@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, ViewChild, SimpleChange } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import {FacadeService} from '../../service/facade.service';
@@ -13,10 +13,11 @@ import { AppointmentSlot } from '../../model/appointment-slot.model';
   templateUrl: './available-slots.component.html',
   styleUrls: ['./available-slots.component.css']
 })
-export class AvailableSlotsComponent implements OnInit {
+export class AvailableSlotsComponent implements OnInit, OnChanges {
 
-  staff : Staff;
+  @Input() staff : Staff;
   @Input() business : Business;
+  @Input() selectedDate : Date;
   slots : AppointmentSlot[] = [];
   displaySlots : AppointmentSlot[] = [];
   size : number = 9;
@@ -24,7 +25,6 @@ export class AvailableSlotsComponent implements OnInit {
   prevOffset : number = 0;
   havePrevSlots : boolean = false;
   haveNextSlots : boolean = false;
-  dateSelected;
   public error : boolean = false;
   public errorMessage : string = "";
   rows : number[] = [0, 1, 2];
@@ -36,9 +36,8 @@ export class AvailableSlotsComponent implements OnInit {
     private facadeService : FacadeService) { }
 
   ngOnInit() {
-    this.staff = this.business.staff[0];
     this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      null).subscribe(
+      null).subscribe(   // pass date null on init, so we get next available date
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
           this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
@@ -52,7 +51,6 @@ export class AvailableSlotsComponent implements OnInit {
           this.errorMessage = "Yikes!!! something cramped our service "+error;
         }
     );
-    this.dateSelected = {"day":"10", "month":"01", "year":"2018"};
   }
 
 
@@ -99,12 +97,11 @@ export class AvailableSlotsComponent implements OnInit {
     }
   }
 
-  onChangeStaff(staffSelected : Staff){
-      this.staff = staffSelected;
+  onChangeStaff(){
       this.offset = 0;
       this.prevOffset = 0;
       this.facadeService.getAppointmentSlots(this.business, this.staff, 
-      this.getSelectedDate()).subscribe(
+      this.selectedDate).subscribe(
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
           this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
@@ -118,8 +115,17 @@ export class AvailableSlotsComponent implements OnInit {
           this.errorMessage = "Yikes!!! something cramped our service "+error;
         }
       );
-  }
+  } 
 
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
+    console.log("changes",  changes);
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      if(!changedProp.isFirstChange()){
+          this.onChangeStaff();
+      }
+    }
+  }
   /* onDateChange(date: NgbDateStruct){
       this.offset = 0;
       this.prevOffset = 0;
@@ -140,8 +146,4 @@ export class AvailableSlotsComponent implements OnInit {
       );
       
   } */
-
-  getSelectedDate(){
-    return new Date(this.dateSelected.year,this.dateSelected.month, this.dateSelected.day);
-  }
 }

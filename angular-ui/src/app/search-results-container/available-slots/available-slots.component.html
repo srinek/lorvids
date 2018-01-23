@@ -1,63 +1,15 @@
-<div class="row">
-    <div class="btn-group btn-group-sm mt-1 ml-3">
-       <button type="button" class="btn btn-info">{{staff?.staff_name}}</button>
-       <div class="btn-group" ngbDropdown role="group" aria-label="Please select a staff">
-          <button class="btn btn-info dropdown-toggle-split" ngbDropdownToggle></button>
-          <div class="dropdown-menu" ngbDropdownMenu>
-            <button class="dropdown-item" 
-                    *ngFor="let estaff of business.staff;"
-                    (click)="onChangeStaff(estaff)">
-                {{estaff.staff_name}}
-            </button>
-          </div>
-       </div>
-    </div>
-</div>
-<div class="row">
-    <div class="ml-3">
-        <form class="form-inline">
-            <div class="form-group">
-                <div class="input-group">
-                    <input class="form-control" placeholder="yyyy-mm-dd"
-                        name="datePicker" [(ngModel)]="dateSelected" 
-                        value="{{dateSelected}}"
-                        (ngModelChange)="onDateChange($event)">
-                    <button class="input-group-addon" (click)="dp.toggle()" type="button">
-                        <i class="material-icons">date_range</i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div> 
-</div>
-<div class="row">
 <ng-container *ngIf="slotsLoaded">
     <ng-container *ngIf="displaySlots.length > 0">
-        <!-- <div class="d-flex justify-content-center"> -->
-            <div class="row" *ngFor="let row of rows; odd as oddrow">
-                <div class="col-4 position-relative" *ngFor="let slot of displaySlots | slice:(row*3):(row+1)*3; first as isFirst; last as isLast">
-                    <ng-container *ngIf="oddrow && isFirst">
-                        <div class="btn-prev-slots" *ngIf="havePrevSlots">
-                            <button type="button" class="btn btn-circle" (click)="morePrevSlots()"> 
-                                <i class="material-icons">chevron_left</i> 
-                            </button>
-                        </div>
-                    </ng-container>
-                    <a class="btn btn-sm btn-info w-100"
-                        title="{{slot.slotTime}}" 
+        <div class="row mt-2">
+           <ul class="list-inline pl-4 mb-0 iphone">
+                <li class="list-inline-item bg-blue text-white" *ngFor="let slot of displaySlots">
+                    <a  title="{{slot.slotTime}}" 
                         (click)="bookAppointment(slot.appointmentId)">
-                            {{slot.slotTime | date:'hh:mm a'}} 
+                        {{slot.slotTime | date:'hh:mm a'}} 
                     </a>
-                    <ng-container *ngIf="oddrow && isLast">
-                        <div class="btn-more-slots" *ngIf="haveNextSlots">
-                            <button type="button" class="btn btn-circle" (click)="moreNextSlots()"> 
-                                <i class="material-icons">chevron_right</i> 
-                            </button>
-                        </div>
-                    </ng-container>
-                </div>
-            </div> `
-        <!-- </div> -->
+                </li>
+           </ul>
+        </div>
     </ng-container>
     <ng-container *ngIf="displaySlots.length === 0">
         No Slots Available. Change Date.
@@ -66,25 +18,3 @@
 <ng-container *ngIf="!slotsLoaded">
     loading slots ...
 </ng-container>
-</div>
-<!-- <div class="row position-relative">
-    <div class="btn-prev-slots" *ngIf="havePrevSlots">
-        <button type="button" class="btn btn-circle" (click)="morePrevSlots()"> 
-            <i class="material-icons">chevron_left</i> 
-        </button>
-    </div>
-    <div class="d-flex flex-wrap justify-content-center">
-        <div class="mr-1" style="width:80px" *ngFor="let slot of displaySlots">
-            <a class="btn btn-sm btn-info align-self-start w-100"
-            title="{{slot.slotTime}}" 
-            (click)="bookAppointment(slot.appointmentId)">
-                {{slot.slotTime | date:'hh:mm a'}} 
-            </a>
-        </div>
-    </div>
-    <div class="btn-more-slots" *ngIf="haveNextSlots">
-        <button type="button" class="btn btn-circle" (click)="moreNextSlots()"> 
-            <i class="material-icons">chevron_right</i> 
-        </button>
-    </div>
-</div> -->

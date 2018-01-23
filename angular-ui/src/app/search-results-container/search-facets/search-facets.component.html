@@ -1,5 +1,5 @@
 
-<div class="search-facets-container" style="width: 100%;" *ngIf="facets.length > 0">
+<div class="search-facets-container text-md-center text-sm-left" style="width: 100%;" *ngIf="facets.length > 0">
   <div role="menubar"  class="pt-3">
     <span *ngFor="let facet of facets">
       <app-search-facet [facet]="facet" [searchTerm]="searchTerm"></app-search-facet>

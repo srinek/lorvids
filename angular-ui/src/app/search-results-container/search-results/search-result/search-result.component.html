@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-title"  style="margin-bottom:0px">
+      <h4 class="card-title text-blue ml-4">{{business.bus_name}}</h4>
+      <h6 class="card-subtitle ml-4 text-muted">
+        <address>
+          {{business.address}}
+        </address>
+      </h6>
+    </div>  
+      
+    <div class="card-block" style="padding-top:0px">
+        <div class="row">
+          <img alt="{{business.bus_name}}" height="150px" width="100%" 
+            src="{{business.defaultImage}}" title="{{business.bus_name}}"
+            class="rounded">
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mt-2">
+                <ng-select *ngIf="staffNames.length > 1" [items]="staffNames"
+                    [active]="staffNames" (selected)="selected($event)" class="w-100">
+                </ng-select>
+                <h6 *ngIf="staffNames.length==0"> {{staffNames[0]}}</h6>
+              </div>
+              <div class="col-md-12 col-lg-6 mt-2">
+                  <div class="input-group">
+                      <input 
+                      class="form-control"
+                      type="text" 
+                      #dp="bsDatepicker" 
+                      bsDatepicker 
+                      [(bsValue)]="selectedDate">
+                      <label class="input-group-addon" for="appt_date" (click)="dp.toggle()"><i class="fa fa-calendar"></i></label>
+                  </div>
+              </div>
+        </div>
+        <app-available-slots [business]="business" [staff]="selectedStaff" [selectedDate]="selectedDate"> </app-available-slots>
+        
+    </div>
+</div>

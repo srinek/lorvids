@@ -1,20 +1,54 @@
-<div class="d-inline-block">
-  <button class="btn btn-outline-primary" id="menuItemComponent-{{facet.name}}" 
-  value="{{facet.name}}"
-  #facetButton>{{facet.name}}</button>
-  <div>
-      <div class="dropdown-item" *ngFor="let fValue of facet.values">
-          <label for="{{facet.name}}-{{fValue.key}}">
-            <input type="checkbox" value="{{fValue.key}}" 
-            id="{{facet.name}}-{{fValue.key}}"
-            #facetval
-            (click)="onClickFacetValue(facetval.value, facetval.checked)">
-            {{fValue.key}}
-          </label>
-      </div>
-      <div class="dropdown-item mb-1 float-right ">
-          <button class="btn btn-sm btn-warning mr-2" (click)="dropDown.close();">Cancel</button>
-          <button class="btn btn-sm btn-primary mr-2" (click)="onClickApply(facetButton.value); dropDown.close();">Apply</button>
-      </div>
-  </div>
-</div>
+<section class="filters d-inline">
+
+    <div class="btn-group" dropdown #dropdownVar="bs-dropdown">
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+        id="menuItemComponent-{{facet.name}}" value="{{facet.name}}"
+        #facetButton>
+                {{facet.name}} <span class="caret"></span>
+        </button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+            <li role="menuitem" *ngFor="let fValue of facet.values">
+                <a class="dropdown-item" href="#" >
+                    <label for="{{facet.name}}-{{fValue.key}}">
+                        <input type="checkbox" value="{{fValue.key}}" 
+                        id="{{facet.name}}-{{fValue.key}}"
+                        #facetval
+                        (click)="onClickFacetValue(facetval.value, facetval.checked)">
+                        {{fValue.key}}
+                    </label>
+                </a>
+            </li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem">
+                <button class="btn btn-sm btn-warning mr-2" (click)="dropdownVar.hide();">Cancel</button>
+                <button class="btn btn-sm btn-primary mr-2" (click)="onClickApply(facetButton.value); dropdownVar.hide();">Apply</button>
+            </li>
+        </ul>
+
+    </div>
+
+
+
+
+
+    <!-- <div class="d-inline-block">
+        <button class="btn btn-outline-primary" id="menuItemComponent-{{facet.name}}" 
+        value="{{facet.name}}"
+        #facetButton>{{facet.name}}</button>
+        <div>
+            <div class="dropdown-item" *ngFor="let fValue of facet.values">
+                <label for="{{facet.name}}-{{fValue.key}}">
+                  <input type="checkbox" value="{{fValue.key}}" 
+                  id="{{facet.name}}-{{fValue.key}}"
+                  #facetval
+                  (click)="onClickFacetValue(facetval.value, facetval.checked)">
+                  {{fValue.key}}
+                </label>
+            </div>
+            <div class="dropdown-item mb-1 float-right ">
+                <button class="btn btn-sm btn-warning mr-2" (click)="dropDown.close();">Cancel</button>
+                <button class="btn btn-sm btn-primary mr-2" (click)="onClickApply(facetButton.value); dropDown.close();">Apply</button>
+            </div>
+        </div>
+      </div> -->
+</section>
