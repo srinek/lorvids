@@ -4,11 +4,18 @@
         <!--<a id="search-btn"  (click)="onSearch(searchFor.value)" 
         class="btn btn-lg btn-primary" value="Search">Search</a>
 </form> -->
-<form class="form-inline" id="search-form-homepage">
+<!-- <form class="form-inline" id="search-form-homepage">
         <input class="form-control mr-sm-2" #searchFor id="search-input" name="search" 
               placeholder="What service are you looking for?" type="text">
         <button type="submit" id="search-btn" (click)="onSearch(searchFor.value)" 
         class="btn btn-outline-success my-2 my-sm-0">Search</button>        
-        <!-- <a id="search-btn" (click)="onSearch(searchFor.value)" 
-        class="btn btn-default" value="Search">Search</a> -->
+        
+</form> -->
+
+<form class="form-md-inline mt-2 mt-md-0 ml-lg-2 mt-sm-4 mt-4">
+        <div class="col-sm-12 relative">
+                <i class="fa fa-search absolute"></i>
+                <input #searchFor name="search" class="form-control form-control-lg header-search" 
+                type="text" placeholder="What service are you looking for?" (keyup.enter)="onSearch(searchFor.value)">
+        </div>
 </form>

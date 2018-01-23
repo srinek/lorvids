@@ -1,30 +1,70 @@
-<div class="container">
-  <div class="row m-bot-3 h4">
-        RECENTLY VISITED
-  </div>  
-  <div class="row">
-    <div class="col-xs-3" *ngFor="let business of recentlyVisitedBusiness">
-        <div class="panel panel-default simple-panel text-center">
-            <div class="panel-body">
-              <div>
-                 {{business.name}}
-              </div>
-              <div>
-                 {{business.address}}
-              </div>
-              <br>
-              <div>
-               <div class="div-inline pull-right">
-                   <a [routerLink]="['appointment', business.id]"> book appointment </a>
-               </div>
-               <div class="div-inline">
-                 <a [routerLink]="['review', business.id]"> write review </a>
-                </div>
-              </div>
-            </div>
-         </div>
+<section id="recentlyvisited">
+    <div class="row">
+        <div class="col-sm-12 mt-4 mb-5">
+            <h1 class="text-blue text-xlarge text-uppercase"><span class="text-green text-small strong text-xxlarge mr-2"></span>rECENTLY VISITED
+    <a class="btn btn-primary btn-sm bg-blue ml-3 recentlyvisitedprev" href="recentlyvisited" title="go back"><i class="fa fa-lg fa-chevron-left"></i></a>
+    <a class="btn btn-primary btn-sm bg-blue recentlyvisitednext" href="recentlyvisited" title="more"><i class="fa fa-lg fa-chevron-right"></i></a>
+  </h1>
+        </div>
+        <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-5">
+                            <div class="card">
+                                <img class="card-img-top" src="https://dummyimage.com/320x180/000/fff.png" alt="Card image cap">
+                                <div class="card-block">
+                                    <h4 class="card-title">Card title</h4>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        </div>
     </div>
-  </div>
-  <div>
-  </div>
-</div>
+</section>

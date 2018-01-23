@@ -1,139 +1,150 @@
-<div class="container-fluid d-flex flex-column-reverse flex-sm-column-reverse flex-md-row justify-content-around">
-    <div class="col-md-8 align-items-stretch">
-        <form (ngSubmit)="bookAppointment()" #appointmentForm="ngForm">
-            <div class="form-group">
-                <label for="id-name" class="col-12 col-form-label"> Name </label>
-                <div class="col-12">
-                    <input name="uname" 
-                    id="id-name" 
-                    class="form-control" 
-                    type="text"
-                    #uname="ngModel"
-                    ngModel required>
-                    <span class="help-block" 
-                    *ngIf="!uname.valid && uname.touched">
-                       we need your name to book the appointment
-                    </span>
+<section id="reviewbooking"  class="pb-5 pt-5">
+    <div class="mb-5 mt-5 container-fluid d-flex flex-column-reverse flex-sm-column-reverse flex-md-row justify-content-around">
+        
+        <div class="col-md-8 align-items-stretch">
+            <div class="card">
+                <div class="card-header bg-red"> 
+                    <h4 class="text-uppercase mb-0 py-2 text-white">Appointment Details</h4>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="id-email" class="col-12 col-form-label">E-Mail</label>
-                <div class="col-12">
-                    <input 
-                    name="uemail" 
-                    id="id-email" 
-                    class="form-control"
-                    #uemail="ngModel"
-                    ngModel required email>
-                    <span class="help-block" 
-                    *ngIf="!uemail.valid && uemail.touched">
-                       we need your email to book the appointment
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="id-phone" class="col-12 col-form-label">Phone</label>
-                <div class="col-12">
-                    <input 
-                    name="uphone" 
-                    id="id-phone" 
-                    class="form-control"
-                    #uphone="ngModel"
-                    ngModel required phone>
-                    <span class="help-block" 
-                    *ngIf="!uphone.valid && uphone.touched">
-                       we need your phone number to book the appointment
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="id-phone" class="col-12 col-form-label">Select Service</label>
-                <div class="col-12" *ngIf="business">
-                    <select name="svc" id="id-svc" 
-                    class="form-control"
-                    #svc="ngModel"
-                    [(ngModel)]="svcSelected" required>
-                       <ng-container *ngFor="let srvc of business.services; first as isFirst">
-                            <ng-container *ngIf="isFirst">
-                                <option 
-                                [ngValue]="srvc" selected>
-                                    {{srvc}}
-                                </option>
-                            </ng-container>
-                            <ng-container *ngIf="!isFirst">
-                                <option 
-                                [ngValue]="srvc">
-                                    {{srvc}}
-                                </option>
-                            </ng-container>
-                        </ng-container>
-                       
-                    </select>
-                    <span class="help-block" 
-                    *ngIf="!svc.valid && svc.touched">
-                       we need your phone number to book the appointment
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="id-spl-instr" class="col-12 col-form-label">Special Insructions (Optional)</label>
-                <div class="col-12">
-                    <textarea 
-                    name="splInstr" 
-                    id="id-spl-instr" 
-                    class="form-control" 
-                    rows="3" ngModel></textarea>
-                </div>
-            </div>
-            <div class="alert alert-danger" role="alert" *ngIf="error">
-                {{errorMessage}}
-            </div>
-            <div class="form-group">
-                <div class="col-12">
-                   <a  class="btn btn-md btn-primary w-100" (click)="bookAppointment()">Book Appointment</a>
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-4 align-items-stretch">
-        <div class="card">
-            <div class="card-body">
-                <div *ngIf="business">
-                    <div class="m-1 font-weight-bold col-12" >
-                        {{business.bus_name}}
-                    </div>
-                    <div class=" m-1 col-12 w-100" >
-                        <span href="/users/show/nanda_profile_num" >
-                            <img alt="{{business.bus_name}}" height="100%" width="100%" 
-                            src="{{business.imageurl}}" title="{{business.bus_name}}"
-                            class="rounded">
-                        </span>
-                    </div>
-                    <div class="text-muted col-12">
-                        {{business.address}}
-                    </div>
-                    <div class="m-3">
-                        <div class="font-weight-bold">
-                            Appointment Summary
+                <div class="card-body">
+                    <form (ngSubmit)="bookAppointment()" #appointmentForm="ngForm">
+                        <div class="form-group">
+                            <label for="id-name" class="col-12 col-form-label"> Name </label>
+                            <div class="col-12">
+                                <input name="uname" 
+                                id="id-name" 
+                                class="form-control" 
+                                type="text"
+                                #uname="ngModel"
+                                ngModel required>
+                                <span class="help-block" 
+                                *ngIf="!uname.valid && uname.touched">
+                                we need your name to book the appointment
+                                </span>
+                            </div>
                         </div>
-                        <div class="m-1">
-                            {{bookingTime}}<!-- 10:30 AM EST, Monday, Sep 10, 2017 -->
+                        <div class="form-group">
+                            <label for="id-email" class="col-12 col-form-label">E-Mail</label>
+                            <div class="col-12">
+                                <input 
+                                name="uemail" 
+                                id="id-email" 
+                                class="form-control"
+                                #uemail="ngModel"
+                                ngModel required email>
+                                <span class="help-block" 
+                                *ngIf="!uemail.valid && uemail.touched">
+                                we need your email to book the appointment
+                                </span>
+                            </div>
                         </div>
-                        <ng-container *ngIf="staff">
-                            <div class="m-1">{{staff.staff_name}}</div>
-                            <div class="m-1">Service Selected : {{svcSelected}}</div>
-                        </ng-container>
-                    </div>
+                        <div class="form-group">
+                            <label for="id-phone" class="col-12 col-form-label">Phone</label>
+                            <div class="col-12">
+                                <input 
+                                name="uphone" 
+                                id="id-phone" 
+                                class="form-control"
+                                #uphone="ngModel"
+                                ngModel required phone>
+                                <span class="help-block" 
+                                *ngIf="!uphone.valid && uphone.touched">
+                                we need your phone number to book the appointment
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-phone" class="col-12 col-form-label">Select Service</label>
+                            <div class="col-12" *ngIf="business">
+                                <select name="svc" id="id-svc" 
+                                class="form-control"
+                                #svc="ngModel"
+                                [(ngModel)]="svcSelected" required>
+                                <ng-container *ngFor="let srvc of business.services; first as isFirst">
+                                        <ng-container *ngIf="isFirst">
+                                            <option 
+                                            [ngValue]="srvc" selected>
+                                                {{srvc}}
+                                            </option>
+                                        </ng-container>
+                                        <ng-container *ngIf="!isFirst">
+                                            <option 
+                                            [ngValue]="srvc">
+                                                {{srvc}}
+                                            </option>
+                                        </ng-container>
+                                    </ng-container>
+                                
+                                </select>
+                                <span class="help-block" 
+                                *ngIf="!svc.valid && svc.touched">
+                                we need your phone number to book the appointment
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="id-spl-instr" class="col-12 col-form-label">Special Insructions (Optional)</label>
+                            <div class="col-12">
+                                <textarea 
+                                name="splInstr" 
+                                id="id-spl-instr" 
+                                class="form-control" 
+                                rows="3" ngModel></textarea>
+                            </div>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="error">
+                            {{errorMessage}}
+                        </div>
+                        <div class="form-group">
+                            <div class="col-12  text-center">
+                            <a  class="btn btn-md btn-primary w-50" (click)="bookAppointment()">
+                                    <h6 class="text-uppercase mb-0 py-2 text-white">Book Appointment</h6>
+                            </a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-         
-        
-        
-        
+        <div class="col-md-4 align-items-stretch">
+            <div class="card" *ngIf="business">
+                <div class="card-header bg-red"> 
+                    <h4 class="text-uppercase mb-0 py-2 text-white">{{business.bus_name}}</h4>    
+                </div>
+                <div class="card-body">
+                    <div>
+                        <div class=" m-1 col-12 w-100" >
+                            <span href="/users/show/nanda_profile_num" >
+                                <img alt="{{business.bus_name}}" height="100%" width="100%" 
+                                src="{{business.defaultImage}}" title="{{business.bus_name}}"
+                                class="rounded">
+                            </span>
+                        </div>
+                        <div class="text-muted col-12">
+                            {{business.address}}
+                        </div>
+                        <div class="m-3">
+                            <div class="font-weight-bold">
+                                Appointment Summary
+                            </div>
+                            <div class="m-1">
+                                {{bookingTime}}<!-- 10:30 AM EST, Monday, Sep 10, 2017 -->
+                            </div>
+                            <ng-container *ngIf="staff">
+                                <div class="m-1">{{staff.staff_name}}</div>
+                                <div class="m-1">Service Selected : {{svcSelected}}</div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            
+        </div>
     </div>
-</div>
-
+</section>
 
 
 <!-- <div class="container">

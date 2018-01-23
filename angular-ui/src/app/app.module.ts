@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts'; 
@@ -100,6 +101,7 @@ import { S3ImageService } from './service/s3image.service';
     CalendarModule.forRoot(),
     DatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
+    CarouselModule.forRoot(),
     SelectModule,
     ChartsModule,
     NgxMyDatePickerModule.forRoot(),

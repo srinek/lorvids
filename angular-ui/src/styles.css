@@ -1,5 +1,240 @@
-/* You can add global styles to this file, and also import other style files */
 body {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #484848;/* #000000; */
+    background-color: #ffffff;
+    margin-top: 50px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0 0 10px 0;
+}
+
+/************************************/
+
+
+/************ Buttons ***************/
+
+
+/************************************/
+
+.page-max-width {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/************************************/
+
+
+/*******  Border Classes ************/
+
+
+/************************************/
+
+.border-radius {
+    border-radius: 4px;
+}
+
+.no-radius {
+    border-radius: 0;
+}
+
+.border-blue {
+    border: 1px solid #3a74c4;
+}
+
+.border-black {
+    border: 1px solid #000000;
+}
+
+.border-grey {
+    border: 2px solid #eee;
+}
+
+.border-dashed {
+    border-style: dashed;
+}
+
+
+/************************************/
+
+
+/*******  Color clases default  *****/
+
+
+/************************************/
+
+.text-theme {
+    color: red !important;
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.text-black {
+    color: #000000 !important;
+}
+
+.text-blue {
+    color: #0064d3 !important;
+}
+
+.text-orange {
+    color: #f5af02 !important;
+}
+
+.text-red {
+    color: #e23238 !important;
+}
+
+.text-green {
+    color: #86b817 !important;
+}
+
+
+/************************************/
+
+
+/*******  Background classes ********/
+
+
+/************************************/
+
+.bg-white {
+    background: #ffffff !important;
+}
+
+.bg-black {
+    background: #000000 !important;
+}
+
+.bg-blue {
+    background: #0063d1 !important;
+}
+
+.bg-orange {
+    background: #f5af02 !important;
+}
+
+.bg-red {
+    background: #e23238 !important;
+}
+
+.bg-green {
+    background: #86b817 !important;
+}
+
+
+/************************************/
+
+
+/************ Font sizes ************/
+
+
+/************************************/
+
+.text-small {
+    font-size: 16px;
+}
+
+.text-medium {
+    font-size: 18px !important;
+}
+
+.text-large {
+    font-size: 28px !important;
+}
+
+.text-xlarge {
+    font-size: 32px !important;
+}
+
+.text-xxlarge {
+    font-size: 36px !important;
+}
+
+.text-xxxlarge {
+    font-size: 40px !important;
+}
+
+@media (max-width: 768px) {
+    .text-small {
+        font-size: 14px !important;
+    }
+    .text-medium {
+        font-size: 16px !important;
+    }
+    .text-large {
+        font-size: 24px !important;
+    }
+    .text-xlarge {
+        font-size: 28px !important;
+    }
+    .text-xxlarge {
+        font-size: 32px !important;
+    }
+    .text-xxxlarge {
+        font-size: 36px !important;
+    }
+    .heading {
+        max-width: 100% !important;
+    }
+    .extra-padding {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+}
+
+@media (max-width: 767px) {
+    .extra-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.strong {
+    font-weight: bold !important;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.w-xy-auto {
+    width: auto;
+    height: auto;
+}
+
+.relative {
+    position: relative;
+}
+
+.absolute {
+    position: absolute;
+}
+
+.no-border {
+    border: none;
+}
+
+.br-0 {
+    border-radius: 0;
+}
+/* You can add global styles to this file, and also import other style files */
+/* body {
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 1.43;
@@ -7,8 +242,9 @@ body {
     background-color: #fff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-hr {
+} */
+
+/* hr {
     margin-top: 15px;
     margin-bottom: 15px;
     border: 0;
@@ -105,9 +341,6 @@ button, input, select, textarea {
     position: relative !important;
 }
 
-
-
-/*---- global styles --------------- */
 a {
     color: #337ab7;
     text-decoration: none;
@@ -135,4 +368,4 @@ a {
 }
 .cursor-pointer{
     cursor: pointer;
-}
+} */

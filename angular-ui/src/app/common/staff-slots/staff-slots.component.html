@@ -1,12 +1,15 @@
 
   <div class="d-inline-flex flex-wrap justify-content-center">  
-      <div class="col-12 d-flex  justify-content-center" *ngIf="!selectedDate"><h4>Select Time</h4></div>
-      <div class="col-12 d-flex  justify-content-center" *ngIf="selectedDate"><h4>{{ selectedDate | date:'fullDate'}}</h4></div>
+      <div class="col-12 d-flex  justify-content-center" *ngIf="!selectedDate"><h4 class="text-blue">Select Time</h4></div>
+      <div class="col-12 d-flex  justify-content-center" *ngIf="selectedDate"><h4 class="text-blue">{{ selectedDate | date:'fullDate'}}</h4></div>
   
 
     <div class="col-lg-6 d-flex  justify-content-center">
       <div class="d-inline-block">
-        <datepicker [(ngModel)]="selectedDate" [showWeeks]="false" (ngModelChange)="onDateChange($event)"></datepicker>
+        <datepicker
+        [(ngModel)]="selectedDate" 
+        [showWeeks]="false" 
+        (ngModelChange)="onDateChange($event)"></datepicker>
       </div>
     </div>
     <div class="col-lg-6 d-flex flex-wrap align-items-center mt-3">

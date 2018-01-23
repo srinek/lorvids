@@ -1,0 +1,11 @@
+.header-search {
+    padding-left: 42px;
+    border: none;
+    background: #fafafa;
+}
+
+form .fa-search {
+    font-size: 25px;
+    left: 24px;
+    top: 11px;
+}

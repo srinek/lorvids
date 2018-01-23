@@ -9,7 +9,8 @@ export class Business{
     phone : number;
     email : string;
     website : string;
-    imageurl : string;
+    images : string[];
+    defaultImage : string;
     rating : number[];
     staff? : Staff[] =[];
     bus_time_zone? : string = "America/new_york";
@@ -47,12 +48,15 @@ export class Business{
         this.specialized_in = src.specialized_in;
         this.appointment_instructions = src.appointment_instructions;
         this.awards = src.awards;
-        this.imageurl = "../../assets/trendy_looks.jpg";
+        this.images = ["../../assets/trendy_looks.jpg", "../../assets/image-2.jpg"];
+        this.defaultImage = "../../assets/trendy_looks.jpg";
         this.services = src.services;
         this.bus_hours = src.bus_hours;
         this.bus_time_zone = src.bus_time_zone;
         this.openTime = src.startTime;
         this.closeTime = src.endTime;
         this.isOpenNow = src.open;
+        this.website = "wwww.lorvids.com";
+        this.email = "info@lorvids.com";
     }
 }

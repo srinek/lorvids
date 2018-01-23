@@ -5,6 +5,7 @@ import { Business } from '../../model/business.model';
 import { Slots } from '../../model/slots.model';
 import { FacadeService } from '../../service/facade.service';
 import { AppointmentSlot } from '../../model/appointment-slot.model';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
 
 @Component({
   selector: 'app-staff-slots',
@@ -20,7 +21,7 @@ export class StaffSlotsComponent implements OnInit {
   public error : boolean = false;
   public errorMessage : string = "";
   slotsLoaded : boolean = false;
-  
+  bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'no-border' });
   
   constructor(private route: ActivatedRoute,
     private router: Router,

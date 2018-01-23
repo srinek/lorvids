@@ -1,5 +1,36 @@
+<section id="hero-section" class="mb-4">
+        <div class="flex-center">
+            <div class="col-lg-7 text-white">
+                <h1 class="text-xlarge">Self-booking helps everyone</h1>
+                <p class="h5">Search the service you need, book your appointment right here at home.</p>
+                <form>
+                    <div class="input-group">
+                        <input type="text" class="form-control form-control-lg" placeholder="What service are you looking for?">
+                        <select class="form-control form-control-lg" id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="dental">Dental Cleaning</option>
+                            <option value="root-canal-treatment">Root Canal Treatment</option>
+                            <option value="cavities">cavities</option>
+                            <option value="teeth pain">teeth pain</option>
+                        </select>
+                        <span class="input-group-btn">
+							<button class="btn btn-primary bg-blue" type="button">Search</button>
+						  </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <div class="container">  
+        <div class="row row-section">
+            <app-recently-visited></app-recently-visited>
+        </div>
+        <div class="row row-section">
+            <app-trending></app-trending>
+        </div>
+    </div>
 
-<div class="container-fluid header-main">
+<!-- <div class="container-fluid header-main">
   <div class="row ">
             <div class="gallery div-inline">
                 <figure>
@@ -23,18 +54,6 @@
             </div>
       
   </div>
- <!--  <div class="row full-width-search display-sm-inline">
-    
-        <div class="global-search">
-            <form id="search-form-homepage">
-                <input  id="search-input" name="search" 
-                placeholder="What service are you looking for?" type="text" autocomplete="off">
-                <input type="submit" class="btn btn-lg btn-primary global-search-btn" value="Search"> commented before
-                <a href="" class="btn btn-lg btn-primary" value="Search">Search</a>
-            </form>
-        </div>
-    
-  </div> -->
 </div>
 <div class="container">  
   <div class="row row-section">
@@ -43,4 +62,4 @@
   <div class="row row-section">
       <app-trending></app-trending>
   </div>
-</div>
+</div> -->

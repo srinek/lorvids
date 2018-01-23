@@ -1,4 +1,17 @@
-.header-main {
+#hero-section {
+  background: url(https://upload.wikimedia.org/wikipedia/commons/e/e5/Banner_Francia_esWvoy.jpg);
+  background-size: cover;
+  padding: 100px;
+}
+
+@media (max-width: 767px) {
+  #hero-section {
+      padding: 100px 0px;
+  }
+}
+
+
+/* .header-main {
   background-color: #1e242e;
   position: relative
 }
@@ -64,7 +77,6 @@
   height: 50px;
   width: 85%;
   font-size: inherit;
-  /*border: none;*/
   border-radius: 3px 0 0 3px;
   padding-left: 22px;
   color: #999999;
@@ -77,8 +89,6 @@
 
 .home-panel{
   height : 100px;
-  /*background-color: #ffffff;
-  margin: 5px;*/
 }
 .row-section{
   margin-bottom: 5px;
@@ -112,6 +122,4 @@
   .simple-panel{
     height : 100px;
     width : 225px;
-    /*background-color: #ffffff;
-    margin: 5px;*/
-}
+  } */
