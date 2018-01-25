@@ -13,6 +13,7 @@ class Business{
         self.bus_name = src.bus_name;
         self.address = src.address;
         self.bus_id = src.bus_id;
+        self.staffIds = src.staff;
         self.staff = [];
         self.holidays = src.holidays;
         self.specialized_in = src.specialized_in;
@@ -98,6 +99,11 @@ class Business{
     addStaff(staff) {
         let self = this;
         self.staff.push(staff);
+    }
+
+    addAllStaff(staffObjs) {
+        let self = this;
+        self.staff = staffObjs;
     }
     
     getNextBusinessDayDefault(){

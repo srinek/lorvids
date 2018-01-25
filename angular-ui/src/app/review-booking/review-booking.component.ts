@@ -41,7 +41,7 @@ export class ReviewBookingComponent implements OnInit {
           console.log("bookingTime ", this.bookingTime);
           let staffId = params['staffId'];
           let businessId = params['busId'];
-          this.facadeService.getBusiness(businessId)
+          this.facadeService.getBusiness(businessId, false)
           .subscribe(
               (business : Business) => {
                   this.business = business;

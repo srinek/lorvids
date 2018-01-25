@@ -28,59 +28,11 @@ export class BusinessPageComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
           let businessId = params['busId'];
-          this.facadeService.getBusiness(businessId)
+          this.facadeService.getBusiness(businessId, true)
           .subscribe(
               (business : Business) => {
                   this.business = business;
-                  var staff1 = new Staff({
-                    "bus_hours": [
-                      {
-                        "day": -1,
-                        "endTime": "17:00",
-                        "startTime": "10:00"
-                      },
-                      {
-                        "day": 1,
-                        "endTime": "17:00",
-                        "startTime": "12:00"
-                      }
-                    ],
-                    "bus_id": "b-test-01",
-                    "imageUrl": [
-                      "profile.jpg"
-                    ],
-                    "service_time": "30",
-                    "staff_id": "b-test-01-s-01",
-                    "staff_name": "Dr. Devi",
-                    "tags": "DDS from RSDM, fellow in oro facial pain"
-                  });
-                  var staff2 = new Staff({
-                    "bus_id": "b-test-01",
-                    "imageUrl": [
-                      "profile.jpg"
-                    ],
-                    "service_time": "30",
-                    "staff_id": "b-test-01-s-03",
-                    "staff_name": "Dr. Sara",
-                    "tags": "hair cut, hair wash, nails"
-                  });
-                  var staff3 = new Staff({
-                    "bus_id": "b-test-01",
-                    "holidays": [
-                      "SAT"
-                    ],
-                    "imageUrl": [
-                      "profile.jpg"
-                    ],
-                    "service_time": "30",
-                    "staff_id": "b-test-01-s-02",
-                    "staff_name": "Dr. Susan",
-                    "tags": "DDS from NYU"
-                  });
-                  this.business.staff.push(staff1);
-                  this.business.staff.push(staff2);
-                  this.business.staff.push(staff3);
-                  this.staffSelected = staff1;
+                  this.staffSelected = this.business.staff[0];
                   this.businessLoaded = true;
               },
               (error : string) => {

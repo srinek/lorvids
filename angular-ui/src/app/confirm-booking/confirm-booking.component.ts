@@ -29,7 +29,7 @@ export class ConfirmBookingComponent implements OnInit {
           this.bookingId = params['bookingId'];
           let staffId = params['staffId'];
           let businessId = params['busId'];
-          this.facadeService.getBusiness(businessId)
+          this.facadeService.getBusiness(businessId, false)
           .subscribe(
               (business : Business) => {
                   this.business = business;

@@ -21,8 +21,10 @@ module.exports.save = (event, context, callback) => {
 }
 
 module.exports.get = (event, context, callback) => {
+    let busId = event.pathParameters.busId;
+    let loadStaff = event.queryStringParameters ? event.queryStringParameters.loadStaff : false;
     businessService
-    .getBusinessById(event.pathParameters.busId)
+    .getBusinessById(busId, loadStaff)
     .then( (data) => {
         console.log("data ", data);
         let response = util.success();

@@ -19,9 +19,8 @@ export class BusinessService {
 
     }
 
-    public getBusiness(busid : string) : Observable<Business>{
-
-        return this.http.get(this.api + this.endpoint+"/"+busid).map(
+    public getBusiness(busid : string, loadStaff : boolean) : Observable<Business>{
+        return this.http.get(this.api + this.endpoint+"/"+busid+"?loadStaff="+loadStaff).map(
             (response : Response) => {
                 let business : Business;
                 let busObj = response.json();

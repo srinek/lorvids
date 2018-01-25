@@ -38,9 +38,10 @@ export class FacadeService {
 
     private rating : number[] = [0 , 0 , 0 ,0 ];
 
-    public getBusiness(busId : string) : Observable<Business> {
-        return this.businessService.getBusiness(busId);
+    public getBusiness(busId : string, loadStaff : boolean) : Observable<Business> {
+        return this.businessService.getBusiness(busId, loadStaff);
     }
+    
 
     public saveBusiness(business : Business) : Observable<string> {
         return this.businessService.saveBusiness(business);
