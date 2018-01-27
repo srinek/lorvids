@@ -1,3 +1,34 @@
-<p>
-    We received your appointment request for ServiceName with <span *ngIf="staff">staff?.staff_name</span> on appointment date and time. Please look for a confirmation email
-</p>
+<section class="mt-5" id="confirm-appt">
+    <div class="container p-5">
+        
+        <div class="row d-flex justify-content-center">
+            <h5 class="text-blue">Hello {{user.name}},</h5>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <h5 class="text-blue">Your Appointment with {{business.bus_name}} is confirmed.</h5>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <p class="text-muted">{{business.address}}</p>
+        </div>
+    </div>
+    <div class="container d-flex justify-content-center align-items-center mb-3">
+        <div class="col-md-6 d-flex justify-content-center align-items-center staff-box">
+            <div class="text-center">
+                <a href="chef-profile.html" class="">    
+                    <img src="../../assets/{{staff.image}}" height="115" width="115" 
+                            class="img-round img-photo d-inline-block " alt="">
+                </a>
+                <h6 class="text-blue p-1">{{staff.staff_name}}</h6>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+                <p class="text-blue text-center">{{appointment.service}}</p> 
+           
+                <div  class="text-red text-center"><strong>{{appointment.time | date:'hh:mm a'}}</strong></div>    
+                <div class="text-blue text-center">{{ appointment.time | date:'fullDate'}}</div>
+        </div>
+    </div>
+    <div class="container  d-flex justify-content-center align-items-center">
+        links for create account, enter password etc
+    </div>
+</section>

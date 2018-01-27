@@ -6,6 +6,9 @@ import {FacadeService} from '../service/facade.service';
 import {Logger} from '../service/logger.service';
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
+import { User } from '../model/user.model';
+import { AppointmentSlot } from '../model/appointment-slot.model';
+import { Appointment } from '../model/appointment.model';
 
 @Component({
   selector: 'app-book-appointment',
@@ -16,12 +19,15 @@ export class ReviewBookingComponent implements OnInit {
 
   business : Business;
   staff : Staff;
+  user : User;
+  appointment : Appointment;
   bookingId : string;
   public error : boolean = false;
   public errorMessage : string = "";
   @ViewChild('appointmentForm') appointmentForm : NgForm;
   svcSelected : string;
   bookingTime : Date = new Date();
+  apptBooked : boolean = false;
 
   constructor(
     private facadeService : FacadeService,
@@ -77,31 +83,32 @@ export class ReviewBookingComponent implements OnInit {
 
   bookAppointment(){
     let apptData : any = {};
-    let user : any = {};
-    user.UserEmail = this.appointmentForm.value.uemail;
-    user.name = this.appointmentForm.value.uname;
-    user.phone = this.appointmentForm.value.uphone;
-    let appointment : any = {};
-    appointment.staffId = this.staff.staff_id;
-    appointment.userEmail = this.appointmentForm.value.uemail;
-    appointment.AppointmentId = this.bookingId;
-    appointment.busId = this.business.bus_id;
-    appointment.location = this.business.address;
-    appointment.time = this.bookingTime;
+    this.user = new User();
+    this.user.UserEmail = this.appointmentForm.value.uemail;
+    this.user.name = this.appointmentForm.value.uname;
+    this.user.phone = this.appointmentForm.value.uphone;
+    this.appointment = new Appointment();
+    this.appointment.staffId = this.staff.staff_id;
+    this.appointment.userEmail = this.appointmentForm.value.uemail;
+    this.appointment.AppointmentId = this.bookingId;
+    this.appointment.busId = this.business.bus_id;
+    this.appointment.location = this.business.address;
+    this.appointment.time = this.bookingTime;
     if(this.appointmentForm.value.splInstr){
-      appointment.notes = this.appointmentForm.value.splInstr;
+      this.appointment.notes = this.appointmentForm.value.splInstr;
     }
-    appointment.service = this.svcSelected;
-    apptData.user = user;
-    apptData.appt = appointment;
+    this.appointment.service = this.svcSelected;
+    apptData.user = this.user;
+    apptData.appt = this.appointment;
 
     this.facadeService.saveAppointment(apptData).subscribe(
       (success : string) => {
         this.logger.log(success);
-        this.router.navigate(
+        this.apptBooked = true;
+        /* this.router.navigate(
           ['/confirm', this.business.bus_id, this.staff.staff_id, this.bookingId ],
           {relativeTo:this.route}
-        );
+        ); */
       },
       (error : string) => {
         this.error = true;

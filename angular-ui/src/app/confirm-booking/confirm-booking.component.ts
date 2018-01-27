@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute, Router, Params} from '@angular/router';
 import { FacadeService} from '../service/facade.service';
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
+import { User } from '../model/user.model';
+import { Appointment } from '../model/appointment.model';
 
 @Component({
   selector: 'app-confirm-appointment',
@@ -11,8 +13,10 @@ import {Staff} from '../model/staff.model';
 })
 export class ConfirmBookingComponent implements OnInit {
 
-  business : Business;
-  staff : Staff;
+  @Input() business : Business;
+  @Input() staff : Staff;
+  @Input() user : User;
+  @Input() appointment : Appointment;
   bookingId : string;
   public error : boolean = false;
   public errorMessage : string = "";
@@ -24,7 +28,7 @@ export class ConfirmBookingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.params.subscribe(
+    /* this.route.params.subscribe(
       (params : Params) => {
           this.bookingId = params['bookingId'];
           let staffId = params['staffId'];
@@ -52,7 +56,7 @@ export class ConfirmBookingComponent implements OnInit {
               }
           )
       }
-    );
+    ); */
 
   }
 
