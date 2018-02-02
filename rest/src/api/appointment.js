@@ -3,12 +3,14 @@ let db = require('../common/db');
 let util = require('../common/util');
 let user = require('./user');
 let appointmentService = require('../services/appointment-service');
+let emailService = require('../services/ses-service');
 
 module.exports.save = (event, context, callback) => {
     
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
     appointmentService.saveAppointment(reqBody.appt).then( (result) => {
+        emailService.sendConfirmationEmail(reqBody.appt, reqBody.user);
         if(save_user){
             user.save(event, context, callback);
          }
