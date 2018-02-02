@@ -13,7 +13,7 @@ module.exports.sendConfirmationEmail = (appointmentData, userData) => {
     let business, staffobj;
     businessService.getBusinessById(appointmentData.busId).then( (businessResult) => {
         business = new Business(businessResult);
-        return staffService.getStaffByBusIdAndStaffId(appointmentData.busId, appointmentData.StaffId);
+        return staffService.getStaffByBusIdAndStaffId(appointmentData.busId, appointmentData.staffId);
     }).then( (staffResult) => {
         staffobj = new Staff(staffResult);
         return {"appointment_time" : "8:00 PM, Monday, Jan 2018"};  /// here we got to load the appointment details

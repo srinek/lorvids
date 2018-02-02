@@ -38,13 +38,13 @@ output: {
 
 let reqBody = {
   "appt": {
-    "StaffId": "b-test-01-s-01",
-    "UserEmail": "srinek@gmail.com",
-    "AppointmentId": "b-test-01-s-01-a-1500",
+    "staffId": "b-test-01-s-01",
+    "userEmail": "srinek@gmail.com",
+    "AppointmentId": "b-test-01-s-01-1517675400000",
     "busId": "b-test-01",
-    "location": "business address",
-    "notes": "empty",
-    "service": "dental cleaning"
+    "location": "110 Main Street, Edison, NJ 08817",
+    "time": "2018-02-03T16:30:00.000Z",
+    "service": "Root Canal Treatment"
   },
   "user": {
     "UserEmail": "srinek@gmail.com",

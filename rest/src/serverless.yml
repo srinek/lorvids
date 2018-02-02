@@ -39,6 +39,11 @@ provider:
       Action: # Gives permission to Elastic Search domain
         - s3:*
       Resource: "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+    - Effect: Allow
+      Action: # Gives permission to Elastic Search domain
+        - ses:*
+      Resource: "*"
+      
 # you can overwrite defaults here
   stage: dev
   region: us-east-1
