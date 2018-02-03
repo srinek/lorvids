@@ -38,3 +38,25 @@ module.exports.get = (event, context, callback) => {
         callback(null, response);
     });
 }
+
+module.exports.getBusinessExpenses = (event, context, callback) => {
+    let busId = event.pathParameters.busId;
+    let month = "";
+    let year = "";
+    let isyearly = "";
+    let loadStaff = event.queryStringParameters ? event.queryStringParameters.loadStaff : false;
+    businessService
+    .getBusinessExpenses(busId, month, year, isyearly)
+    .then( (data) => {
+        console.log("data ", data);
+        let response = util.success();
+        response.body = JSON.stringify(data);
+        callback(null, response);
+    })
+    .catch((error) => {
+        console.log("error "+error);
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        callback(null, response);
+    });
+}

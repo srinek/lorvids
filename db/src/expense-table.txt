@@ -1,0 +1,2 @@
+aws dynamodb delete-table --table-name Expense
+aws dynamodb create-table --table-name Expense --attribute-definitions AttributeName=bus_id,AttributeType=S AttributeName=expense_id,AttributeType=S  --key-schema AttributeName=bus_id,KeyType=HASH AttributeName=expense_id,KeyType=RANGE  --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1

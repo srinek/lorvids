@@ -1,4 +1,21 @@
 
+.datepicker-container {
+  vertical-align: top; 
+  width: 230px; 
+  margin-bottom:10px;
+}
+
+.date-picker-btn-group button {
+  border: solid 1px #cfcece;
+}
+
+.date-picker-btn-group {
+  margin-left: 2px;
+}
+
+/***
+copied
+**/
  :root {
     --blue: #20a8d8;
     --indigo: #6610f2;

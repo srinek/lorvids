@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FacadeService } from '../../service/facade.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Business } from '../../model/business.model';
+import { Staff } from '../../model/staff.model';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/forkJoin';
 
 @Component({
   selector: 'app-admin-reports',
@@ -28,9 +35,41 @@ export class AdminReportsComponent implements OnInit {
    * 
    */
 
-  constructor() { }
+   public businessId:string = "b-test-01";
+   public month:string = "2";
+   public year:string = "2018";
+   public isyearly:boolean = false;
+
+   public business : Business;
+   public business1 : Business;
+   public staffList : Array<Staff> ;
+   public businessLoaded;
+   public earningsExpenseErrorFlag : boolean = false;
+   public earningsExpenseErrorMessage : string = ""; 
+   public earningsExpenseDataLoaded = false;
+
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private facadeService : FacadeService) { }
 
   ngOnInit() {
+    console.log("searchFor "+this.businessId);
+    Observable.forkJoin(
+      this.facadeService.getBusiness(this.businessId, true),
+      this.facadeService.getBusinessExpenses(this.businessId, this.month, this.year, this.isyearly)
+    ).subscribe(response => {
+        this.business = <any>response[0];
+        this.business1 = <any>response[1];
+        // Here the codes you want to execute after retrieving all data
+        this.loadEarningsExpenseChart();
+     },
+      (error : string) => {
+        this.earningsExpenseErrorFlag = true;
+        this.earningsExpenseErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
+        throw error;
+      }
+    );
+
   }
 
   model: any = { jsdate: new Date() };
@@ -39,14 +78,31 @@ export class AdminReportsComponent implements OnInit {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels:string[] = ['Staff A', 'Staff B', 'Staff C'];
   public barChartType:string = 'horizontalBar';
   public barChartLegend:boolean = true;
 
-  public barChartData:any[] = [
-    {data: [265, 259, 280], label: 'Earnings'},
-    {data: [28, 48, 40], label: 'Expense'}
-  ];
+  public barChartLabels:string[] = [];
+  public barChartData:any[] = [];
+
+  public loadEarningsExpenseChart() : void {
+
+    this.staffList = this.business.staff;
+    console.log("staffList:", this.staffList);
+
+    this.staffList.forEach( (staff : Staff) => {
+      this.barChartLabels.push(staff.staff_name);
+    });
+
+    this.barChartLabels.push("Miscellaneous");
+
+    this.barChartData = [
+      {data: [265, 259, 280, 0], label: 'Earnings'},
+      {data: [28, 48, 40, 50], label: 'Expense'}
+    ];
+
+    this.earningsExpenseDataLoaded = true;
+
+  } 
 
   // events
   public chartClicked(e:any):void {
@@ -69,45 +125,7 @@ export class AdminReportsComponent implements OnInit {
   public doughnutChartType:string = 'doughnut';
 
 
-    // // lineChart
-    // public lineChartData:Array<any> = [
-    //   {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    //   {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    //   {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-    // ];
-    // public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    // public lineChartOptions:any = {
-    //   responsive: true
-    // };
-    // public lineChartColors:Array<any> = [
-    //   { // grey
-    //     backgroundColor: 'rgba(148,159,177,0.2)',
-    //     borderColor: 'rgba(148,159,177,1)',
-    //     pointBackgroundColor: 'rgba(148,159,177,1)',
-    //     pointBorderColor: '#fff',
-    //     pointHoverBackgroundColor: '#fff',
-    //     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    //   },
-    //   { // dark grey
-    //     backgroundColor: 'rgba(77,83,96,0.2)',
-    //     borderColor: 'rgba(77,83,96,1)',
-    //     pointBackgroundColor: 'rgba(77,83,96,1)',
-    //     pointBorderColor: '#fff',
-    //     pointHoverBackgroundColor: '#fff',
-    //     pointHoverBorderColor: 'rgba(77,83,96,1)'
-    //   },
-    //   { // grey
-    //     backgroundColor: 'rgba(148,159,177,0.2)',
-    //     borderColor: 'rgba(148,159,177,1)',
-    //     pointBackgroundColor: 'rgba(148,159,177,1)',
-    //     pointBorderColor: '#fff',
-    //     pointHoverBackgroundColor: '#fff',
-    //     pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    //   }
-    // ];
-    // public lineChartLegend:boolean = true;
-    // public lineChartType:string = 'line';
-  
+
     // lineChart
     public lineChartData:Array<any> = [
       {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},

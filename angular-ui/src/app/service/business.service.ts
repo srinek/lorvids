@@ -7,6 +7,7 @@ import {Business} from '../model/business.model';
 
 import {Logger} from './logger.service';
 import { environment } from '../../environments/environment';
+import { Expense } from '../model/expense.model';
 
 @Injectable()
 export class BusinessService {
@@ -47,4 +48,16 @@ export class BusinessService {
             }
         );
     }
+
+    public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Expense[]>{
+        return this.http.get(this.api + this.endpoint+"/"+busId).map(
+            (response : Response) => {
+                let expense : Expense[];
+                let expenseObj = response.json();
+                expense.push (new Expense(expenseObj));
+                return expense;
+            }
+        );
+    }
+
 }

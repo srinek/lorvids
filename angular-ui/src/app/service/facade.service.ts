@@ -18,6 +18,7 @@ import {ApptService} from './appt.service';
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 import { SearchVO } from '../model/search-vo';
 import { S3ImageService } from './s3image.service';
+import { Expense } from '../model/expense.model';
 
 @Injectable()
 export class FacadeService {
@@ -38,6 +39,10 @@ export class FacadeService {
 
     private rating : number[] = [0 , 0 , 0 ,0 ];
 
+
+    /**
+     *  BUSINESS APIS
+     */
     public getBusiness(busId : string, loadStaff : boolean) : Observable<Business> {
         return this.businessService.getBusiness(busId, loadStaff);
     }
@@ -47,6 +52,14 @@ export class FacadeService {
         return this.businessService.saveBusiness(business);
     }
 
+    public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean) : Observable<Expense[]> {
+        return this.businessService.getBusinessExpenses(busId, month, year, isyearly);
+    }
+
+
+    /**
+     *  STAFF APIS
+     */
     public getStaff(busId : string, staffId : string) : Observable<Staff> {
         return this.staffService.getStaff(busId, staffId);
     }

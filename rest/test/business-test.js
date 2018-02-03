@@ -9,14 +9,14 @@ let testGetObj = { "pathParameters" :
                         "loadStaff": "false"
                     }
                  };
-business.get(testGetObj  , 
-     null, 
-     (error, response) => {
-        console.log('-----------------------------GET RESPONSE START-----------------------------');
-        console.log(response);
-        console.log('-----------------------------GET RESPONSE END-----------------------------');
-     }
-);
+// business.get(testGetObj  , 
+//      null, 
+//      (error, response) => {
+//         console.log('-----------------------------GET RESPONSE START-----------------------------');
+//         console.log(response);
+//         console.log('-----------------------------GET RESPONSE END-----------------------------');
+//      }
+// );
 
 let testSaveObj = {
     "body" : 
@@ -137,3 +137,13 @@ let testSaveObj2 =
         console.log('-----------------------------SAVE RESPONSE END-----------------------------');
     }
 );  */
+
+
+business.getBusinessExpenses(testGetObj  , 
+  null, 
+  (error, response) => {
+     console.log('-----------------------------GET Expense RESPONSE START-----------------------------');
+     console.log(response);
+     console.log('-----------------------------GET RESPONSE END-----------------------------');
+  }
+);

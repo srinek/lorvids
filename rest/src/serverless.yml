@@ -94,6 +94,14 @@ functions:
           path: business
           method: post
           cors: true
+  getBusinessExpenses:
+    handler: api/business.getBusinessExpenses
+    description : get business expenses by Id
+    events:
+      - http:
+          path: business/expense/{busId}
+          method: get
+          cors: true  
   ddbESBusinessIndexer:
     handler: common/ddbEsIndexer.esBusinessIndexer
     description: index busines docs from ddb to es
