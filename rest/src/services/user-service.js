@@ -12,3 +12,15 @@ module.exports.saveUser = (userData) => {
           
     return db.saveData(params);
 }
+
+module.exports.getUserDetails = (userEmail) => {
+    var params = {
+        TableName: 'User',
+        Key: {
+            'UserEmail' : userEmail
+        }
+    };
+    console.log("get Business params "+  JSON.stringify(params));
+    let userData = db.getData(params);
+    return userData;
+}

@@ -40,11 +40,12 @@ let reqBody = {
   "appt": {
     "staffId": "b-test-01-s-01",
     "userEmail": "srinek@gmail.com",
-    "AppointmentId": "b-test-01-s-01-1517675400000",
+    "AppointmentId": "b-test-01-s-01-1517864400000",
     "busId": "b-test-01",
     "location": "110 Main Street, Edison, NJ 08817",
     "time": "2018-02-03T16:30:00.000Z",
-    "service": "Root Canal Treatment"
+    "service": "Root Canal Treatment",
+    "notes" : "some notes"
   },
   "user": {
     "UserEmail": "srinek@gmail.com",
@@ -53,13 +54,44 @@ let reqBody = {
   }
 };
 
-let saveObj = {
+let updateObj = {
   "queryStringParameters": {
-    "saveuser": "true"
+    "saveuser": false
   },
   "body": JSON.stringify(reqBody)
 };
-appointment.save(saveObj , null, (error, response) => {
+/* appointment.save(updateObj , null, (error, response) => {
+  console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+}); */
+
+
+
+let creatReqBody = {
+  "appt": {
+    "staffId": "b-test-01-s-01",
+    "busId": "b-test-01",
+    "time": "1517747168193",
+  }
+};
+
+let createObj = {
+  "body": JSON.stringify(creatReqBody)
+};
+
+/* appointment.createNew(createObj , null, (error, response) => {
+  console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+}); */
+
+let testGetObj = { "pathParameters" : 
+  {
+      "sId" : "b-test-01-s-01-1517931000000",
+  }
+};
+appointment.getSlotDetails(testGetObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');

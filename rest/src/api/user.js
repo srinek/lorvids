@@ -27,3 +27,20 @@ module.exports.save = (event, context, callback) => {
         
     db.saveData(params, callback); */
 }
+
+module.exports.get = (event, context, callback) => {
+   
+    let userEmail = event.pathParameters.userEmail;
+    let userDataPromise = userService.getUserDetails(userEmail);
+    userDataPromise.then((result) => {
+        let response = util.success();
+        response.body = JSON.stringify(result);
+        console.log("success callback ", response);
+        callback(null, response);
+     }).catch( (error) => {
+       let response = util.error();
+       response.body = JSON.stringify(error);
+       console.log("error callback ", response);
+       callback(null, response);
+    });
+} 

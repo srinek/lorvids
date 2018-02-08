@@ -5,6 +5,17 @@ let Staff = require('../model/staff-model');
 let db = require('../common/db');
 let util = require('../common/util');
 
+module.exports.findSlotDetails = (slot_id) => {
+    var params = {
+        TableName: 'Appointments',
+        Key: {
+            'AppointmentId' : slot_id
+        }
+    };
+    console.log("findSlots params "+  JSON.stringify(params));
+    let slotDataPromise = db.getData(params);
+    return slotDataPromise;
+}
 module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     let business, staffobj;
     return  businessService.getBusinessById(bus_id).then((businessResult) => {
@@ -47,7 +58,25 @@ let findBookedSlots = (busId, staffId, date) => {
 }
 module.exports.findBookedSlots= findBookedSlots;
 
-module.exports.saveAppointment = (appointmentData) => {
+module.exports.updateAppointment = (appointmentData) => {
+    var params = {
+       TableName: 'Appointments',
+       Key: { "AppointmentId" : appointmentData.AppointmentId },
+       UpdateExpression: `set service = :service, userEmail = :useremail, notes=:notes`,
+       ExpressionAttributeValues: {
+        ':service' : appointmentData.service,
+        ':useremail' : appointmentData.userEmail,
+        ':notes' : appointmentData.notes
+      }
+    };
+    console.log("params_appt "+  JSON.stringify(params));
+    return db.updateData(params);
+}
+
+// creates a new appointment
+module.exports.createAppointment = (appointmentData) => {
+    /* "appointmentId" : self.staff_id+"-"+slotid, */
+    appointmentData.AppointmentId = appointmentData.staffId+"-"+appointmentData.time;
     var params = {
        TableName: 'Appointments',
        Item: appointmentData

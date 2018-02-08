@@ -60,9 +60,7 @@ class Staff{
                 continue;
             }
             let slotTimeFormatted = slot.tz(timezone).format("MM-D-YYYY hh:mm:ss a Z");
-            let slotid = new Date(slotTimeFormatted).getTime();
             returnSlots.push({
-            "appointmentId" : self.staff_id+"-"+slotid,
             "time" : slotTimeFormatted, 
             "available" : true, 
             "staffid":self.staff_id, 

@@ -18,6 +18,8 @@ import {ApptService} from './appt.service';
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 import { SearchVO } from '../model/search-vo';
 import { S3ImageService } from './s3image.service';
+import { User } from '../model/user.model';
+import { UserService } from './user.service';
 
 @Injectable()
 export class FacadeService {
@@ -28,10 +30,11 @@ export class FacadeService {
 
     constructor(private logger: Logger,
                 private searchService : SearchService,
-                private businessService : BusinessService,
+                private businessService: BusinessService,
                 private staffService : StaffService,
                 private apptService : ApptService,
-                private s3ImageService : S3ImageService
+                private s3ImageService : S3ImageService,
+                private userService : UserService
                ){
 
     }
@@ -56,8 +59,18 @@ export class FacadeService {
         return staff;
     }
 
+    public getAppointment(slotId : string) : Observable<AppointmentSlot>{
+        return this.apptService.getAppointment(slotId);
+    }
     public saveAppointment(appt : any) : Observable<string>{
         return this.apptService.saveAppointment(appt);
+    }
+    public createAppointment(appt : any) : Observable<AppointmentSlot>{
+        return this.apptService.createAppointment(appt);
+    }
+
+    public getUserDetails(userEmail : string) : Observable<User>{
+        return this.userService.getUser(userEmail);
     }
 
     public getTrendingBusiness() : Business[] {

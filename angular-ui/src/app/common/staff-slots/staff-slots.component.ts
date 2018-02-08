@@ -6,6 +6,8 @@ import { Slots } from '../../model/slots.model';
 import { FacadeService } from '../../service/facade.service';
 import { AppointmentSlot } from '../../model/appointment-slot.model';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker/bs-datepicker.config';
+import { Appointment } from '../../model/appointment.model';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: 'app-staff-slots',
@@ -16,11 +18,14 @@ export class StaffSlotsComponent implements OnInit {
   
   @Input() staff : Staff;
   @Input() business : Business;
+  @Input() previousSlotId : string;
+  @Input() pUserEmail : User;
   slots : AppointmentSlot[];
   selectedDate : Date;
   public error : boolean = false;
   public errorMessage : string = "";
   slotsLoaded : boolean = false;
+  appointment : Appointment;
   bsConfig: Partial<BsDatepickerConfig> = Object.assign({}, { containerClass: 'no-border' });
   
   constructor(private route: ActivatedRoute,
@@ -30,16 +35,31 @@ export class StaffSlotsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadNewSlots(true);
+    //this.loadNewSlots(true);
     
   }
 
-  bookAppointment(bookingId : string){
+  bookAppointment(slotTimeInMillis : Date){
     //[routerLink]="['/reviewbooking', business.bus_id, staff.staff_id, slot.bookingId]" 
-    console.log("business ", this.business, this.staff, bookingId);
-    this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id, bookingId],
-        {relativeTo:this.route});
-    this.facadeService.triggerBusinessSubject(this.business);
+    //let apptData : any = {};
+    /* this.appointment = new Appointment();
+    this.appointment.staffId = this.staff.staff_id;
+    this.appointment.busId = this.business.bus_id;
+    this.appointment.time = slotTimeInMillis;
+    apptData.appt = this.appointment;
+    this.facadeService.createAppointment(apptData).subscribe(
+        (result : AppointmentSlot) => {
+        
+        this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id],
+                      {relativeTo:this.route, queryParams : {'sid' : result.appointmentId}});
+        this.facadeService.triggerBusinessSubject(this.business);
+      },
+      (error : string) => {
+        this.error = true;
+        this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
+      }); */
+      this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id],
+                      {relativeTo:this.route, queryParams : {'sid' : slotTimeInMillis, 'pid':this.previousSlotId,'u':this.pUserEmail}});
   }
 
   onDateChange(date: Date){

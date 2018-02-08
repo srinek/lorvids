@@ -15,6 +15,8 @@ export class ApptService {
 
     api : string = environment.appurl;
     endpoint : string = "appt";
+    endpointNewAppt : string = "appt/new";
+    endpointGetAppt : string = "appt";
     endpointslots : string = "slots";
 
     constructor(private http : Http,
@@ -22,11 +24,38 @@ export class ApptService {
 
     }
 
+    public getAppointment(apptId : string) : Observable<AppointmentSlot>{
+        return this.http.get(this.api + this.endpointGetAppt+"/"+ apptId).map(
+            (response : Response) => {
+                let res = response.json();
+                let appointmentSlot = new AppointmentSlot(res);
+                return appointmentSlot;
+            }
+        ).catch(
+            (error: Response) => {
+              return Observable.throw(error);
+            }
+        );
+    }
     public saveAppointment(appt : any) : Observable<string>{
         return this.http.post(this.api + this.endpoint + "?saveuser=true", appt).map(
             (response : Response) => {
                 let res = response.json();
                 return res;
+            }
+        );
+    }
+
+    public createAppointment(appt : any) : Observable<AppointmentSlot>{
+        return this.http.post(this.api + this.endpointNewAppt, appt).map(
+            (response : Response) => {
+                let res = response.json();
+                let appointmentSlot = new AppointmentSlot(res);
+                return appointmentSlot;
+            }
+        ).catch(
+            (error: Response) => {
+              return Observable.throw(error);
             }
         );
     }

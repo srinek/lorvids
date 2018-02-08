@@ -11,6 +11,11 @@ module.exports.error = () => {
     return response;
 }
 
+module.exports.sanitizeResponse = (inValue) => {
+   delete inValue.TableName;
+   return inValue;
+}   
+
 module.exports.success = () => {
     let response = {
         statusCode: 200,

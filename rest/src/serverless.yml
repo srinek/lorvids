@@ -128,6 +128,22 @@ functions:
           path: staff
           method: post
           cors: true
+  getAppointment:
+    handler: api/appointment.getSlotDetails
+    description : get the appointment details by id
+    events:
+      - http:
+          path: appt/{sId}
+          method: get
+          cors : true
+  createAppointment:
+    handler: api/appointment.createNew
+    description : create appointment
+    events:
+      - http:
+          path: appt/new
+          method: post
+          cors : true
   saveAppointment:
     handler: api/appointment.save
     description : save appointment
@@ -151,7 +167,23 @@ functions:
       - http:
           path: bookedslots/{busId}/{staffId}
           method: get
-          cors : true          
+          cors : true
+  getUserDetails:
+    handler: api/user.get
+    description : booked appointments for a business and staff
+    events:
+      - http:
+          path: user/{userEmail}
+          method: get
+          cors : true
+  saveUserDetails:
+    handler: api/user.save
+    description : booked appointments for a business and staff
+    events:
+      - http:
+          path: user
+          method: post
+          cors : true      
   search:
     handler: api/search.doSearch
     description : search api

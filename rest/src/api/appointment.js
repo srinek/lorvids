@@ -5,13 +5,15 @@ let user = require('./user');
 let appointmentService = require('../services/appointment-service');
 let emailService = require('../services/ses-service');
 
+
+//saves to exisitng appointment
 module.exports.save = (event, context, callback) => {
     
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
-    appointmentService.saveAppointment(reqBody.appt).then( (result) => {
-        emailService.sendConfirmationEmail(reqBody.appt, reqBody.user);
+    appointmentService.createAppointment(reqBody.appt).then( (result) => {
         if(save_user){
+            emailService.sendConfirmationEmail(result, reqBody.user);
             user.save(event, context, callback);
          }
          else{
@@ -26,34 +28,21 @@ module.exports.save = (event, context, callback) => {
         console.log("error callback ", response);
         callback(null, response);
     });
-
-
-    /* var params_appt = {
-      TableName: 'Appointments',
-      Item: reqBody.appt
-    };
- 
-    console.log("params_appt "+  JSON.stringify(params_appt));
-    
-    db.nxtId(
-        (generatedId) => {
-            params_appt.Item.apptId = params_appt.Item.StaffId+"-a-"+generatedId;
-           console.log("params "+  JSON.stringify(params_appt));
-           db.saveData(params_appt, (error, response) => {
-              if(response.statusCode === 500){
-                   callback(null, response);
-              }
-              else{
-                  if(save_user){
-                      user.save(event, context, callback);
-                   }
-                   else{
-                       callback(null, response);
-                   }
-              }
-           });
-        }
-     ); */
+}
+//creates a new appointment
+module.exports.createNew =  (event, context, callback) => {
+    let reqBody = JSON.parse(event.body);
+    appointmentService.createAppointment(reqBody.appt).then( (result) => {
+        let response = util.success();
+        response.body = JSON.stringify(result.Item);
+        console.log("success callback ", response);
+        callback(null, response);
+    }).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
+    });
 }
 
 module.exports.getAllAppointments = (event, context, callback) => {
@@ -84,6 +73,22 @@ module.exports.findBookedSlots = (event, context, callback) => {
        console.log("success callback ", response);
        callback(null, response);
     }).catch( (error) => {
+       let response = util.error();
+       response.body = JSON.stringify(error);
+       console.log("error callback ", response);
+       callback(null, response);
+    });
+ }
+
+ module.exports.getSlotDetails = (event, context, callback) => {
+    let slot_id = event.pathParameters.sId;
+    let slotDataPromise = appointmentService.findSlotDetails(slot_id);
+    slotDataPromise.then((result) => {
+        let response = util.success();
+        response.body = JSON.stringify(result);
+        console.log("success callback ", response);
+        callback(null, response);
+     }).catch( (error) => {
        let response = util.error();
        response.body = JSON.stringify(error);
        console.log("error callback ", response);

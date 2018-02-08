@@ -9,6 +9,7 @@ import {Staff} from '../model/staff.model';
 import { User } from '../model/user.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
 import { Appointment } from '../model/appointment.model';
+import { ParamMap } from '@angular/router/src/shared';
 
 @Component({
   selector: 'app-book-appointment',
@@ -21,12 +22,15 @@ export class ReviewBookingComponent implements OnInit {
   staff : Staff;
   user : User;
   appointment : Appointment;
-  bookingId : string;
+  //bookingId : string;
   public error : boolean = false;
   public errorMessage : string = "";
   @ViewChild('appointmentForm') appointmentForm : NgForm;
   svcSelected : string;
   bookingTime : Date = new Date();
+  prevSlotId : string;
+  userEmail : string;
+  userData : User;
   apptBooked : boolean = false;
 
   constructor(
@@ -39,49 +43,65 @@ export class ReviewBookingComponent implements OnInit {
   }
 
   ngOnInit() {
+    
+    this.route.queryParamMap.subscribe(
+      (paramMap: ParamMap) => {
+        this.bookingTime.setTime(+paramMap.get('sid'));
+/*         let splitBookingId = this.bookingId.split("-");
+        this.bookingTime.setTime(+splitBookingId[splitBookingId.length-1]); */
+        this.prevSlotId = paramMap.get('pid');
+        this.userEmail = paramMap.get('u');
+        this.loadUser();
+        console.log("bookingTime ", this.bookingTime);
+      }
+    );
+
     this.route.params.subscribe(
       (params : Params) => {
-          this.bookingId = params['bookingId'];
-          let splitBookingId = this.bookingId.split("-");
-          this.bookingTime.setTime(+splitBookingId[splitBookingId.length-1]);
-          console.log("bookingTime ", this.bookingTime);
-          let staffId = params['staffId'];
-          let businessId = params['busId'];
-          this.facadeService.getBusiness(businessId, false)
-          .subscribe(
-              (business : Business) => {
-                  this.business = business;
-              },
-              (error : string) => {
-                this.error = true;
-                this.errorMessage = "Yikes!!! something cramped our service "+error;
-              }
-          )
-          this.facadeService.getStaff(businessId, staffId)
-          .subscribe(
-              (staff : Staff) => {
-                  this.staff = staff;
-              },
-              (error : string) => {
-                this.error = true;
-                this.errorMessage = "Yikes!!! something cramped our service "+error;
-              }
-          )
-          /* this.facadeService.businessSubject.subscribe(
+        let staffId = params['staffId'];
+        let businessId = params['busId'];
+        this.facadeService.getBusiness(businessId, false)
+        .subscribe(
             (business : Business) => {
-              this.business = business;
-              console.log("business loaded through subject ", this.business);
+                this.business = business;
             },
             (error : string) => {
               this.error = true;
               this.errorMessage = "Yikes!!! something cramped our service "+error;
             }
-          ) */
+        )
+        this.facadeService.getStaff(businessId, staffId)
+        .subscribe(
+            (staff : Staff) => {
+                this.staff = staff;
+            },
+            (error : string) => {
+              this.error = true;
+              this.errorMessage = "Yikes!!! something cramped our service "+error;
+            }
+        )
       }
     );
+
+    this.facadeService.businessSubject.subscribe(
+      (business : Business) => {
+        
+        console.log("business loaded through subject ", business);
+      },
+      (error : string) => {
+        this.error = true;
+        this.errorMessage = "Yikes!!! something cramped our service "+error;
+      }
+    )
   }
 
-  bookAppointment(){
+  private loadUser() {
+    this.facadeService.getUserDetails(this.userEmail).subscribe( (userData : User) => {
+       this.userData = userData;
+    });
+  }
+
+  saveAppointment(){
     let apptData : any = {};
     this.user = new User();
     this.user.UserEmail = this.appointmentForm.value.uemail;
@@ -90,10 +110,11 @@ export class ReviewBookingComponent implements OnInit {
     this.appointment = new Appointment();
     this.appointment.staffId = this.staff.staff_id;
     this.appointment.userEmail = this.appointmentForm.value.uemail;
-    this.appointment.AppointmentId = this.bookingId;
+    //this.appointment.AppointmentId = this.bookingId;
     this.appointment.busId = this.business.bus_id;
     this.appointment.location = this.business.address;
     this.appointment.time = this.bookingTime;
+    this.appointment.notes = "";
     if(this.appointmentForm.value.splInstr){
       this.appointment.notes = this.appointmentForm.value.splInstr;
     }
