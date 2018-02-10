@@ -65,23 +65,12 @@ let populateTemplateData = (appointmentData, userData, business, staff, appointm
     templateData.staff_name = staff.staff_name;
     templateData.service = appointmentData.service;
     templateData.user = userData.name;
-    templateData.appointments_url = "";
+    templateData.appointments_url = `http://lorvids.s3-website-us-east-1.amazonaws.com/bushome/${business.bus_id}?psId=${appointment.appointment_id}`;
     //lorvids variables
     templateData.lorvid_url = "http://lorvids.s3-website-us-east-1.amazonaws.com/";
     templateData.lorvids_logo = "https://s3.amazonaws.com/lorvid-devlot/logo.png";
     return JSON.stringify(templateData);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* let sendEmail = (emailData) => {
@@ -252,7 +241,7 @@ module.exports.createTemplate = () => {
                                                                              <p style="margin:0 0 35px; font-size:12px; line-height:18px; color:#333333;">
                                                                              Thank you for scheduling. Looking forward to your visit. 
              <br/>
-             <a href="{{appointments_url}}" style="color:#398ad0; text-decoration:none; font-weight: bolder;">Click Here</a> to view your appointments, reschedule, and update your profile.
+             <a href="{{appointments_url}}" style="color:#398ad0; text-decoration:none; font-weight: bolder;">Click Here</a> to  reschedule your appointment.
              <br/><br/>
              Thank You, <br/>
              {{bus_name}} </p>

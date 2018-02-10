@@ -49,8 +49,8 @@ let reqBody = {
     "location": "110 Main Street, Edison, NJ 08817",
     "time": "2018-02-10T15:30:00.000Z",
     "notes": "NONE",
-    "service": "Cavities",
-    "AppointmentId": "b-test-01-s-02-1518114600000-3bbd3b5c"
+    "service": "Cavities"/*,
+    "AppointmentId": "b-test-01-s-02-1518114600000-3bbd3b5c"*/
   }
 };
 
@@ -60,7 +60,7 @@ let updateObj = {
   },
   "body": JSON.stringify(reqBody)
 };
-appointment.save(updateObj , null, (error, response) => {
+appointment.createNew(updateObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');

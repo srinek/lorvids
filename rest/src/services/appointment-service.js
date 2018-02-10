@@ -76,6 +76,7 @@ module.exports.updateAppointment = (appointmentData) => {
         ':time' : appointmentData.time
       },
       "ConditionExpression": "attribute_exists(AppointmentId)",
+      "ReturnValues": "ALL_NEW"
     };
     console.log("params_appt "+  JSON.stringify(params));
     return db.updateData(params);
@@ -88,7 +89,8 @@ module.exports.createAppointment = (appointmentData) => {
     appointmentData.AppointmentId = appointmentData.staffId+"-"+timeInMillis+"-"+util.randomValueHex(8);
     var params = {
        TableName: 'Appointments',
-       Item: appointmentData
+       Item: appointmentData,
+       "ReturnValues": "ALL_OLD"
     };
     console.log("params_appt "+  JSON.stringify(params));
     return db.saveData(params);

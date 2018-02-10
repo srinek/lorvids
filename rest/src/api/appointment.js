@@ -11,7 +11,7 @@ module.exports.save = (event, context, callback) => {
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
     appointmentService.updateAppointment(reqBody.appt).then( (result) => {
-       afterCreateModifyAppointment(event, context, callback, save_user, reqBody);
+       afterCreateModifyAppointment(event, context, callback, save_user, reqBody.appt, reqBody.user);
     }).catch( (error) => {
         let response = util.error();
         response.body = JSON.stringify(error);
@@ -24,7 +24,8 @@ module.exports.createNew =  (event, context, callback) => {
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
     appointmentService.createAppointment(reqBody.appt).then( (result) => {
-        afterCreateModifyAppointment(event, context, callback, save_user, reqBody);
+        console.log(result);
+        afterCreateModifyAppointment(event, context, callback, save_user, result.Item, reqBody.user);
     }).catch( (error) => {
         let response = util.error();
         response.body = JSON.stringify(error);
@@ -33,9 +34,9 @@ module.exports.createNew =  (event, context, callback) => {
     });
 }
 
-let afterCreateModifyAppointment = (event, context, callback, save_user, reqBody) => {
+let afterCreateModifyAppointment = (event, context, callback, save_user, appt, user) => {
     if(save_user){
-        emailService.sendConfirmationEmail(reqBody.appt, reqBody.user);
+        emailService.sendConfirmationEmail(appt, user);
         user.save(event, context, callback);
      }
      else{
