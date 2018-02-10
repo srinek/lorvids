@@ -10,7 +10,7 @@ module.exports.getBusinessById = (busId, loadStaff) => {
             'bus_id' : busId
         }
     };
-    console.log("get Business params "+  JSON.stringify(params));
+    console.log("get Business params -- "+  JSON.stringify(params));
     let businessData = db.getData(params).then( (result) => {
         let business = new Business(result);
         

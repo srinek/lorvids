@@ -8,20 +8,10 @@ let emailService = require('../services/ses-service');
 
 //saves to exisitng appointment
 module.exports.save = (event, context, callback) => {
-    
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
-    appointmentService.createAppointment(reqBody.appt).then( (result) => {
-        if(save_user){
-            emailService.sendConfirmationEmail(result, reqBody.user);
-            user.save(event, context, callback);
-         }
-         else{
-            let response = util.success();
-            response.body = JSON.stringify(result);
-            console.log("success callback ", response);
-            callback(null, response);
-         }
+    appointmentService.updateAppointment(reqBody.appt).then( (result) => {
+       afterCreateModifyAppointment(event, context, callback, save_user, reqBody);
     }).catch( (error) => {
         let response = util.error();
         response.body = JSON.stringify(error);
@@ -31,18 +21,29 @@ module.exports.save = (event, context, callback) => {
 }
 //creates a new appointment
 module.exports.createNew =  (event, context, callback) => {
+    const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
     appointmentService.createAppointment(reqBody.appt).then( (result) => {
-        let response = util.success();
-        response.body = JSON.stringify(result.Item);
-        console.log("success callback ", response);
-        callback(null, response);
+        afterCreateModifyAppointment(event, context, callback, save_user, reqBody);
     }).catch( (error) => {
         let response = util.error();
         response.body = JSON.stringify(error);
         console.log("error callback ", response);
         callback(null, response);
     });
+}
+
+let afterCreateModifyAppointment = (event, context, callback, save_user, reqBody) => {
+    if(save_user){
+        emailService.sendConfirmationEmail(reqBody.appt, reqBody.user);
+        user.save(event, context, callback);
+     }
+     else{
+        let response = util.success();
+        response.body = JSON.stringify(result);
+        console.log("success callback ", response);
+        callback(null, response);
+     }
 }
 
 module.exports.getAllAppointments = (event, context, callback) => {

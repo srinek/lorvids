@@ -60,14 +60,22 @@ module.exports.findBookedSlots= findBookedSlots;
 
 module.exports.updateAppointment = (appointmentData) => {
     var params = {
-       TableName: 'Appointments',
-       Key: { "AppointmentId" : appointmentData.AppointmentId },
-       UpdateExpression: `set service = :service, userEmail = :useremail, notes=:notes`,
-       ExpressionAttributeValues: {
+       "TableName": 'Appointments',
+       "Key": { "AppointmentId" : appointmentData.AppointmentId },
+       "UpdateExpression": `set #service = :service, #userEmail = :useremail, #notes=:notes, #appointment_time=:time`,
+       "ExpressionAttributeNames" : {
+        '#service' : "service",
+        '#userEmail' : "userEmail",
+        '#notes' : "notes",
+        '#appointment_time' : "time"
+       },
+       "ExpressionAttributeValues": {
         ':service' : appointmentData.service,
         ':useremail' : appointmentData.userEmail,
-        ':notes' : appointmentData.notes
-      }
+        ':notes' : appointmentData.notes,
+        ':time' : appointmentData.time
+      },
+      "ConditionExpression": "attribute_exists(AppointmentId)",
     };
     console.log("params_appt "+  JSON.stringify(params));
     return db.updateData(params);
@@ -76,7 +84,8 @@ module.exports.updateAppointment = (appointmentData) => {
 // creates a new appointment
 module.exports.createAppointment = (appointmentData) => {
     /* "appointmentId" : self.staff_id+"-"+slotid, */
-    appointmentData.AppointmentId = appointmentData.staffId+"-"+appointmentData.time;
+    let timeInMillis = new Date(appointmentData.time).getTime();
+    appointmentData.AppointmentId = appointmentData.staffId+"-"+timeInMillis+"-"+util.randomValueHex(8);
     var params = {
        TableName: 'Appointments',
        Item: appointmentData

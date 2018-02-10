@@ -29,6 +29,7 @@ export class ReviewBookingComponent implements OnInit {
   svcSelected : string;
   bookingTime : Date = new Date();
   prevSlotId : string;
+  updateAppointment : boolean;
   userEmail : string;
   userData : User;
   apptBooked : boolean = false;
@@ -50,6 +51,9 @@ export class ReviewBookingComponent implements OnInit {
 /*         let splitBookingId = this.bookingId.split("-");
         this.bookingTime.setTime(+splitBookingId[splitBookingId.length-1]); */
         this.prevSlotId = paramMap.get('pid');
+        if(this.prevSlotId){
+           this.updateAppointment = true;
+        }
         this.userEmail = paramMap.get('u');
         this.loadUser();
         console.log("bookingTime ", this.bookingTime);
@@ -110,11 +114,10 @@ export class ReviewBookingComponent implements OnInit {
     this.appointment = new Appointment();
     this.appointment.staffId = this.staff.staff_id;
     this.appointment.userEmail = this.appointmentForm.value.uemail;
-    //this.appointment.AppointmentId = this.bookingId;
     this.appointment.busId = this.business.bus_id;
     this.appointment.location = this.business.address;
     this.appointment.time = this.bookingTime;
-    this.appointment.notes = "";
+    this.appointment.notes = "NONE";
     if(this.appointmentForm.value.splInstr){
       this.appointment.notes = this.appointmentForm.value.splInstr;
     }
@@ -122,6 +125,16 @@ export class ReviewBookingComponent implements OnInit {
     apptData.user = this.user;
     apptData.appt = this.appointment;
 
+    if(this.updateAppointment) {
+      this.appointment.AppointmentId = this.prevSlotId;
+      this.modifyAppointment(apptData);
+    }
+    else{
+      this.createAppointment(apptData);
+    }
+  }
+
+  private modifyAppointment(apptData) {
     this.facadeService.saveAppointment(apptData).subscribe(
       (success : string) => {
         this.logger.log(success);
@@ -135,8 +148,22 @@ export class ReviewBookingComponent implements OnInit {
         this.error = true;
         this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
       }
-    )
+    );
+  }
 
-    
+  private createAppointment(apptData){
+    this.facadeService.createAppointment(apptData).subscribe(
+      (success : AppointmentSlot) => {
+        this.apptBooked = true;
+        /* this.router.navigate(
+          ['/confirm', this.business.bus_id, this.staff.staff_id, this.bookingId ],
+          {relativeTo:this.route}
+        ); */
+      },
+      (error : string) => {
+        this.error = true;
+        this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
+      }
+    );
   }
 }

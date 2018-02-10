@@ -20,7 +20,7 @@ module.exports.getUserDetails = (userEmail) => {
             'UserEmail' : userEmail
         }
     };
-    console.log("get Business params "+  JSON.stringify(params));
+    console.log("get user params "+  JSON.stringify(params));
     let userData = db.getData(params);
     return userData;
 }

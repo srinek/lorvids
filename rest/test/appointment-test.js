@@ -37,34 +37,34 @@ output: {
 
 
 let reqBody = {
-  "appt": {
-    "staffId": "b-test-01-s-01",
-    "userEmail": "srinek@gmail.com",
-    "AppointmentId": "b-test-01-s-01-1517864400000",
-    "busId": "b-test-01",
-    "location": "110 Main Street, Edison, NJ 08817",
-    "time": "2018-02-03T16:30:00.000Z",
-    "service": "Root Canal Treatment",
-    "notes" : "some notes"
-  },
   "user": {
     "UserEmail": "srinek@gmail.com",
-    "name": "nanda nekkanti",
-    "phone": "9784441111"
+    "name": "Nandakishore Nekkanti Nea",
+    "phone": "17323182848"
+  },
+  "appt": {
+    "staffId": "b-test-01-s-02",
+    "userEmail": "srinek@gmail.com",
+    "busId": "b-test-01",
+    "location": "110 Main Street, Edison, NJ 08817",
+    "time": "2018-02-10T15:30:00.000Z",
+    "notes": "NONE",
+    "service": "Cavities",
+    "AppointmentId": "b-test-01-s-02-1518114600000-3bbd3b5c"
   }
 };
 
 let updateObj = {
   "queryStringParameters": {
-    "saveuser": false
+    "saveuser": true
   },
   "body": JSON.stringify(reqBody)
 };
-/* appointment.save(updateObj , null, (error, response) => {
+appointment.save(updateObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-}); */
+});
 
 
 
@@ -91,11 +91,11 @@ let testGetObj = { "pathParameters" :
       "sId" : "b-test-01-s-01-1517931000000",
   }
 };
-appointment.getSlotDetails(testGetObj , null, (error, response) => {
+/* appointment.getSlotDetails(testGetObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-});
+}); */
 
 /* appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01').then((result) => {
   console.log("all slots", result);

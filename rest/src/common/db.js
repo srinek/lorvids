@@ -21,17 +21,7 @@ module.exports.saveData = (params) => {
 } 
 
 module.exports.updateData = (params) => {
-  return new Promise((resolve, reject) => {
-    let request =  docClient.update(params, function(err, data) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(params);
-      }
-    });
-    //console.log(" request ", request);
-  });
-  
+  return docClient.update(params).promise();
 }
 
 
