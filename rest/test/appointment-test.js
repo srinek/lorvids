@@ -39,18 +39,18 @@ output: {
 let reqBody = {
   "user": {
     "UserEmail": "srinek@gmail.com",
-    "name": "Nandakishore Nekkanti Nea",
+    "name": "Nandakishore Nekkanti",
     "phone": "17323182848"
   },
   "appt": {
-    "staffId": "b-test-01-s-02",
+    "staffId": "b-test-01-s-01",
     "userEmail": "srinek@gmail.com",
     "busId": "b-test-01",
     "location": "110 Main Street, Edison, NJ 08817",
-    "time": "2018-02-10T15:30:00.000Z",
+    "time": "2018-02-12T20:30:00.000Z",
     "notes": "NONE",
-    "service": "Cavities"/*,
-    "AppointmentId": "b-test-01-s-02-1518114600000-3bbd3b5c"*/
+    "service": "Dental Cleaning"/*,
+    "AppointmentId": "b-test-01-s-02-1518276600000-cba9fbd9"*/
   }
 };
 

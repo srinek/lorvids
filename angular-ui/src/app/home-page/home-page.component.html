@@ -5,17 +5,17 @@
                 <p class="h5">Search the service you need, book your appointment right here at home.</p>
                 <form>
                     <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="What service are you looking for?">
-                        <select class="form-control form-control-lg" id="service" name="service" required>
-                            <option value="">Select a service</option>
-                            <option value="dental">Dental Cleaning</option>
-                            <option value="root-canal-treatment">Root Canal Treatment</option>
-                            <option value="cavities">cavities</option>
-                            <option value="teeth pain">teeth pain</option>
-                        </select>
+                        <ng-select [items]="categories"
+                            [active]="categories"
+                            (selected)="categorySelected($event)">
+                        </ng-select>
+                        <input #searchFor type="text" class="form-control form-control-lg" 
+                        placeholder="What service are you looking for?"
+                        (keyup.enter)="onSearch(searchFor.value)">
                         <span class="input-group-btn">
-							<button class="btn btn-primary bg-blue" type="button">Search</button>
-						  </span>
+                            <button class="btn btn-primary bg-blue" type="button"
+                            (click)="onSearch(searchFor.value)">Search</button>
+						</span>
                     </div>
                 </form>
             </div>

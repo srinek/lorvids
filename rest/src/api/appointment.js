@@ -24,7 +24,6 @@ module.exports.createNew =  (event, context, callback) => {
     const save_user = event.queryStringParameters.saveuser;
     let reqBody = JSON.parse(event.body);
     appointmentService.createAppointment(reqBody.appt).then( (result) => {
-        console.log(result);
         afterCreateModifyAppointment(event, context, callback, save_user, result.Item, reqBody.user);
     }).catch( (error) => {
         let response = util.error();
@@ -34,9 +33,9 @@ module.exports.createNew =  (event, context, callback) => {
     });
 }
 
-let afterCreateModifyAppointment = (event, context, callback, save_user, appt, user) => {
+let afterCreateModifyAppointment = (event, context, callback, save_user, appt, userObj) => {
     if(save_user){
-        emailService.sendConfirmationEmail(appt, user);
+        emailService.sendConfirmationEmail(appt, userObj);
         user.save(event, context, callback);
      }
      else{

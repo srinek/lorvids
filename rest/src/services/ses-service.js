@@ -26,7 +26,7 @@ module.exports.sendConfirmationEmail = (appointmentData, userData) => {
         console.log("===============================================================");
         console.log("emailData", emailData);
         console.log("===============================================================");
-        sendEmail(emailData);
+        //sendEmail(emailData);
     });
     
 }

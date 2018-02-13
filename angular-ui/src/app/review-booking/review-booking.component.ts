@@ -55,7 +55,9 @@ export class ReviewBookingComponent implements OnInit {
            this.updateAppointment = true;
         }
         this.userEmail = paramMap.get('u');
-        this.loadUser();
+        if(this.userEmail){
+          this.loadUser();
+        }
         console.log("bookingTime ", this.bookingTime);
       }
     );
