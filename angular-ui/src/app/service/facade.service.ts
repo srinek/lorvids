@@ -20,6 +20,7 @@ import { SearchVO } from '../model/search-vo';
 import { S3ImageService } from './s3image.service';
 import { User } from '../model/user.model';
 import { UserService } from './user.service';
+import { Category } from '../model/category.model';
 
 @Injectable()
 export class FacadeService {
@@ -100,6 +101,17 @@ export class FacadeService {
 
     public deleteFile(fileName : string) : Observable<String> {
         return this.s3ImageService.deleteFile(fileName);
+    }
+
+    public getAllCategories() : Array<Category>{
+        let cate1 = new Category({"categoryName" : "Dentists", "categoryCode":"DENTISTS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate2 = new Category({"categoryName" : "Doctors", "categoryCode":"DOCTORS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate3 = new Category({"categoryName" : "Tax Professional", "categoryCode":"TAX", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate4 = new Category({"categoryName" : "House Services", "categoryCode":"HOME", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate5 = new Category({"categoryName" : "Health & Beauty", "categoryCode":"BEAUTY", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate6 = new Category({"categoryName" : "Legal Services", "categoryCode":"LEGAL", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let categories = [cate1, cate2, cate3, cate4, cate5, cate6];
+        return categories;
     }
 
     public triggerMainPageLoaded(){

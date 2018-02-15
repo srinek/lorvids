@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {FacadeService} from '../service/facade.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { Category } from '../model/category.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class HomePageComponent implements OnInit {
 
-  public categories:Array<string> = [];
+  public categories:Array<Category> = [];
+  public categoryValues : Array<string> = [];
 
   private selectedCategory : string;
 
@@ -21,12 +23,11 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
       this.facadeService.triggerMainPageLoaded();
-      this.categories.push("Doctors & Dentists");
-      this.categories.push("Spa & Saloons");
-      this.categories.push("CPA & Financial Services");
-      this.categories.push("Lawyers & Legal Services");
-      this.categories.push("Cleaners & Home Services");
-      this.categories.push("Education & Schools");
+      this.categories = this.facadeService.getAllCategories();
+      this.categories && this.categories.forEach( (category : Category) => {
+        this.categoryValues.push(category.getCategoryName());
+      })
+
   }
 
   public categorySelected(value:any):void {

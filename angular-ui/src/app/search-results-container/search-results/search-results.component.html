@@ -14,9 +14,9 @@
 <ng-template #searchBlock>
 
 <div class="container-fluid search-results-container pl-5">
-        <div class="row">
+        <!-- <div class="row">
             <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
-        </div>
+        </div> -->
         <div class="row search-results pt-5" >
             <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
                     <app-search-result [business]="business"></app-search-result>
