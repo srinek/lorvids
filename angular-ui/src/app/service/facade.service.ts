@@ -120,9 +120,9 @@ export class FacadeService {
     }
 
     public getAllCategories() : Array<Category>{
-        let cate1 = new Category({"categoryName" : "Dentists", "categoryCode":"DENTISTS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
-        let cate2 = new Category({"categoryName" : "Doctors", "categoryCode":"DOCTORS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
-        let cate3 = new Category({"categoryName" : "Tax Professional", "categoryCode":"TAX", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate1 = new Category({"categoryName" : "Dentists", "categoryCode":"HEALTH", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate2 = new Category({"categoryName" : "Doctors", "categoryCode":"HEALTH", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate3 = new Category({"categoryName" : "Tax Professional", "categoryCode":"FINANCE", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
         let cate4 = new Category({"categoryName" : "House Services", "categoryCode":"HOME", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
         let cate5 = new Category({"categoryName" : "Health & Beauty", "categoryCode":"BEAUTY", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
         let cate6 = new Category({"categoryName" : "Legal Services", "categoryCode":"LEGAL", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
