@@ -79,7 +79,6 @@ module.exports.findBookedSlots = (event, context, callback) => {
        console.log("error callback ", response);
        callback(null, response);
     });
-<<<<<<< HEAD
 }
 
 module.exports.getBusinessBookedAppointments = (event, context, callback) => {
@@ -103,10 +102,8 @@ module.exports.getBusinessBookedAppointments = (event, context, callback) => {
         callback(null, response);
     });
 }
-=======
- }
 
- module.exports.getSlotDetails = (event, context, callback) => {
+module.exports.getSlotDetails = (event, context, callback) => {
     let slot_id = event.pathParameters.sId;
     let slotDataPromise = appointmentService.findSlotDetails(slot_id);
     slotDataPromise.then((result) => {
@@ -121,4 +118,3 @@ module.exports.getBusinessBookedAppointments = (event, context, callback) => {
        callback(null, response);
     });
  }
->>>>>>> e728d168c5494e79cf47185f462e2aab715afa4c
