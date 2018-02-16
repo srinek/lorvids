@@ -163,7 +163,7 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let category of categories">
                     <div class="box">
-                        <a href="/advanced_search?lat=38.9072&amp;long=-77.0369"  target="_blank">
+                        <a [routerLink]="['/search']" [queryParams]="{'look_for' : category.categoryCode, '_p':'b'}">
                             <img class="image" src="https://s3.amazonaws.com/lorvid-devlot/{{category.image}}" alt="{{category.categoryName}}">
                             <div class="img-caption">
                                 <p>
