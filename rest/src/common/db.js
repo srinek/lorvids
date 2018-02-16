@@ -19,14 +19,6 @@ module.exports.saveData = (params) => {
   });
 } 
 
-<<<<<<< HEAD
-=======
-module.exports.updateData = (params) => {
-  return docClient.update(params).promise();
-}
-
-
->>>>>>> e728d168c5494e79cf47185f462e2aab715afa4c
 module.exports.getData = (params) => {
   return new Promise((resolve, reject) => {
     docClient.get(params, function(err, data) {

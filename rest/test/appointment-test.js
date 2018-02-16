@@ -117,7 +117,7 @@ let testGetObj = { "pathParameters" :
 
 
 
- let testGetObj = { "pathParameters" : 
+ let testbookedAppointmentObj = { "pathParameters" : 
                     {
                         "busId" : "b-test-01",
                     },
@@ -128,7 +128,7 @@ let testGetObj = { "pathParameters" :
                         "isyearly":"fasle"
                     }
                  };
- appointment.getBusinessBookedAppointments(testGetObj  , 
+ appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
   null, 
   (error, response) => {
 

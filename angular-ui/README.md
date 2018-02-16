@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # OurProject
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.0.
@@ -27,7 +26,3 @@ Before running the tests make sure you are serving the app via `ng serve`.
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-=======
-# our_project
-appointment application
->>>>>>> fc3edce41b5ff8ab49c8bf6c07ffc5b852546b58
