@@ -163,19 +163,18 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let category of categories">
                     <div class="box">
-                        <a href="/advanced_search?lat=38.9072&amp;long=-77.0369"
-                            target="_blank"><img class="image"
-                            src="https://s3.amazonaws.com/lorvid-devlot/{{category.image}}"
-                            alt="Washington">
-                        <div class="img-caption">
+                        <a href="/advanced_search?lat=38.9072&amp;long=-77.0369"  target="_blank">
+                            <img class="image" src="https://s3.amazonaws.com/lorvid-devlot/{{category.image}}" alt="{{category.categoryName}}">
+                            <div class="img-caption">
                                 <p>
-                                    <span><img
-                                        src="https://s3.amazonaws.com/lorvid-devlot/favicon.png"
-                                        alt="Bus white" height="15px"></span>
+                                    <span>
+                                        <img src="https://s3.amazonaws.com/lorvid-devlot/favicon.png" height="15px">
+                                    </span>
                                 </p>
                                 <h4>{{category.categoryName}}</h4>
                             </div>
-                            <div class="overlay"></div></a>
+                            <div class="overlay"></div>
+                        </a>
                     </div>
                 </div>
             </div>

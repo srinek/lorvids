@@ -4,8 +4,10 @@ var docMapper = require('../common/db-es-doc-mapper.js');
 let util = require('../common/util');
 
 module.exports.doSearch = (event, context, callback) => {
+    console.log("queryString", event.queryStringParameters);
     const searchTerm = event.queryStringParameters.searchTerm;
-    let esObj = docMapper.searchDocMapper(searchTerm);
+    let property = event.queryStringParameters._p;
+    let esObj = docMapper.searchDocMapper(searchTerm, property);
     es.esSearch(esObj, (error, result) => {
         if (error) {
             let response = util.error();
@@ -23,10 +25,12 @@ module.exports.doSearch = (event, context, callback) => {
 
 module.exports.doFacetSearch = (event, context, callback) => {
     const searchTerm = event.queryStringParameters.searchTerm;
-    console.log("body", event.body);
+    let property = event.queryStringParameters._p;
+    console.log("property", property);
+    //console.log("body", event.body);
     const facets = JSON.parse(event.body);
-    console.log("facets", facets);
-    let esObj = docMapper.facetSearchDocMapper(searchTerm, facets);
+    //console.log("facets", facets);
+    let esObj = docMapper.facetSearchDocMapper(searchTerm, property, facets);
     es.esSearch(esObj, (error, result) => {
         if (error) {
             let response = util.error();

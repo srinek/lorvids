@@ -36,7 +36,10 @@ export class HomePageComponent implements OnInit {
   }
 
   onSearch(searchVal) : void{
+    console.log("searchVal", searchVal);
     this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {'look_for' : searchVal}});
   }
+
+  
 
 }

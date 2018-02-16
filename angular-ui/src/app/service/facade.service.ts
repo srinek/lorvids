@@ -82,16 +82,16 @@ export class FacadeService {
         return recentlyVisitedBusiness;
     }
 
-    public getSearchResults(searchTerm : string) : Observable<SearchVO> {
+    public getSearchResults(searchTerm : string, prop:string) : Observable<SearchVO> {
         this.mainPageUnLoaded.next(true);
-        return this.searchService.invokeSearch(searchTerm);
+        return this.searchService.invokeSearch(searchTerm, prop);
     }
 
-    public getFacetedSearchResults(searchTerm : string, facetMap : Map<string, string[]>) : Observable<SearchVO> {
+    public getFacetedSearchResults(searchTerm : string, prop:string, facetMap : Map<string, string[]>) : Observable<SearchVO> {
         if(facetMap && facetMap.size > 0){
-            return this.searchService.facetFilter(searchTerm, facetMap);
+            return this.searchService.facetFilter(searchTerm, prop, facetMap);
         }
-        return this.getSearchResults(searchTerm);
+        return this.getSearchResults(searchTerm, prop);
     }
 
     public getAppointmentSlots(business : Business, staff : Staff, 

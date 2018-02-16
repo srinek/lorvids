@@ -13,16 +13,21 @@
 </ng-template>
 <ng-template #searchBlock>
 
-<div class="container-fluid search-results-container pl-5">
-        <!-- <div class="row">
-            <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
-        </div> -->
-        <div class="row search-results pt-5" >
-            <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
-                    <app-search-result [business]="business"></app-search-result>
+    <div class="container-fluid search-results-container pl-5">
+            <!-- <div class="row">
+                <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
+            </div> -->
+            <div class="row search-results pt-5" *ngIf="searchResults.length > 0">
+                <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
+                        <app-search-result [business]="business"></app-search-result>
+                </div>
             </div>
-        </div>
-</div>
+            <div class="row search-results pt-5" *ngIf="searchResults.length == 0">
+                <div class="container alert alert-danger"> 
+                    No results matched to your search
+                </div> 
+            </div>
+    </div>
 
     
 </ng-template>

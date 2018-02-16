@@ -43,12 +43,13 @@ module.exports.staffDocMapper = (ddbDoc) => {
   return staffIndexdoc;
 }
 
-module.exports.searchDocMapper = (searchTerm) => {
+module.exports.searchDocMapper = (searchTerm, property) => {
+  const matchObj = getMatchObj(searchTerm, property);
   let searchObj = {};
   setDefaults(searchObj, false);
   searchObj.body = { 
     query : {
-      match : { _all : searchTerm }
+      match : matchObj
     }, 
     aggs : {
       categories : {
@@ -86,20 +87,37 @@ module.exports.searchDocMapper = (searchTerm) => {
   return searchObj;
 }
 
-module.exports.facetSearchDocMapper = (searchTerm, facet) => {
+var getMatchObj = (searchTerm, property) => {
+  if(property === 'b'){
+    return { "category" : searchTerm } ;
+  }
+  return { "_all" : searchTerm } ;
+}
+
+var getProperty = (searchTerm, property) => {
+  if(!property){
+    return "_all";
+  }
+  if(property === 'b'){
+    return "category";
+  }
+}
+
+module.exports.facetSearchDocMapper = (searchTerm, property, facet) => {
   let facetSearchObj = {};
   setDefaults(facetSearchObj, false);
   const requestBody = elBuilder.requestBodySearch();
-  requestBody.query(buildQueryObj(searchTerm, facet));
+  console.log("property new ", property);
+  requestBody.query(buildQueryObj(searchTerm, property, facet));
   requestBody.aggs(buildAggObj());
   facetSearchObj.body = requestBody.toJSON();
   console.log("search obj %j ", facetSearchObj.body);
   return facetSearchObj;
 }
 
-var buildQueryObj = (searchTerm, facet) => {
+var buildQueryObj = (searchTerm, property, facet) => {
   var queryObj = elBuilder.boolQuery()
-  .must(elBuilder.matchQuery('_all', searchTerm));
+  .must(elBuilder.matchQuery(getProperty(searchTerm, property), searchTerm));
   if(facet.key === "staff.languages" || facet.key === "staff.gender"){ // TODO : fix this when facet key is fixed in UI
     queryObj.filter(elBuilder.nestedQuery(buildTermsQueries(facet), "staff"));
   }

@@ -21,10 +21,10 @@ export class SearchService{
 
     }
 
-    public invokeSearch(searchTerm : string) : Observable<SearchVO>{
+    public invokeSearch(searchTerm : string, prop: string) : Observable<SearchVO>{
         //this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         
-        return this.http.get(this.searchUrl+this.searchEndpoint+"?searchTerm="+searchTerm)
+       return this.http.get(this.searchUrl+this.searchEndpoint+"?searchTerm="+searchTerm+"&_p="+prop)
             .map((response : Response) => {
                return this.parseESResponse(response);
            }
@@ -36,7 +36,7 @@ export class SearchService{
         );
     }
 
-    public facetFilter(searchTerm : string, facetMap: Map<string, string[]>) : Observable<SearchVO>{
+    public facetFilter(searchTerm : string, prop: string, facetMap: Map<string, string[]>) : Observable<SearchVO>{
         //console.log("search invoked ", this.searchUrl, searchTerm, facetMap);
         //let data : object[] = [];
         let data : object = {};
@@ -46,11 +46,10 @@ export class SearchService{
             data = {key : k, values : v};
         });
         //console.log(data);
-        return this.http.post(this.searchUrl+this.facetEndpoint+"?searchTerm="+searchTerm, 
+        return this.http.post(this.searchUrl+this.facetEndpoint+"?searchTerm="+searchTerm+"&_p="+prop, 
         data).map( (response : Response) => {
                     return this.parseESResponse(response);
                 }
-                                        
         ).catch(
             (error: Response) => {
               return Observable.throw(error);

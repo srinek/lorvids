@@ -6,7 +6,7 @@
             //"endpoint" : "http://localhost:8001"
         },
         "es" : {
-            "host" : "http://localhost:9200/"
+            "host" : "https://search-epokly-dev-v2-gtoyrqtpxtzscmdewgodxjzhtu.us-east-1.es.amazonaws.com"
         }
     }
 }
