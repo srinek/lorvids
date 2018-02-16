@@ -17,14 +17,16 @@ module.exports.saveData = (params) => {
     });
     //console.log(" request ", request);
   });
-  
 } 
 
+<<<<<<< HEAD
+=======
 module.exports.updateData = (params) => {
   return docClient.update(params).promise();
 }
 
 
+>>>>>>> e728d168c5494e79cf47185f462e2aab715afa4c
 module.exports.getData = (params) => {
   return new Promise((resolve, reject) => {
     docClient.get(params, function(err, data) {
@@ -38,7 +40,6 @@ module.exports.getData = (params) => {
 }
 
 module.exports.queryData = (params) => {
-
   return new Promise((resolve, reject) => {
     docClient.query(params, function(err, data) {
       if (err) {
@@ -73,4 +74,3 @@ module.exports.nxtId = () => {
     });
   });
 }
-

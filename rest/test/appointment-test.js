@@ -60,11 +60,11 @@ let updateObj = {
   },
   "body": JSON.stringify(reqBody)
 };
-appointment.createNew(updateObj , null, (error, response) => {
-  console.log('-----------------------------SAVE RESPONSE START-----------------------------');
-  console.log(response);
-  console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-});
+// appointment.save(saveObj , null, (error, response) => {
+//   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+//   console.log(response);
+//   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+// });
 
 
 
@@ -114,3 +114,26 @@ let testGetObj = { "pathParameters" :
      console.log('-----------------------------SAVE RESPONSE END-----------------------------');
    }
  );  */
+
+
+
+ let testGetObj = { "pathParameters" : 
+                    {
+                        "busId" : "b-test-01",
+                    },
+                    "queryStringParameters" : 
+                    {
+                        "month": "",
+                        "year":"",
+                        "isyearly":"fasle"
+                    }
+                 };
+ appointment.getBusinessBookedAppointments(testGetObj  , 
+  null, 
+  (error, response) => {
+
+    console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
+    console.log(response);
+    console.log('-----------------------------GET RESPONSE END-----------------------------');
+  }
+);

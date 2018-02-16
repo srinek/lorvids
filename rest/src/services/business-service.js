@@ -44,3 +44,21 @@ module.exports.saveBusiness = (busData) => {
     });
     return saveDataPromise;
 }
+
+module.exports.getBusinessExpenses = (busId, month, year, isyearly) => {
+    var params = {
+        TableName: 'Expense',
+        KeyConditionExpression: "bus_id = :business_id",
+        ExpressionAttributeValues: {
+           ":business_id": busId
+        }
+     }; 
+     console.log("getBusinessExpenses params", params);
+     let expensePromise = db.queryData(params).then((result) => {
+        return result;
+     }).catch( (error) => {
+        console.log("in error block ", error);
+        return error;
+     });
+     return expensePromise;
+}

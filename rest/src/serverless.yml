@@ -94,6 +94,14 @@ functions:
           path: business
           method: post
           cors: true
+  getBusinessExpenses:
+    handler: api/business.getBusinessExpenses
+    description : get business expenses by Id
+    events:
+      - http:
+          path: business/expense/{busId}
+          method: get
+          cors: true  
   ddbESBusinessIndexer:
     handler: common/ddbEsIndexer.esBusinessIndexer
     description: index busines docs from ddb to es
@@ -167,6 +175,17 @@ functions:
       - http:
           path: bookedslots/{busId}/{staffId}
           method: get
+<<<<<<< HEAD
+          cors : true     
+  getBusinessBookedAppointments:
+    handler: api/appointment.getBusinessBookedAppointments
+    description : booked appointments for a business
+    events:
+      - http:
+          path: appt/business/{busId}
+          method: get
+          cors : true   
+=======
           cors : true
   getUserDetails:
     handler: api/user.get
@@ -184,6 +203,7 @@ functions:
           path: user
           method: post
           cors : true      
+>>>>>>> e728d168c5494e79cf47185f462e2aab715afa4c
   search:
     handler: api/search.doSearch
     description : search api

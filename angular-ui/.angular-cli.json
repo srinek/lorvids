@@ -20,6 +20,7 @@
       "prefix": "app",
       "styles": [
         "styles.css",
+        "style-overrride.css",
         "ng2-select.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/material-design-icons/iconfont/material-icons.css",

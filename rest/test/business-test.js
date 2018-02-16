@@ -137,3 +137,14 @@ let testSaveObj2 =
         console.log('-----------------------------SAVE RESPONSE END-----------------------------');
     }
 );  */
+
+
+// business.getBusinessExpenses(testGetObj  , 
+//   null, 
+//   (error, response) => {
+
+//     console.log('-----------------------------GET Expense RESPONSE START-----------------------------');
+//     console.log(response);
+//     console.log('-----------------------------GET RESPONSE END-----------------------------');
+//   }
+// );

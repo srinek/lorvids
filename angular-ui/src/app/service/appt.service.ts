@@ -9,6 +9,7 @@ import {Logger} from './logger.service';
 import { environment } from '../../environments/environment';
 import { Slots } from '../model/slots.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
+import { Appointment } from '../model/appointment.model';
 
 @Injectable()
 export class ApptService {
@@ -80,4 +81,27 @@ export class ApptService {
             }
         );
     }
+
+    public getBusinessBookedAppointments(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Appointment []>{
+
+        var apiUrl = this.api + this.endpoint + "/" + "business/" + busId;
+        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=isyearly";
+
+        console.log("getBusinessBookedAppointments", apiUrl);
+
+        return this.http.get(apiUrl).map(
+            (response : Response) => {
+                let appointments  : Appointment [] = [];
+                let appointmentArr  = response.json();
+
+                if (appointmentArr) {
+                    appointmentArr.forEach(element => {
+                        appointments.push(new Appointment(element));
+                    });
+                }
+                return appointments;
+            }
+        );
+    }
+
 }

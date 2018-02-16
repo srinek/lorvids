@@ -37,25 +37,95 @@ module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     });
 }
 
+// let findBookedSlots = (busId, staffId, date) => {
+
+//     if ( typeof(staffId) == "string" ) {
+//         var params = {
+//             TableName: 'Appointments',
+//             IndexName : 'StaffAppointmentsIndex',
+//             KeyConditionExpression: "busId=:bus_id and staffId = :staff_id",
+//             ExpressionAttributeValues: {
+//                ":staff_id": staffId,
+//                ":bus_id" : busId
+//             }
+//          };
+//     }
+//     // staff values has to be an array e.g. ["staff1", "staff2"]
+//     if (typeof(staffId) == "object" ) {
+//         var inObject = { ":bus_id" : busId};
+//         var index = 0;
+//         var staffKeys = "";
+
+//         // inObject = { };
+
+//         // staffId.forEach(function(value) {
+//         //     index++;
+//         //     var titleKey = ":staffId"+index;
+//         //     staffKeys += titleKey + ",";
+//         //     inObject[titleKey.toString()] = value;
+//         // });
+
+//         var params = {
+//             TableName: 'Appointments',
+//             IndexName : 'AppointmentsForBuinessStaff',
+//             // KeyConditionExpression: " busId=:bus_id and staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
+//             // KeyConditionExpression: " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
+//             KeyConditionExpression : "busId=:bus_id",
+//             // FilterExpression: " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
+//             ExpressionAttributeValues: inObject
+//         };
+//     }
+//     console.log("Params123:", params);
+//     let apptPromise = db.queryData(params).then((result) => {
+//         return result;
+//     }).catch( (error) => {
+//         console.log("in error block ", error);
+//         return error;
+//     });
+//     return apptPromise;
+// }
+
+
 let findBookedSlots = (busId, staffId, date) => {
+
     var params = {
         TableName: 'Appointments',
-        IndexName : 'StaffAppointmentsIndex',
-        KeyConditionExpression: "staffId = :staff_id and busId=:bus_id",
+        IndexName : 'AppointmentsForBuinessStaff',
+        KeyConditionExpression: "busId=:bus_id and staffId = :staff_id",
         ExpressionAttributeValues: {
-           ":staff_id": staffId,
-           ":bus_id" : busId
+            ":bus_id" : busId,
+            ":staff_id": staffId
         }
-     }; 
-     console.log("getStaffByStaffId params", params);
-     let apptPromise = db.queryData(params).then((result) => {
+    };
+
+    if (typeof(staffId) == "object" ) {
+        var inObject = { ":bus_id" : busId};
+        var index = 0;
+        var staffKeys = "";
+
+        // staffId.forEach(function(value) {
+        //     index++;
+        //     var titleKey = ":staffId"+index;
+        //     staffKeys += titleKey + ",";
+        //     inObject[titleKey.toString()] = value;
+        // });
+
+        // params["KeyConditionExpression"] = " busId=:bus_id and staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
+        params["KeyConditionExpression"] = " busId=:bus_id ";
+        // params["FilterExpression"] = " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
+        params["ExpressionAttributeValues"] = inObject
+    }
+
+    console.log("Params:", params);
+    let apptPromise = db.queryData(params).then((result) => {
         return result;
-     }).catch( (error) => {
+    }).catch( (error) => {
         console.log("in error block ", error);
         return error;
-     });
-     return apptPromise;
+    });
+    return apptPromise;
 }
+
 module.exports.findBookedSlots= findBookedSlots;
 
 module.exports.updateAppointment = (appointmentData) => {
@@ -109,7 +179,6 @@ let findBusinessBookedSlots = (businessId, timePeriod, date) => {
         business.addStaff(staffobj);
         return findBookedSlots(bus_id, staff_id, date);
     }).then((bookedSlots) => {
-
         return  business.getAvailableSlots(staffobj, bookedSlots, date);
     }).catch((error) => {
         console.log(error);
@@ -133,4 +202,22 @@ let findBusinessBookedSlots = (businessId, timePeriod, date) => {
      });
      return apptPromise;
 }
+
+
+module.exports.getBusinessBookedAppointments = (busId, month, year, isyearly) => {
+
+    return  businessService.getBusinessById(busId).then((businessResult) => {
+        // console.log("businessResult ", businessResult);
+        
+        console.log("staff: ", businessResult.staffIds); 
+
+        return findBookedSlots(busId, businessResult.staffIds, "");
+    }).then((bookedSlots) => {
+        console.log("bookedSlots",bookedSlots);
+        return bookedSlots; 
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 module.exports.findBusinessBookedSlots= findBusinessBookedSlots;
