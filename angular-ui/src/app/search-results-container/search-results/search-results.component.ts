@@ -31,14 +31,15 @@ export class SearchResultsComponent implements OnInit {
     this.route.queryParamMap.subscribe(
       (paramMap: ParamMap) => {
          this.searchTerm = paramMap.get('look_for');
+         let searchProp = paramMap.get('_p');
          paramMap.keys.forEach((key) => {
-            if(key === 'look_for'){
+            if(key === 'look_for' || key === '_p'){
               return;
             }
             this.filterBy.set(key, paramMap.getAll(key));
          })
          console.log("searchFor "+this.searchTerm);
-         this.facadeService.getFacetedSearchResults(this.searchTerm, this.filterBy)
+         this.facadeService.getFacetedSearchResults(this.searchTerm, searchProp, this.filterBy)
             .subscribe(
                 (searchVo : SearchVO) => {
                     this.searchResults = searchVo.searchResults;

@@ -144,10 +144,8 @@ let testRecord_staff = {
   console.log(msg);
 }); */
 
-/* let searchObj = {
-  "queryStringParameters": {
-    "searchTerm": "best"
-  }
+let searchObj = {
+  "queryStringParameters": { _p: 'null', searchTerm: 'best' }
 };
 
 
@@ -155,10 +153,10 @@ search.doSearch(searchObj, null, (error, response) => {
   console.log('-----------------------------search RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------search RESPONSE END-----------------------------');
-}); */
+}); 
 
 
-let facetSearchObj = {
+/*  let facetSearchObj = {
   "queryStringParameters": {
     "searchTerm": "best"
   },
@@ -167,7 +165,8 @@ let facetSearchObj = {
 
 let facetSearchObj2 = {
   "queryStringParameters": {
-    "searchTerm": "best"
+    "searchTerm": "health",
+    "_p" : ""
   },
   "body" : "{\"key\" : \"staff.languages\", \"values\" : [\"english\", \"telugu\"]}"
 };
@@ -176,4 +175,4 @@ search.doFacetSearch(facetSearchObj2, null, (error, response) => {
   console.log('-----------------------------Facet RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------Facet RESPONSE END-----------------------------');
-});
+});  */

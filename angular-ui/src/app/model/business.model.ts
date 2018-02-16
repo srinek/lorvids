@@ -50,7 +50,7 @@ export class Business{
         this.awards = src.awards;
         this.images = ["../../assets/trendy_looks.jpg", "../../assets/image-2.jpg"];
         this.defaultImage = "../../assets/trendy_looks.jpg";
-        this.services = src.services;
+        this.mapServices(src);
         this.bus_hours = src.bus_hours;
         this.bus_time_zone = src.bus_time_zone;
         this.openTime = src.startTime;
@@ -58,5 +58,22 @@ export class Business{
         this.isOpenNow = src.open;
         this.website = "wwww.lorvids.com";
         this.email = "info@lorvids.com";
+    }
+
+    private mapServices(src) : void {
+        if(src.services){
+            src.services.forEach( (service) => {
+                this.services.push(service.name);
+            });
+        }
+    }
+
+    public findStaff(staffId : string) : Staff{
+        if(this.staff){
+            return this.staff.find( (eachStaff) => {
+                return eachStaff.staff_id === staffId;
+            });
+        }
+        return null;
     }
 }

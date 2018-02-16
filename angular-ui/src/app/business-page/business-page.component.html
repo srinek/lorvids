@@ -51,9 +51,20 @@
             </select>
         </div>
     </section>
-    <section id="slots">
+    <section id="previous_appt">
         <div class="container my-3">
-            <app-staff-slots [business]="business" [staff]="staffSelected"></app-staff-slots>
+            <div class="row">
+                <div class="col-6 text-right"><h6 class="text-green">Current Appointment</h6></div>
+                <div class="col-6 text-left font-weight-bold text-muted" *ngIf="prevAppointment">
+                        {{prevAppointment.slotTime | date:'h:mm a'}} on {{ prevAppointment.slotTime | date:'EEEE, MMM d y'}}
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <section id="slots" *ngIf="staffSelected">
+        <div class="container my-3">
+            <app-staff-slots [business]="business" [staff]="staffSelected" [previousSlotId]="prevAppointment?.appointmentId" [pUserEmail]="prevAppointment?.userEmail"></app-staff-slots>
         </div>
         
     </section>

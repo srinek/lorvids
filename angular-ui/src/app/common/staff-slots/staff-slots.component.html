@@ -10,16 +10,16 @@
         [(ngModel)]="selectedDate" 
         [showWeeks]="false" 
         (ngModelChange)="onDateChange($event)"></datepicker>
-      </div>
+    </div>
     </div>
     <div class="col-lg-6 d-flex flex-wrap align-items-center mt-3">
       <ng-container *ngIf="slotsLoaded">
           <ng-container *ngIf="slots.length > 0">
             <div class="d-flex flex-wrap align-items-center justify-content-center">
-              <div class="mr-1 col-xs-2" *ngFor="let slot of slots">
+              <div class="mr-1 mb-1 col-xs-2" *ngFor="let slot of slots">
                 <a class="btn btn-sm btn-info align-self-start w-100"
-                title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.appointmentId)">
-                  {{slot.slotTime | date:'hh:mm a'}}
+                title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.slotTimeInMillis)">
+                  {{slot.slotTime | date:'h:mm a'}}
                 </a>
               </div>
             </div>

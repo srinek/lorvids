@@ -4,6 +4,8 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Logger } from '../service/logger.service';
 import { Business } from '../model/business.model';
 import { Staff } from '../model/staff.model';
+import { AppointmentSlot } from '../model/appointment-slot.model';
+import { ParamMap } from '@angular/router/src/shared';
 
 @Component({
   selector: 'app-business-page',
@@ -15,6 +17,7 @@ export class BusinessPageComponent implements OnInit {
   public error : boolean = false;
   public errorMessage : string = "";
   business : Business;
+  prevAppointment : AppointmentSlot;
   businessLoaded : boolean;
   staffSelected : Staff;
   
@@ -25,6 +28,7 @@ export class BusinessPageComponent implements OnInit {
     private logger: Logger) { }
 
   ngOnInit() {
+
     this.route.params.subscribe(
       (params : Params) => {
           let businessId = params['busId'];
@@ -32,7 +36,7 @@ export class BusinessPageComponent implements OnInit {
           .subscribe(
               (business : Business) => {
                   this.business = business;
-                  this.staffSelected = this.business.staff[0];
+                  this.loadPreviousAppointment();
                   this.businessLoaded = true;
               },
               (error : string) => {
@@ -40,9 +44,34 @@ export class BusinessPageComponent implements OnInit {
                 this.errorMessage = "Yikes!!! something cramped our service "+error;
                 throw error;
               }
-          )
+          );
       }
     );
   }
 
+  private loadPreviousAppointment(){
+    // load previous appointment details for modify appointment
+    this.route.queryParamMap.subscribe(
+      (paramMap: ParamMap) => {
+        let prevSlotId = paramMap.get('psId');
+        if(prevSlotId){  //load the staff that was with previous appointment
+          this.facadeService.getAppointment(prevSlotId)
+            .subscribe(
+                (prevSlot : AppointmentSlot) => {
+                    this.prevAppointment = prevSlot;
+                    this.staffSelected = this.business.findStaff(prevSlot.staffId);
+                },
+                (error : string) => {
+                  this.error = true;
+                  this.errorMessage = "Yikes!!! something cramped our service "+error;
+                  throw error;
+                }
+          );
+        }
+        else{  //load first one in order
+            this.staffSelected = this.business.staff[0];
+        }
+      }
+    );
+  }
 }

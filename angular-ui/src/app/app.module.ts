@@ -56,6 +56,7 @@ import { AppointmentCalendarComponent } from './admin/appointment-calendar/appoi
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { S3ImageService } from './service/s3image.service';
 import { SearchResultComponent } from './search-results-container/search-results/search-result/search-result.component';
+import { UserService } from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,7 @@ import { SearchResultComponent } from './search-results-container/search-results
   ],
   providers: [FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, S3ImageService, Logger],
+    ApptService, S3ImageService, Logger, UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

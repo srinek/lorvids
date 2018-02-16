@@ -23,6 +23,9 @@ import {ApptService} from './appt.service';
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 import { SearchVO } from '../model/search-vo';
 import { S3ImageService } from './s3image.service';
+import { User } from '../model/user.model';
+import { UserService } from './user.service';
+import { Category } from '../model/category.model';
 
 @Injectable()
 export class FacadeService {
@@ -33,10 +36,11 @@ export class FacadeService {
 
     constructor(private logger: Logger,
                 private searchService : SearchService,
-                private businessService : BusinessService,
+                private businessService: BusinessService,
                 private staffService : StaffService,
                 private apptService : ApptService,
-                private s3ImageService : S3ImageService
+                private s3ImageService : S3ImageService,
+                private userService : UserService
                ){
 
     }
@@ -72,8 +76,18 @@ export class FacadeService {
         return staff;
     }
 
+    public getAppointment(slotId : string) : Observable<AppointmentSlot>{
+        return this.apptService.getAppointment(slotId);
+    }
     public saveAppointment(appt : any) : Observable<string>{
         return this.apptService.saveAppointment(appt);
+    }
+    public createAppointment(appt : any) : Observable<AppointmentSlot>{
+        return this.apptService.createAppointment(appt);
+    }
+
+    public getUserDetails(userEmail : string) : Observable<User>{
+        return this.userService.getUser(userEmail);
     }
 
     public getTrendingBusiness() : Business[] {
@@ -84,16 +98,16 @@ export class FacadeService {
         return recentlyVisitedBusiness;
     }
 
-    public getSearchResults(searchTerm : string) : Observable<SearchVO> {
+    public getSearchResults(searchTerm : string, prop:string) : Observable<SearchVO> {
         this.mainPageUnLoaded.next(true);
-        return this.searchService.invokeSearch(searchTerm);
+        return this.searchService.invokeSearch(searchTerm, prop);
     }
 
-    public getFacetedSearchResults(searchTerm : string, facetMap : Map<string, string[]>) : Observable<SearchVO> {
+    public getFacetedSearchResults(searchTerm : string, prop:string, facetMap : Map<string, string[]>) : Observable<SearchVO> {
         if(facetMap && facetMap.size > 0){
-            return this.searchService.facetFilter(searchTerm, facetMap);
+            return this.searchService.facetFilter(searchTerm, prop, facetMap);
         }
-        return this.getSearchResults(searchTerm);
+        return this.getSearchResults(searchTerm, prop);
     }
 
     public getAppointmentSlots(business : Business, staff : Staff, 
@@ -103,6 +117,17 @@ export class FacadeService {
 
     public deleteFile(fileName : string) : Observable<String> {
         return this.s3ImageService.deleteFile(fileName);
+    }
+
+    public getAllCategories() : Array<Category>{
+        let cate1 = new Category({"categoryName" : "Dentists", "categoryCode":"DENTISTS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate2 = new Category({"categoryName" : "Doctors", "categoryCode":"DOCTORS", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate3 = new Category({"categoryName" : "Tax Professional", "categoryCode":"TAX", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate4 = new Category({"categoryName" : "House Services", "categoryCode":"HOME", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate5 = new Category({"categoryName" : "Health & Beauty", "categoryCode":"BEAUTY", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let cate6 = new Category({"categoryName" : "Legal Services", "categoryCode":"LEGAL", "image":"dentist-pain-borowac-cure-52527.jpeg", "description":""});
+        let categories = [cate1, cate2, cate3, cate4, cate5, cate6];
+        return categories;
     }
 
     public triggerMainPageLoaded(){

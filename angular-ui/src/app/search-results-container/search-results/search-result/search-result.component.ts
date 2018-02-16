@@ -26,7 +26,6 @@ export class SearchResultComponent implements OnInit {
   }
 
   public selected(value:any):void {
-    console.log('Selected value is: ', value);
     this.selectedStaff = this.business.staff.find( (elem) => {
        return elem.staff_id === value.id;
     });

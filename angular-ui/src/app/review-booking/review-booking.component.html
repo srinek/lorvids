@@ -1,18 +1,19 @@
 <section id="reviewbooking"  class="pb-5 pt-5" *ngIf="!apptBooked">
     <div class="mb-5 mt-5 container-fluid d-flex flex-column-reverse flex-sm-column-reverse flex-md-row justify-content-around">
         
-        <div class="col-md-8 align-items-stretch">
+        <div class="col-md-8 align-items-stretch mt-1">
             <div class="card">
                 <div class="card-header bg-red"> 
                     <h4 class="text-uppercase mb-0 py-2 text-white">Appointment Details</h4>
                 </div>
                 <div class="card-body">
-                    <form (ngSubmit)="bookAppointment()" #appointmentForm="ngForm">
+                    <form #appointmentForm="ngForm">
                         <div class="form-group">
                             <label for="id-name" class="col-12 col-form-label"> Name </label>
                             <div class="col-12">
                                 <input name="uname" 
                                 id="id-name" 
+                                value="{{userData?.name}}"
                                 class="form-control" 
                                 type="text"
                                 #uname="ngModel"
@@ -29,6 +30,7 @@
                                 <input 
                                 name="uemail" 
                                 id="id-email" 
+                                value="{{userData?.UserEmail}}"
                                 class="form-control"
                                 #uemail="ngModel"
                                 ngModel required email>
@@ -44,6 +46,7 @@
                                 <input 
                                 name="uphone" 
                                 id="id-phone" 
+                                value="{{userData?.phone}}"
                                 class="form-control"
                                 #uphone="ngModel"
                                 ngModel required phone>
@@ -97,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-12  text-center">
-                            <a  class="btn btn-md btn-primary w-50" (click)="bookAppointment()">
+                            <a  class="btn btn-md btn-primary booking-btn" (click)="saveAppointment()">
                                     <h6 class="text-uppercase mb-0 py-2 text-white">Book Appointment</h6>
                             </a>
                             </div>
@@ -127,8 +130,8 @@
                             <div class="font-weight-bold">
                                 Appointment Summary
                             </div>
-                            <div class="m-1">
-                                {{bookingTime}}<!-- 10:30 AM EST, Monday, Sep 10, 2017 -->
+                            <div class="m-1 text-blue font-weight-bold">
+                                {{bookingTime | date:'h:mm a'}} on {{ bookingTime | date:'EEEE, MMM d y'}}
                             </div>
                             <ng-container *ngIf="staff">
                                 <div class="m-1">{{staff.staff_name}}</div>

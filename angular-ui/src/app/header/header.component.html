@@ -4,7 +4,7 @@
   </button>
   <a class="navbar-brand" [routerLink]="['']"><img class="img-fluid logo" src="../../assets/logo.png" alt="" /></a>
   <div class="collapse navbar-collapse" id="navbarCollapse">
-      <app-search-box id="header-search"></app-search-box>
+      <app-search-box id="header-search" *ngIf="!isMainPage"></app-search-box>
       <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>

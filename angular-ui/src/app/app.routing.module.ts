@@ -23,7 +23,7 @@ const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
     {path:'search', component : SearchResultsComponent},
     //{path:'search/:searchFor', component : SearchResultsContainerComponent},
-    {path:'reviewbooking/:busId/:staffId/:bookingId', component : ReviewBookingComponent},
+    {path:'reviewbooking/:busId/:staffId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
     {path:'addb', component : AddBusinessComponent},
     {path:'addsvc/:busId', component : AddServiceComponent},

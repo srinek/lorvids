@@ -1,65 +1,196 @@
 <section id="hero-section" class="mb-4">
-        <div class="flex-center">
-            <div class="col-lg-7 text-white">
-                <h1 class="text-xlarge">Self-booking helps everyone</h1>
-                <p class="h5">Search the service you need, book your appointment right here at home.</p>
-                <form>
-                    <div class="input-group">
-                        <input type="text" class="form-control form-control-lg" placeholder="What service are you looking for?">
-                        <select class="form-control form-control-lg" id="service" name="service" required>
-                            <option value="">Select a service</option>
-                            <option value="dental">Dental Cleaning</option>
-                            <option value="root-canal-treatment">Root Canal Treatment</option>
-                            <option value="cavities">cavities</option>
-                            <option value="teeth pain">teeth pain</option>
-                        </select>
-                        <span class="input-group-btn">
-							<button class="btn btn-primary bg-blue" type="button">Search</button>
-						  </span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-    <div class="container">  
-        <div class="row row-section">
-            <app-recently-visited></app-recently-visited>
-        </div>
-        <div class="row row-section">
-            <app-trending></app-trending>
+    <div class="flex-center">
+        <div class="col-lg-7 text-white">
+            <h1 class="text-xlarge">Self-booking helps everyone</h1>
+            <p class="h5">Search the service you need, book your appointment right here at home.</p>
+            <form>
+                <div class="input-group">
+                    <ng-select [items]="categoryValues"
+                        [active]="categoryValues"
+                        (selected)="categorySelected($event)">
+                    </ng-select>
+                    <input #searchFor type="text" class="form-control form-control-lg" 
+                    placeholder="What service are you looking for?"
+                    (keyup.enter)="onSearch(searchFor.value)">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary bg-blue" type="button"
+                        (click)="onSearch(searchFor.value)">Search</button>
+                    </span>
+                </div>
+            </form>
         </div>
     </div>
+</section>
 
-<!-- <div class="container-fluid header-main">
-  <div class="row ">
-            <div class="gallery div-inline">
-                <figure>
-                    <picture>
-                        <source media="(min-width: 650px)" srcset="../../assets/test_img_1.webp">
-                        <source media="(min-width: 465px)" srcset="../../assets/test_img_1.webp">
-                        <img src="../../assets/test_img_1.webp" alt="Flowers" style="width:auto;">
-                    </picture>
-                </figure>
-            </div>
-            <div class="content">
-                <h1>self-booking helps everyone</h1>
-                <p> 
-                    search the service you need, book your appointment right here at home.
+
+
+
+
+<section class="container d-flex flex-column align-items-center" id="how-it-works">
+    <div class="restyle d-flex flex-column align-items-center">
+        <p class="p-header m-b-40">How it works?</p>
+        <div>
+            <p class="text m-b-60">
+                We connect students and professionals in finding new homes. Book off-campus, furnished stays around your college                             or profession from local hosts.
+            </p>
+        </div>
+    </div>
+    <div class="d-flex flex-xl-row flex-lg-row flex-md-row flex-sm-row flex-column justify-content-around">
+        <div class="about-card d-flex flex-column align-items-center">
+            <img class="m-b-20"
+                src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/search-icon-e6a66f9a989faab1171eb3a6d26800b40e71ebf2f3d26cf3619c2d359cec0cae.png"
+                alt="Search icon">
+            <h3 class="m-b-20 card-title">SEARCH</h3>
+            <p class="m-b-20 card-text">Type and search around campuses, metro
+                stations or cities. Check out your hosts profile to view photos of
+                them, their listings and prices too! Select from the ones you like.
+            </p>
+        </div>
+        <div class="about-card d-flex flex-column align-items-center">
+                <img class="m-b-20"
+                src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/match-icon-644bad4739e92700e558118ea25ffd26be719f94f277291dcdf040d65e14f552.png"
+                alt="Match icon">
+            <h3 class="m-b-20 card-title">BOOK</h3>
+            <p class="m-b-20 card-text">Book as many stays as you like. Hosts
+                typically respond within 48 hours. If you don’t hear back from your
+                host, we will send you alternative options similar to those which you
+                inquired.
+            </p>
+        </div>
+        <div class="about-card d-flex flex-column align-items-center">
+                <img class="m-b-20"
+                src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/home-icon-9d5eb79cff3024547825751f67368232a1f1bd9fc4e188183abc7352a5e00cd0.png"
+                alt="Home icon">
+            <h3 class="m-b-20 card-title">MOVE IN</h3>
+            <p class="m-b-20 card-text">Once your host approves your booking,
+                simply pay your reservation fee and move into your new home.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="container d-flex flex-column align-items-center" id="how-it-works">
+    <div class="pt-5 pb-5 text-center">
+        <div class="restyle">
+            <p class="p-header m-b-40">How it works?</p>
+            <div class="row">
+                <p class="text col-12 col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-8 offset-md-2 m-b-60">
+                    We connect students and professionals in finding new homes. Book off-campus, furnished stays around your college                             or profession from local hosts.
                 </p>
-                
-                <div class="global-search hidden-xs">
-                    <app-search-box id="home-page"></app-search-box>
-                </div>
-                
             </div>
-      
-  </div>
-</div>
-<div class="container">  
-  <div class="row row-section">
-      <app-recently-visited></app-recently-visited>
-  </div>
-  <div class="row row-section">
-      <app-trending></app-trending>
-  </div>
+        </div>
+        <div>
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="col-4">
+                <img class="m-b-20"
+                    src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/search-icon-e6a66f9a989faab1171eb3a6d26800b40e71ebf2f3d26cf3619c2d359cec0cae.png"
+                    alt="Search icon">
+                <h3 class="m-b-20 card-title">SEARCH</h3>
+                <p class="m-b-20 card-text">Type and search around campuses, metro
+                    stations or cities. Check out your hosts profile to view photos of
+                    them, their listings and prices too! Select from the ones you like.
+                </p>
+            </div>
+            <div class="col-4">
+                <img class="m-b-20"
+                    src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/match-icon-644bad4739e92700e558118ea25ffd26be719f94f277291dcdf040d65e14f552.png"
+                    alt="Match icon">
+                <h3 class="m-b-20 card-title">BOOK</h3>
+                <p class="m-b-20 card-text">Book as many stays as you like. Hosts
+                    typically respond within 48 hours. If you don’t hear back from your
+                    host, we will send you alternative options similar to those which you
+                    inquired.
+                </p>
+            </div>
+            <div class="col-4">
+                <img class="m-b-20"
+                    src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/home-icon-9d5eb79cff3024547825751f67368232a1f1bd9fc4e188183abc7352a5e00cd0.png"
+                    alt="Home icon">
+                <h3 class="m-b-20 card-title">MOVE IN</h3>
+                <p class="m-b-20 card-text">Once your host approves your booking,
+                    simply pay your reservation fee and move into your new home.
+                </p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section> -->
+
+<section class="campus p-b-30">
+    <div class="container">
+        <div class="inner-container-sm">
+            <div class="title m-t-80 m-b-60 text-center">
+                <h2>Trending Categories to explore</h2>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let category of categories">
+                    <div class="box">
+                        <a href="/advanced_search?lat=38.9072&amp;long=-77.0369"  target="_blank">
+                            <img class="image" src="https://s3.amazonaws.com/lorvid-devlot/{{category.image}}" alt="{{category.categoryName}}">
+                            <div class="img-caption">
+                                <p>
+                                    <span>
+                                        <img src="https://s3.amazonaws.com/lorvid-devlot/favicon.png" height="15px">
+                                    </span>
+                                </p>
+                                <h4>{{category.categoryName}}</h4>
+                            </div>
+                            <div class="overlay"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="restyle text-center m-t-60 m-b-60">
+                <a class="btn btn-outline-primary" href="/advanced_search"
+                    target="_blank">VIEW ALL CITIES</a>
+            </div> -->
+        </div>
+    </div>
+</section>
+        
+<!-- <div class="container">  
+    <div class="row row-section">
+        <app-recently-visited></app-recently-visited>
+    </div>
+    <div class="row row-section">
+        <app-trending></app-trending>
+    </div>
 </div> -->
