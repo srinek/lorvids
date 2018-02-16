@@ -33,10 +33,10 @@
       <div class="card-columns cols-2">
         <div class="card">
           <div class="card-header">
-              January's Earning Expense Chart
+              {{monthName}}'s Earning Expense Chart
             <div class="card-actions">
-              <a href="http://www.chartjs.org">
-                <small class="text-muted">docs</small>
+              <a>
+                <small class="text-muted">.</small>
               </a>
             </div>
           </div>
@@ -52,6 +52,8 @@
                   <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
                 </div>
               </div>
+
+              <img *ngIf= "!earningsExpenseDataLoaded" src="assets/loading_1.gif" style="margin-left:150px;"/> 
 
             <canvas *ngIf= "earningsExpenseDataLoaded"
              baseChart style="display: block; width: 527px; height: 263px;"  class=""
@@ -72,10 +74,10 @@
         </div>
         <div class="card">
           <div class="card-header">
-              January's Services Opted Chart
+            {{monthName}}'s Services Opted Chart
             <div class="card-actions">
-              <a href="http://www.chartjs.org">
-                <small class="text-muted">docs</small>
+              <a>
+                <small class="text-muted">.</small>
               </a>
             </div>
           </div>
@@ -93,10 +95,10 @@
 
         <div class="card">
           <div class="card-header">
-              January's Service Earnings Chart
+            {{monthName}}'s Service Earnings Chart
             <div class="card-actions">
-              <a href="http://www.chartjs.org">
-                <small class="text-muted">docs</small>
+              <a>
+                <small class="text-muted">.</small>
               </a>
             </div>
           </div>
@@ -114,19 +116,30 @@
         </div>
         <div class="card">
             <div class="card-header">
-              January's Staff Business Chart
+              {{monthName}}'s Staff Business Chart
               <div class="card-actions">
-                <a href="http://www.chartjs.org">
-                  <small class="text-muted">docs</small>
+                <a>
+                  <small class="text-muted">.</small>
                 </a>
               </div>
             </div>
             <div class="card-body">
-              <div class="chart-wrapper"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+              <div class="chart-wrapper">
+                <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                  <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                    </div>
+                  </div>
+                  <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                    <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+                    </div>
+                  </div>
+                </div>
               <canvas baseChart
                 [data]="pieChartData"
                 [labels]="pieChartLabels"
                 [chartType]="pieChartType"
+                [colors]="chartColors"
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas> 
               </div>

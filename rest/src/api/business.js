@@ -41,10 +41,10 @@ module.exports.get = (event, context, callback) => {
 
 module.exports.getBusinessExpenses = (event, context, callback) => {
     let busId = event.pathParameters.busId;
-    let month = "";
-    let year = "";
-    let isyearly = "";
-    let loadStaff = event.queryStringParameters ? event.queryStringParameters.loadStaff : false;
+    let month = event.queryStringParameters ? event.queryStringParameters.month : "";
+    let year = event.queryStringParameters ? event.queryStringParameters.year : "";
+    let isyearly = event.queryStringParameters ? event.queryStringParameters.isyearly : false;
+
     businessService
     .getBusinessExpenses(busId, month, year, isyearly)
     .then( (data) => {

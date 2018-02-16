@@ -13,6 +13,10 @@
   margin-left: 2px;
 }
 
+.card-actions small.text-muted {
+  color:#f1f3f8 !important;
+}
+
 /***
 copied
 **/

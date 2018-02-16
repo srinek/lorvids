@@ -17,9 +17,7 @@ module.exports.saveData = (params) => {
     });
     //console.log(" request ", request);
   });
-  
 } 
-
 
 module.exports.getData = (params) => {
   return new Promise((resolve, reject) => {
@@ -34,7 +32,6 @@ module.exports.getData = (params) => {
 }
 
 module.exports.queryData = (params) => {
-
   return new Promise((resolve, reject) => {
     docClient.query(params, function(err, data) {
       if (err) {
@@ -69,4 +66,3 @@ module.exports.nxtId = () => {
     });
   });
 }
-

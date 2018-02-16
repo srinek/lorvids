@@ -89,4 +89,26 @@ module.exports.findBookedSlots = (event, context, callback) => {
        console.log("error callback ", response);
        callback(null, response);
     });
- }
+}
+
+module.exports.getBusinessBookedAppointments = (event, context, callback) => {
+    let busId = event.pathParameters.busId;
+    let month = event.queryStringParameters ? event.queryStringParameters.month : "";
+    let year = event.queryStringParameters ? event.queryStringParameters.year : "";
+    let isyearly = event.queryStringParameters ? event.queryStringParameters.isyearly : false;
+
+    appointmentService
+    .getBusinessBookedAppointments(busId, month, year, isyearly)
+    .then( (data) => {
+        console.log("data ", data);
+        let response = util.success();
+        response.body = JSON.stringify(data);
+        callback(null, response);
+    })
+    .catch((error) => {
+        console.log("error "+error);
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        callback(null, response);
+    });
+}

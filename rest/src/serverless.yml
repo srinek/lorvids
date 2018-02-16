@@ -159,7 +159,15 @@ functions:
       - http:
           path: bookedslots/{busId}/{staffId}
           method: get
-          cors : true          
+          cors : true     
+  getBusinessBookedAppointments:
+    handler: api/appointment.getBusinessBookedAppointments
+    description : booked appointments for a business
+    events:
+      - http:
+          path: appt/business/{busId}
+          method: get
+          cors : true   
   search:
     handler: api/search.doSearch
     description : search api

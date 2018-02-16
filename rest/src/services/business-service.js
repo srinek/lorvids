@@ -54,12 +54,11 @@ module.exports.getBusinessExpenses = (busId, month, year, isyearly) => {
         }
      }; 
      console.log("getBusinessExpenses params", params);
-     let apptPromise = db.queryData(params).then((result) => {
-         
+     let expensePromise = db.queryData(params).then((result) => {
         return result;
      }).catch( (error) => {
         console.log("in error block ", error);
         return error;
      });
-     return apptPromise;
+     return expensePromise;
 }

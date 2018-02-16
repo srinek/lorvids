@@ -4,10 +4,15 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
 
+// model
 import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
 import {Slots} from '../model/slots.model';
 import {AppointmentSlot} from '../model/appointment-slot.model';
+import { Expense } from '../model/expense.model';
+import { Appointment } from '../model/appointment.model';
+
+//service
 import {Logger} from './logger.service';
 import {SearchService} from './search.service';
 import {BusinessService} from './business.service';
@@ -18,7 +23,6 @@ import {ApptService} from './appt.service';
 import {trendingBusiness,recentlyVisitedBusiness} from '../test-data/test-data';
 import { SearchVO } from '../model/search-vo';
 import { S3ImageService } from './s3image.service';
-import { Expense } from '../model/expense.model';
 
 @Injectable()
 export class FacadeService {
@@ -55,7 +59,6 @@ export class FacadeService {
     public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean) : Observable<Expense[]> {
         return this.businessService.getBusinessExpenses(busId, month, year, isyearly);
     }
-
 
     /**
      *  STAFF APIS
@@ -109,4 +112,13 @@ export class FacadeService {
     public triggerBusinessSubject(business : Business){
         this.businessSubject.next(business);
     }
+
+    /***
+     * APPOINTMENT API
+     */
+
+    public getBusinessBookedAppointments(busId : string, month : string, year: string, isyearly : boolean) : Observable<Appointment[]> {
+        return this.apptService.getBusinessBookedAppointments(busId, month, year, isyearly);
+    }
+
 }

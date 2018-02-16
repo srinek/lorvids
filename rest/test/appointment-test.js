@@ -59,11 +59,11 @@ let saveObj = {
   },
   "body": JSON.stringify(reqBody)
 };
-appointment.save(saveObj , null, (error, response) => {
-  console.log('-----------------------------SAVE RESPONSE START-----------------------------');
-  console.log(response);
-  console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-});
+// appointment.save(saveObj , null, (error, response) => {
+//   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+//   console.log(response);
+//   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+// });
 
 /* appointmentService.findAvailableSlots('b-test-01', 'b-test-01-s-01').then((result) => {
   console.log("all slots", result);
@@ -82,3 +82,26 @@ appointment.save(saveObj , null, (error, response) => {
      console.log('-----------------------------SAVE RESPONSE END-----------------------------');
    }
  );  */
+
+
+
+ let testGetObj = { "pathParameters" : 
+                    {
+                        "busId" : "b-test-01",
+                    },
+                    "queryStringParameters" : 
+                    {
+                        "month": "",
+                        "year":"",
+                        "isyearly":"fasle"
+                    }
+                 };
+ appointment.getBusinessBookedAppointments(testGetObj  , 
+  null, 
+  (error, response) => {
+
+    console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
+    console.log(response);
+    console.log('-----------------------------GET RESPONSE END-----------------------------');
+  }
+);
