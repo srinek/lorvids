@@ -19,6 +19,10 @@ module.exports.saveData = (params) => {
   });
 } 
 
+module.exports.updateData = (params) => {
+  return docClient.update(params).promise();
+}
+
 module.exports.getData = (params) => {
   return new Promise((resolve, reject) => {
     docClient.get(params, function(err, data) {
