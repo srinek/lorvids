@@ -55,20 +55,26 @@ export class AdminReportsComponent implements OnInit {
    public appointmentList : Array<Appointment>;
    public staffList : Array<Staff> ;
    public businessLoaded;
+   
    public earningsExpenseErrorFlag : boolean = false;
    public earningsExpenseErrorMessage : string = ""; 
    public earningsExpenseDataLoaded = false;
-   public servicesOptedErrorFlag : boolean = false;
-   public servicesOptedErrorMessage : string = ""; 
-   public servicesOptedDataLoaded = false;
+  
+   public servicesOptedDataLoaded : boolean = false;
+   
+   public servicesStaffCallErrorFlag : boolean = false;
+   public servicesStaffCallErrorMessage : string = ""; 
+
+   public staffBusinessDataLoaded : boolean = false;
+
+   public servicesEarningsDataLoaded : boolean = false;
+   public servicesEarningsErrorMessage : string = ""; 
+   public servicesEarningsErrorFlag = false;
+
    public monthNames : Array<string> = ["", "January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December" ];
 
-   public businessDataLoadedObservable1:Observable<string> =  Observable.create(observer => {
-    console.log("observer type:", typeof observer);
-   });
-
-   public businessDataLoadedObservable = new Subject();
+   public businessDataLoadedSubject = new Subject();
 
    public pieChartOptions = { colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] };
 
@@ -90,24 +96,24 @@ export class AdminReportsComponent implements OnInit {
   //   'rgb(201, 203, 207)'
   // ];
 
-  public chartColors:Array<any> = [{ // grey
-    backgroundColor: 'rgba(159,204,0)',
+  public chartColors:Array<any> = [{ 
+    backgroundColor: 'rgba(150,12,12,1)',
     borderColor: '#fff',
-    pointBackgroundColor: 'rgb(159,204,0)',
+    pointBackgroundColor: 'rgba(150,1,1,1)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgb(148,159,177,0.8)'
+    pointHoverBorderColor: 'rgba(110,12,12,0.8)'
   },
-  { // dark grey
-    backgroundColor: 'rgba(123,198,242,1)',
+  { 
+    backgroundColor: 'rgba(12,127,152,1)',
     borderColor: '#fff',
-    pointBackgroundColor: 'rgba(77,83,96,1)',
+    pointBackgroundColor: 'rgba(12,17,12,1)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
     pointHoverBorderColor: 'rgba(77,83,96,1)'
   },
-  { // grey
-    backgroundColor: 'rgba(252,225,150,1)',
+  { 
+    backgroundColor: 'rgba(12,12,15,1)',
     borderColor: '#fff',
     pointBackgroundColor: 'rgba(148,159,177,1)',
     pointBorderColor: '#fff',
@@ -123,16 +129,9 @@ export class AdminReportsComponent implements OnInit {
       this.year = "2018";
       this.monthName =  this.monthNames[this.month]; 
 
-      // ChartJsProvider.setOptions({
-      //   chartColors: ['#FF5252', '#FF8A80'],
-      //   responsive: false
-      // });
-  
-
     }
 
   ngOnInit() {
-    console.log("searchFor "+this.businessId);
     Observable.forkJoin(
       this.facadeService.getBusiness(this.businessId, true),
       this.facadeService.getBusinessExpenses(this.businessId, this.month, this.year, this.isyearly)
@@ -140,11 +139,9 @@ export class AdminReportsComponent implements OnInit {
         this.business = <any>response[0];
         this.businessExpense = <any>response[1];
         console.log("in call:", this.businessExpense);
-        // Here the codes you want to execute after retrieving all data
         this.loadEarningsExpenseChart();
-        // Observable.of(this.businessDataLoadedObservable);
-        this.businessDataLoadedObservable.next('loaded');
-
+        this.loadEarningsServiceChart();
+        this.businessDataLoadedSubject.next('loaded');
         // finish
      },
       (error : string) => {
@@ -165,23 +162,19 @@ export class AdminReportsComponent implements OnInit {
       if (this.earningsExpenseDataLoaded) {
         this.loadStaffBusinessChart();
       } else {
-        this.businessDataLoadedObservable.asObservable().subscribe(x => {
+        this.businessDataLoadedSubject.asObservable().subscribe(x => {
           this.loadStaffBusinessChart();
         });
       }
    },
     (error : string) => {
-      this.servicesOptedErrorFlag = true;
-      this.servicesOptedErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
+      this.servicesStaffCallErrorFlag = true;
+      this.servicesStaffCallErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
       throw error;
     }
   );
 
-console.log("setting up the context");
-this.loadStaffBusinessChart();
 }
-
-  
 
   model: any = { jsdate: new Date() };
 
@@ -232,6 +225,7 @@ this.loadStaffBusinessChart();
     serviceList.forEach( service => {
       this.doughnutChartData.push(this.appointmentList.filter(x => x.service == service).length);
     });
+    this.servicesOptedDataLoaded = true;
   }
 
   //pie chart - staff busines
@@ -239,40 +233,66 @@ this.loadStaffBusinessChart();
   public pieChartData:number[] = [];
   public pieChartType:string = 'pie';
   
-  // Observable.forkJoin([observable1,observable2])
-  //      .subscribe((response) => {
-  //         console.log(response[0], response[1]);
-  //      });
-  
-  // Promise.all(
-  //     [businessDataLoadedPromise, appointmentDataLoadedPromise ]
-  //  ).then(() => {
-  //   console.log("all resolved")
-  // });
-
   public loadStaffBusinessChart() : void {
   
-    // if (!this.appointmentList || this.appointmentList.length == 0) {
-    //   this.pieChartLabels = ['None'];
-    //   this.pieChartData = [1];
-    //   return;
-    // } 
+    if (!this.appointmentList || this.appointmentList.length == 0) {
+      this.pieChartLabels = ['None'];
+      this.pieChartData = [1];
+      return;
+    } 
 
-    // let staffIdList = new Set(this.appointmentList.map(x => x.staffId));
+    let staffIdList = new Set(this.appointmentList.map(x => x.staffId));
 
-    // this.pieChartData = [];
-    // staffIdList.forEach( staffId => {
-    //   this.pieChartLabels.push(this.business.staff.filter(a => a.staff_id == staffId)[0].staff_name);
-    //   this.pieChartData.push(this.appointmentList.filter(x => x.staffId == staffId).length);
-    // });
+    this.pieChartData = [];
+    staffIdList.forEach( staffId => {
+      this.pieChartLabels.push(this.business.staff.filter(a => a.staff_id == staffId)[0].staff_name);
+      this.pieChartData.push(this.appointmentList.filter(x => x.staffId == staffId).length);
+    });
+ 
+    this.staffBusinessDataLoaded = true;
+  }
 
-    // this.pieChartLabels = ["staff1", "staff2", "staff3"];
-    // this.pieChartData = [3, 6, 1];
+  
+  public lineChartLabels:Array<any> = []; // service names
+  public lineChartData:Array<any> = [];   // data with respect to staff
+  public lineChartType:string = 'line';
+  
+  public loadEarningsServiceChart() : void {
+    this.lineChartData = [
+      {data: [65, 59, 80], label: 'Dr. Devi'},
+      {data: [28, 48, 40], label: 'Dr. Susan'},
+      {data: [58, 28, 90], label: 'Dr. Saran'}
+    ];
+    
+    this.lineChartLabels = ['Whitening', 'Crowning', 'Root Canal'];
 
-    this.pieChartLabels = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
-    this.pieChartData = [300, 500, 100];
+    this.servicesEarningsDataLoaded = true;
+  }
 
-}
+  public stackedChartLabels:Array<any> = ["January", "February", "March"]; // service names
+  public stackedChartData:Array<any> = [{
+    label: 'Dataset 1',
+    data: [ 10, 20,30 ]
+}, {
+    label: 'Dataset 2',
+    data: [20, 30, 10]
+}, {
+    label: 'Dataset 3',
+    data: [40,15,20]
+}]
+  public stackedChartType:string = 'bar';
+  public stackedChartOptions = {
+    responsive: true,
+    scales: {
+        xAxes: [{
+            stacked: true,
+        }],
+        yAxes: [{
+            stacked: true
+        }]
+    }
+};
+
 
   // events
   public chartClicked(e:any):void {
@@ -283,21 +303,7 @@ this.loadStaffBusinessChart();
     console.log(e);
   }
 
-    // lineChart
-    public lineChartData:Array<any> = [
-      {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-    ];
-
-    // public lineChartData:Array<any> = [
-    //   [65, 59, 80, 81, 56, 55, 40],
-    //   [28, 48, 40, 19, 86, 27, 90]
-    // ];
-
-    public lineChartOptions:any = {
-        responsive: true
-      };
-    public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    public lineChartType:string = 'line';
-
+  public lineChartOptions:any = {
+    responsive: true
+  };
 }
