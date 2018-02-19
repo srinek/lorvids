@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   isMainPage : boolean = true;
+  showNav : boolean = false;
 
   private mainPageUnloadedSubscription : Subscription;
 
@@ -30,6 +31,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.mainPageUnloadedSubscription.unsubscribe();
   }
 
-  
+  toggleNav(){
+    this.showNav = !this.showNav;
+  }
 
 }

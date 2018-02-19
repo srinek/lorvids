@@ -3,7 +3,9 @@
         <div class="row mt-2">
            <ul class="list-inline pl-4 mb-0 iphone">
                 <li class="list-inline-item bg-blue text-white" *ngFor="let slot of displaySlots">
-                    <a  title="{{slot.slotTime}}" 
+                    <a  class="text-white"
+                        title="{{slot.slotTime}}" 
+                        [routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"
                         (click)="bookAppointment(slot.appointmentId)">
                         {{slot.slotTime | date:'hh:mm a'}} 
                     </a>
