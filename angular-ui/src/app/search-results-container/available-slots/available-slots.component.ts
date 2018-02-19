@@ -57,8 +57,8 @@ export class AvailableSlotsComponent implements OnInit, OnChanges {
 
   bookAppointment(bookingId : string){
     //[routerLink]="['/reviewbooking', business.bus_id, staff.staff_id, slot.bookingId]" 
-    this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id, bookingId],
-        {relativeTo:this.route});
+    /* this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id],
+        {relativeTo:this.route}); */
     this.facadeService.triggerBusinessSubject(this.business);
   }
 

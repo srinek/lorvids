@@ -53,9 +53,9 @@
     </section>
     <section id="previous_appt">
         <div class="container my-3">
-            <div class="row">
+            <div class="row" *ngIf="prevAppointment">
                 <div class="col-6 text-right"><h6 class="text-green">Current Appointment</h6></div>
-                <div class="col-6 text-left font-weight-bold text-muted" *ngIf="prevAppointment">
+                <div class="col-6 text-left font-weight-bold text-muted">
                         {{prevAppointment.slotTime | date:'h:mm a'}} on {{ prevAppointment.slotTime | date:'EEEE, MMM d y'}}
                 </div>
             </div>
