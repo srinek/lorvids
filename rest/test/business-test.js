@@ -138,8 +138,17 @@ let testSaveObj2 =
     }
 );  */
 
+let testExpenseObj = { "pathParameters" : 
+                    {
+                        "busId" : "b-test-01",
+                    },
+                    "queryStringParameters" : 
+                    {
+                        "loadStaff": "false"
+                    }
+                 };
 
-// business.getBusinessExpenses(testGetObj  , 
+// business.getBusinessExpenses(testExpenseObj  , 
 //   null, 
 //   (error, response) => {
 

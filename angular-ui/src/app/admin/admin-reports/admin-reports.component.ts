@@ -59,6 +59,7 @@ export class AdminReportsComponent implements OnInit {
    public earningsExpenseErrorFlag : boolean = false;
    public earningsExpenseErrorMessage : string = ""; 
    public earningsExpenseDataLoaded = false;
+   public businessDataLoaded = false;
   
    public servicesOptedDataLoaded : boolean = false;
    
@@ -71,64 +72,28 @@ export class AdminReportsComponent implements OnInit {
    public servicesEarningsErrorMessage : string = ""; 
    public servicesEarningsErrorFlag = false;
 
-   public monthNames : Array<string> = ["", "January", "February", "March", "April", "May", "June",
+   public monthNames : Array<string> = ["January", "February", "March", "April", "May", "June",
    "July", "August", "September", "October", "November", "December" ];
 
    public businessDataLoadedSubject = new Subject();
 
-   public pieChartOptions = { colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] };
-
-  //  public chartColors:Array<any> = ["#ef9ab2","#7bc6f2","#fce196","#4caf50","#ff5722","#795548","#607d8b","#673ab7","#86d8d8","#9e9e9e",
-  //                                      "#e94351","#00bcd4","#fef982","#8e5ea2","#66c855","#fffbdd","#e5e5e5","#f5fdf8","#e8c3b9","#c4574f" 
-  //                                     ];
-  // public chartColors:Array<any> = [{backgroundColor:"#ef9ab2"},{backgroundColor:"#7bc6f2"},{backgroundColor:"#fce196"}];
-
-  // public chartColors:Array<any>  = ["rgba(159,204,0,1)","rgba(250,109,33,1)","rgba(154,154,154,1)"];
-          
-
-  // public chartColors:Array<any> = [
-  //   'rgb(255, 99, 132)',
-  //   'rgb(255, 159, 64)',
-  //   'rgb(255, 205, 86)',
-  //   'rgb(75, 192, 192)',
-  //   'rgb(54, 162, 235)',
-  //   'rgb(153, 102, 255)',
-  //   'rgb(201, 203, 207)'
-  // ];
-
-  public chartColors:Array<any> = [{ 
-    backgroundColor: 'rgba(150,12,12,1)',
-    borderColor: '#fff',
-    pointBackgroundColor: 'rgba(150,1,1,1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(110,12,12,0.8)'
-  },
-  { 
-    backgroundColor: 'rgba(12,127,152,1)',
-    borderColor: '#fff',
-    pointBackgroundColor: 'rgba(12,17,12,1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(77,83,96,1)'
-  },
-  { 
-    backgroundColor: 'rgba(12,12,15,1)',
-    borderColor: '#fff',
-    pointBackgroundColor: 'rgba(148,159,177,1)',
-    pointBorderColor: '#fff',
-    pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-  }];
+  public chartColors:Array<any> = [
+      { 
+        backgroundColor: 'rgba(12,12,15,1)',
+        borderColor: '#fff',
+        pointBackgroundColor: 'rgba(148,159,177,1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      }
+    ];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
     private facadeService : FacadeService) { 
-    
-      this.month = "2";
+      this.month = "1";
       this.year = "2018";
       this.monthName =  this.monthNames[this.month]; 
-
     }
 
   ngOnInit() {
@@ -139,8 +104,7 @@ export class AdminReportsComponent implements OnInit {
         this.business = <any>response[0];
         this.businessExpense = <any>response[1];
         console.log("in call:", this.businessExpense);
-        this.loadEarningsExpenseChart();
-        this.loadEarningsServiceChart();
+        this.businessDataLoaded = true; 
         this.businessDataLoadedSubject.next('loaded');
         // finish
      },
@@ -159,11 +123,11 @@ export class AdminReportsComponent implements OnInit {
       this.appointmentList = response;
       this.loadServicesOptedChart();
     
-      if (this.earningsExpenseDataLoaded) {
-        this.loadStaffBusinessChart();
+      if (this.businessDataLoaded) {
+        this.loadChartsByBusinessAppointments();
       } else {
         this.businessDataLoadedSubject.asObservable().subscribe(x => {
-          this.loadStaffBusinessChart();
+          this.loadChartsByBusinessAppointments();
         });
       }
    },
@@ -173,6 +137,12 @@ export class AdminReportsComponent implements OnInit {
       throw error;
     }
   );
+}
+
+public loadChartsByBusinessAppointments() : void {
+  this.loadStaffBusinessChart();
+  this.loadEarningsExpenseChart();
+  this.loadEarningsServiceChart();
 
 }
 
@@ -193,17 +163,51 @@ export class AdminReportsComponent implements OnInit {
     this.staffList = this.business.staff;
     console.log("staffList:", this.staffList);
 
+    let businServices = this.business.services;
+
+    let earningsData = [];
+    let expenseData = [];
+
+    /**
+     * For each staff,
+     *  get the list of appointments by service and staff
+     *     calculate the cost of them.. that is earnings for the staff
+     */
     this.staffList.forEach( (staff : Staff) => {
       this.barChartLabels.push(staff.staff_name);
+      let staffEarnings = 0;
+      businServices.forEach( service => {
+        let appointmentsByStaffNService = this.appointmentList.filter(a => a.service == service.name
+                                         && a.staffId == staff.staff_id);
+        staffEarnings += (appointmentsByStaffNService.length * parseInt(service.cost));
+      }, this);
+      earningsData.push( staffEarnings ); 
+      let staffExpense = this.businessExpense.filter(x => x.bus_id == this.business.bus_id 
+                                && staff.staff_id == x.staffId);
+      if (staffExpense.length > 0) {
+        expenseData.push(staffExpense[0].cost); 
+      } else {
+        expenseData.push(0);
+      }
     });
 
     this.barChartLabels.push("Miscellaneous");
+    earningsData.push(0);
+    let miscelaneousExpenseList = this.businessExpense.filter(x => x.bus_id == this.business.bus_id && !x.staffId );
+    let miscelaneousCost = 0;
+    
+    miscelaneousExpenseList.forEach(x => {
+      if (x.cost) {
+        miscelaneousCost += parseInt(x.cost);
+      }
+    });
+
+    expenseData.push(miscelaneousCost);
 
     this.barChartData = [
-      {data: [265, 259, 280, 0], label: 'Earnings'},
-      {data: [28, 48, 40, 50], label: 'Expense'}
+      {data: earningsData, label: 'Earnings'},
+      {data: expenseData, label: 'Expense'}
     ];
-
     this.earningsExpenseDataLoaded = true;
   }
 
@@ -252,34 +256,10 @@ export class AdminReportsComponent implements OnInit {
     this.staffBusinessDataLoaded = true;
   }
 
-  
-  public lineChartLabels:Array<any> = []; // service names
-  public lineChartData:Array<any> = [];   // data with respect to staff
-  public lineChartType:string = 'line';
-  
-  public loadEarningsServiceChart() : void {
-    this.lineChartData = [
-      {data: [65, 59, 80], label: 'Dr. Devi'},
-      {data: [28, 48, 40], label: 'Dr. Susan'},
-      {data: [58, 28, 90], label: 'Dr. Saran'}
-    ];
-    
-    this.lineChartLabels = ['Whitening', 'Crowning', 'Root Canal'];
-
-    this.servicesEarningsDataLoaded = true;
-  }
-
-  public stackedChartLabels:Array<any> = ["January", "February", "March"]; // service names
-  public stackedChartData:Array<any> = [{
-    label: 'Dataset 1',
-    data: [ 10, 20,30 ]
-}, {
-    label: 'Dataset 2',
-    data: [20, 30, 10]
-}, {
-    label: 'Dataset 3',
-    data: [40,15,20]
-}]
+  // service names
+  public stackedChartLabels:Array<any> = []; 
+  // data with respect to staff
+  public stackedChartData:Array<any> = []
   public stackedChartType:string = 'bar';
   public stackedChartOptions = {
     responsive: true,
@@ -291,8 +271,36 @@ export class AdminReportsComponent implements OnInit {
             stacked: true
         }]
     }
-};
-
+  };  
+  
+  public loadEarningsServiceChart() : void {
+    this.stackedChartData = [];
+    console.log("business:", this.business);
+    let businServices = this.business.services;
+    // let businServices = [{name: "Dental Cleaning", cost: "300"}, {name: "Root Canal Treatment", cost: "100"}, 
+    //                        {name: "Cavities", cost: "250"}, {name: "Teeth Pain", cost: "100"}];
+    let serviceList = new Set(businServices.map(y => y.name ));
+    // service offerd
+    this.stackedChartLabels =  Array.from(serviceList.values());
+    
+    let staffList =  this.business.staff;
+    staffList.forEach( staff => {
+      var stackData = {};
+      stackData["label"] = staff.staff_name;
+      stackData["data"] = [];
+      businServices.forEach( service => {
+        let appointmentsByStaffNService = this.appointmentList.filter(a => a.service == service.name
+                                         && a.staffId == staff.staff_id);
+        let cost = 0;
+        if (service.cost) {
+          cost = parseInt(service.cost);
+        }
+        stackData["data"].push( appointmentsByStaffNService.length * cost); 
+      }, this); 
+      this.stackedChartData.push(stackData);
+    });
+    this.servicesEarningsDataLoaded = true;
+  }
 
   // events
   public chartClicked(e:any):void {

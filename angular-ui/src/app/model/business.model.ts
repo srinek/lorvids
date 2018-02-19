@@ -1,5 +1,6 @@
 import {Staff} from './staff.model';
 import {AppointmentSlot} from './appointment-slot.model';
+import { Service } from './service.model';
 
 export class Business{
 
@@ -21,7 +22,8 @@ export class Business{
     specialized_in? : string = "";
     awards? : string = "";
     appointment_instructions? : string[] = [];
-    services? : string[] = [];
+    services? : Service[] = [];
+    // services? : string[] = [];
     isOpenNow : boolean = false;
     openTime : Date;
     closeTime : Date;
@@ -63,7 +65,10 @@ export class Business{
     private mapServices(src) : void {
         if(src.services){
             src.services.forEach( (service) => {
-                this.services.push(service.name);
+                var serviceObj = new Service();
+                serviceObj.name = service.name;
+                serviceObj.cost = service.cost;
+                this.services.push(serviceObj);
             });
         }
     }
