@@ -16,6 +16,7 @@ class Expense {
         this.remarks = src.remarks;
         this.type = src.type;
         this.repeatMonth = src.repeatMonth;
+        this.staffId = src.staffId;
     }
 }
 
