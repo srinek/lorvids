@@ -5,6 +5,7 @@ import {Business} from '../model/business.model';
 import {Staff} from '../model/staff.model';
 import { User } from '../model/user.model';
 import { Appointment } from '../model/appointment.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-confirm-appointment',
@@ -20,7 +21,8 @@ export class ConfirmBookingComponent implements OnInit {
   bookingId : string;
   public error : boolean = false;
   public errorMessage : string = "";
-  
+  imageRoot : string = environment.imageRoot;
+
   constructor(
     private facadeService : FacadeService,
     private route : ActivatedRoute,

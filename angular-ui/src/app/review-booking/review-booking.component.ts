@@ -10,6 +10,7 @@ import { User } from '../model/user.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
 import { Appointment } from '../model/appointment.model';
 import { ParamMap } from '@angular/router/src/shared';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-book-appointment',
@@ -33,6 +34,7 @@ export class ReviewBookingComponent implements OnInit {
   userEmail : string;
   userData : User;
   apptBooked : boolean = false;
+  imageRoot : string = environment.imageRoot;
 
   constructor(
     private facadeService : FacadeService,

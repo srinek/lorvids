@@ -50,8 +50,8 @@ export class Business{
         this.specialized_in = src.specialized_in;
         this.appointment_instructions = src.appointment_instructions;
         this.awards = src.awards;
-        this.images = ["../../assets/trendy_looks.jpg", "../../assets/image-2.jpg"];
-        this.defaultImage = "../../assets/trendy_looks.jpg";
+        this.images = ["trendy_looks.jpg", "image-2.jpg"];
+        this.defaultImage = "trendy_looks.jpg";
         this.mapServices(src);
         this.bus_hours = src.bus_hours;
         this.bus_time_zone = src.bus_time_zone;

@@ -1,5 +1,5 @@
 <div class="card">
-    <div class="card-title"  style="margin-bottom:0px">
+    <div class="card-title goto-business"  style="margin-bottom:0px" (click)="gotoBusiness(business)">
       <h4 class="card-title text-blue ml-4">{{business.bus_name}}</h4>
       <h6 class="card-subtitle ml-4 text-muted">
         <address>
@@ -9,9 +9,9 @@
     </div>  
       
     <div class="card-block" style="padding-top:0px">
-        <div class="row">
+        <div class="row goto-business" (click)="gotoBusiness(business)">
           <img alt="{{business.bus_name}}" height="150px" width="100%" 
-            src="{{business.defaultImage}}" title="{{business.bus_name}}"
+            src="{{imageRoot}}/{{business.defaultImage}}" title="{{business.bus_name}}"
             class="rounded">
         </div>
         <div class="row">
