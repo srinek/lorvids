@@ -6,7 +6,7 @@
             <div class="container">
                 <form>
                     <div class="">
-                            <div id="home-page-search" class="input-group d-flex flex-xl-row flex-lg-row flex-md-row flex-column justify-content-around">
+                            <div id="home-page-search" class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column justify-content-around">
                                 <ng-select [items]="categoryValues"
                                     [active]="categoryValues"
                                     (selected)="categorySelected($event)">
@@ -14,7 +14,7 @@
                                 <input #searchFor type="text" class="form-control form-control-lg" 
                                 placeholder="What service are you looking for?"
                                 (keyup.enter)="onSearch(searchFor.value)">
-                                <span class="input-group-btn mt-1">
+                                <span class="input-group-btn">
                                     <button class="btn btn-primary bg-blue" type="button"
                                     (click)="onSearch(searchFor.value)">Search</button>
                                 </span>

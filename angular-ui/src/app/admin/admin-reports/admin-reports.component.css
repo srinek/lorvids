@@ -3,6 +3,7 @@
   vertical-align: top; 
   width: 230px; 
   margin-bottom:10px;
+  padding-top: 10px;
 }
 
 .date-picker-btn-group button {
@@ -16,6 +17,196 @@
 .card-actions small.text-muted {
   color:#f1f3f8 !important;
 }
+
+/**
+YEAR PICKER
+**/
+
+.year-picker ul {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-around;
+  padding: 0 1.25rem;
+  border-bottom: 1px solid #ebeef2;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 10px 0px ;
+
+}
+
+.year-picker ul li{
+  cursor: pointer;
+  margin-bottom: -1px;
+  text-align: center;
+}
+
+
+.year-picker ul li a {
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+  padding: 1.25rem;
+  color: #a4abb3;
+}
+
+.year-picker ul li.active {
+  position: relative;
+  background-color: #ebeff5;
+  border-radius: 0.375rem 0.375rem 0 0;
+}
+
+.year-picker ul li.active a{ 
+  color: #000;
+  font-size: 22px;
+}
+
+.year-picker ul li.active::before{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 5px;
+  border-radius: 2.5px;
+  bottom: 0;
+  left: 0;
+  background: #40dc7e;
+}
+
+.year-picker ul li a:hover {
+  color: #2a2a2a;
+  font-weight: 600;
+}
+
+
+/**
+MONTH PICKER
+**/
+.month-picker-fieldset {
+  display: inline-block;
+  padding: 0px 7px;
+  background: rgb(61, 162, 236);
+  border-radius: 5px;
+  padding-top: 5px;
+}
+
+.month-picker-fieldset > input {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.month-picker-label, .month-picker-label:before {
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+}
+.month-picker-label {
+  position: relative;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: 200;
+  color: #fbfbfb;
+  text-transform: uppercase;
+}
+.month-picker-label, .month-picker-nav {
+  display: inline-block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  line-height: 25px;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+input[type=radio][name=month]:checked + label {
+  border-radius: 5px;
+  background: #40dc7e;
+}
+
+
+
+/**
+For Switch
+**/
+
+/* .nb-theme-cosmic[_nghost-c7], .nb-theme-cosmic [_nghost-c7] {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 50%;
+} */
+
+.theme-switch {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0;
+}
+
+.theme-switch .switch-label {
+  padding: 0px 10px;
+}
+
+.yearly .switch input:checked + .slider::before{
+  -webkit-transform: translateX(2.25rem);
+  transform: translateX(2.25rem);
+}
+
+.yearly .switch input {
+  display: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 4rem;
+  height: 1.75rem;
+  margin: 0;
+}
+
+.switch .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.75rem;
+  background-color: #ebeff5;
+}
+
+.switch .slider::before {
+  position: absolute;
+  content: '';
+  height: 1.75rem;
+  width: 1.75rem;
+  border-radius: 50%;
+  background-color: #40dc7e;
+  transition: 0.2s;
+  box-shadow: 0 0 0.25rem 0 rgba(164, 171, 179, 0.4);
+}
+
+
+
+/**
+For Switch - END
+**/
+
 
 /***
 copied

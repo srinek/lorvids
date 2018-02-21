@@ -26,20 +26,8 @@ export class AdminReportsComponent implements OnInit {
   /**
    * Date Picker: Year, month, day : https://github.com/kekeh/ngx-mydatepicker#options-attribute
    * https://www.npmjs.com/package/ngx-mydatepicker
-   * profit expense                        hori.  Bar chart
    * 
-   * categories/services most opted for a week           Bar chart
-   * 
-   * Staff usage in a week   -- no. of appointments       Pie chart
-   * 
-   * Line Charts
-   * Sales in relation to awareness
-   * 
-   * 
-   * Quarterly and Monthly Revenue Reports      Pie chart
-   * 
-   * Capacity and Resource Planning
-   * 
+   * https://valor-software.com/ng2-charts/
    * 
    * 
    */
