@@ -3,7 +3,7 @@
         <div class="container">
             <carousel [interval]="5000" [noWrap]="false">
                     <slide *ngFor="let bImage of business.images; let index=index">
-                        <img [src]="bImage" alt="business.bus_name" height="300" width="100%">
+                        <img src="{{imageRoot}}/{{bImage}}" alt="business.bus_name" height="300" width="100%">
                     </slide>
             </carousel>
             <div class="card bg-red text-white">
@@ -35,10 +35,10 @@
         <div class="d-flex flex-wrap justify-content-center">
             <h4 *ngIf="!staffSelected">Select Staff</h4>
             <div *ngIf="staffSelected" class="col-12 text-center">
-                <h4><a href="../../assets/{{staffSelected.image}}" class="">{{staffSelected.staff_name}}</a></h4>
+                <h4><a href="{{imageRoot}}/{{staffSelected.image}}" class="">{{staffSelected.staff_name}}</a></h4>
                 <div class="text-center">
                     <a href="chef-profile.html" class="">    
-                        <img src="../../assets/{{staffSelected.image}}" height="115" width="115" 
+                        <img src="{{imageRoot}}/{{staffSelected.image}}" height="115" width="115" 
                                 class="img-round img-photo d-inline-block " alt="">
                     </a>
                 </div>

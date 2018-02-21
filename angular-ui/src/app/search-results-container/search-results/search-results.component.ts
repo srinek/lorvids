@@ -19,6 +19,7 @@ export class SearchResultsComponent implements OnInit {
   public filterBy : Map<string, string[]> = new Map<string, string[]>();
   public error : boolean = false;
   public errorMessage : string = "";
+  public searchDone : boolean = false;
   
   constructor(private facadeService : FacadeService,
               private route : ActivatedRoute,
@@ -38,7 +39,7 @@ export class SearchResultsComponent implements OnInit {
             }
             this.filterBy.set(key, paramMap.getAll(key));
          })
-         console.log("searchFor "+this.searchTerm);
+         //console.log("searchFor "+this.searchTerm);
          this.facadeService.getFacetedSearchResults(this.searchTerm, searchProp, this.filterBy)
             .subscribe(
                 (searchVo : SearchVO) => {
@@ -48,16 +49,13 @@ export class SearchResultsComponent implements OnInit {
                 (error : string) => {
                   this.error = true;
                   this.errorMessage = "Yikes!!! something cramped our service "+error;
+                },
+                () => {
+                  this.searchDone = true;
                 }
             )
       }
     );
     
   }
-
-  gotoBusiness(business : Business){
-    this.router.navigate(['/bushome', business.bus_id],
-    {relativeTo:this.route});
-  }
-
 }

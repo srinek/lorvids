@@ -5,7 +5,7 @@
           (click)="toggleNav()">
       <i class="fa fa-bars"></i>
   </button>
-  <a class="navbar-brand" [routerLink]="['']"><img class="img-fluid logo" src="../../assets/logo.png" alt="" /></a>
+  <a class="navbar-brand" [routerLink]="['']"><img class="img-fluid logo" src="{{imageRoot}}/logo.png" alt="" /></a>
   <div class="collapse navbar-collapse" [ngClass]="{show:showNav}" id="navbarCollapse">
       <app-search-box id="header-search" *ngIf="!isMainPage"></app-search-box>
       <ul class="navbar-nav pull-right ml-auto">

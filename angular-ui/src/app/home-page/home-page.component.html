@@ -36,7 +36,7 @@
                     <p class="p-header m-b-40">How it works?</p>
                     <div>
                         <p class="text m-b-60">
-                            We connect students and professionals in finding new homes. Book off-campus, furnished stays around your college                             or profession from local hosts.
+                            Lorvids lets you book your service appointments anytime from your desktop or mobile phone. Provides appointment confirmation, reminder emails and text messages.
                         </p>
                     </div>
                 </div>
@@ -44,33 +44,27 @@
     <div>
             <div class="d-flex flex-xl-row flex-lg-row flex-md-row flex-sm-row flex-column justify-content-around">
                     <div class="about-card d-flex flex-column align-items-center">
-                        <img class="m-b-20"
-                            src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/search-icon-e6a66f9a989faab1171eb3a6d26800b40e71ebf2f3d26cf3619c2d359cec0cae.png"
+                        <img class="m-b-20" height="120px" width="120px"
+                            src="{{imageRoot}}/homepage-search-icon.svg"
                             alt="Search icon">
                         <h3 class="m-b-20 card-title">SEARCH</h3>
-                        <p class="m-b-20 card-text">Type and search around campuses, metro
-                            stations or cities. Check out your hosts profile to view photos of
-                            them, their listings and prices too! Select from the ones you like.
+                        <p class="m-b-20 card-text">Select a service category, set your location and search for your service need.
                         </p>
                     </div>
                     <div class="about-card d-flex flex-column align-items-center">
-                            <img class="m-b-20"
-                            src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/match-icon-644bad4739e92700e558118ea25ffd26be719f94f277291dcdf040d65e14f552.png"
+                            <img class="m-b-20" height="120px" width="120px"
+                            src="{{imageRoot}}/homepage-calendar.png"
                             alt="Match icon">
-                        <h3 class="m-b-20 card-title">BOOK</h3>
-                        <p class="m-b-20 card-text">Book as many stays as you like. Hosts
-                            typically respond within 48 hours. If you don’t hear back from your
-                            host, we will send you alternative options similar to those which you
-                            inquired.
+                        <h3 class="m-b-20 card-title">PICK SLOT</h3>
+                        <p class="m-b-20 card-text">Pick your business, staff and convenient time from the available search results.
                         </p>
                     </div>
                     <div class="about-card d-flex flex-column align-items-center">
-                            <img class="m-b-20"
-                            src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/home-icon-9d5eb79cff3024547825751f67368232a1f1bd9fc4e188183abc7352a5e00cd0.png"
+                            <img class="m-b-20" height="120px" width="120px"
+                            src="{{imageRoot}}/homepage-fill-in-form.png"
                             alt="Home icon">
-                        <h3 class="m-b-20 card-title">MOVE IN</h3>
-                        <p class="m-b-20 card-text">Once your host approves your booking,
-                            simply pay your reservation fee and move into your new home.
+                        <h3 class="m-b-20 card-title">BOOK</h3>
+                        <p class="m-b-20 card-text">Review appointment, Fill in your details to book the appointment.
                         </p>
                     </div>
                 </div>
@@ -135,11 +129,11 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let category of categories">
                     <div class="box">
                         <a [routerLink]="['/search']" [queryParams]="{'look_for' : category.categoryCode, '_p':'b'}">
-                            <img class="image" src="https://s3.amazonaws.com/lorvid-devlot/{{category.image}}" alt="{{category.categoryName}}">
+                            <img class="image" src="{{imageRoot}}/{{category.image}}" alt="{{category.categoryName}}">
                             <div class="img-caption">
                                 <p>
                                     <span>
-                                        <img src="https://s3.amazonaws.com/lorvid-devlot/favicon.png" height="15px">
+                                        <img src="{{imageRoot}}/favicon.png" height="15px">
                                     </span>
                                 </p>
                                 <h4>{{category.categoryName}}</h4>
@@ -156,12 +150,3 @@
         </div>
     </div>
 </section>
-        
-<!-- <div class="container">  
-    <div class="row row-section">
-        <app-recently-visited></app-recently-visited>
-    </div>
-    <div class="row row-section">
-        <app-trending></app-trending>
-    </div>
-</div> -->

@@ -17,16 +17,23 @@
             <!-- <div class="row">
                 <app-search-facets [facets]="facets" [searchTerm]="searchTerm"></app-search-facets>
             </div> -->
-            <div class="row search-results pt-5" *ngIf="searchResults.length > 0">
-                <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
-                        <app-search-result [business]="business"></app-search-result>
+            <ng-container *ngIf="searchDone">
+                <div class="row search-results pt-5" *ngIf="searchResults.length > 0">
+                    <div class="col-lg-4 col-md-6 search-result" *ngFor="let business of searchResults">
+                            <app-search-result [business]="business"></app-search-result>
+                    </div>
                 </div>
-            </div>
-            <div class="row search-results pt-5" *ngIf="searchResults.length == 0">
-                <div class="container alert alert-danger"> 
-                    No results matched to your search
+                <div class="row search-results pt-5" *ngIf="searchResults.length == 0">
+                    <div class="container alert alert-danger"> 
+                        No results matched to your search
+                    </div> 
+                </div>
+            </ng-container>
+            <ng-container *ngIf="searchDone">
+                <div class="container alert alert-info"> 
+                    Loading Search results ...
                 </div> 
-            </div>
+            </ng-container>
     </div>
 
     

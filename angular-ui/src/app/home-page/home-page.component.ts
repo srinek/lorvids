@@ -4,6 +4,7 @@ import {FacadeService} from '../service/facade.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { Category } from '../model/category.model';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +17,7 @@ export class HomePageComponent implements OnInit {
   public categoryValues : Array<string> = [];
 
   private selectedCategory : string;
+  imageRoot : string = environment.imageRoot;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
