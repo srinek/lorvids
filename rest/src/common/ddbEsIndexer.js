@@ -39,4 +39,23 @@ module.exports.esStaffIndexer = (event, context, callback) => {
             }
         });
     });
-}    
+} 
+
+module.exports.appointmentIndexer = (event, context, callback) => {
+    event.Records.forEach((record) => {
+        console.log("appointment record:",record);
+        let esObj = docMapper.appointmentDocMapper(record.dynamodb.NewImage);
+        es.esIndex(esObj, (error, response) => { 
+            if(error){
+                console.log("error-- %j", error);
+                callback(null, error);
+            }
+            else{
+                console.log("success-- %j", response);
+                callback(null, response);
+            }
+        });
+    });
+} 
+
+

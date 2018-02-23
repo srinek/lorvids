@@ -1,6 +1,46 @@
 var DynamoDB = require('aws-sdk/clients/dynamodb');
 const elBuilder = require('elastic-builder');
 
+module.exports.appointmentDocMapper = (ddbDoc) => {
+  let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
+  console.log("appointment doc indexed %j -- ", ddbJsDoc);
+  let indexdoc = {};
+  setAppoinmentIndexType(indexdoc,true);
+  indexdoc.id = ddbJsDoc.AppointmentId;
+  indexdoc.body = ddbJsDoc;
+  return indexdoc;
+}
+
+var ddbToESAppointmentDoc = (ddbDoc) => {
+
+  var esObj = {};
+  var fieldsToCopy = ["checkin","checkout","cost","location","notes","service","status","time"];
+  // ddbColumnName:ESAttributeName
+  var fieldsToMap = {"AppointmentId" : "appointment_id", "busId":"bus_id", "staffId":"staff_id", "userEmail":"user_email",
+                      "creationDate" : "creation_date", "createdBy":"created_by", "updateDate":"update_date",
+                      "updatedBy":"updated_by" }
+
+  fieldsToCopy.forEach(function(element){
+    esObj[element] = ddbDoc[element]; 
+  });
+
+  for (var key in fieldsToMap) {
+    if (ddbDoc.hasOwnProperty(key)) {
+      esObj[fieldsToMap.key] = ddbDoc[key]; 
+    }
+  }
+
+  return esObj; 
+}
+
+var setAppoinmentIndexType = (indexdoc, refresh) => {
+  indexdoc.index = "business_docs";
+  indexdoc.type = 'appointment_info';
+  if(refresh){
+    indexdoc.refresh = true;
+  }
+}
+
 module.exports.businessDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
   console.log("business doc indexed %j -- ", ddbJsDoc);
