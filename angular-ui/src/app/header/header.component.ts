@@ -1,4 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { FacadeService} from '../service/facade.service';
 import { Subscription } from 'rxjs/Subscription';
 import { environment } from '../../environments/environment';
@@ -16,7 +18,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   private mainPageUnloadedSubscription : Subscription;
 
-  constructor(private facadeService : FacadeService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private facadeService : FacadeService) {
 
    }
 
@@ -37,4 +41,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showNav = !this.showNav;
   }
 
+  onSearch(searchVal) : void{
+    this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {'look_for' : searchVal}});
+  }
 }
