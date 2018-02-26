@@ -1,0 +1,475 @@
+curl -XPUT "http://localhost:9200/business_docs" -H 'Content-Type: application/json' -d'
+PUT /business_docs/appointment_info/_mapping
+{
+    "appointment_info" : {
+        "properties" : {
+                "appointment_id" : {
+                    "type" :  "text"
+                },
+                "bus_id" : {
+                    "type" :  "text"
+                },
+                "checkin" : {
+                    "type" :  "date",
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                },
+                "checkout" : {
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    "type" :  "date"
+                },
+                "cost" : {
+                   "type" :  "long"
+                },
+                "location" : {
+                    "type" :  "string"
+                },
+                "notes" : {
+                    "type" :  "string"
+                },
+                "service" : {
+                   "type" :  "string"
+                },
+                "staff_id" : {
+                    "type" :  "string"
+                },
+                "status" : {
+                    "type" :  "string"
+                },
+                "time" : {
+                    "type" :  "date",
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                },
+                "user_email" : {
+                    "type" :  "string"
+                },
+                "creation_date" : {
+                    "type" :  "date",
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                },
+                "created_by" : {
+                    "type" :  "string"
+                },
+                "update_date" : {
+                    "type" :  "date",
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                },
+                "updated_by" : {
+                    "type" :  "string"
+                },
+                "coords": {
+                    "type":"geo_point"
+                }                 				  
+        }
+    }
+}
+
+
+"yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+
+#########
+##
+## BULK INSERT
+##
+###########
+
+POST business_docs/appointment_info/_bulk
+{
+  "appointment_id": "b-test-01-s-01-1516721400000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-23T17:30:00.000Z",
+  "checkout": "2018-02-23T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Root Canal Treatment",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-23T15:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com",
+  "coords": {
+      "lat": 45.0112511097505,
+      "lon": -122.9980246311445
+    }  
+}
+
+{
+  "appointment_id": "b-test-01-s-01-1516894200000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-25T17:30:00.000Z",
+  "checkout": "2018-02-25T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "Some instructions",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-25T15:30:00.000Z",
+  "user_email": "nanda@lorvids.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com",
+  "coords": {
+      "lat": 40.522420,
+      "lon": -74.357716
+    }  
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1519318800000-97356e06",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-22T17:30:00.000Z",
+  "checkout": "2018-02-22T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Teeth Pain",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-22T17:00:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517675400000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-03T17:30:00.000Z",
+  "checkout": "2018-02-03T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Root Canal Treatment",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-03T16:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-02-1518276600000-ec0d4480",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-10T17:30:00.000Z",
+  "checkout": "2018-02-10T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Cavities",
+  "staff_id": "b-test-01-s-02",
+  "status": "Pending",
+  "time": "2018-02-10T15:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-02-1518276600000-9e095e73",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-11T17:30:00.000Z",
+  "checkout": "2018-02-11T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Cavities",
+  "staff_id": "b-test-01-s-02",
+  "status": "Pending",
+  "time": "2018-02-11T15:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517857200000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-02T17:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-02T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517857200000",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "time": "2018-02-02T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-02T17:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517603400000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-02T17:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-02T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-02-1518114600000-6bc07d14",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "asds",
+  "service": "Root Canal Treatment added more",
+  "staff_id": "b-test-01-s-02",
+  "time": "2018-02-08T18:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-08T17:30:00.000Z",
+  "checkout": "2018-02-08T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+    
+}
+{
+  "appointment_id": "b-test-01-s-02-1518114600000-8a0058ef",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "asds",
+  "service": "Root Canal Treatment added more",
+  "staff_id": "b-test-01-s-02",
+  "time": "2018-02-08T18:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-08T17:30:00.000Z",
+  "checkout": "2018-02-08T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+   
+}
+{
+  "appointment_id": "b-test-01-s-02-1518276600000-5ee94c5e",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Cavities",
+  "staff_id": "b-test-01-s-02",
+  "time": "2018-02-10T15:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-10T17:30:00.000Z",
+  "checkout": "2018-02-10T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+    
+}
+{
+  "appointment_id": "b-test-01-s-01-1518467400000-bb25fac7",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "time": "2018-02-12T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-12T17:30:00.000Z",
+  "checkout": "2018-02-12T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+    
+}
+{
+  "appointment_id": "b-test-01-s-01-1518467400000-c184a294",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-12T17:30:00.000Z",
+  "checkout": "2018-02-12T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-12T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1518460200000-73c57b50",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-12T17:30:00.000Z",
+  "checkout": "2018-02-12T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Teeth Pain",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-12T18:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517587200000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-02T17:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "sasasa",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-02T16:00:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-02-1518276600000-cba9fbd9",
+  "bus_id": "b-test-01",
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-02",
+  "time": "2018-02-12T20:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-12T17:30:00.000Z",
+  "checkout": "2018-02-12T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517931000000",
+  "bus_id": "b-test-01",
+  "notes": "some new notes",
+  "service": "Dental Cleaning",
+  "staff_id": "b-test-01-s-02",
+  "time": "2018-02-02T17:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "checkin": "2018-02-02T17:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "status": "Pending",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+    
+}
+{
+  "appointment_id": "b-test-01-s-02-1518276600000-5923b403",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-10T15:30:00.000Z",
+  "checkout": "2018-02-10T16:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Cavities",
+  "staff_id": "b-test-01-s-02",
+  "status": "Pending",
+  "time": "2018-02-10T15:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1518460200000-a132a771",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-12T18:30:00.000Z",
+  "checkout": "2018-02-12T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "notes": "NONE",
+  "service": "Root Canal Treatment",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-12T18:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
+{
+  "appointment_id": "b-test-01-s-01-1517596200000",
+  "bus_id": "b-test-01",
+  "checkin": "2018-02-02T18:30:00.000Z",
+  "checkout": "2018-02-02T19:30:00.000Z",
+  "cost": 150,
+  "location": "110 Main Street, Edison, NJ 08817",
+  "service": "Root Canal Treatment",
+  "staff_id": "b-test-01-s-01",
+  "status": "Pending",
+  "time": "2018-02-02T18:30:00.000Z",
+  "user_email": "srinek@gmail.com",
+  "creation_date": "2018-02-23T15:30:00.000Z",
+  "created_by": "srinek@gmail.com",
+  "update_date": "2018-02-23T15:30:00.000Z",
+  "updated_by": "srinek@gmail.com"
+  
+}
