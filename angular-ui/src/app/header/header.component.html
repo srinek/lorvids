@@ -7,19 +7,21 @@
       </a>
     </div>
     <div class="col-xl-5 col-lg-5 col-md-5 col-sm-1 col-8 inputs">
-      <div class="row">
+      <div class="row" [ngClass]="{'d-none':isMainPage}">
         <div class="col-xl-8 col-lg-12 col-md-12 relative p-0 search-box-div">
           <i class="fa fa-search absolute"></i>
-          <input class="form-control search-box" name="" placeholder="Search a service for appointment" type="text" autocomplete="off">
+          <input class="form-control search-box" #searchFor name="" placeholder="Search a service for appointment" 
+          type="text" autocomplete="off" (keyup.enter)="onSearch(searchFor.value)">
         </div>
         <div class="col-xl-4 col-lg-0 col-md-0 p-0">
-          <select name="svc" id="id-svc" 
-          class="form-control select" selected="Dental"
-          >
-            <option 
-            value="Dental" selected>
-                Dental
-            </option>
+          <select name="svc" id="id-category" 
+          class="form-control select"
+          #category="ngModel" [(ngModel)]="categorySelected">
+            <ng-container *ngFor="let category of categoryValues">
+              <option [ngValue]="category">
+                {{category}}
+              </option>
+            </ng-container>
           </select>
         </div>
       </div>
@@ -37,7 +39,7 @@
                 <li><a>Log In</a></li>
                 <li><a>Sign Up</a></li>
                 <li><a>Help</a></li>
-                <li class="list"><a>LIST YOUR BUSINESS</a></li>
+                <li class="list"><a [routerLink]="['addb']">LIST YOUR BUSINESS</a></li>
               </ul>
             </div>
           </div>

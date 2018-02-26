@@ -7,11 +7,11 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 9999
+    z-index: 9999;
 }
 
 #header .logo a {
-    margin-left: 20px
+    margin-left: 20px;
 }
 
 #header .logo img.desktop {
@@ -73,7 +73,7 @@ header {
 }
 
 
-#header .inputs .input:after {
+#header .inputs .search-box::after {
     background-color: #e7e6e6;
     content: "\007C";
     display: block;
