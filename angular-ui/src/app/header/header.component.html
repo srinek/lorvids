@@ -34,12 +34,25 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" [ngClass]="{show:showNav}">
-            <div class="navbar-nav" id="top-navbar">
+            <div class="navbar-nav" id="h-navbar">
               <ul>
-                <li><a>Log In</a></li>
-                <li><a>Sign Up</a></li>
+                <li [ngClass]="{'d-none':loggedIn}"><a>Log In</a></li>
+                <li [ngClass]="{'d-none':loggedIn}"><a>Sign Up</a></li>
                 <li><a>Help</a></li>
-                <li class="list"><a [routerLink]="['addb']">LIST YOUR BUSINESS</a></li>
+                <li class="list" [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['addb']">LIST YOUR BUSINESS</a></li>
+                <li class="dropdown navbar-user" [ngClass]="{show:showProfile, 'd-block-inline':loggedIn, 'd-none':!loggedIn}" (click)="toggleProifle()">
+                  <a href="/dashboard/home" id="user__img">
+                    <img alt="Nandakishore" style="border-radius: 50%;" src="https://s3.us-east-2.amazonaws.com/4stay/users/profile_pictures/000/003/759/mini/picture?1519688675">
+                  </a>
+                  <a href="javascript:;" class="dropdown-toggle">
+                    <span class="hidden-xs">Nandakishore<b class="caret"></b></span>
+                  </a>
+                  <ul class="dropdown-menu animated fadeInRight show">
+                    <li><a target="_self" href="/dashboard/settings/personal_info">Edit profile</a></li>
+                    <li><a target="_self" href="/dashboard/home">Dashboard</a></li>
+                    <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log Out</a></li>
+                  </ul>
+                </li>
               </ul>
             </div>
           </div>

@@ -17,6 +17,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public categoryValues : Array<string> = [];
   isMainPage : boolean = true;
   showNav : boolean = false;
+  showProfile : boolean = false;
+  loggedIn : boolean = false;
   imageRoot : string = environment.imageRoot;
   categorySelected : string = "";
 
@@ -51,6 +53,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   toggleNav(){
     this.showNav = !this.showNav;
+  }
+
+  toggleProifle(){
+    this.showProfile = !this.showProfile;
   }
 
   onSearch(searchVal) : void{
