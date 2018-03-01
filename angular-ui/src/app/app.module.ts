@@ -9,7 +9,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts'; 
-import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
@@ -108,7 +107,6 @@ import { UserService } from './service/user.service';
     CarouselModule.forRoot(),
     SelectModule,
     ChartsModule,
-    NgxMyDatePickerModule.forRoot(),
     ImageUploadModule.forRoot(),
     BsDropdownModule.forRoot()
   ],
