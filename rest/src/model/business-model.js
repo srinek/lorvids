@@ -19,7 +19,8 @@ class Business{
         self.specialized_in = src.specialized_in;
         self.appointment_instructions = src.appointment_instructions;
         self.awards = src.awards;
-        self.imageurl = src.imageurl;
+        self.images = src.images;
+        self.defaultImage = src.defaultImage;
         self.services = src.services;
         self.bus_time_zone = src.bus_time_zone;
         self.phone = src.phone;
@@ -28,6 +29,12 @@ class Business{
         self.startTime = self.opensAt();
         self.endTime = self.closesAt();
         self.allhours = self.getAllHours();
+        if(src.website){
+            self.website = src.website;
+        }
+        if(src.email){
+            self.email = src.email;
+        }
     }
 
     isOpenNow(){

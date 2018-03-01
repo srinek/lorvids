@@ -2,7 +2,7 @@
     <ng-container *ngIf="displaySlots.length > 0">
         <div class="row mt-2">
            <ul class="list-inline pl-4 mb-0 iphone">
-                <li class="list-inline-item bg-blue text-white" *ngFor="let slot of displaySlots">
+                <li class="list-inline-item bg-logo-letter-o text-white" *ngFor="let slot of displaySlots">
                     <a  class="text-white"
                         title="{{slot.slotTime}}" 
                         [routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"

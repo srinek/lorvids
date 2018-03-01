@@ -50,16 +50,16 @@ export class Business{
         this.specialized_in = src.specialized_in;
         this.appointment_instructions = src.appointment_instructions;
         this.awards = src.awards;
-        this.images = ["trendy_looks.jpg", "image-2.jpg"];
-        this.defaultImage = "trendy_looks.jpg";
+        this.images = src.images;
+        this.defaultImage = src.defaultImage;
         this.mapServices(src);
         this.bus_hours = src.bus_hours;
         this.bus_time_zone = src.bus_time_zone;
         this.openTime = src.startTime;
         this.closeTime = src.endTime;
         this.isOpenNow = src.open;
-        this.website = "wwww.lorvids.com";
-        this.email = "info@lorvids.com";
+        this.website = src.website;
+        this.email = src.email;
     }
 
     private mapServices(src) : void {

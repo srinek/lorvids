@@ -9,6 +9,7 @@
         <datepicker
         [(ngModel)]="selectedDate" 
         [showWeeks]="false" 
+        [minDate]="minDate"
         (ngModelChange)="onDateChange($event)"></datepicker>
     </div>
     </div>

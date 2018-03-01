@@ -108,14 +108,14 @@ header {
 }
 
 #header .menu .navbar #h-navbar li.list a {
-    border: 1px solid #02d830;
+    border: 1px solid #46A8D7;
     border-radius: 3px;
-    color: #02d830;
+    color: #46A8D7;
 }
 
 #header .menu .navbar #h-navbar li.list a:hover {
     color: #ffffff;
-    background: #02d830;
+    background: #46A8D7;
     outline: none;
     text-decoration: none
 }
