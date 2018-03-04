@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input, Output, ViewChild, SimpleChange } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, ViewChild, SimpleChange, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import {FacadeService} from '../../service/facade.service';
@@ -29,6 +29,7 @@ export class AvailableSlotsComponent implements OnInit, OnChanges {
   public errorMessage : string = "";
   rows : number[] = [0, 1, 2];
   slotsLoaded: boolean = false;
+  @Output() dateChange : EventEmitter<Date> = new EventEmitter<Date>();
   
 
   constructor(private route: ActivatedRoute,
@@ -40,7 +41,9 @@ export class AvailableSlotsComponent implements OnInit, OnChanges {
       null).subscribe(   // pass date null on init, so we get next available date
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
-          this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+          this.displaySlots = this.slots;//.slice(this.offset, this.offset+this.size);
+          const date = this.displaySlots[0] && this.displaySlots[0].slotTime;
+          this.dateChange.emit(date);
           this.slotsLoaded = true;
           this.showhideMoreSlots();
           this.prevOffset = this.offset;
@@ -104,7 +107,7 @@ export class AvailableSlotsComponent implements OnInit, OnChanges {
       this.selectedDate).subscribe(
         (appointmentSlots : AppointmentSlot[]) => {
           this.slots = appointmentSlots;
-          this.displaySlots = this.slots.slice(this.offset, this.offset+this.size);
+          this.displaySlots = this.slots;//.slice(this.offset, this.offset+this.size);
           this.showhideMoreSlots();
           this.showHidePrevSlots();
           this.prevOffset = this.offset;
@@ -116,6 +119,8 @@ export class AvailableSlotsComponent implements OnInit, OnChanges {
         }
       );
   } 
+
+
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     console.log("changes",  changes);
