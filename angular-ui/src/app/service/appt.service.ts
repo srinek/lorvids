@@ -85,7 +85,7 @@ export class ApptService {
     public getBusinessBookedAppointments(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Appointment []>{
 
         var apiUrl = this.api + this.endpoint + "/" + "business/" + busId;
-        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=isyearly";
+        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=" + isyearly;
 
         console.log("getBusinessBookedAppointments", apiUrl);
 

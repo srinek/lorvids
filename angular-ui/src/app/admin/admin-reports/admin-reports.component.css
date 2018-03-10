@@ -22,6 +22,13 @@
 YEAR PICKER
 **/
 
+@media (min-width: 992px) { 
+  .ml-25-lg {
+    margin-left: 25%;
+  }
+}
+
+
 .year-picker ul {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -93,7 +100,7 @@ MONTH PICKER
   padding-top: 5px;
 }
 
-.month-picker-fieldset > input {
+.month-picker-fieldset > span input {
   position: absolute;
   clip: rect(1px, 1px, 1px, 1px);
 }

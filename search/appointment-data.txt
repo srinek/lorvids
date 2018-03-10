@@ -4,57 +4,57 @@ PUT /business_docs/appointment_info/_mapping
     "appointment_info" : {
         "properties" : {
                 "appointment_id" : {
-                    "type" :  "text"
+                    "type" :  "keyword"
                 },
                 "bus_id" : {
-                    "type" :  "text"
+                    "type" :  "keyword"
                 },
                 "checkin" : {
                     "type" :  "date",
                     "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "checkout" : {
-                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ",
                     "type" :  "date"
                 },
                 "cost" : {
                    "type" :  "long"
                 },
                 "location" : {
-                    "type" :  "string"
+                    "type" :  "text"
                 },
                 "notes" : {
-                    "type" :  "string"
+                    "type" :  "text"
                 },
                 "service" : {
-                   "type" :  "string"
+                   "type" :  "text"
                 },
                 "staff_id" : {
-                    "type" :  "string"
+                    "type" :  "keyword"
                 },
                 "status" : {
-                    "type" :  "string"
+                    "type" :  "text"
                 },
                 "time" : {
                     "type" :  "date",
                     "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "user_email" : {
-                    "type" :  "string"
+                    "type" :  "text"
                 },
                 "creation_date" : {
                     "type" :  "date",
                     "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "created_by" : {
-                    "type" :  "string"
+                    "type" :  "keyword"
                 },
                 "update_date" : {
                     "type" :  "date",
                     "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "updated_by" : {
-                    "type" :  "string"
+                    "type" :  "keyword"
                 },
                 "coords": {
                     "type":"geo_point"

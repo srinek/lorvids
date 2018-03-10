@@ -15,6 +15,10 @@ import { Staff } from '../../model/staff.model';
 import { Expense } from '../../model/expense.model';
 import { Appointment } from '../../model/appointment.model';
 import { Subject } from 'rxjs';
+import { MonthNames } from '../../model/all.month.model';
+import { Month } from '../../model/month.model';
+
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-admin-reports',
@@ -35,6 +39,8 @@ export class AdminReportsComponent implements OnInit {
    public businessId:string = "b-test-01";
    public month:string = "";
    public year:string = "";
+   public currentMonth:string = "";
+   public currentYear:string = "";
    public monthName:string = "";
    public isyearly:boolean = false;
 
@@ -60,12 +66,11 @@ export class AdminReportsComponent implements OnInit {
    public servicesEarningsErrorMessage : string = ""; 
    public servicesEarningsErrorFlag = false;
 
-   public monthNames : Array<string> = ["January", "February", "March", "April", "May", "June",
-   "July", "August", "September", "October", "November", "December" ];
+   public monthNames : Array<Month> = MonthNames.allMonth;
 
    public businessDataLoadedSubject = new Subject();
 
-  public chartColors:Array<any> = [
+   public chartColors:Array<any> = [
       { 
         backgroundColor: 'rgba(12,12,15,1)',
         borderColor: '#fff',
@@ -79,12 +84,41 @@ export class AdminReportsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private router: Router,
     private facadeService : FacadeService) { 
-      this.month = "1";
-      this.year = "2018";
-      this.monthName =  this.monthNames[this.month]; 
+      var currentDate = new Date();
+      this.month = "" + currentDate.getMonth();
+      this.currentMonth = this.month;
+      this.year = "" + currentDate.getFullYear();
+      this.currentYear = this.year;
+      this.monthName =  this.monthNames[this.month].getFullName(); 
     }
 
+  reportPeriodEvent(event) {
+    this.isyearly = event.target.checked;
+    this.monthName = this.year;
+    if (this.isyearly) {
+      this.initializeChartData(); 
+    } else {
+      // back to monthly view
+      this.reportMonthChangeEvent(null);
+    }
+    
+  }
+
+  reportMonthChangeEvent(event) {
+    if (event) {
+      this.month = event.target.value;
+    }
+    this.monthName =  this.monthNames[this.month].getFullName(); 
+    this.initializeChartData();
+    // this._chart.refresh(); 
+  }
+
   ngOnInit() {
+   this.initializeChartData(); 
+  }
+
+  public initializeChartData(): void {
+    console.log("yearly val:", this.isyearly);
     Observable.forkJoin(
       this.facadeService.getBusiness(this.businessId, true),
       this.facadeService.getBusinessExpenses(this.businessId, this.month, this.year, this.isyearly)
@@ -103,36 +137,34 @@ export class AdminReportsComponent implements OnInit {
       }
     );
 
-
     // Services opted:
     this.facadeService.getBusinessBookedAppointments(this.businessId, this.month, this.year, this.isyearly)
-    .subscribe(response => {
-
-      this.appointmentList = response;
-      this.loadServicesOptedChart();
-    
-      if (this.businessDataLoaded) {
-        this.loadChartsByBusinessAppointments();
-      } else {
-        this.businessDataLoadedSubject.asObservable().subscribe(x => {
+      .subscribe(response => {
+        this.appointmentList = response;
+        this.loadServicesOptedChart();
+      
+        if (this.businessDataLoaded) {
           this.loadChartsByBusinessAppointments();
-        });
+        } else {
+          this.businessDataLoadedSubject.asObservable().subscribe(x => {
+            this.loadChartsByBusinessAppointments();
+          });
+        }
+     },
+      (error : string) => {
+        this.servicesStaffCallErrorFlag = true;
+        this.servicesStaffCallErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
+        throw error;
       }
-   },
-    (error : string) => {
-      this.servicesStaffCallErrorFlag = true;
-      this.servicesStaffCallErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
-      throw error;
-    }
-  );
-}
+    );
+  } // END initializeChartData 
 
-public loadChartsByBusinessAppointments() : void {
-  this.loadStaffBusinessChart();
-  this.loadEarningsExpenseChart();
-  this.loadEarningsServiceChart();
-
-}
+  public loadChartsByBusinessAppointments() : void {
+    this.loadStaffBusinessChart();
+    this.loadEarningsExpenseChart();
+    this.loadEarningsServiceChart();
+  
+  }
 
   model: any = { jsdate: new Date() };
 
@@ -143,10 +175,12 @@ public loadChartsByBusinessAppointments() : void {
   public barChartType:string = 'horizontalBar';
   public barChartLegend:boolean = true;
 
-  public barChartLabels:string[] = [];
-  public barChartData:any[] = [];
+  public barChartLabels:string[];
+  public barChartData:any[];
 
   public loadEarningsExpenseChart() : void {
+    this.barChartLabels = [];
+    this.barChartData = [];
 
     this.staffList = this.business.staff;
     console.log("staffList:", this.staffList);
@@ -197,17 +231,21 @@ public loadChartsByBusinessAppointments() : void {
       {data: expenseData, label: 'Expense'}
     ];
     this.earningsExpenseDataLoaded = true;
-  }
+  } // END loadEarningsExpenseChart
 
   public doughnutChartLabels:string[] = [];
   public doughnutChartData:number[] = [];
   public doughnutChartType:string = 'doughnut';
 
   public loadServicesOptedChart() : void {
-  
+    
+    this.doughnutChartData = [];
+    this.doughnutChartLabels = [];
+    
     if (!this.appointmentList || this.appointmentList.length == 0) {
       this.doughnutChartLabels = ['No Service'];
       this.doughnutChartData = [1];
+      this.servicesOptedDataLoaded = true;
       return;
     } 
 
@@ -218,7 +256,7 @@ public loadChartsByBusinessAppointments() : void {
       this.doughnutChartData.push(this.appointmentList.filter(x => x.service == service).length);
     });
     this.servicesOptedDataLoaded = true;
-  }
+  } // END loadServicesOptedChart
 
   //pie chart - staff busines
   public pieChartLabels:string[] = [];
@@ -226,10 +264,14 @@ public loadChartsByBusinessAppointments() : void {
   public pieChartType:string = 'pie';
   
   public loadStaffBusinessChart() : void {
+
+    this.pieChartLabels = [];
+    this.pieChartData = [];
   
     if (!this.appointmentList || this.appointmentList.length == 0) {
       this.pieChartLabels = ['None'];
       this.pieChartData = [1];
+      this.staffBusinessDataLoaded = true;
       return;
     } 
 
@@ -242,7 +284,7 @@ public loadChartsByBusinessAppointments() : void {
     });
  
     this.staffBusinessDataLoaded = true;
-  }
+  } // loadStaffBusinessChart
 
   // service names
   public stackedChartLabels:Array<any> = []; 
@@ -288,7 +330,7 @@ public loadChartsByBusinessAppointments() : void {
       this.stackedChartData.push(stackData);
     });
     this.servicesEarningsDataLoaded = true;
-  }
+  } // END loadEarningsServiceChart
 
   // events
   public chartClicked(e:any):void {

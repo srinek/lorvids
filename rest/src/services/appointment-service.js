@@ -4,6 +4,8 @@ let Business = require('../model/business-model');
 let Staff = require('../model/staff-model');
 let db = require('../common/db');
 let util = require('../common/util');
+let es = require('../es/es-sync.js');
+let docMapper = require('../common/db-es-doc-mapper.js');
 
 module.exports.findSlotDetails = (slot_id) => {
     var params = {
@@ -16,6 +18,7 @@ module.exports.findSlotDetails = (slot_id) => {
     let slotDataPromise = db.getData(params);
     return slotDataPromise;
 }
+
 module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     let business, staffobj;
     return  businessService.getBusinessById(bus_id).then((businessResult) => {
@@ -37,55 +40,6 @@ module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     });
 }
 
-// let findBookedSlots = (busId, staffId, date) => {
-
-//     if ( typeof(staffId) == "string" ) {
-//         var params = {
-//             TableName: 'Appointments',
-//             IndexName : 'StaffAppointmentsIndex',
-//             KeyConditionExpression: "busId=:bus_id and staffId = :staff_id",
-//             ExpressionAttributeValues: {
-//                ":staff_id": staffId,
-//                ":bus_id" : busId
-//             }
-//          };
-//     }
-//     // staff values has to be an array e.g. ["staff1", "staff2"]
-//     if (typeof(staffId) == "object" ) {
-//         var inObject = { ":bus_id" : busId};
-//         var index = 0;
-//         var staffKeys = "";
-
-//         // inObject = { };
-
-//         // staffId.forEach(function(value) {
-//         //     index++;
-//         //     var titleKey = ":staffId"+index;
-//         //     staffKeys += titleKey + ",";
-//         //     inObject[titleKey.toString()] = value;
-//         // });
-
-//         var params = {
-//             TableName: 'Appointments',
-//             IndexName : 'AppointmentsForBuinessStaff',
-//             // KeyConditionExpression: " busId=:bus_id and staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
-//             // KeyConditionExpression: " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
-//             KeyConditionExpression : "busId=:bus_id",
-//             // FilterExpression: " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
-//             ExpressionAttributeValues: inObject
-//         };
-//     }
-//     console.log("Params123:", params);
-//     let apptPromise = db.queryData(params).then((result) => {
-//         return result;
-//     }).catch( (error) => {
-//         console.log("in error block ", error);
-//         return error;
-//     });
-//     return apptPromise;
-// }
-
-
 let findBookedSlots = (busId, staffId, date) => {
 
     var params = {
@@ -98,24 +52,6 @@ let findBookedSlots = (busId, staffId, date) => {
         }
     };
 
-    if (typeof(staffId) == "object" ) {
-        var inObject = { ":bus_id" : busId};
-        var index = 0;
-        var staffKeys = "";
-
-        // staffId.forEach(function(value) {
-        //     index++;
-        //     var titleKey = ":staffId"+index;
-        //     staffKeys += titleKey + ",";
-        //     inObject[titleKey.toString()] = value;
-        // });
-
-        // params["KeyConditionExpression"] = " busId=:bus_id and staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
-        params["KeyConditionExpression"] = " busId=:bus_id ";
-        // params["FilterExpression"] = " staffId IN (" + staffKeys.substr(0, staffKeys.length-1) + ")",
-        params["ExpressionAttributeValues"] = inObject
-    }
-
     console.log("Params:", params);
     let apptPromise = db.queryData(params).then((result) => {
         return result;
@@ -125,8 +61,73 @@ let findBookedSlots = (busId, staffId, date) => {
     });
     return apptPromise;
 }
-
 module.exports.findBookedSlots= findBookedSlots;
+
+let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
+    console.log("findBookedSlotsES:");
+    var searchTerms = [];
+    var rangeTerms = [];
+    searchTerms.push({"field":"bus_id.raw", "value":busId});
+    if (staffId) {
+        searchTerms.push({"field":"staff_id.raw", "value":staffId}); 
+    }
+
+    var _appointmentDate = new Date(appointmentDate);
+    var month = _appointmentDate.getMonth() + 1; // because months are zero indexed
+    var year = _appointmentDate.getFullYear();
+    var day = _appointmentDate.getDay();
+    var date = _appointmentDate.getDate();
+    
+    if (!viewType || viewType == "day") {
+        rangeTerms.push({"field":"time", from:{operator:"gte", value:year+"-"+month+"-"+date, format:"yyyy-MM-dd"}, 
+                                    to:{operator:"lt", value:year+"-"+month+"-"+date+"||+1d", format:"yyyy-MM-dd"} 
+                 });  
+    } else if (viewType == "year") {
+        rangeTerms.push({"field":"time", from:{operator:"gte", value:year, format:"yyyy"}, 
+                                    to:{operator:"lt", value:year+1, format:"yyyy"} 
+                 });  
+    } else if (viewType == "month") {
+        rangeTerms.push({"field":"time", from:{operator:"gte", value:year+"-"+month, format:"yyyy-MM"}, 
+                to:{operator:"lt", value:year+"-"+month+"||+1M", format:"yyyy-MM"} 
+        });  
+    } else if (viewType == "week") {
+
+        var startDate = new Date(appointmentDate); 
+        startDate.setDate(startDate.getDate() - day); // - day, it will get the day in a week, 0 indexed, 0 is sunday
+        var startMonth = startDate.getMonth() + 1; // because months are zero indexed
+        var startYear = startDate.getFullYear();
+        var startDate = startDate.getDate();
+
+        var endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + 7); // 7 = because week is 7 days
+        var endMonth = endDate.getMonth() + 1; // because months are zero indexed
+        var endYear = endDate.getFullYear();
+        var endDate = endDate.getDate();
+
+        rangeTerms.push({"field":"time", from:{operator:"gte", value:startYear+"-"+startMonth+"-"+startDate, format:"yyyy-MM-dd"}, 
+                                    to:{operator:"lte", value:endYear+"-"+endMonth+"-"+endDate, format:"yyyy-MM-dd"}  
+                            });
+    }
+
+    // searchTerm, rangeTerm, facet
+    let esObj = docMapper.findBookedAppointments(searchTerms, rangeTerms);
+    var appointmentPromise = new Promise(function(resolve, reject) {
+        es.esSearch(esObj, (error, result) => {
+            if (error) {
+                let response = util.error();
+                response.body = JSON.stringify(error)
+                reject(response);
+            } else {
+                let response = util.success();
+                response.body = JSON.stringify(result);
+                resolve(response);
+            }
+        });
+    });
+    
+    return appointmentPromise; 
+}
+module.exports.findBookedSlotsES= findBookedSlotsES;
 
 module.exports.updateAppointment = (appointmentData) => {
     var params = {
@@ -204,20 +205,10 @@ let findBusinessBookedSlots = (businessId, timePeriod, date) => {
 }
 
 
-module.exports.getBusinessBookedAppointments = (busId, month, year, isyearly) => {
+module.exports.getBusinessBookedAppointments = (busId, staffId, appointmentDate, viewType) => {
 
-    return  businessService.getBusinessById(busId).then((businessResult) => {
-        // console.log("businessResult ", businessResult);
-        
-        console.log("staff: ", businessResult.staffIds); 
+    return findBookedSlotsES(busId, staffId, appointmentDate, viewType);
 
-        return findBookedSlots(busId, businessResult.staffIds, "");
-    }).then((bookedSlots) => {
-        console.log("bookedSlots",bookedSlots);
-        return bookedSlots; 
-    }).catch((error) => {
-        console.log(error);
-    });
 }
 
 module.exports.findBusinessBookedSlots= findBusinessBookedSlots;

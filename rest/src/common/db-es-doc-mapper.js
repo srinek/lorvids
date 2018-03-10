@@ -7,7 +7,7 @@ module.exports.appointmentDocMapper = (ddbDoc) => {
   let indexdoc = {};
   setAppoinmentIndexType(indexdoc,true);
   indexdoc.id = ddbJsDoc.AppointmentId;
-  indexdoc.body = ddbJsDoc;
+  indexdoc.body = ddbToESAppointmentDoc(ddbJsDoc);
   return indexdoc;
 }
 
@@ -26,7 +26,7 @@ var ddbToESAppointmentDoc = (ddbDoc) => {
 
   for (var key in fieldsToMap) {
     if (ddbDoc.hasOwnProperty(key)) {
-      esObj[fieldsToMap.key] = ddbDoc[key]; 
+      esObj[fieldsToMap[key]] = ddbDoc[key]; 
     }
   }
 
@@ -148,14 +148,14 @@ module.exports.facetSearchDocMapper = (searchTerm, property, facet) => {
   setDefaults(facetSearchObj, false);
   const requestBody = elBuilder.requestBodySearch();
   console.log("property new ", property);
-  requestBody.query(buildQueryObj(searchTerm, property, facet));
+  requestBody.query(buildSearchQueryObj(searchTerm, property, facet));
   requestBody.aggs(buildAggObj());
   facetSearchObj.body = requestBody.toJSON();
   console.log("search obj %j ", facetSearchObj.body);
   return facetSearchObj;
 }
 
-var buildQueryObj = (searchTerm, property, facet) => {
+var buildSearchQueryObj = (searchTerm, property, facet) => {
   var queryObj = elBuilder.boolQuery()
   .must(elBuilder.matchQuery(getProperty(searchTerm, property), searchTerm));
   if(facet.key === "staff.languages" || facet.key === "staff.gender"){ // TODO : fix this when facet key is fixed in UI
@@ -164,6 +164,54 @@ var buildQueryObj = (searchTerm, property, facet) => {
   else{
     queryObj.filter(buildTermsQueries(facet));
   }
+  return queryObj;
+}
+/**
+ * returns a max. of 1000 records
+ * @param {} searchTerms 
+ * @param {*} rangeTerms 
+ */
+module.exports.findBookedAppointments = (searchTerms, rangeTerms) => {
+  let appointmentSearchObj = {};
+  setAppoinmentIndexType(appointmentSearchObj, false);
+  const requestBody = elBuilder.requestBodySearch();
+  requestBody.query(buildAppointmentQueryObj(searchTerms, rangeTerms));
+  requestBody.from(0);
+  requestBody.size(1000);
+  appointmentSearchObj.body = requestBody.toJSON();
+  console.log("Appointment search query:", appointmentSearchObj.body);
+  return appointmentSearchObj;
+}
+
+/**
+ * 
+ * searchTerms = [{field:"bus_id",value:"b-test-01"}]
+ * rangeTerms =  [{field:"creation_date", from:{operator:"gte", value:"2018", format?:""}, 
+ *                    to:{operator:"lt", value:"2019", format?:"yyyy"}];
+ * 
+ */
+var buildAppointmentQueryObj = (searchTerms, rangeTerms) => {
+  var queryObj = elBuilder.boolQuery();
+  // queryObj.from(0);
+  // queryObj.size(1000);
+
+  if (searchTerms) {
+    searchTerms.forEach( function (searchTerm)
+    {
+      queryObj.must(elBuilder.termQuery(searchTerm.field, searchTerm.value));
+    });
+  }
+  
+  if (rangeTerms) {
+    rangeTerms.forEach( function (rangeTerm)
+    {
+      var rangeQueryObj = elBuilder.rangeQuery(rangeTerm.field);
+      rangeQueryObj.gte(rangeTerm.from.value).format(rangeTerm.from.format);
+      rangeQueryObj.lt(rangeTerm.to.value);
+
+      queryObj.must(rangeQueryObj);
+    });
+  } 
   return queryObj;
 }
 

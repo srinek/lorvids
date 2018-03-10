@@ -117,23 +117,48 @@ let testGetObj = { "pathParameters" :
 
 
 
- let testbookedAppointmentObj = { "pathParameters" : 
-                    {
-                        "busId" : "b-test-01",
-                    },
-                    "queryStringParameters" : 
-                    {
-                        "month": "",
-                        "year":"",
-                        "isyearly":"fasle"
-                    }
-                 };
- appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
-  null, 
-  (error, response) => {
+//  let testbookedAppointmentObj = { "pathParameters" : 
+//                     {
+//                         "busId" : "b-test-01",
+//                     },
+//                     "queryStringParameters" : 
+//                     {
+//                         "month": "",
+//                         "year":"",
+//                         "isyearly":"fasle"
+//                     }
+//                  };
+//  appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+//   null, 
+//   (error, response) => {
 
-    console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
-    console.log(response);
-    console.log('-----------------------------GET RESPONSE END-----------------------------');
-  }
+//     console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
+//     console.log(response);
+//     console.log('-----------------------------GET RESPONSE END-----------------------------');
+//   }
+// );
+
+var _date = new Date();
+_date.setMonth(01); // Feb
+_date.setDate(12);
+
+let testbookedAppointmentObj = { "pathParameters" : 
+{
+    "busid" : "b-test-01",
+},
+"queryStringParameters" : 
+{
+    // "staffid": ,
+    "appointmentdate":_date.getTime(),
+    "viewtype":"day"
+}
+};
+appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+  null, 
+    (error, response) => {
+
+      console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
+      console.log(response);
+      console.log('-----------------------------GET RESPONSE END-----------------------------');
+    }
 );

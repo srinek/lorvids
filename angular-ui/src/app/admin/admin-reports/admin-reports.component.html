@@ -25,7 +25,7 @@
       </span>
   </div> -->
  <!-- input-group datepicker-container -->
-  <div class="col-md-6">
+  <div class="col-sm-12 col-md-12 col-lg-6 ml-25-lg">
       <div class="card">
           <div class="card-header">
               Report View
@@ -35,7 +35,7 @@
                 <label class="theme-switch col-md-6 yearly">
                     <span class="switch-label">Monthly</span>
                     <div class="switch">
-                      <input type="checkbox" checked="checked" />  
+                      <input type="checkbox" [checked]="isyearly" (click)="reportPeriodEvent($event)"/>  
                       <span class="slider"></span>
                     </div>
                     <span class="switch-label">Yearly</span>
@@ -49,36 +49,16 @@
                     </ul>
                   </div>
                   
-                  <div class="month-picker">
+                  <div *ngIf= "!isyearly" class="month-picker">
                     <fieldset class="month-picker-fieldset">
-                      <input type="radio" name="month" value="jan" id="jan">
-                      <label for="jan" class="month-picker-label">Jan</label>
-                      <input type="radio" name="month" value="feb" id="feb">
-                      <label for="feb" class="month-picker-label">Feb</label>
-                      <input type="radio" name="month" value="mar" id="mar">
-                      <label for="mar" class="month-picker-label">Mar</label>
-                      <input type="radio" name="month" value="apr" id="apr">
-                      <label for="apr" class="month-picker-label">Apr</label>
-                      <input type="radio" name="month" value="may" id="may">
-                      <label for="may" class="month-picker-label">May</label>
-                      <input type="radio" name="month" value="jun" id="jun">
-                      <label for="jun" class="month-picker-label">Jun</label>
-                      <input type="radio" name="month" value="jul" id="jul">
-                      <label for="jul" class="month-picker-label">Jul</label>
-                      <input type="radio" name="month" value="aug" id="aug">
-                      <label for="aug" class="month-picker-label">Aug</label>
-                      <input type="radio" name="month" value="sep" id="sep" checked>
-                      <label for="sep" class="month-picker-label">Sep</label>
-                      <input type="radio" name="month" value="oct" id="oct">
-                      <label for="oct" class="month-picker-label">Oct</label>
-                      <input type="radio" name="month" value="nov" id="nov">
-                      <label for="nov" class="month-picker-label">Nov</label>
-                      <input type="radio" name="month" value="dec" id="dec">
-                      <label for="dec" class="month-picker-label">Dec</label>
+                      <span *ngFor="let monthlist of monthNames">
+                        <input  type="radio" name="month"  [attr.checked]="month == monthlist.index ? true : null" 
+                            (click)="reportMonthChangeEvent($event)" 
+                              value="{{monthlist.index}}" id="{{monthlist.index}}">
+                        <label for="{{monthlist.index}}" class="month-picker-label">{{monthlist.shortName}}</label>
+                      </span>
                     </fieldset>
                   </div>
-                
-
             </div>
           </div>
         </div>

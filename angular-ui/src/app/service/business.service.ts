@@ -54,7 +54,7 @@ export class BusinessService {
     public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Expense[]>{
 
         var apiUrl = this.api + this.expenseEndpoint+"/"+busId;
-        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=isyearly";
+        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=" + isyearly;
 
         console.log("getBusinessExpenses", apiUrl);
 
