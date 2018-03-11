@@ -221,6 +221,14 @@ functions:
           path: pic/{picid}
           method: delete
           cors : true
+  activateUser:
+    handler: api/user.activateUser
+    description : activate user
+    events:
+      - http:
+          path: user/activate/{emailHash}
+          method: get
+          cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

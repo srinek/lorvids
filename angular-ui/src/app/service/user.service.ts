@@ -43,4 +43,20 @@ export class UserService {
             }
         );
     }
+
+    public activateUser(hash:string) : Observable<string>{
+        return this.http.get(this.api + this.endpoint+"/activate/"+ hash).map(
+            (response : Response) => {
+                let res = response.json();
+                if(res.status && res.status === "success"){
+                    return "success";
+                }
+                return Observable.throw(response.json());
+            }
+        ).catch(
+            (error: Response) => {
+              return Observable.throw(error);
+            }
+        );
+    }
 }

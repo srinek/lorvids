@@ -50,8 +50,8 @@ export class ApptService {
     public createAppointment(appt : any) : Observable<AppointmentSlot>{
         return this.http.post(this.api + this.endpointNewAppt+ "?saveuser=true", appt).map(
             (response : Response) => {
-                let res = response.json();
-                let appointmentSlot = new AppointmentSlot(res);
+                //let res = response.json();
+                let appointmentSlot = new AppointmentSlot(appt);
                 return appointmentSlot;
             }
         ).catch(

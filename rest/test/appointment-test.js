@@ -60,15 +60,20 @@ let updateObj = {
   },
   "body": JSON.stringify(reqBody)
 };
-// appointment.save(saveObj , null, (error, response) => {
-//   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
-//   console.log(response);
-//   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-// });
+/*  appointment.save(updateObj , null, (error, response) => {
+   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+   console.log(response);
+   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+ }); */
 
 
 
 let creatReqBody = {
+  "user": {
+    "UserEmail": "srinek@gmail.com",
+    "name": "Nandakishore Nekkanti",
+    "phone": "17323182848"
+  },
   "appt": {
     "staffId": "b-test-01-s-01",
     "busId": "b-test-01",
@@ -77,14 +82,17 @@ let creatReqBody = {
 };
 
 let createObj = {
+  "queryStringParameters": {
+    "saveuser": true
+  },
   "body": JSON.stringify(creatReqBody)
 };
 
-/* appointment.createNew(createObj , null, (error, response) => {
+appointment.createNew(createObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-}); */
+}); 
 
 let testGetObj = { "pathParameters" : 
   {
@@ -128,7 +136,7 @@ let testGetObj = { "pathParameters" :
                         "isyearly":"fasle"
                     }
                  };
- appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+ /* appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
   null, 
   (error, response) => {
 
@@ -136,4 +144,4 @@ let testGetObj = { "pathParameters" :
     console.log(response);
     console.log('-----------------------------GET RESPONSE END-----------------------------');
   }
-);
+); */

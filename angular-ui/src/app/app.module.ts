@@ -56,6 +56,7 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { S3ImageService } from './service/s3image.service';
 import { SearchResultComponent } from './search-results-container/search-results/search-result/search-result.component';
 import { UserService } from './service/user.service';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { UserService } from './service/user.service';
     AdminStaffCountComponent,
     AdminExpenseTrackerComponent,
     AdminStaffDetailsComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    ActivateUserComponent
   ],
   imports: [
     BrowserModule,

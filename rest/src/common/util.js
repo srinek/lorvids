@@ -35,3 +35,8 @@ module.exports.randomValueHex = (len) => {
         .toString('hex') // convert to hexadecimal format
         .slice(0,len);   // return required number of characters
 }
+
+module.exports.generateHash = (dataStr) => {
+    const hash = crypto.createHash('md5').update(dataStr).digest("hex");
+    return hash;
+} 

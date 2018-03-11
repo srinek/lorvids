@@ -15,7 +15,7 @@
             class="rounded">
         </div>
         <div class="row">
-              <div class="col-sm-12 col-md-6 mt-2">
+              <div class="col-sm-12 col-md-6 mt-2" id="staff-container">
                 <ng-select *ngIf="staffNames.length > 1" [items]="staffNames"
                     [active]="staffNames" (selected)="selected($event)" class="w-100">
                 </ng-select>
@@ -33,7 +33,9 @@
                 </div>
               </div>
         </div>
-        <app-available-slots [business]="business" [staff]="selectedStaff" [selectedDate]="selectedDate"> </app-available-slots>
+        <app-available-slots [business]="business" [staff]="selectedStaff" 
+        [selectedDate]="selectedDate"
+        (dateChange)="onDateChange($event)"> </app-available-slots>
         
     </div>
 </div>
