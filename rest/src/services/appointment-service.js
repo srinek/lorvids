@@ -1,6 +1,7 @@
 let businessService = require('./business-service');
 let staffService = require('./staff-service');
 let Business = require('../model/business-model');
+let ResponseModel = require('../model/response-model');
 let Staff = require('../model/staff-model');
 let db = require('../common/db');
 let util = require('../common/util');
@@ -119,7 +120,8 @@ let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
                 reject(response);
             } else {
                 let response = util.success();
-                response.body = JSON.stringify(result);
+                let responseModel =  new ResponseModel(result);
+                response.body = JSON.stringify(responseModel);
                 resolve(response);
             }
         });

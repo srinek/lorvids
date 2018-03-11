@@ -20,3 +20,5 @@ class Expense {
     }
 }
 
+module.exports = Expense; 
+

@@ -91,13 +91,11 @@ module.exports.getBusinessBookedAppointments = (event, context, callback) => {
     appointmentService
        .getBusinessBookedAppointments(busId, staffId, _date, viewType)
         .then( (data) => {
-            console.log("api response data ", data);
             let response = util.success();
             response.body = JSON.stringify(data);
             callback(null, response);
         })
         .catch((error) => {
-            console.log("api error ",error);
             let response = util.error();
             response.body = JSON.stringify(error);
             callback(null, response);
