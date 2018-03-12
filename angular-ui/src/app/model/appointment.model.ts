@@ -9,6 +9,8 @@ export class Appointment {
     time :  Date;
     notes : string;
     service : string;
+    checkin: Date;
+    checkout: Date;
 
     constructor(private json? : string){
         if(json){
@@ -17,13 +19,15 @@ export class Appointment {
     }
 
     public map(src) : void {
-        this.staffId = src.staffId;
-        this.userEmail = src.userEmail;
-        this.AppointmentId = src.AppointmentId;
-        this.busId = src.busId;
+        this.staffId = src.staff_id;
+        this.userEmail = src.user_email;
+        this.AppointmentId = src.appointment_id;
+        this.busId = src.bus_id;
         this.location = src.location;
         this.time = src.time;
         this.notes = src.notes;
         this.service = src.service;
+        this.checkin = src.checkin;
+        this.checkout = src.checkout;
     }
 }

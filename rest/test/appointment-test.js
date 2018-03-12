@@ -150,7 +150,7 @@ let testbookedAppointmentObj = { "pathParameters" :
 {
     // "staffid": ,
     "appointmentdate":_date.getTime(),
-    "viewtype":"day"
+    "viewtype":"week"
 }
 };
 appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 

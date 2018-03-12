@@ -72,7 +72,7 @@ let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
     if (staffId) {
         searchTerms.push({"field":"staff_id.raw", "value":staffId}); 
     }
-
+    console.log("findBookedSlotsES searchTerms:", JSON.stringify(searchTerms));
     var _appointmentDate = new Date(appointmentDate);
     var month = _appointmentDate.getMonth() + 1; // because months are zero indexed
     var year = _appointmentDate.getFullYear();
@@ -93,36 +93,34 @@ let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
         });  
     } else if (viewType == "week") {
 
-        var startDate = new Date(appointmentDate); 
-        startDate.setDate(startDate.getDate() - day); // - day, it will get the day in a week, 0 indexed, 0 is sunday
-        var startMonth = startDate.getMonth() + 1; // because months are zero indexed
-        var startYear = startDate.getFullYear();
-        var startDate = startDate.getDate();
+        var startDateObj = new Date(appointmentDate); 
+        startDateObj.setDate(startDateObj.getDate() - day); // - day, it will get the day in a week, 0 indexed, 0 is sunday
+        var startMonth = startDateObj.getMonth() + 1; // because months are zero indexed
+        var startYear = startDateObj.getFullYear();
+        var startDate = startDateObj.getDate();
 
-        var endDate = new Date(startDate);
-        endDate.setDate(endDate.getDate() + 7); // 7 = because week is 7 days
-        var endMonth = endDate.getMonth() + 1; // because months are zero indexed
-        var endYear = endDate.getFullYear();
-        var endDate = endDate.getDate();
+
+        var endDateObj = new Date(startDateObj.getTime());
+        endDateObj.setDate(endDateObj.getDate() + 6); // 6 = because week is 7 days, starts with 0
+        var endMonth = endDateObj.getMonth() + 1; // because months are zero indexed
+        var endYear = endDateObj.getFullYear();
+        var endDate = endDateObj.getDate();
 
         rangeTerms.push({"field":"time", from:{operator:"gte", value:startYear+"-"+startMonth+"-"+startDate, format:"yyyy-MM-dd"}, 
                                     to:{operator:"lte", value:endYear+"-"+endMonth+"-"+endDate, format:"yyyy-MM-dd"}  
                             });
     }
-
+    console.log("findBookedSlotsES rangeTerms:", JSON.stringify(rangeTerms));
     // searchTerm, rangeTerm, facet
     let esObj = docMapper.findBookedAppointments(searchTerms, rangeTerms);
+    console.log("findBookedSlotsES search query:", JSON.stringify(esObj));
     var appointmentPromise = new Promise(function(resolve, reject) {
         es.esSearch(esObj, (error, result) => {
             if (error) {
-                let response = util.error();
-                response.body = JSON.stringify(error)
-                reject(response);
+                reject(error);
             } else {
-                let response = util.success();
-                let responseModel =  new ResponseModel(result);
-                response.body = JSON.stringify(responseModel);
-                resolve(response);
+                console.log("RESULT...:", result);
+                resolve(new ResponseModel(result));
             }
         });
     });

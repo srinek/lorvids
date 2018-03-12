@@ -206,9 +206,16 @@ var buildAppointmentQueryObj = (searchTerms, rangeTerms) => {
     rangeTerms.forEach( function (rangeTerm)
     {
       var rangeQueryObj = elBuilder.rangeQuery(rangeTerm.field);
-      rangeQueryObj.gte(rangeTerm.from.value).format(rangeTerm.from.format);
-      rangeQueryObj.lt(rangeTerm.to.value);
-
+      rangeQueryObj[rangeTerm.from.operator](rangeTerm.from.value)
+      if (rangeTerm.from.format) {
+        rangeQueryObj.format(rangeTerm.from.format); 
+      }
+      if (rangeTerm.to) {
+        rangeQueryObj[rangeTerm.to.operator](rangeTerm.to.value);
+        if (rangeTerm.to.format) {
+          rangeQueryObj.format(rangeTerm.to.format); 
+        }
+      }
       queryObj.must(rangeQueryObj);
     });
   } 

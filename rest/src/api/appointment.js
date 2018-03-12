@@ -82,22 +82,29 @@ module.exports.findBookedSlots = (event, context, callback) => {
 }
 
 module.exports.getBusinessBookedAppointments = (event, context, callback) => {
-    let busId = event.pathParameters.busid;
+    let busId = event.pathParameters.busId;
     let staffId = event.queryStringParameters.staffid;
     // expecting appointment date in milliseconds
     const _date = parseInt(event.queryStringParameters.appointmentdate, 10);
+    console.log("queryString:",_date);
+
     let viewType = event.queryStringParameters ? event.queryStringParameters.viewtype : "day";
+    console.log("queryString viewType:",viewType);
 
     appointmentService
        .getBusinessBookedAppointments(busId, staffId, _date, viewType)
         .then( (data) => {
+            console.log("in SUCCESS");
             let response = util.success();
             response.body = JSON.stringify(data);
+            console.log("suc: resp:", response);
             callback(null, response);
         })
         .catch((error) => {
+            console.log("in ERROR");
             let response = util.error();
             response.body = JSON.stringify(error);
+            console.log("in ERROR:", response);
             callback(null, response);
         });
 }

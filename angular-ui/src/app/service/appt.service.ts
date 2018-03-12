@@ -83,9 +83,18 @@ export class ApptService {
     }
 
     public getBusinessBookedAppointments(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Appointment []>{
+        
+        var appointmentDate = new Date();
+        appointmentDate.setFullYear(parseInt(year)); 
+        var viewtype = "month";
+        if (isyearly) {
+            viewtype = "year";
+        } else {
+            appointmentDate.setMonth(parseInt(month));
+        }
 
         var apiUrl = this.api + this.endpoint + "/" + "business/" + busId;
-        apiUrl += "?month=" + month + "&year=" + year + "&isyearly=" + isyearly;
+        apiUrl += "?appointmentdate=" + appointmentDate.getTime() + "&viewtype=" + viewtype;
 
         console.log("getBusinessBookedAppointments", apiUrl);
 
@@ -93,12 +102,15 @@ export class ApptService {
             (response : Response) => {
                 let appointments  : Appointment [] = [];
                 let appointmentArr  = response.json();
+                
+                console.log("appointmentArr:", appointmentArr);
 
-                if (appointmentArr) {
-                    appointmentArr.forEach(element => {
+                if (appointmentArr && appointmentArr.hits) {
+                    appointmentArr.hits.forEach(element => {
                         appointments.push(new Appointment(element));
                     });
                 }
+                console.log("appointments:", appointments);
                 return appointments;
             }
         );
