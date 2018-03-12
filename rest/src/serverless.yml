@@ -78,7 +78,7 @@ package:
     - node_modules/aws-sdk/**
 
 functions:
-  get:
+  getBusiness:
     handler: api/business.get
     description : get business by Id
     events:
@@ -86,7 +86,7 @@ functions:
           path: business/{busId}
           method: get
           cors: true
-  save:
+  saveBusiness:
     handler: api/business.save
     description : save single business
     events:
