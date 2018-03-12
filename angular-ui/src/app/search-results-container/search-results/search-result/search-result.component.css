@@ -1,3 +1,12 @@
 .goto-business{
     cursor: pointer;
 }
+#staff-container .btn-secondary {
+    color: #46A8D7;
+    background-color: #E33238;
+    border-color: #ccc;
+}
+
+#staff-container .ui-select-choices{
+    background-color: #F5AF02;
+}

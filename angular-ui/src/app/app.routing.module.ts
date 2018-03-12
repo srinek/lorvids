@@ -18,6 +18,7 @@ import { AdminStaffDetailsComponent } from './admin/admin-staff-details/admin-st
 import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.component';
 import { AdminExpenseTrackerComponent } from './admin/admin-expense-tracker/admin-expense-tracker.component';
 import { SearchResultsComponent } from './search-results-container/search-results/search-results.component';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
@@ -35,10 +36,8 @@ const appRoutes : Routes = [
     { path: 'admin/staff', component : AdminStaffComponent},
     { path: 'admin/staff-details/:staffid', component : AdminStaffDetailsComponent},
     { path: 'admin/settings', component : AdminSettingsComponent},
-    { path: 'admin/expense', component : AdminExpenseTrackerComponent}
-
-    
-    
+    { path: 'admin/expense', component : AdminExpenseTrackerComponent},
+    { path : 'user/activate/:hash', component: ActivateUserComponent}
     /* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];

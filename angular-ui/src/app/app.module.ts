@@ -9,7 +9,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts'; 
-import { NgxMyDatePickerModule } from 'ngx-mydatepicker';
 import { ImageUploadModule } from "angular2-image-upload";
 
 import { AppComponent } from './app.component';
@@ -57,6 +56,7 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { S3ImageService } from './service/s3image.service';
 import { SearchResultComponent } from './search-results-container/search-results/search-result/search-result.component';
 import { UserService } from './service/user.service';
+import { ActivateUserComponent } from './activate-user/activate-user.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +94,8 @@ import { UserService } from './service/user.service';
     AdminStaffCountComponent,
     AdminExpenseTrackerComponent,
     AdminStaffDetailsComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    ActivateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -108,7 +109,6 @@ import { UserService } from './service/user.service';
     CarouselModule.forRoot(),
     SelectModule,
     ChartsModule,
-    NgxMyDatePickerModule.forRoot(),
     ImageUploadModule.forRoot(),
     BsDropdownModule.forRoot()
   ],

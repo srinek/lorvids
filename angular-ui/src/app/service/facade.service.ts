@@ -146,4 +146,7 @@ export class FacadeService {
         return this.apptService.getBusinessBookedAppointments(busId, month, year, isyearly);
     }
 
+    public activateUser(hash : string) : Observable<string> {
+        return this.userService.activateUser(hash);
+    }
 }

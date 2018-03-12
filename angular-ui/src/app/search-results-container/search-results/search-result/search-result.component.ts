@@ -22,7 +22,9 @@ export class SearchResultComponent implements OnInit {
   constructor(private facadeService : FacadeService,
     private route : ActivatedRoute,
     private router : Router
-    ) { }
+    ) { 
+    
+  }
 
   ngOnInit() {
     this.selectedStaff = this.business.staff[0];
@@ -42,5 +44,9 @@ export class SearchResultComponent implements OnInit {
   public gotoBusiness(business : Business){
     this.router.navigate(['/bushome', business.bus_id],
     {relativeTo:this.route});
+  }
+
+  public onDateChange(newDate){
+    this.selectedDate = newDate;
   }
 }

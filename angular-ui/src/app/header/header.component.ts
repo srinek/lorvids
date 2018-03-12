@@ -1,6 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+
 import { FacadeService} from '../service/facade.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Category } from '../model/category.model';
 import { environment } from '../../environments/environment';
 
 @Component({
@@ -10,13 +13,20 @@ import { environment } from '../../environments/environment';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
+  public categories:Array<Category> = [];
+  public categoryValues : Array<string> = [];
   isMainPage : boolean = true;
   showNav : boolean = false;
+  showProfile : boolean = false;
+  loggedIn : boolean = false;
   imageRoot : string = environment.imageRoot;
+  categorySelected : string = "";
 
   private mainPageUnloadedSubscription : Subscription;
 
-  constructor(private facadeService : FacadeService) {
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private facadeService : FacadeService) {
 
    }
 
@@ -24,8 +34,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.mainPageUnloadedSubscription = this.facadeService.mainPageUnLoaded.subscribe(
          (mainPageUnloaded : boolean) => {
            this.isMainPage = !mainPageUnloaded;
+           if(!this.isMainPage){
+              this.categories = this.facadeService.getAllCategories();
+              this.categories && this.categories.forEach( (category : Category) => {
+                 this.categoryValues.push(category.getCategoryName());
+                 this.categorySelected = this.categoryValues[0];
+              });
+           }
          }
-       );
+      );
+      
   }
 
   ngOnDestroy(){
@@ -37,4 +55,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showNav = !this.showNav;
   }
 
+  toggleProifle(){
+    this.showProfile = !this.showProfile;
+  }
+
+  onSearch(searchVal) : void{
+    console.log("searchVal", searchVal);
+    this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {'look_for' : searchVal}});
+  }
 }

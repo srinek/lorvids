@@ -24,6 +24,9 @@ module.exports.updateData = (params) => {
 }
 
 module.exports.getData = (params) => {
+
+  //return docClient.get(params).promise();
+
   return new Promise((resolve, reject) => {
     docClient.get(params, function(err, data) {
       if (err) {
@@ -32,7 +35,7 @@ module.exports.getData = (params) => {
         resolve(data.Item);
       }
     });
-  });  
+  }); 
 }
 
 module.exports.queryData = (params) => {

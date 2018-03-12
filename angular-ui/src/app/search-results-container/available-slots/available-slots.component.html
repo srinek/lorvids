@@ -2,13 +2,13 @@
     <ng-container *ngIf="displaySlots.length > 0">
         <div class="row mt-2">
            <ul class="list-inline pl-4 mb-0 iphone">
-                <li class="list-inline-item bg-blue text-white" *ngFor="let slot of displaySlots">
-                    <a  class="text-white"
+                <li class="list-inline-item" *ngFor="let slot of displaySlots">
+                    <button  class="btn bg-logo-letter-o text-white slot-button"
                         title="{{slot.slotTime}}" 
                         [routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"
                         (click)="bookAppointment(slot.appointmentId)">
                         {{slot.slotTime | date:'hh:mm a'}} 
-                    </a>
+                    </button>
                 </li>
            </ul>
         </div>

@@ -6,7 +6,7 @@ let testGetObj = { "pathParameters" :
                     },
                     "queryStringParameters" : 
                     {
-                        "loadStaff": "false"
+                        "loadStaff": true
                     }
                  };
 business.get(testGetObj  , 
