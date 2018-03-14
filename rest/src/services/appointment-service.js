@@ -21,6 +21,7 @@ module.exports.findSlotDetails = (slot_id) => {
 }
 
 module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
+    let self = this;
     let business, staffobj;
     return  businessService.getBusinessById(bus_id).then((businessResult) => {
         //console.log("businessResult ", businessResult);
@@ -32,7 +33,7 @@ module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
             staffobj.bus_hours = business.bus_hours;
         }
         business.addStaff(staffobj);
-        return findBookedSlots(bus_id, staff_id, date);
+        return self.findBookedSlots(bus_id, staff_id, date);
     }).then((bookedSlots) => {
 
         return  business.getAvailableSlots(staffobj, bookedSlots, date);
@@ -41,7 +42,7 @@ module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     });
 }
 
-let findBookedSlots = (busId, staffId, date) => {
+module.exports.findBookedSlots = (busId, staffId, date) => {
 
     var params = {
         TableName: 'Appointments',
@@ -62,9 +63,8 @@ let findBookedSlots = (busId, staffId, date) => {
     });
     return apptPromise;
 }
-module.exports.findBookedSlots= findBookedSlots;
 
-let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
+module.exports.findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
     console.log("findBookedSlotsES:");
     var searchTerms = [];
     var rangeTerms = [];
@@ -114,20 +114,14 @@ let findBookedSlotsES = (busId, staffId, appointmentDate, viewType) => {
     // searchTerm, rangeTerm, facet
     let esObj = docMapper.findBookedAppointments(searchTerms, rangeTerms);
     console.log("findBookedSlotsES search query:", JSON.stringify(esObj));
-    var appointmentPromise = new Promise(function(resolve, reject) {
-        es.esSearch(esObj, (error, result) => {
-            if (error) {
-                reject(error);
-            } else {
-                console.log("RESULT...:", result);
-                resolve(new ResponseModel(result));
-            }
-        });
+    var appointmentPromise = es.esSearch(esObj); 
+    appointmentPromise.then( (result) => {
+        return new ResponseModel(result);
+    }).catch( (error) => {
+        return Promise.reject(error);
     });
-    
     return appointmentPromise; 
 }
-module.exports.findBookedSlotsES= findBookedSlotsES;
 
 module.exports.updateAppointment = (appointmentData) => {
     var params = {
@@ -167,7 +161,7 @@ module.exports.createAppointment = (appointmentData) => {
     return db.saveData(params);
 }
 
-let findBusinessBookedSlots = (businessId, timePeriod, date) => {
+module.exports.findBusinessBookedSlots = (businessId, timePeriod, date) => {
     let business, staffobj;
     return  businessService.getBusinessById(bus_id).then((businessResult) => {
         business = new Business(businessResult);
@@ -207,8 +201,38 @@ let findBusinessBookedSlots = (businessId, timePeriod, date) => {
 
 module.exports.getBusinessBookedAppointments = (busId, staffId, appointmentDate, viewType) => {
 
-    return findBookedSlotsES(busId, staffId, appointmentDate, viewType);
+    return this.findBookedSlotsES(busId, staffId, appointmentDate, viewType);
 
 }
 
-module.exports.findBusinessBookedSlots= findBusinessBookedSlots;
+module.exports.cancelAppointment = (slot_id) => {
+    let currentDate = new Date();
+    currentDate = currentDate.toLocaleString();
+    var params = {
+        "TableName": 'Appointments',
+        "Key": { "AppointmentId" : slot_id },
+        "UpdateExpression": `set #status = :status, #updateDate = :updateDate`,
+        "ExpressionAttributeNames" : {
+         '#status' : "status",
+         '#updateDate' : "updateDate"
+        },
+        "ExpressionAttributeValues": {
+         ':status' : 'cancelled',
+         ':updateDate' : currentDate
+       },
+       "ConditionExpression": "attribute_exists(AppointmentId)",
+       "ReturnValues": "ALL_NEW"
+     };
+     console.log("params_appt "+  JSON.stringify(params));
+     return db.updateData(params);
+}
+
+module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
+    let slotDataPromise = this.findSlotDetails(slot_id);
+    return slotDataPromise.then( (slotDetails) => {
+        let userEmail = slotDetails.userEmail;
+        return userEmail;
+    }).catch( (error) => {
+        return Promise.reject(error);
+    });
+}

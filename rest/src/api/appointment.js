@@ -123,4 +123,31 @@ module.exports.getSlotDetails = (event, context, callback) => {
        console.log("error callback ", response);
        callback(null, response);
     });
+}
+
+module.exports.getAllAppointmentsByAppointmentId = (event, context, callback) => {
+    let slot_id = event.pathParameters.sId;
+    let appointmentByIdPromise = appointmentService.getAllAppointmentsByAppointmentId(slot_id);
+    appointmentByIdPromise.then( (slots) => {
+        console.log("slots ", slots);
+    }).catch( (error) => {
+        console.log(`error in getAllAppointmentsByAppointmentId`, error);
+    });
+    
+ }
+
+ module.exports.cancel = (event, context, callback) => {
+    let slot_id = event.pathParameters.sId;
+    let cancelApptPromise = appointmentService.cancelAppointment(slot_id);
+    cancelApptPromise.then( (result) => {
+        let response = util.success();
+        response.body = JSON.stringify({result : "success"});
+        console.log("success callback from cancel appointment", response);
+        callback(null, response);
+    }).catch( (error) => {
+       let response = util.error();
+       response.body = JSON.stringify({result : "failed"});
+       console.log(`cancel appointment failed for ${slot_id} with error %j`, error);
+       callback(null, response);
+    });
  }

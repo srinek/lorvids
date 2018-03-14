@@ -88,11 +88,11 @@ let createObj = {
   "body": JSON.stringify(creatReqBody)
 };
 
-// appointment.createNew(createObj , null, (error, response) => {
-//   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
-//   console.log(response);
-//   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-// }); 
+/* appointment.createNew(createObj , null, (error, response) => {
+  console.log('-----------------------------SAVE RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------SAVE RESPONSE END-----------------------------');
+}); */ 
 
 let testGetObj = { "pathParameters" : 
   {
@@ -123,34 +123,11 @@ let testGetObj = { "pathParameters" :
    }
  );  */
 
-
-
-//  let testbookedAppointmentObj = { "pathParameters" : 
-//                     {
-//                         "busId" : "b-test-01",
-//                     },
-//                     "queryStringParameters" : 
-//                     {
-//                         "month": "",
-//                         "year":"",
-//                         "isyearly":"fasle"
-//                     }
-//                  };
-//  appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
-//   null, 
-//   (error, response) => {
-
-//     console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
-//     console.log(response);
-//     console.log('-----------------------------GET RESPONSE END-----------------------------');
-//   }
-// );
-
 var _date = new Date();
 _date.setMonth(01); // Feb
 _date.setDate(12);
 
-let testbookedAppointmentObj = { "pathParameters" : 
+/* let testbookedAppointmentObj = { "pathParameters" : 
 {
     "busid" : "b-test-01",
 },
@@ -160,25 +137,54 @@ let testbookedAppointmentObj = { "pathParameters" :
     "appointmentdate":_date.getTime(),
     "viewtype":"week"
 }
-};
+}; */
 
 let testbookedAppointmentObj = { "pathParameters" : 
-                    {
-                        "busId" : "b-test-01",
-                    },
-                    "queryStringParameters" : 
-                    {
-                        "month": "",
-                        "year":"",
-                        "isyearly":"fasle"
-                    }
-                 };
- appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+{
+   "busId" : "b-test-01",
+},
+"queryStringParameters" : 
+{
+   // "staffid": ,
+   "appointmentdate":_date.getTime(),
+   "viewtype":"week"
+}
+};
+appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
   null, 
     (error, response) => {
       console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
       console.log(response);
       console.log('-----------------------------GET RESPONSE END-----------------------------');
     }
-);
+); 
 
+
+let cancelReq = {
+  "pathParameters" : 
+  {
+      "sId" : "b-test-01-s-01-1516721400000"
+  }
+}
+
+/* appointment.cancel(cancelReq, 
+  null, 
+  (error, response) => {
+
+    console.log('-----------------------------GET cancelAppointments RESPONSE START-----------------------------');
+    console.log(response);
+    console.log('-----------------------------GET RESPONSE END-----------------------------');
+}); */
+
+let appointmentByIdReq = {
+  "pathParameters" : 
+  {
+      "sId" : "b-test-01-s-01-1516721400000"
+  }
+}
+/* appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
+
+  console.log('-----------------------------GET getAllAppointmentsByAppointmentId RESPONSE START-----------------------------');
+  console.log(response);
+  console.log('-----------------------------GET RESPONSE END-----------------------------');
+}); */
