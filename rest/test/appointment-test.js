@@ -152,7 +152,7 @@ _date.setDate(12);
 
 let testbookedAppointmentObj = { "pathParameters" : 
 {
-    "busid" : "b-test-01",
+    "busId" : "b-test-01",
 },
 "queryStringParameters" : 
 {
@@ -162,17 +162,6 @@ let testbookedAppointmentObj = { "pathParameters" :
 }
 };
 
-let testbookedAppointmentObj = { "pathParameters" : 
-                    {
-                        "busId" : "b-test-01",
-                    },
-                    "queryStringParameters" : 
-                    {
-                        "month": "",
-                        "year":"",
-                        "isyearly":"fasle"
-                    }
-                 };
  appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
   null, 
     (error, response) => {

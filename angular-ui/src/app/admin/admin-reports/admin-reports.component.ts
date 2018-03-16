@@ -87,8 +87,6 @@ export class AdminReportsComponent implements OnInit {
       var currentDate = new Date();
       this.month = "" + currentDate.getMonth();
       this.currentMonth = this.month;
-      // for testing
-      this.month = "1";
       this.year = "" + currentDate.getFullYear();
       this.currentYear = this.year;
       this.monthName =  this.monthNames[this.month].getFullName(); 
