@@ -15,10 +15,10 @@ PUT /business_docs
         }
     },
 	"mappings" : {
-	    "business_type" : {
+	    "business_info" : {
 			"properties" : {
                   "bus_id" : {
-                      "type" :  "text"
+                      "type" :  "keyword"
 			      },
 				  "bus_name" : {
                       "type" :  "text"
@@ -119,8 +119,8 @@ PUT /business_docs
 }
 
 
-curl -XPOST "http://localhost:9200/business_docs/business_type" -H 'Content-Type: application/json' -d'
-POST /business_docs/business_type
+curl -XPOST "http://localhost:9200/business_docs/business_info" -H 'Content-Type: application/json' -d'
+POST /business_docs/business_info
 {
      "bus_id" : "b-test-01",
 	 "bus_name" : "Smile Dental",
@@ -179,7 +179,7 @@ POST /business_docs/business_type
 	 ]
 }
 
-POST /business_docs/business_type
+POST /business_docs/business_info
 {
 	 "bus_id" : "b-test-02",
 	 "bus_name" : "Rainbow Pediatrics",
@@ -227,7 +227,7 @@ POST /business_docs/business_type
 	 ]
 }
 
-POST /business_docs/business_type
+POST /business_docs/business_info
 {
 	 "bus_id" : "b-test-03",
 	 "bus_name" : "Theory Salon",
@@ -317,93 +317,7 @@ POST /business_docs/_search
 	}
 }
 
-curl -XDELETE 'localhost:9200/appointment_docs?pretty'
-DELETE /appointment_docs?pretty
-
-curl -XPUT "http://localhost:9200/appointment_docs" -H 'Content-Type: application/json' -d'
-PUT /appointment_docs
-{
-    "settings": {
-        "analysis": {
-            "analyzer": {
-                "bus_std": {
-                    "type":      "standard",
-                    "stopwords": "_english_"
-                }
-            }
-        }
-    },
-	"mappings" : {
-	    "appointments_type" : {
-			"properties" : {
-            "staff_id" : {
-                "type" :  "text"
-	        },
-			"slots" : {
-			  "type" :  "nested",
-			  "properties" : {
-					"slot" : {
-					   "type" : "nested",
-					   "properties" : {
-							"slot_id" : {
-								 "type" : "text"
-							},
-							"slot_time" : {
-								 "type" : "text"
-							}
-					   }
-					}
-			   }
-		  }
-		}
-	}
-  }
-}
-
-POST /appointment_docs/appointments_type
-{
-	 "staff_id" : "b-test-01-s-01",
-	 "slots" : [
-		{
-		   "date" : 1507825795220,
-		   "slot" : [
-		       {
-				  "slot_id" : "b-test-01-s-01-s-1000AM",
-				  "slot_time" : "10:00 AM"
-			   },
-			   {
-				  "slot_id" : "b-test-01-s-01-s-1130AM",
-				  "slot_time" : "11:30 AM"
-			   }
-		   ]
-		}
-	 ]
-}
-
-
-POST /appointment_docs/appointments_type
-{
-	 "staff_id" : "b-test-01-s-02",
-	 "slots" : [
-		{
-		   "date" : "10/10/2017",
-		   "slot" : [
-		       {
-				  "slot_id" : "b-test-01-s-02-s-1030AM",
-				  "slot_time" : "10:30 AM"
-			   },
-			   {
-				  "slot_id" : "b-test-01-s-02-s-0100PM",
-				  "slot_time" : "01:00 PM"
-			   }
-		   ]
-		}
-	 ]
-}
-
-
-
-POST /business_docs/business_type/b-test-01/_update
+POST /business_docs/business_info/b-test-01/_update
 {
   "script": {
     "lang": "painless",
@@ -419,7 +333,7 @@ POST /business_docs/business_type/b-test-01/_update
   }
 }
 
-GET /business_docs/business_type/b-test-01
+GET /business_docs/business_info/b-test-01
 
 
 

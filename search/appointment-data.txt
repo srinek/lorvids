@@ -40,7 +40,7 @@ PUT /business_docs/appointment_info/_mapping
                     "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "user_email" : {
-                    "type" :  "text"
+                    "type" :  "keyword"
                 },
                 "creation_date" : {
                     "type" :  "date",

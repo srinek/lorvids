@@ -154,7 +154,6 @@ export class AppointmentCalendarComponent implements OnInit {
       this.currentMonth = this.month;
       this.year = "" + currentDate.getFullYear();
       this.currentYear = this.year;
-      this.monthName =  this.monthNames[this.month].getFullName(); 
     }
 
   modalData: {

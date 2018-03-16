@@ -68,9 +68,9 @@ module.exports.findBookedSlotsES = (busId, staffId, appointmentDate, viewType) =
     console.log("findBookedSlotsES:");
     var searchTerms = [];
     var rangeTerms = [];
-    searchTerms.push({"field":"bus_id.raw", "value":busId});
+    searchTerms.push({"field":"bus_id", "value":busId});
     if (staffId) {
-        searchTerms.push({"field":"staff_id.raw", "value":staffId}); 
+        searchTerms.push({"field":"staff_id", "value":staffId}); 
     }
     console.log("findBookedSlotsES searchTerms:", JSON.stringify(searchTerms));
     var _appointmentDate = new Date(appointmentDate);
@@ -235,7 +235,7 @@ module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
         console.log("userEmail:", userEmail);
         var searchTerms = [];
 
-        searchTerms.push({"field":"user_email", "value":userEmail.substr(0,userEmail.indexOf('@'))});
+        searchTerms.push({"field":"user_email", "value":userEmail});
 
         let esObj = docMapper.findBookedAppointments(searchTerms);
         console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
