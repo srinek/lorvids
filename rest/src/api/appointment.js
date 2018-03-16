@@ -128,10 +128,15 @@ module.exports.getSlotDetails = (event, context, callback) => {
 module.exports.getAllAppointmentsByAppointmentId = (event, context, callback) => {
     let slot_id = event.pathParameters.sId;
     let appointmentByIdPromise = appointmentService.getAllAppointmentsByAppointmentId(slot_id);
-    appointmentByIdPromise.then( (slots) => {
-        console.log("slots ", slots);
+    appointmentByIdPromise.then( (data) => {
+        let response = util.success();
+        response.body = JSON.stringify(data);
+        callback(null, response);
     }).catch( (error) => {
-        console.log(`error in getAllAppointmentsByAppointmentId`, error);
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
     });
     
  }

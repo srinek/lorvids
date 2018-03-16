@@ -231,7 +231,22 @@ module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
     let slotDataPromise = this.findSlotDetails(slot_id);
     return slotDataPromise.then( (slotDetails) => {
         let userEmail = slotDetails.userEmail;
-        return userEmail;
+
+        console.log("userEmail:", userEmail);
+        var searchTerms = [];
+
+        searchTerms.push({"field":"user_email", "value":userEmail.substr(0,userEmail.indexOf('@'))});
+
+        let esObj = docMapper.findBookedAppointments(searchTerms);
+        console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
+        var userAppointmentPromise = es.esSearch(esObj); 
+        userAppointmentPromise.then( (result) => {
+            return new ResponseModel(result);
+        }).catch( (error) => {
+            return Promise.reject(error);
+        });
+        return userAppointmentPromise; 
+
     }).catch( (error) => {
         return Promise.reject(error);
     });

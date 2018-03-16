@@ -25,6 +25,13 @@ import { Component,
   } from 'angular-calendar';
 import { EventInfo } from '../shared/EventInfo';
 import { EventService } from '../shared/event.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FacadeService } from '../../service/facade.service';
+import { Business } from '../../model/business.model';
+import { Expense } from '../../model/expense.model';
+import { Appointment } from '../../model/appointment.model';
+import { Staff } from '../../model/staff.model';
+import { Observable } from 'rxjs/Observable';
 
 
 const colors: any = {
@@ -55,10 +62,38 @@ export class AppointmentCalendarComponent implements OnInit {
   dayStart:number = 9;
   dayEnd:number = 18;
 
+  public businessId:string = "b-test-01";
+  public month:string = "";
+  public year:string = "";
+  public currentMonth:string = "";
+  public currentYear:string = "";
+
+  public business : Business;
+  public businessExpense : Array<Expense>;
+  public appointmentList : Array<Appointment>;
+  public staffList : Array<Staff> ;
+
+  public businessDataLoaded = false;
+  public businessErrorFlag : boolean = false;
+  public businessErrorMessage : string = ""; 
+
   @Output() eventClicked = new EventEmitter();
 
   ngOnInit() {
-
+    Observable.forkJoin(
+      this.facadeService.getBusiness(this.businessId, true)
+    ).subscribe(response => {
+        this.business = <any>response[0];
+        this.businessDataLoaded = true; 
+        console.log("business:", this.business);
+        console.log("sub days:", subDays(endOfMonth(new Date()), 3));
+     },
+      (error : string) => {
+        this.businessErrorFlag = true;
+        this.businessErrorMessage = "Yikes!!! We apologize, currently there isn't any data to generate report.";
+        throw error;
+      }
+    );
   }
 
   actions: CalendarEventAction[] = [
@@ -110,7 +145,17 @@ export class AppointmentCalendarComponent implements OnInit {
     }
   ];
 
-  constructor(private eventService:EventService) { }
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private facadeService : FacadeService,
+    private eventService:EventService) { 
+      var currentDate = new Date();
+      this.month = "" + currentDate.getMonth();
+      this.currentMonth = this.month;
+      this.year = "" + currentDate.getFullYear();
+      this.currentYear = this.year;
+      this.monthName =  this.monthNames[this.month].getFullName(); 
+    }
 
   modalData: {
     action: string;
