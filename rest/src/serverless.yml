@@ -157,13 +157,21 @@ functions:
           path: appt/new
           method: post
           cors : true
-  saveAppointment:
+  saveAppointment:  # modify appointment
     handler: api/appointment.save
     description : save appointment
     events:
       - http:
           path: appt
           method: post
+          cors : true
+  cancelAppointment:
+    handler: api/appointment.cancel
+    description : available appointments
+    events:
+      - http:
+          path: slots/cancel/{sId}
+          method: get
           cors : true
   getAllAppointments:
     handler: api/appointment.getAllAppointments

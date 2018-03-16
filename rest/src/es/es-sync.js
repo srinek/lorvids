@@ -17,13 +17,6 @@ module.exports.esUpdate = (jsonStr, callback) => {
     );
 }
 
-module.exports.esSearch = (jsonStr, callback) => {
-    esClient.search(jsonStr)
-    .then(results => {
-        console.log("results %j ", results);
-        callback(null, results);
-      })
-      .catch(error => {
-        callback(error, null);
-      });
+module.exports.esSearch = (jsonStr) => {
+    return esClient.search(jsonStr);
 }
