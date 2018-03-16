@@ -114,13 +114,25 @@ module.exports.findBookedSlotsES = (busId, staffId, appointmentDate, viewType) =
     // searchTerm, rangeTerm, facet
     let esObj = docMapper.findBookedAppointments(searchTerms, rangeTerms);
     console.log("findBookedSlotsES search query:", JSON.stringify(esObj));
-    var appointmentPromise = es.esSearch(esObj); 
-    appointmentPromise.then( (result) => {
-        return new ResponseModel(result);
+
+    // var appointmentPromise = new Promise(function(resolve, reject) {
+    //     es.esSearch(esObj).then( (result) => {
+    //         resolve(new ResponseModel(result));
+    //     }).catch( (error) => {
+    //         reject(error);
+    //     });
+    // });
+
+    // return appointmentPromise; 
+
+
+    return es.esSearch(esObj).then( (result) => {
+        return (new ResponseModel(result));
     }).catch( (error) => {
-        return Promise.reject(error);
-    });
-    return appointmentPromise; 
+        return error;
+    }); 
+
+    
 }
 
 module.exports.updateAppointment = (appointmentData) => {
@@ -229,6 +241,7 @@ module.exports.cancelAppointment = (slot_id) => {
 
 module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
     let slotDataPromise = this.findSlotDetails(slot_id);
+
     return slotDataPromise.then( (slotDetails) => {
         let userEmail = slotDetails.userEmail;
 
@@ -239,13 +252,12 @@ module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
 
         let esObj = docMapper.findBookedAppointments(searchTerms);
         console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
-        var userAppointmentPromise = es.esSearch(esObj); 
-        userAppointmentPromise.then( (result) => {
+
+        return es.esSearch(esObj).then( (result) => {
             return new ResponseModel(result);
         }).catch( (error) => {
-            return Promise.reject(error);
+            return error;
         });
-        return userAppointmentPromise; 
 
     }).catch( (error) => {
         return Promise.reject(error);

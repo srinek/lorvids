@@ -139,14 +139,14 @@ let testbookedAppointmentObj = { "pathParameters" :
 }
 };
 
-//  appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
-//   null, 
-//     (error, response) => {
-//       console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
-//       console.log(response);
-//       console.log('-----------------------------GET RESPONSE END-----------------------------');
-//     }
-// ); 
+ appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+  null, 
+    (error, response) => {
+      console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
+      console.log(response);
+      console.log('-----------------------------GET RESPONSE END-----------------------------');
+    }
+); 
 
 
 let cancelReq = {
@@ -171,9 +171,9 @@ let appointmentByIdReq = {
       "sId" : "b-test-01-s-01-1516721400000"
   }
 }
-appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
+// appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
 
-  console.log('-----------------------------GET getAllAppointmentsByAppointmentId RESPONSE START-----------------------------');
-  console.log(response);
-  console.log('-----------------------------GET RESPONSE END-----------------------------');
-});
+//   console.log('-----------------------------GET getAllAppointmentsByAppointmentId RESPONSE START-----------------------------');
+//   console.log(response);
+//   console.log('-----------------------------GET RESPONSE END-----------------------------');
+// });
