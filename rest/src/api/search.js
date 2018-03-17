@@ -8,19 +8,24 @@ module.exports.doSearch = (event, context, callback) => {
     const searchTerm = event.queryStringParameters.searchTerm;
     let property = event.queryStringParameters._p;
     let esObj = docMapper.searchDocMapper(searchTerm, property);
-    es.esSearch(esObj, (error, result) => {
-        if (error) {
-            let response = util.error();
-            response.body = JSON.stringify(error);
-            console.log("error callback ", response);
-            callback(null, response);
-          } else {
-            let response = util.success();
+    es.esSearch(esObj).then( (result) => {
+        let response = util.success();
             response.body = JSON.stringify(result);
             console.log("success callback ", response);
             callback(null, response);
-          }
+    }).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
     });
+    /* es.esSearch(esObj, (error, result) => {
+        if (error) {
+            
+          } else {
+            
+          }
+    }); */
 }
 
 module.exports.doFacetSearch = (event, context, callback) => {

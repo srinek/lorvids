@@ -110,7 +110,7 @@ let testGetObj = { "pathParameters" :
 }); */
 
 
-/*  appointment.getAllAppointments(
+appointment.getAllAppointments(
    {
      "queryStringParameters": { "d": "" },
      "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
@@ -121,7 +121,7 @@ let testGetObj = { "pathParameters" :
      console.log(response);
      console.log('-----------------------------SAVE RESPONSE END-----------------------------');
    }
- );  */
+ );
 
 var _date = new Date();
 _date.setMonth(01); // Feb
@@ -139,14 +139,14 @@ let testbookedAppointmentObj = { "pathParameters" :
 }
 };
 
- appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
+/*  appointment.getBusinessBookedAppointments(testbookedAppointmentObj  , 
   null, 
     (error, response) => {
       console.log('-----------------------------GET getBusinessBookedAppointments RESPONSE START-----------------------------');
       console.log(response);
       console.log('-----------------------------GET RESPONSE END-----------------------------');
     }
-); 
+);  */
 
 
 let cancelReq = {

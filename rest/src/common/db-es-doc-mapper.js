@@ -41,8 +41,20 @@ var setAppoinmentIndexType = (indexdoc, refresh) => {
   }
 }
 
+let mapToEsStaffObjFromDdbBusObj = (ddbBusObj) => {
+  let esStaffObj = [];
+  let ddbStaffIds = ddbBusObj.staff;
+  if(ddbStaffIds){
+    ddbStaffIds.forEach( (eachStaffId) => {
+      esStaffObj.push({"staff_id" : eachStaffId});
+    });
+  }
+  return esStaffObj;
+}
+
 module.exports.businessDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
+  ddbJsDoc.staff = mapToEsStaffObjFromDdbBusObj(ddbJsDoc);
   console.log("business doc indexed %j -- ", ddbJsDoc);
   let indexdoc = {};
   setDefaults(indexdoc,true);
@@ -53,7 +65,7 @@ module.exports.businessDocMapper = (ddbDoc) => {
 
 var setDefaults = (indexdoc, refresh) => {
   indexdoc.index = "business_docs";
-  indexdoc.type = 'business_type';
+  indexdoc.type = 'business_info';
   if(refresh){
     indexdoc.refresh = true;
   }

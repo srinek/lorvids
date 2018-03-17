@@ -1,8 +1,8 @@
 'use strict'
 var moment = require('moment-timezone');
-let appointmentService = require('../services/appointment-service');
 
 class Staff{
+    
     constructor(src){
         if(src){
             this.map(src);

@@ -10,95 +10,75 @@ let testRecord_bus = {
           "ApproximateCreationDateTime": 1510049340,
           "Keys": {
             "bus_id": {
-              "S": "b-test-es-03"
+              "S": "b-test-01"
             }
           },
           "NewImage": {
-            "bus_hours": {
-              "L": [
+            "bus_hours": [
                 {
-                  "M": {
-                    "time": {
-                      "S": "10AM - 5PM"
-                    },
-                    "day": {
-                      "S": "ALL"
-                    }
-                  }
+                    "startTime": "10:00",
+                    "endTime": "17:00",
+                    "day": -1
                 },
                 {
-                  "M": {
-                    "time": {
-                      "S": "9AM - 1PM"
-                    },
-                    "day": {
-                      "S": "SAT"
-                    }
-                  }
+                    "startTime": "09:00",
+                    "endTime": "13:00",
+                    "day": 7
                 }
-              ]
-            },
-            "address": {
-              "S": "110 Second Street, Newyork, NY 08854"
-            },
+            ],
+            "images": [
+                "trendy_looks.jpg",
+                "image-2.jpg"
+            ],
+            "website": "wwww.smiledentalnj.com",
+            "address": "110 Main Street, Edison, NJ 08817",
+            "staff": [
+              "b-test-01-s-01",
+              "b-test-01-s-02",
+              "b-test-01-s-03"
+            ],
+            "services": [
+                {
+                    "cost": "100",
+                    "name": "Dental Cleaning"
+                },
+                {
+                    "cost": "200",
+                    "name": "Root Canal Treatment"
+                },
+                {
+                    "cost": "50",
+                    "name": "Cavities"
+                },
+                {
+                    "cost": "25",
+                    "name": "Teeth Pain"
+                }
+            ],
             "holidays": {
-              "M": {
-                "weekdays": {
-                  "L": [
-                    {
-                      "N": "0"
-                    },
-                    {
-                      "N": "4"
-                    }
-                  ]
-                },
-                "dates": {
-                  "L": [
-                    {
-                      "S": "1507825795220"
-                    },
-                    {
-                      "S": "1507825795221"
-                    },
-                    {
-                      "S": "1507825795222"
-                    }
-                  ]
-                }
-              }
+                "weekdays": [
+                    0,
+                    3
+                ],
+                "dates": [
+                    "07-04-2018",
+                    "09-04-2018",
+                    "11-25-2018"
+                ]
             },
-            "phone": {
-              "S": "9890005555"
-            },
-            "awards": {
-              "S": "best dental NJ 2011"
-            },
-            "bus_time_zone": {
-              "S": "EST"
-            },
-            "statement_notes": {
-              "S": "smile with confidence"
-            },
-            "specialized_in": {
-              "S": "dental needs"
-            },
-            "bus_id": {
-              "S": "b-test-es-03"
-            },
-            "category": {
-              "S": "Health Care"
-            },
-            "bus_name": {
-              "S": "Nekkanti Business"
-            },
-            "appointment_instructions": {
-              "S": "insurance or by cash"
-            },
-            "statement_caption": {
-              "S": "Practice Mission"
-            }
-          },
+            "phone": "7871111211",
+            "awards": "NJ Best Dental 2015",
+            "bus_time_zone": "America/New_York",
+            "statement_notes": "we treat your smile special",
+            "specialized_in": "General Dentistry",
+            "bus_id": "b-test-01",
+            "category": "Health Care",
+            "bus_name": "Smile Dental",
+            "defaultImage": "trendy_looks.jpg",
+            "email": "info@smiledentalnj.com",
+            "appointment_instructions": "insurance not required. walk-ins welcome",
+            "statement_caption": "Our Mission"
+        },
           "SequenceNumber": "96767400000000004568984127",
           "SizeBytes": 457,
           "StreamViewType": "NEW_IMAGE"
@@ -107,9 +87,9 @@ let testRecord_bus = {
     ]
   };
 
-/* ddbIndexer.esBusinessIndexer(testRecord_bus, null, (response, msg) => {
+ddbIndexer.esBusinessIndexer(testRecord_bus, null, (response, msg) => {
       console.log(msg);
-}); */
+});
 
 
 
@@ -149,11 +129,11 @@ let searchObj = {
 };
 
 
-search.doSearch(searchObj, null, (error, response) => {
+/* search.doSearch(searchObj, null, (error, response) => {
   console.log('-----------------------------search RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------search RESPONSE END-----------------------------');
-}); 
+});  */
 
 
 /*  let facetSearchObj = {
