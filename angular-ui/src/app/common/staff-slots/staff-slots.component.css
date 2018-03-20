@@ -8,3 +8,8 @@
     border-radius: 32px;
     color: black;
 }
+
+.slot-button{
+    font-weight: bold;
+    cursor: pointer;
+}

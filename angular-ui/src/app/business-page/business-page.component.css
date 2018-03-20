@@ -6,23 +6,6 @@
     background-size:cover;
     background-attachment: fixed;
 }
-.img-round {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    border: 2px solid #fff;
-}
-.img-photo {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    backface-visibility: hidden;
-    position: relative;
-    display: inline-block;
-    vertical-align: bottom;
-    overflow: hidden;
-    background-color: #bbb;
-}
-
 /* below styles are moved to styles.css*/
 /* .img-round {
     -webkit-border-radius: 50%;

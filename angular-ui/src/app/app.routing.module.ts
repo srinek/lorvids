@@ -19,6 +19,7 @@ import { AdminSettingsComponent } from './admin/admin-settings/admin-settings.co
 import { AdminExpenseTrackerComponent } from './admin/admin-expense-tracker/admin-expense-tracker.component';
 import { SearchResultsComponent } from './search-results-container/search-results/search-results.component';
 import { ActivateUserComponent } from './activate-user/activate-user.component';
+import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
@@ -31,6 +32,7 @@ const appRoutes : Routes = [
     {path:'addstaff/:busId', component : AddStaffComponent},
     {path:'bushome/:busId', component : BusinessPageComponent},
     {path:'staff/:staffId', component : StaffPageComponent},
+    {path:'viewappts/:sId', component : ViewAppointmentsComponent},
     { path: 'admin/dashboard', component : AdminDashboardComponent},
     { path: 'admin/reports', component : AdminReportsComponent},
     { path: 'admin/staff', component : AdminStaffComponent},

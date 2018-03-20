@@ -115,6 +115,14 @@ export class FacadeService {
         return this.apptService.findAvailableSlots(business.bus_id, staff.staff_id, selectedDate);
     }
 
+    public getAllAppointmentsByUser(sId : string) : Observable<AppointmentSlot[]> {
+        return this.apptService.slotsByUserId(sId);
+    }
+
+    public cancelAppointment(sId : string) : Observable<string> {
+        return this.apptService.cancelAppointment(sId);
+    }
+
     public deleteFile(fileName : string) : Observable<String> {
         return this.s3ImageService.deleteFile(fileName);
     }

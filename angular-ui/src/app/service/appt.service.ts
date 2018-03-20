@@ -82,6 +82,30 @@ export class ApptService {
         );
     }
 
+    public slotsByUserId(slotId : string) : Observable<AppointmentSlot[]>{
+        return this.http.get(this.api + this.endpointGetAppt+"/apptId/"+slotId).map(
+            (response : Response) => {
+                let res = response.json();
+                let appointmentSlots : AppointmentSlot[] = [];
+                if(Array.isArray(res)){
+                    res.forEach((elem) => {
+                        appointmentSlots.push(new AppointmentSlot(elem));
+                    });
+                }
+                return appointmentSlots;
+            }
+        );
+    }
+
+    public cancelAppointment(sId : string) : Observable<string> {
+        return this.http.get(this.api + this.endpointslots+"/cancel/"+sId).map(
+            (response : Response) => {
+                let result = response.json();
+                return result;
+            }
+        );
+    }
+
     public getBusinessBookedAppointments(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Appointment []>{
         
         var appointmentDate = new Date();

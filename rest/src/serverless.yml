@@ -196,7 +196,15 @@ functions:
       - http:
           path: appt/business/{busId}
           method: get
-          cors : true   
+          cors : true
+  getAllAppointmentsByAppointmentId:
+    handler: api/appointment.getAllAppointmentsByAppointmentId
+    description : booked appointments for a user
+    events:
+      - http:
+          path: appt/apptId/{sId}
+          method: get
+          cors : true
   search:
     handler: api/search.doSearch
     description : search api

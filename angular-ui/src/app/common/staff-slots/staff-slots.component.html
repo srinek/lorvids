@@ -18,11 +18,10 @@
           <ng-container *ngIf="slots.length > 0">
             <div class="d-flex flex-wrap align-items-center justify-content-center">
               <div class="mr-1 mb-1 col-xs-2 text-white" *ngFor="let slot of slots">
-                <a class="btn btn-sm btn-info align-self-start w-100"
-                   [routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"
+                <button class="btn btn-sm bg-logo-letter-o text-white slot-button align-self-start w-100"
                    title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.slotTimeInMillis)">
                   {{slot.slotTime | date:'h:mm a'}}
-                </a>
+                </button>
               </div>
             </div>
           </ng-container>

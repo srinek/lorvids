@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import {SelectModule} from 'ng2-select';
 import { CalendarModule } from 'angular-calendar';
 import { ChartsModule } from 'ng2-charts'; 
@@ -57,6 +58,7 @@ import { S3ImageService } from './service/s3image.service';
 import { SearchResultComponent } from './search-results-container/search-results/search-result/search-result.component';
 import { UserService } from './service/user.service';
 import { ActivateUserComponent } from './activate-user/activate-user.component';
+import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +97,8 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
     AdminExpenseTrackerComponent,
     AdminStaffDetailsComponent,
     SearchResultComponent,
-    ActivateUserComponent
+    ActivateUserComponent,
+    ViewAppointmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +108,7 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
     CalendarModule.forRoot(),
     DatepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    ModalModule.forRoot(),
     TimepickerModule.forRoot(),
     CarouselModule.forRoot(),
     SelectModule,

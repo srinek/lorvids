@@ -230,6 +230,33 @@ p {
 .br-0 {
     border-radius: 0;
 }
+
+.img-round {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.img-photo {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    overflow: hidden;
+    background-color: #bbb;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.btn:hover {
+    background :  #F5AF02  !important;
+    color: #0064d3  !important;
+}
+
 /* You can add global styles to this file, and also import other style files */
 /* body {
     font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -363,6 +390,4 @@ a {
     overflow: hidden;
     background-color: #bbb;
 }
-.cursor-pointer{
-    cursor: pointer;
-} */
+ */

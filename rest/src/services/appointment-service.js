@@ -254,7 +254,8 @@ module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
         console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
 
         return es.esSearch(esObj).then( (result) => {
-            return new ResponseModel(result);
+            let esResponse = new ResponseModel(result);
+            return esResponse.hits;
         }).catch( (error) => {
             return error;
         });

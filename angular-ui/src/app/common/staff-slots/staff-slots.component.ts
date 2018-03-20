@@ -22,7 +22,8 @@ export class StaffSlotsComponent implements OnInit, OnChanges {
   slots : AppointmentSlot[];
   selectedDate : Date;
   minDate: Date = void 0;
-  currentDate : Date; // additional variable to prevent onDateChange when staff is changed.
+  tempCurrentDate : Date = new Date();
+  currentDate : Date = new Date(this.tempCurrentDate.getFullYear(), this.tempCurrentDate.getMonth(), this.tempCurrentDate.getDate()); // additional variable to prevent onDateChange when staff is changed.
   public error : boolean = false;
   public errorMessage : string = "";
   slotsLoaded : boolean = false;
@@ -59,6 +60,7 @@ export class StaffSlotsComponent implements OnInit, OnChanges {
         this.error = true;
         this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
       }); */
+      //[routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"
       this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id],
                       {relativeTo:this.route, queryParams : {'sid' : slotTimeInMillis, 'pid':this.previousSlotId,'u':this.pUserEmail}});
   }
