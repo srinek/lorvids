@@ -61,7 +61,7 @@ export class ReviewBookingComponent implements OnInit {
         if(this.userEmail){
           this.loadUser();
         }
-        console.log("bookingTime ", this.bookingTime);
+        //console.log("bookingTime ", this.bookingTime);
       }
     );
 

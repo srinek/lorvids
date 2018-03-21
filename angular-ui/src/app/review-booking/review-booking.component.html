@@ -119,15 +119,13 @@
                             {{business.address}}
                         </div>
                         <div class="m-3">
-                            <div class="font-weight-bold">
-                                Appointment Summary
-                            </div>
+                           
                             <div class="m-1 text-blue font-weight-bold">
                                 {{bookingTime | date:'h:mm a'}} on {{ bookingTime | date:'EEEE, MMM d y'}}
                             </div>
                             <ng-container *ngIf="staff">
                                 <div class="m-1">{{staff.staff_name}}</div>
-                                <div class="m-1">Service Selected : {{svcSelected}}</div>
+                                <div class="m-1"> {{svcSelected.name}} ({{svcSelected.cost | currency}})</div>
                             </ng-container>
                         </div>
                     </div>
