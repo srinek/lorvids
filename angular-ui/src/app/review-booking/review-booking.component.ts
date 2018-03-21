@@ -11,6 +11,7 @@ import { AppointmentSlot } from '../model/appointment-slot.model';
 import { Appointment } from '../model/appointment.model';
 import { ParamMap } from '@angular/router/src/shared';
 import { environment } from '../../environments/environment';
+import { Service } from '../model/service.model';
 
 @Component({
   selector: 'app-book-appointment',
@@ -27,7 +28,7 @@ export class ReviewBookingComponent implements OnInit {
   public error : boolean = false;
   public errorMessage : string = "";
   @ViewChild('appointmentForm') appointmentForm : NgForm;
-  svcSelected : string;
+  svcSelected : Service;
   bookingTime : Date = new Date();
   prevSlotId : string;
   updateAppointment : boolean;
@@ -72,6 +73,10 @@ export class ReviewBookingComponent implements OnInit {
         .subscribe(
             (business : Business) => {
                 this.business = business;
+                if(this.business.services && 
+                  this.business.services.length >0){
+                    this.svcSelected = this.business.services[0];
+                }
             },
             (error : string) => {
               this.error = true;
@@ -125,7 +130,7 @@ export class ReviewBookingComponent implements OnInit {
     if(this.appointmentForm.value.splInstr){
       this.appointment.notes = this.appointmentForm.value.splInstr;
     }
-    this.appointment.service = this.svcSelected;
+    this.appointment.service = this.svcSelected.name;
     apptData.user = this.user;
     apptData.appt = this.appointment;
 
