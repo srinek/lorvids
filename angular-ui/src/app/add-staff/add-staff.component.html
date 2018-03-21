@@ -6,7 +6,20 @@
 //staff role
 //attach to services -->
 
-<div class="container">
+<div class="container margin-top-8-pr">
+
+    <div class="row margin-bottom-25">
+        <div class="col-12">
+            <ul class="nav nav-tabs abdb-tabs">
+                <li><a href="javascript:void(0);"><span class="span1">&nbsp;1.&nbsp;</span> BUSINESS INFO</a></li>
+                <li><a href="javascript:void(0);"><span class="span1">&nbsp;2.&nbsp;</span> SERVICES</a></li>
+                <li class="active"><a href="javascript:void(0);"><span class="span1">&nbsp;3.&nbsp;</span> STAFF INFO</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
     <div class="row">
         <div class="col-md-6">
           <h2>
@@ -23,7 +36,7 @@
         (ngSubmit)="addStaff()" 
         #addStaffForm="ngForm">
       <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-7">
               <div class="row form-group">
                 <div class="col">
                     <label for="id-staff-name" class="">Staff Name: </label>
@@ -33,13 +46,23 @@
                       placeholder="Staff Name"
                       #staffName="ngModel"
                       ngModel required>
-                    <span class="form-text text-muted" 
+                    <span class="form-text text-muted help-block" 
                           *ngIf="!staffName.valid && staffName.touched">
-                        Business Name is required
+                        Staff Name is required
                     </span>
                 </div>
+
+                <div class="col">
+                        <label for="id-staff-email" class="">Staff Email: </label>
+                        <input type="email" class="form-control" 
+                          id="id-staff-email" 
+                          name="staffEmail"
+                          placeholder="Staff Email"
+                          #staffEmail="ngModel"
+                          ngModel required>
+                    </div>
               </div>
-              <div class="row form-group">
+              <!-- <div class="row form-group">
                   <div class="col">
                       <label for="id-staff-email" class="">Staff Email: </label>
                       <input type="email" class="form-control" 
@@ -60,7 +83,53 @@
                         #staffPhone="ngModel"
                         ngModel required>
                   </div>
+              </div>-->
+
+              <div class="row form-group">
+
+                    <div class="col">
+                        <label for="id-staff-salary" class="">Staff Salary: </label>
+                        <input type="text" class="form-control" 
+                          id="id-staff-salary" 
+                          name="staffSalary"
+                          placeholder="Staff Salary"
+                          #staffSalary="ngModel"
+                          ngModel>
+                    </div>
+
+                    <div class="col">
+                            <label for="id-staff-phone" class="">Staff Phone: </label>
+                            <input type="tel" class="form-control" 
+                              id="id-staff-phone" 
+                              name="staffPhone"
+                              placeholder="Staff Phone"
+                              #staffPhone="ngModel"
+                              ngModel required>
+                    </div>
+
               </div>
+              <div class="row form-group">
+                    <div class="col">
+                        <label for="id-staff-salary" class="">Awards : </label>
+
+                        <textarea rows="2" class="form-control"
+                        id="id-staff-awards" 
+                          name="staffAwards"
+                          placeholder="Awards"
+                          #staffSalary="ngModel"
+                          ngModel>
+                                </textarea>
+
+                        <!-- <input type="text" class="form-control" 
+                          id="id-staff-salary" 
+                          name="staffSalary"
+                          placeholder="Staff Salary"
+                          #staffSalary="ngModel"
+                          ngModel> -->
+                    </div>
+              </div>
+
+
               <div class="row form-group">
                 <div class="col">
                     <div>
@@ -95,12 +164,12 @@
                 </div>
               </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="d-flex flex-column align-items-center">
                 <div>
-                    <h6>working hours</h6>
+                    <h6>Working hours</h6>
                 </div>
-                <div class="w-50"><hr></div>
+                <!-- <div class="w-50"><hr></div> -->
                 <div>
                     <label class="custom-control custom-checkbox" >
                       <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
@@ -119,19 +188,40 @@
                 
             </div>
           </div>
-      </div>
+      </div><br/>
+
       <div class="row form-group">
+
+            <!-- <div class="row margin-top-20">
+
+                    <div class="col-md-6">
+                           <button type="submit"  name="addAnother" class="btn yellow-button">Add Another</button>
+                       </div>
+ 
+                       <div class="col-md-6 text-right">
+ 
+                           <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
+                           
+                       </div>
+ 
+ 
+           </div> -->
+
           <div class="col-md-6 text-center">
             <button type="submit"
                     name="addAnother" 
-                    class="btn btn-info w-75">Add Another</button>
+                    class="btn btn-info w-75 yellow-button">Add Another</button>
           </div>
-          <div class="col-md-6 text-center">
+          <div class="col-md-6 text-right">
+
+            <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
               <button type="submit" 
                       name="done"
-                      class="btn btn-info w-75">Done With Staff</button>
+                      class="btn my-btn btn-red">DONE</button>
+                           
           </div>
-      </div>
+      </div><br/><br/>
+
     </form>
   </div>  
 

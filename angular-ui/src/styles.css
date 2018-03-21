@@ -231,13 +231,141 @@ p {
     border-radius: 0;
 }
 
-.img-round {
+
+/*Colors*/
+.color-red{
+    color: #e64d4d;
+}
+
+/*Margin Styles*/
+.margin-top-10{
+    margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+.margin-bottom-25{
+    margin-bottom: 25px;
+}
+.margin-bottom-10{
+    margin-bottom: 10px;
+}
+.margin-right-18-minus{
+    margin-right: -18px;
+}
+
+.margin-top-8-pr{
+    margin-top: 8%;
+}
+
+.margin-top-10-pr{
+    margin-top: 10%;
+}
+
+/* Font styles*/
+.text-center{
+text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+.txt-upper{
+text-transform:uppercase;
+}
+.font-20{
+font-size: 20px;
+}
+.font-25{
+font-size: 20px;
+}
+
+.padding-10{
+  padding: 10px;
+}
+.padding-right-15{
+    padding-right: 15px;
+}
+
+/*Common Business Tabs Styles*/
+.abdb-tabs li{
+    width: 33.4%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    background: #efefef;
+}
+.abdb-tabs li.active{
+    background: #ec3137;
+}
+.abdb-tabs li.active a{
+    color: white !important;
+    
+}
+.abdb-tabs li a{
+    color: #bdbdbd;
+    text-decoration: none;
+}
+
+.abdb-tabs{
+    border:none;
+}
+
+
+/*Button Styles*/
+.my-btn{
+    width: 130px;
+    border-radius: 0px;
+    font-size: 15px;
+}
+.btn-red{
+    background: #e75358;
+    color: white;
+    
+}
+
+.btn-ccc{
+    background: #efefef;
+}
+
+.red-background{
+    background: #e75358;
+  }
+
+.red-button{
+    background: #e75358;
+    border: none;
+}
+.yellow-button{
+    background: #f5af02 !important;
+    border-color: #f5af02 !important;
+    color: white !important;
+}
+
+.help-block{
+    color: red;
+    font-size: 13px;
+}
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    opacity: 0.6 !important;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    opacity: 0.6 !important;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    opacity: 0.6 !important;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    opacity: 0.6 !important;
+  }
+
+  .img-round {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
     border: 2px solid #fff;
-}
-.img-photo {
+  }
+  .img-photo {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -256,6 +384,11 @@ p {
     background :  #F5AF02  !important;
     color: #0064d3  !important;
 }
+
+
+
+
+
 
 /* You can add global styles to this file, and also import other style files */
 /* body {
@@ -390,4 +523,6 @@ a {
     overflow: hidden;
     background-color: #bbb;
 }
- */
+.cursor-pointer{
+    cursor: pointer;
+} */
