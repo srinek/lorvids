@@ -1,16 +1,34 @@
-<div class="container">
-  <div class="row">
-      <div class="col-md-6">
-        <h2>
-            Let's create your account
-        </h2>
+<div class="container margin-top-10-pr">
+
+
+  <div class="row margin-bottom-25">
+      <div class="col-12">
+        <ul class="nav nav-tabs abdb-tabs">
+            <li class="active"><a href="javascript:void(0);"><span class="span1">&nbsp;1.&nbsp;</span> BUSINESS INFO</a></li>
+            <li><a href="javascript:void(0);"><span class="span1">&nbsp;2.&nbsp;</span> SERVICES</a></li>
+            <li><a href="javascript:void(0);"><span class="span1">&nbsp;3.&nbsp;</span> STAFF INFO</a></li>
+        </ul>
       </div>
+
   </div>
   <div class="row">
+      <div class="col-md-12">
+        <div align="center">
+
+            <h2>
+                Tell us about your business.
+            </h2>
+            <p>Help us finish up your account details.</p>
+
+        </div>
+        
+      </div>
+  </div>
+  <!-- <div class="row">
       <div class="col-12">
           <hr>
       </div>
-  </div>
+  </div> -->
   <form class="form-horizontal" 
             (ngSubmit)="addBusines()" 
             #addBusinessForm="ngForm">
@@ -29,7 +47,17 @@
           </span>
         </div>
         <div class="col-md-6">
-          <label for="id-bus-addr" class="">Business Address: </label>
+            <div class="form-group">
+                <label class="control-label" for="selectbasic">Country</label>
+                <div>
+                  <select id="selectbasic" name="selectbasic" class="form-control">
+                    <option value="1">India</option>
+                    <option value="2">United States</option>
+                  </select>
+                </div>
+              </div>
+
+          <!--<label for="id-bus-addr" class="">Business Address: </label>
           <div class="">
             <input type="text" class="form-control" 
             id="id-bus-addr" 
@@ -41,25 +69,38 @@
                   *ngIf="!busAddr.valid && busAddr.touched">
                 Business Address is required
             </span>
-          </div>
+          </div>-->
         </div>
       </div>
       <div class="row form-group">
         <div class="col-md-6">
-          <label for="id-bus-email" class="">Business Email</label>
-            <input type="email" class="form-control" 
-              id="id-bus-email" 
-              name="busEmail"
-              placeholder="Business Email"
-              #busEmail="ngModel"
+          <label for="id-bus-Addrs" class="">Business Address</label>
+            <input type="text" class="form-control" 
+              id="id-bus-Addrs" 
+              name="busAddrs"
+              placeholder="Address"
+              #busAddrs="ngModel"
               ngModel required>
             <span class="help-block" 
-                *ngIf="!busEmail.valid && busEmail.touched">
-                Business Email is required
+                *ngIf="!busAddrs.valid && busAddrs.touched">
+                Business Address is required
             </span>
         </div>
         <div class="col-md-6">
-          <label for="id-bus-phone" class="">Business Phone</label>
+            <label for="id-bus-website">Apt.Suit Number</label>
+            <input type="text" class="form-control" 
+              id="id-bus-website" 
+              name="busWs"
+              placeholder="Apt.Suit Number"
+              #busWs="ngModel"
+              ngModel>
+
+          
+        </div>
+      </div>
+      <div class="row form-group">
+        <div class="col-md-6">
+            <label for="id-bus-phone" class="">Business Phone</label>
             <input type="tel" class="form-control" 
               id="id-bus-phone" 
               name="busPhone"
@@ -72,23 +113,15 @@
             </span>
         </div>
       </div>
-      <div class="row form-group">
-        <div class="col-md-6">
-            <label for="id-bus-website">Business Website</label>
-            <input type="text" class="form-control" 
-              id="id-bus-website" 
-              name="busWs"
-              placeholder="Business Website"
-              #busWs="ngModel"
-              ngModel>
-        </div>
+
+      <div class="form-group margin-right-18-minus">
+          <div class="col-md-12" align="right">
+            <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
+            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red">NEXT</button>
+          </div>
       </div>
-      <div class="row form-group">
-        <div class="col-12 text-center">
-          <button type="submit" 
-                  class="btn btn-info w-75">Next</button>
-        </div>
-      </div>
+      <br/><br/>
   </form>
+  
 </div>
 
