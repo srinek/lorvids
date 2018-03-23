@@ -27,7 +27,7 @@ module.exports.sendConfirmationEmail = (appointmentData, userData) => {
         console.log("===============================================================");
         console.log("emailData", emailData);
         console.log("===============================================================");
-        //sendEmail(emailData);
+        sendEmail(emailData);
     });
     
 }
@@ -70,7 +70,7 @@ let sendEmail = (emailData) => {
 let populateAppointmentConfirmationTemplateData = (appointmentData, userData, business, staff, appointment) => {
     let templateData = {};
     templateData.bus_id = business.bus_id;
-    templateData.bus_image = `${image_lot}/b-test-01-1516982181394.jpg`;
+    templateData.bus_image = `${image_lot}/${business.defaultImage}`;
     templateData.bus_name = business.bus_name;
     templateData.bus_address = business.address;
     templateData.bus_phone = business.phone;
@@ -78,7 +78,7 @@ let populateAppointmentConfirmationTemplateData = (appointmentData, userData, bu
     templateData.staff_name = staff.staff_name;
     templateData.service = appointmentData.service;
     templateData.user = userData.name;
-    templateData.appointments_url = `${lorvid_url}/bushome/${business.bus_id}?psId=${appointment.appointment_id}`;
+    templateData.appointments_url = `${lorvid_url}/viewappts/${appointment.appointment_id}`;
     //lorvids variables
     templateData.lorvid_url = lorvid_url;
     templateData.lorvids_logo = `${image_lot}/logo.png`;

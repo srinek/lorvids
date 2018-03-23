@@ -67,7 +67,7 @@ module.exports.createAppointmentConfirmationTemplate = () => {
                                                                              <p style="margin:0 0 35px; font-size:12px; line-height:18px; color:#333333;">
                                                                              Thank you for scheduling. Looking forward to your visit. 
              <br/>
-             <a href="{{appointments_url}}" style="color:#398ad0; text-decoration:none; font-weight: bolder;">Click Here</a> to  reschedule your appointment.
+             <a href="{{appointments_url}}" style="color:#398ad0; text-decoration:none; font-weight: bolder;">Click Here</a> to  cancel/reschedule your appointment.
              <br/><br/>
              Thank You, <br/>
              {{bus_name}} </p>

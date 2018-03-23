@@ -88,11 +88,11 @@ let createObj = {
   "body": JSON.stringify(creatReqBody)
 };
 
-/* appointment.createNew(createObj , null, (error, response) => {
+appointment.createNew(createObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-}); */ 
+});
 
 let testGetObj = { "pathParameters" : 
   {
@@ -171,9 +171,9 @@ let appointmentByIdReq = {
       "sId" : "b-test-01-s-01-1516721400000"
   }
 }
-appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
+/* appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
 
   console.log('-----------------------------GET getAllAppointmentsByAppointmentId RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------GET RESPONSE END-----------------------------');
-});
+}); */
