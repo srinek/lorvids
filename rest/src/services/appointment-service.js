@@ -219,7 +219,7 @@ module.exports.getBusinessBookedAppointments = (busId, staffId, appointmentDate,
 
 module.exports.cancelAppointment = (slot_id) => {
     let currentDate = new Date();
-    currentDate = currentDate.toLocaleString();
+    currentDate = currentDate.toISOString();
     var params = {
         "TableName": 'Appointments',
         "Key": { "AppointmentId" : slot_id },

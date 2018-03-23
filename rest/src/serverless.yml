@@ -213,6 +213,22 @@ functions:
           path: search
           method: get
           cors : true
+  getUserDetails:
+    handler: api/user.get
+    description : booked appointments for a business and staff
+    events:
+      - http:
+          path: user/{userEmail}
+          method: get
+          cors : true
+  saveUserDetails:
+    handler: api/user.save
+    description : booked appointments for a business and staff
+    events:
+      - http:
+          path: user
+          method: post
+          cors : true
   filter:
     handler: api/search.doFacetSearch
     description : facet search api
