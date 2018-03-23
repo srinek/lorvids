@@ -242,13 +242,16 @@ p {
     margin-top: 10px;
 }
 .margin-top-20{
-    margin-top: 20px;
+    margin-top: 20px !important;
 }
 .margin-bottom-25{
     margin-bottom: 25px;
 }
 .margin-bottom-10{
     margin-bottom: 10px;
+}
+.margin-bottom-50{
+    margin-bottom:50px !important;
 }
 .margin-right-18-minus{
     margin-right: -18px;
@@ -380,10 +383,10 @@ font-size: 20px;
     cursor: pointer;
 }
 
-.btn:hover {
+/*.btn:hover {
     background :  #F5AF02  !important;
     color: #0064d3  !important;
-}
+}*/
 
 
 

@@ -1,22 +1,26 @@
 <div>
-  <div class="row my-1" *ngFor="let day of weekdays">
-    <div style="width:70px" class="pl-1 py-1">
-      {{day}}
-    </div>
-    <div style="width:110px" class="mr-2">
-        <ng-select [items]="beginItems"
-          [active]="beginItems"
-          [disabled]="disabled">
-        </ng-select>
-    </div>
-    <div style="width:110px">
-        <ng-select [items]="endItems"
-            [active]="endItems"
-            [disabled]="disabled">
-        </ng-select>
-    </div>
-    <div>
-        <a href="" click=""><i class="material-icons">delete</i></a>
-    </div>
+  <div class="row my-1 weekdays" *ngFor="let day of weekdays">
+          <div style="width:70px" class="pl-1 py-1">
+            {{day}}
+          </div>
+
+          <div style="width:130px" class="mr-2">
+              <ng-select [items]="beginItems"
+                [active]="beginItems"
+                [disabled]="disabled">
+              </ng-select>
+          </div>
+
+          <div style="width:130px">
+              <ng-select [items]="endItems"
+                  [active]="endItems"
+                  [disabled]="disabled">
+              </ng-select>
+          </div>
+
+          <div>
+              <a href="" class="delete-icon"><i class="material-icons">delete</i></a>
+          </div>
+
   </div>
 </div>

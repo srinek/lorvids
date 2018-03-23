@@ -1,29 +1,32 @@
 <div class="container margin-top-10-pr">
 
+      <div class="row margin-bottom-25">
+          <div class="col-12">
+            <ul class="nav nav-tabs abdb-tabs">
+                <li class="active"><a href="javascript:void(0);"><span class="span1">&nbsp;1.&nbsp;</span> BUSINESS INFO</a></li>
+                <li><a href="javascript:void(0);"><span class="span1">&nbsp;2.&nbsp;</span> SERVICES</a></li>
+                <li><a href="javascript:void(0);"><span class="span1">&nbsp;3.&nbsp;</span> STAFF INFO</a></li>
+            </ul>
+          </div>
 
-  <div class="row margin-bottom-25">
-      <div class="col-12">
-        <ul class="nav nav-tabs abdb-tabs">
-            <li class="active"><a href="javascript:void(0);"><span class="span1">&nbsp;1.&nbsp;</span> BUSINESS INFO</a></li>
-            <li><a href="javascript:void(0);"><span class="span1">&nbsp;2.&nbsp;</span> SERVICES</a></li>
-            <li><a href="javascript:void(0);"><span class="span1">&nbsp;3.&nbsp;</span> STAFF INFO</a></li>
-        </ul>
       </div>
 
-  </div>
-  <div class="row">
-      <div class="col-md-12">
-        <div align="center">
-
-            <h2>
+      <div class="row">
+            <div class="col-md-6">
+                <h2>
                 Tell us about your business.
-            </h2>
-            <p>Help us finish up your account details.</p>
-
-        </div>
-        
+                </h2>
+                <p>Help us finish up your account details.</p>
+          </div>
       </div>
-  </div>
+
+      <div class="row">
+        <div class="col-12">
+            <hr>
+        </div>
+      </div>
+
+  
   <!-- <div class="row">
       <div class="col-12">
           <hr>
@@ -32,95 +35,235 @@
   <form class="form-horizontal" 
             (ngSubmit)="addBusines()" 
             #addBusinessForm="ngForm">
-      <div class="row form-group">
-        <div class="col-md-6">
-          <label for="id-bus-name" class="">Business Name: </label>
-          <input type="text" class="form-control" 
-            id="id-bus-name" 
-            name="busName"
-            placeholder="Business Name"
-            #busName="ngModel"
-            ngModel required>
-          <span class="help-block" 
-                *ngIf="!busName.valid && busName.touched">
-              Business Name is required
-          </span>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label class="control-label" for="selectbasic">Country</label>
-                <div>
-                  <select id="selectbasic" name="selectbasic" class="form-control">
-                    <option value="1">India</option>
-                    <option value="2">United States</option>
-                  </select>
-                </div>
-              </div>
 
-          <!--<label for="id-bus-addr" class="">Business Address: </label>
-          <div class="">
-            <input type="text" class="form-control" 
-            id="id-bus-addr" 
-            name="busAddr"
-            placeholder="Business Address"
-            #busAddr="ngModel"
-            ngModel required>
-            <span class="help-block" 
-                  *ngIf="!busAddr.valid && busAddr.touched">
-                Business Address is required
-            </span>
-          </div>-->
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-md-6">
-          <label for="id-bus-Addrs" class="">Business Address</label>
-            <input type="text" class="form-control" 
-              id="id-bus-Addrs" 
-              name="busAddrs"
-              placeholder="Address"
-              #busAddrs="ngModel"
-              ngModel required>
-            <span class="help-block" 
-                *ngIf="!busAddrs.valid && busAddrs.touched">
-                Business Address is required
-            </span>
-        </div>
-        <div class="col-md-6">
-            <label for="id-bus-website">Apt.Suit Number</label>
-            <input type="text" class="form-control" 
-              id="id-bus-website" 
-              name="busWs"
-              placeholder="Apt.Suit Number"
-              #busWs="ngModel"
-              ngModel>
+            <div class="row">
+                <div class="col-md-7">
+                          <div class="row form-group">
+                            <div class="col-md-6">
+                                    <label for="id-bus-name" class="">Business Name: </label>
+                                    <input type="text" class="form-control" 
+                                      id="id-bus-name" 
+                                      name="busName"
+                                      placeholder="Business Name"
+                                      #busName="ngModel"
+                                      ngModel required>
+                                    <span class="help-block" 
+                                          *ngIf="!busName.valid && busName.touched">
+                                        Business Name is required
+                                    </span>
+                            </div>
 
+                            <div class="col-md-6">
+                                  <div class="form-group">
+                                        <label class="control-label" for="selectbasic">Country</label>
+                                        <div>
+                                          <select id="selectbasic" name="selectbasic" class="form-control">
+                                            <option value="1">India</option>
+                                            <option value="2">United States</option>
+                                          </select>
+                                        </div>
+                                  </div>
+                            </div>
+                          </div>
+
+                            <div class="row form-group">
+                                    <div class="col-md-6">
+                                              <label for="id-bus-Addrs" class="">Business Address</label>
+                                              <input type="text" class="form-control" 
+                                                id="id-bus-Addrs" 
+                                                name="busAddrs"
+                                                placeholder="Address"
+                                                #busAddrs="ngModel"
+                                                ngModel required>
+                                              <span class="help-block" 
+                                                  *ngIf="!busAddrs.valid && busAddrs.touched">
+                                                  Business Address is required
+                                              </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="id-bus-website">Apt.Suit Number</label>
+                                        <input type="text" class="form-control" 
+                                          id="id-bus-website" 
+                                          name="busWs"
+                                          placeholder="Apt.Suit Number"
+                                          #busWs="ngModel"
+                                          ngModel>
+                                    </div>
+                            </div>
+                            <div class="row form-group">
+                                  <div class="col-md-6">
+                                      <label for="id-bus-phone" class="">Business Phone</label>
+                                      <input type="tel" class="form-control" 
+                                        id="id-bus-phone" 
+                                        name="busPhone"
+                                        placeholder="Business Phone"
+                                        #busPhone="ngModel"
+                                        ngModel required>
+                                      <span class="help-block" 
+                                          *ngIf="!busPhone.valid && busPhone.touched">
+                                          Business Phone is required
+                                      </span>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <label for="id-bus-phone" class="">Business Email </label>
+                                    <input type="tel" class="form-control" 
+                                      id="id-bus-email" 
+                                      name="busEmail "
+                                      placeholder="Business Email"
+                                      #busEmail="ngModel"
+                                      ngModel required>
+                                    <span class="help-block" 
+                                        *ngIf="!busEmail.valid && busEmail.touched">
+                                        Business Email  is required.
+                                    </span>
+                                  </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-6">
+                                    <label for="id-bus-phone" class="">Business Website </label>
+                                    <input type="tel" class="form-control" 
+                                      id="id-bus-website" 
+                                      name="busWebsite"
+                                      placeholder="Business Website "
+                                      #busWebsite="ngModel"
+                                      ngModel required>
+                                    <span class="help-block" 
+                                        *ngIf="!busWebsite.valid && busWebsite.touched">
+                                        Business Website  is required
+                                    </span>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <label class="control-label" for="selectTimezone">Timezone</label>
+                                  <div>
+                                    <select id="selectTimezone" name="selectTimezone" class="form-control">
+                                      <option value="1">India</option>
+                                      <option value="2">United States</option>
+                                    </select>
+                                  </div>
+
+                              </div>
+
+                            </div>
+
+                            <div class="row form-group">
+                                  <div class="col-md-6">
+                                          <label class="control-label" for="selectCategory">Business Category</label>
+                                          <div>
+                                            <select id="selectCategory" name="selectCategory" class="form-control">
+                                              <option value="1">India</option>
+                                              <option value="2">United States</option>
+                                            </select>
+                                          </div>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                      <label for="id-bus-phone" class="">Business Timezone </label>
+                                      <input type="tel" class="form-control" 
+                                        id="id-bus-timezone" 
+                                        name="busTimezone "
+                                        placeholder="Business Timezone"
+                                        #busTimezone="ngModel"
+                                        ngModel required>
+                                      <span class="help-block" 
+                                          *ngIf="!busTimezone.valid && busTimezone.touched">
+                                          Business Timezone  is required.
+                                      </span>
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col">
+                                    <label for="id-staff-salary" class="">Appointment Instructions </label>
+            
+                                    <textarea rows="2" class="form-control"
+                                    id="id-bus-appointment-ins" 
+                                      name="busAppointments"
+                                      placeholder="Appointment Instructions"
+                                      #busAppointments="ngModel"
+                                      ngModel>
+                                            </textarea>
+                                </div>
+
+                                <div class="col">
+                                    <label for="id-staff-salary" class="">Business Statement </label>
+            
+                                    <textarea rows="2" class="form-control"
+                                    id="id-bus-statements" 
+                                      name="busStatements"
+                                      placeholder="Business Statement"
+                                      #busStatement="ngModel"
+                                      ngModel>
+                                            </textarea>
+                                </div>
+                          </div>
+                          <div class="row form-group">
+                              <div class="col">
+                                  <label for="id-staff-salary" class="">Awards  </label>
           
-        </div>
-      </div>
-      <div class="row form-group">
-        <div class="col-md-6">
-            <label for="id-bus-phone" class="">Business Phone</label>
-            <input type="tel" class="form-control" 
-              id="id-bus-phone" 
-              name="busPhone"
-              placeholder="Business Phone"
-              #busPhone="ngModel"
-              ngModel required>
-            <span class="help-block" 
-                *ngIf="!busPhone.valid && busPhone.touched">
-                Business Phone is required
-            </span>
-        </div>
-      </div>
+                                  <textarea rows="2" class="form-control"
+                                  id="id-bus-awards" 
+                                    name="busAwards"
+                                    placeholder="Awards"
+                                    #busAwards="ngModel"
+                                    ngModel>
+                                          </textarea>
+                              </div>
+                            </div>
 
-      <div class="form-group margin-right-18-minus">
-          <div class="col-md-12" align="right">
-            <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
+                            <div class="row form-group">
+                                <div class="col">
+                                    <div>
+                                        <label class="">Upload Images: </label>
+                                        <image-upload 
+                                           url="https://kdmgdajlje.execute-api.us-east-1.amazonaws.com/dev/savepic/b-test-01"
+                                           (removed)="onImageRemoved($event)"
+                                           [headers]="awsHeaders"
+                                           [beforeUpload]="onBeforeUpload"
+                                           [uploadedFiles]="images">
+                                        </image-upload>
+                                    </div>
+                                </div>
+                              </div>
+
+              <br/><br/>
+    </div><!-- col-md-7 -->
+
+    <div class="col-md-5">
+        <div class="d-flex flex-column align-items-center">
+            <div>
+                <h6>Working hours</h6>
+            </div>
+            <!-- <div class="w-50"><hr></div> -->
+            <div>
+                <label class="custom-control custom-checkbox" >
+                  <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">Same as business hours</span>
+                </label>
+            </div>
+        
+            <div>
+                <app-business-hours 
+                   [startTime]="startTime"
+                   [endTime]="endTime"
+                   #busHours>
+                </app-business-hours>
+            </div>
+            
+        </div>
+    </div>
+
+</div><!--row-->
+
+        <div class="form-group margin-right-18-minus">
+            <div class="col-md-12" align="right">
             <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red">NEXT</button>
-          </div>
-      </div>
-      <br/><br/>
+            </div>
+        </div>
+
   </form>
   
 </div>

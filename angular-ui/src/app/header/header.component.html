@@ -39,7 +39,7 @@
                 <li [ngClass]="{'d-none':loggedIn}"><a>Log In</a></li>
                 <li [ngClass]="{'d-none':loggedIn}"><a>Sign Up</a></li>
                 <li><a>Help</a></li>
-                <li class="list" [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['addb']">LIST YOUR BUSINESS</a></li>
+                <li class="list" [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['listb']">LIST YOUR BUSINESS</a></li>
                 <li class="dropdown navbar-user" [ngClass]="{show:showProfile, 'd-block-inline':loggedIn, 'd-none':!loggedIn}" (click)="toggleProifle()">
                   <a href="/dashboard/home" id="user__img">
                     <img alt="Nandakishore" style="border-radius: 50%;" src="">

@@ -1,0 +1,261 @@
+<section id="hero-section" class="mb-4">
+
+  <div class="container">
+          <div class="row">
+                  <div class="col-md-7">
+                          <div class="hpage-left-data">
+                              <h1 class="become-mem">BECOME A MEMBER</h1>
+                              <h4 class="color-white">&nbsp;Explore Trending Topics</h4>
+                              <!-- <h1 class="text-xlarge">Self-booking helps everyone</h1> -->
+                          </div>
+                  </div>
+
+                  <div class="col-md-5 sign-up-col">
+                          <div class="panel panel-info" >
+                                  <div class="panel-heading red-background">
+                                      <div class="panel-title text-center">SIGN UP IT'S FREE</div>
+                                  </div>     
+              
+                                  <div style="padding-top:30px" class="panel-body" >
+              
+                                      <form id="loginform" class="form-horizontal" role="form">
+                                              <div class="row">
+                                                      <div class="col-xs-12 col-sm-6 col-md-6">
+                                                          <div class="form-group">
+                                                              <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                                                          </div>
+                                                      </div>
+                                                      <div class="col-xs-12 col-sm-6 col-md-6">
+                                                          <div class="form-group">
+                                                              <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                                                          </div>
+                                                      </div>
+                                              </div>
+                                          
+                                              <div class="form-group">
+                                                      <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="3">
+                                              </div>
+
+                                              <div class="form-group">
+                                                      <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="4">
+                                              </div>
+
+                                              <div class="form-group">
+                                                      <input type="text" name="mobile" class="form-control input-lg" placeholder="Mobile No." tabindex="5">
+                                              </div>
+
+                                              <div class="row">
+                                                      <div class="col-md-12">
+                                                          <span class="button-checkbox">
+                                                              <label class="checkbox">
+                                                                  <input type="checkbox" class="btn btn-primary">
+                                                                  <span class="checkmark"></span>
+                                                                  
+                                                              </label>
+                                                          </span>
+                                                      <a href="#" data-toggle="modal" data-target="#t_and_c_m" style="text-decoration:none;"> I accept Terms and Conditions</a>
+                                                      </div>
+                                              </div>
+
+                                              <div class="row margin-top-10 padding-10">
+                                                  <button type="button" class="btn btn-primary btn-lg btn-block yellow-button padding-10 create-btn" (click)="createbtnClick()">Create Account</button>
+                                              </div>
+
+                                              <div class="text-center">
+                                                      Already have an account? <a href="">Login here!</a>
+                                              </div>
+
+                                              
+
+                                              
+
+                                      </form>     
+              
+                                  </div>                     
+                          </div>  
+                  </div><!-- col-md-7 -->
+          </div>
+  </div>
+
+<!-- <div class="flex-center">
+  <div class="col-lg-7 text-white">
+      <h1 class="text-xlarge">Self-booking helps everyone</h1>
+      <p class="h5">Search the service you need, book your appointment right here at home.</p>
+      <div class="container">
+          <form>
+              <div class="">
+                      <div id="home-page-search" class="d-flex flex-xl-row flex-lg-row flex-md-row flex-column justify-content-around">
+                          <ng-select [items]="categoryValues"
+                              [active]="categoryValues"
+                              (selected)="categorySelected($event)">
+                          </ng-select>
+                          <input #searchFor type="text" class="form-control form-control-lg" 
+                          placeholder="What service are you looking for?"
+                          (keyup.enter)="onSearch(searchFor.value)">
+                          <span class="input-group-btn">
+                              <button class="btn btn-primary bg-blue" type="button"
+                              (click)="onSearch(searchFor.value)">Search</button>
+                          </span>
+                      </div>
+              </div>
+          </form>
+      </div>
+  </div>
+</div> -->
+</section>
+
+
+
+
+
+<section class="container d-flex flex-column align-items-center" id="how-it-works">
+<div>
+      <div class="restyle d-flex flex-column align-items-center margin-top-20">
+              <p class="p-header m-b-40 txt-upper">How it works?</p>
+              <div align="center">
+                  <p class="m-b-60 max-80-pr font-20">                         
+                      Lorvids lets you book your service appointments anytime from your desktop or mobile phone. Provides appointment confirmation, reminder emails and text messages.
+                  </p>
+              </div>
+          </div>
+
+</div>
+
+  <div class="row margin-bottom-50">
+          <!-- Loop slide -->
+          <div class="col-md-4">
+              <div class="centered service">
+                  <div class="circle-border circle-border1 zoom-in">
+                          <i class="fa fa-address-book" aria-hidden="true"></i>
+                  </div>
+                  <h3>SEARCH<br></h3>
+                      <span class="font-20">Select a service category, set your location and search for your service need.</span>
+                  <!--<p>We Create Modern And Clean Theme For Your Business Company.</p>-->
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="centered service">
+                  <div class="circle-border circle-border2 zoom-in">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                  </div>
+                  <h3>PICK SLOT<br></h3>
+                  <span class="font-20">Pick your business, staff and convenient time from the available search results.</span>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <div class="centered service">
+                  <div class="circle-border circle-border3 zoom-in">
+                          <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                  </div>
+                  <h3>BOOK<br></h3>
+                      <span class="font-20">Review appointment, Fill in your details to book the appointment.</span>
+              </div>
+          </div>
+  </div>
+
+<!-- <div>
+      <div class="d-flex flex-xl-row flex-lg-row flex-md-row flex-sm-row flex-column justify-content-around">
+              <div class="about-card d-flex flex-column align-items-center">
+                  <img class="m-b-20" height="120px" width="120px"
+                      src="{{imageRoot}}/homepage-search-icon.svg"
+                      alt="Search icon">
+                  <h3 class="m-b-20 card-title">SEARCH</h3>
+                  <p class="m-b-20 card-text">Select a service category, set your location and search for your service need.
+                  </p>
+              </div>
+              <div class="about-card d-flex flex-column align-items-center">
+                      <img class="m-b-20" height="120px" width="120px"
+                      src="{{imageRoot}}/homepage-calendar.png"
+                      alt="Match icon">
+                  <h3 class="m-b-20 card-title">PICK SLOT</h3>
+                  <p class="m-b-20 card-text">Pick your business, staff and convenient time from the available search results.
+                  </p>
+              </div>
+              <div class="about-card d-flex flex-column align-items-center">
+                      <img class="m-b-20" height="120px" width="120px"
+                      src="{{imageRoot}}/homepage-fill-in-form.png"
+                      alt="Home icon">
+                  <h3 class="m-b-20 card-title">BOOK</h3>
+                  <p class="m-b-20 card-text">Review appointment, Fill in your details to book the appointment.
+                  </p>
+              </div>
+          </div>
+</div> -->
+
+</section>
+
+<!-- <section class="container d-flex flex-column align-items-center" id="how-it-works">
+<div class="pt-5 pb-5 text-center">
+  <div class="restyle">
+      <p class="p-header m-b-40">How it works?</p>
+      <div class="row">
+          <p class="text col-12 col-xl-8 offset-xl-2 col-lg-8 offset-lg-2 col-md-8 offset-md-2 m-b-60">
+              We connect students and professionals in finding new homes. Book off-campus, furnished stays around your college                             or profession from local hosts.
+          </p>
+      </div>
+  </div>
+  <div>
+  <div class="d-flex flex-wrap justify-content-center">
+      <div class="col-4">
+          <img class="m-b-20"
+              src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/search-icon-e6a66f9a989faab1171eb3a6d26800b40e71ebf2f3d26cf3619c2d359cec0cae.png"
+              alt="Search icon">
+          <h3 class="m-b-20 card-title">SEARCH</h3>
+          <p class="m-b-20 card-text">Type and search around campuses, metro
+              stations or cities. Check out your hosts profile to view photos of
+              them, their listings and prices too! Select from the ones you like.
+          </p>
+      </div>
+      <div class="col-4">
+          <img class="m-b-20"
+              src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/match-icon-644bad4739e92700e558118ea25ffd26be719f94f277291dcdf040d65e14f552.png"
+              alt="Match icon">
+          <h3 class="m-b-20 card-title">BOOK</h3>
+          <p class="m-b-20 card-text">Book as many stays as you like. Hosts
+              typically respond within 48 hours. If you don’t hear back from your
+              host, we will send you alternative options similar to those which you
+              inquired.
+          </p>
+      </div>
+      <div class="col-4">
+          <img class="m-b-20"
+              src="https://d3guu5uu0s6zk1.cloudfront.net/assets/icons/home-icon-9d5eb79cff3024547825751f67368232a1f1bd9fc4e188183abc7352a5e00cd0.png"
+              alt="Home icon">
+          <h3 class="m-b-20 card-title">MOVE IN</h3>
+          <p class="m-b-20 card-text">Once your host approves your booking,
+              simply pay your reservation fee and move into your new home.
+          </p>
+      </div>
+  </div>
+  </div>
+</div>
+</section> -->
+
+<!-- <section class="campus p-b-30" id="trending-section">
+<div class="container">
+  <div class="inner-container-sm">
+      <div class="title m-t-80 m-b-60 text-center">
+          <h2>Trending Categories to explore</h2>
+      </div>
+      <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 col-12" *ngFor="let category of categories">
+              <div class="box">
+                  <a [routerLink]="['/search']" [queryParams]="{'look_for' : category.categoryCode, '_p':'b'}">
+                      <img class="image" src="{{imageRoot}}/{{category.image}}" alt="{{category.categoryName}}">
+                      <div class="img-caption">
+                          <p>
+                              <span>
+                                  <img src="{{imageRoot}}/favicon.png" height="15px">
+                              </span>
+                          </p>
+                          <h4>{{category.categoryName}}</h4>
+                      </div>
+                      <div class="overlay"></div>
+                  </a>
+              </div>
+          </div>
+      </div>
+     
+  </div>
+</div>
+</section> -->

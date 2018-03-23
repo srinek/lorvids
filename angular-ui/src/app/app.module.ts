@@ -59,6 +59,7 @@ import { SearchResultComponent } from './search-results-container/search-results
 import { UserService } from './service/user.service';
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
+import { ListBusinessComponent } from './home-page/list-business/list-business.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { ViewAppointmentsComponent } from './view-appointments/view-appointments
     AdminStaffDetailsComponent,
     SearchResultComponent,
     ActivateUserComponent,
-    ViewAppointmentsComponent
+    ViewAppointmentsComponent,
+    ListBusinessComponent
   ],
   imports: [
     BrowserModule,
