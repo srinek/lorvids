@@ -33,7 +33,7 @@ export class ReviewBookingComponent implements OnInit {
   prevSlotId : string;
   updateAppointment : boolean;
   userEmail : string;
-  userData : User;
+  userData : User = new User();
   apptBooked : boolean = false;
   imageRoot : string = environment.imageRoot;
 

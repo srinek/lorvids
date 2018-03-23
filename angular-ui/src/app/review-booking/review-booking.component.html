@@ -3,7 +3,7 @@
         
         <div class="col-md-8 align-items-stretch mt-1">
             <div class="card">
-                <div class="card-header bg-logo-letter-l"> 
+                <div class="card-header bg-logo-letter-o"> 
                     <h4 class="text-uppercase mb-0 py-2 text-white">Appointment Details</h4>
                 </div>
                 <div class="card-body">
@@ -13,13 +13,13 @@
                             <div class="col-12">
                                 <input name="uname" 
                                 id="id-name" 
-                                value="{{userData?.name}}"
+                                [(ngModel)]="userData.name"
                                 class="form-control" 
                                 type="text"
-                                #uname="ngModel"
-                                ngModel required>
+                                #uname = "ngModel"
+                                required>
                                 <span class="help-block" 
-                                *ngIf="!uname.valid && uname.touched">
+                                [hidden]="uname.valid || uname.pristine">
                                 we need your name to book the appointment
                                 </span>
                             </div>
@@ -30,12 +30,12 @@
                                 <input 
                                 name="uemail" 
                                 id="id-email" 
-                                value="{{userData?.UserEmail}}"
+                                [(ngModel)]="userData.UserEmail"
                                 class="form-control"
-                                #uemail="ngModel"
-                                ngModel required email>
+                                #uemail = "ngModel"
+                                required email>
                                 <span class="help-block" 
-                                *ngIf="!uemail.valid && uemail.touched">
+                                [hidden]="uemail.valid || uemail.pristine">
                                 we need your email to book the appointment
                                 </span>
                             </div>
@@ -46,12 +46,12 @@
                                 <input 
                                 name="uphone" 
                                 id="id-phone" 
-                                value="{{userData?.phone}}"
+                                [(ngModel)]="userData.phone"
                                 class="form-control"
-                                #uphone="ngModel"
-                                ngModel required phone>
+                                #uphone = "ngModel"
+                                required phone>
                                 <span class="help-block" 
-                                *ngIf="!uphone.valid && uphone.touched">
+                                [hidden]="uphone.valid || uphone.pristine">
                                 we need your phone number to book the appointment
                                 </span>
                             </div>
@@ -61,7 +61,7 @@
                             <div class="col-12" *ngIf="business">
                                 <select name="svc" id="id-svc" 
                                 class="form-control"
-                                #svc="ngModel"
+                                #svc = "ngModel"
                                 [(ngModel)]="svcSelected" required>
                                 <ng-container *ngFor="let srvc of business.services; first as isFirst">
                                         <option 
@@ -72,7 +72,7 @@
                                 
                                 </select>
                                 <span class="help-block" 
-                                *ngIf="!svc.valid && svc.touched">
+                                [hidden]="svc.valid || svc.pristine">
                                 we need your phone number to book the appointment
                                 </span>
                             </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="col-md-4 align-items-stretch">
             <div class="card" *ngIf="business">
-                <div class="card-header bg-logo-letter-l"> 
+                <div class="card-header bg-logo-letter-o"> 
                     <h4 class="text-uppercase mb-0 py-2 text-white">{{business.bus_name}}</h4>    
                 </div>
                 <div class="card-body">
