@@ -1,26 +1,32 @@
 <div>
-  <div class="row my-1 weekdays" *ngFor="let day of weekdays">
+  <div class="row my-1 weekdays" *ngFor="let weekDay of weekdays">
           <div style="width:70px" class="pl-1 py-1">
-            {{day}}
+            {{weekDay.day}}
           </div>
 
           <div style="width:130px" class="mr-2">
               <ng-select [items]="beginItems"
                 [active]="beginItems"
-                [disabled]="disabled">
+                [disabled]="disabled"
+                (selected)="beginTimeSelected($event, weekDay.dayInWeek)"
+                (onEndClosed)="closeBegin($event)"
+                #beginTime>
               </ng-select>
           </div>
 
           <div style="width:130px">
               <ng-select [items]="endItems"
                   [active]="endItems"
-                  [disabled]="disabled">
+                  [disabled]="disabled"
+                  (selected)="endTimeSelected($event, weekDay.dayInWeek)"
+                  (onBeginClosed)="closeEnd($event)"
+                  #endTime>
               </ng-select>
           </div>
 
-          <div>
+          <!-- <div>
               <a href="" class="delete-icon"><i class="material-icons">delete</i></a>
-          </div>
+          </div> -->
 
   </div>
 </div>

@@ -1,12 +1,14 @@
 import {Staff} from './staff.model';
 import {AppointmentSlot} from './appointment-slot.model';
 import { Service } from './service.model';
+import { weekdays } from 'moment';
 
 export class Business{
 
     bus_id : string;
     bus_name : string;
     address : string;
+    aptSuite : string;
     phone : number;
     email : string;
     website : string;
@@ -15,8 +17,8 @@ export class Business{
     rating : number[];
     staff? : Staff[] =[];
     bus_time_zone? : string = "America/new_york";
-    bus_hours? : any = {};
-    holidays? : any = {};
+    bus_hours? : Array<{day:number, endTime?:string, startTime?:string}> = [];
+    holidays? : {dates?:Array<string>, weekdays?:Array<number>} = {dates:[], weekdays:[]};
     statement_caption? : string = "";
     statement_notes? : string = "";
     specialized_in? : string = "";

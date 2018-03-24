@@ -9,6 +9,7 @@ import { SelectComponent } from 'ng2-select';
 import { BusinessHoursComponent } from '../common/business-hours/business-hours.component';
 import { UploadMetadata } from 'angular2-image-upload/lib/image-upload/before-upload.interface';
 import { FileHolder } from 'angular2-image-upload/lib/image-upload/image-upload.component';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-add-business',
@@ -24,7 +25,9 @@ export class AddBusinessComponent implements OnInit {
   public errorMessage : string = "";
   public startTime : Date = new Date(2018, 1, 7, 0, 0);
   public endTime : Date = new Date(2018, 1, 7, 23, 45);
+  businessData : Business = new Business();
   private _availableServices : Array<any> = [];
+  uploadApi : string = environment.appurl+"/savepic/b-test-01";
   images = [];
   awsHeaders: { [name: string]: any } = {
     //"X-Amz-Content-Sha256": "UNSIGNED-PAYLOAD"
@@ -44,24 +47,26 @@ export class AddBusinessComponent implements OnInit {
   }
 
   addBusines(){
-    let business : Business = new Business();
-    business.bus_id = this.busForm.value.busid;
+    /* let business : Business = new Business();
     business.bus_name = this.busForm.value.busName;
     business.address = this.busForm.value.busAddr;
-    business.email = this.busForm.value.busEmail;
+    business.aptSuite = this.busForm.value.aptSuite;
     business.phone = this.busForm.value.busPhone;
-    business.website = this.busForm.value.busWs;
-    this.router.navigate(
-      ['/addsvc', 1],
-      {relativeTo:this.route}
-    );
-     this.facadeService.saveBusiness(business).subscribe(
+    business.email = this.busForm.value.busEmail;
+    business.website = this.busForm.value.busWebsite;
+    business.appointment_instructions = this.busForm.value.apptInstructions;
+    business.statement_notes = this.busForm.value.busStatement;
+    business.awards = this.busForm.value.busAwards; */
+    this.facadeService.saveBusiness(this.businessData).subscribe(
       (busId : string) => {
         this.logger.log(busId);
-        this.router.navigate(
-          ['/addstaff', busId],
+        this.router.navigate(['/addsvc', busId],
           {relativeTo:this.route}
         );
+        /* this.router.navigate(
+          ['/addstaff', busId],
+          {relativeTo:this.route}
+        ); */
       },
       (error : string) => {
         this.error = true;
@@ -101,6 +106,49 @@ export class AddBusinessComponent implements OnInit {
      );
   }
 
- 
+  beginTimeSelected(value){
+    console.log("time selected", value);
+    if(value.beginTime === "Closed"){
+      this.addHoliday(value.dayInWeek);
+      return;
+    }
+    let busHour = this.businessData.bus_hours.find( (busHr)=> {
+      return busHr.day === value.dayInWeek;
+    });
+    if(!busHour){
+      this.businessData.bus_hours.push({day:value.dayInWeek, startTime : value.beginTime});
+    }
+    else{
+      busHour.startTime = value.beginTime;
+    }
+  }
+  
+  endTimeSelected(value){
+    console.log("time selected", value);
+    if(value.endTime === "Closed"){
+      this.addHoliday(value.dayInWeek);
+      return;
+    }
+    let busHour = this.businessData.bus_hours.find( (busHr)=> {
+      return busHr.day === value.dayInWeek;
+    });
+    if(!busHour){
+      this.businessData.bus_hours.push({day:value.dayInWeek, endTime : value.endTime});
+    }
+    else{
+      busHour.endTime = value.endTime;
+    }
+
+    console.log("business data", this.businessData);
+  }
+
+  addHoliday(dayInWeek){
+    let dayExist = this.businessData.holidays.weekdays.find( (holiday) => {
+      return holiday === dayInWeek;
+    });
+    if(!dayExist){
+      this.businessData.holidays.weekdays.push(dayInWeek);
+    }
+  }
 
 }

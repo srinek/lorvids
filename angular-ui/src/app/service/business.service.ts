@@ -34,6 +34,7 @@ export class BusinessService {
     }
 
     public saveBusiness(business : Business) : Observable<string>{
+        console.log("business ", business);
         return this.http.post(this.api + this.endpoint, business).map(
             (response : Response) => {
                 let result : string;
@@ -48,7 +49,7 @@ export class BusinessService {
             (error: Response) => {
               return Observable.throw(error);
             }
-        );
+        ); 
     }
 
     public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Expense[]>{
