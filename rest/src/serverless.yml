@@ -245,6 +245,14 @@ functions:
           path: savepic/{picid}
           method: post
           cors : true
+  uploadBusPic:
+    handler: api/imageapi.uploadBusPic
+    description : upload to s3
+    events:
+      - http:
+          path: saveBusPic
+          method: post
+          cors : true
   deletepic:
     handler: api/imageapi.delete
     description : delete file from s3

@@ -12,7 +12,7 @@ export class Business{
     phone : number;
     email : string;
     website : string;
-    images : string[];
+    images : string[]=[];
     defaultImage : string;
     rating : number[];
     staff? : Staff[] =[];

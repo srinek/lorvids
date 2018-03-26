@@ -1,7 +1,7 @@
 let imageapi = require('../src/api/imageapi');
 
 let image = {
-  "body" : '{ "base64" : "some string"}'
+  "body" : '{ "base64" : "some string 111"}'
 };
 
 imageapi.upload(

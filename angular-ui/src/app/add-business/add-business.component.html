@@ -199,7 +199,8 @@
                                            (removed)="onImageRemoved($event)"
                                            [headers]="awsHeaders"
                                            [beforeUpload]="onBeforeUpload"
-                                           [uploadedFiles]="images">
+                                           [uploadedFiles]="images"
+                                           (uploadFinished)="onUploadFinished($event)">
                                         </image-upload>
                                     </div>
                                 </div>

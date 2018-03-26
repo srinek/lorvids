@@ -27,7 +27,7 @@ export class AddBusinessComponent implements OnInit {
   public endTime : Date = new Date(2018, 1, 7, 23, 45);
   businessData : Business = new Business();
   private _availableServices : Array<any> = [];
-  uploadApi : string = environment.appurl+"/savepic/b-test-01";
+  uploadApi : string = environment.appurl+"saveBusPic";
   images = [];
   awsHeaders: { [name: string]: any } = {
     //"X-Amz-Content-Sha256": "UNSIGNED-PAYLOAD"
@@ -94,6 +94,13 @@ export class AddBusinessComponent implements OnInit {
     });
   }
 
+  onUploadFinished(file: FileHolder) {
+    //console.log(JSON.stringify(file.serverResponse));
+    console.log("upload response ", file.serverResponse._body);
+    this.businessData.images.push(file.serverResponse._body);
+    this.businessData.defaultImage=this.businessData.images[0];
+  }
+  
   onImageRemoved(file: FileHolder) {
      console.log("file ", file);
      this.facadeService.deleteFile(file.src).subscribe(

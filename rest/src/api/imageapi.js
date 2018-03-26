@@ -6,6 +6,10 @@ module.exports.upload = (event, context, callback) => {
     const id = event.pathParameters.picid;
     const time = new Date();
     const fileName = `${id}-${time.getTime()}`;
+    uploadPic(body, fileName, callback);
+}
+
+let uploadPic = (body, fileName, callback) => {
     s3Service.uploadFile(body['base64'], fileName)
     .then( (data) => {
         console.log("data ", data);
@@ -20,6 +24,12 @@ module.exports.upload = (event, context, callback) => {
     });
 }
 
+module.exports.uploadBusPic = (event, context, callback) => {
+    const body = JSON.parse(event.body);
+    const time = new Date();
+    const fileName = `${util.randomValueHex()}-${time.getTime()}`;
+    uploadPic(body, fileName, callback);
+}
 module.exports.delete = (event, context, callback) => {
     const fileName = event.pathParameters.picid;
     s3Service.deleteFile(fileName)
