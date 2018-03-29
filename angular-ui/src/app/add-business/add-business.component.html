@@ -228,7 +228,7 @@
                    [endTime]="endTime"
                    (onBeginTimeSelected)="beginTimeSelected($event)"
                    (onEndTimeSelected)="endTimeSelected($event)"
-                   #busHours>
+                   [busHours]="businessData.bus_hours">
                 </app-business-hours>
             </div>
             

@@ -64,6 +64,7 @@ export class Business{
         this.isOpenNow = src.open;
         this.website = src.website;
         this.email = src.email;
+        this.category = src.category;
     }
 
     private mapServices(src) : void {

@@ -29,6 +29,7 @@ class Business{
         self.startTime = self.opensAt();
         self.endTime = self.closesAt();
         self.allhours = self.getAllHours();
+        self.category = src.category;
         if(src.website){
             self.website = src.website;
         }

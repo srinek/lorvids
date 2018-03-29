@@ -9,6 +9,7 @@ export class BusinessHoursComponent implements OnInit {
 
   @Input() startTime : Date;
   @Input() endTime : Date;
+  @Input() busHours : Array<{day:number, endTime?:string, startTime?:string}> = [];
   onBeginClosed = new EventEmitter<number>();
   onEndClosed = new EventEmitter<number>();
   @Output() onBeginTimeSelected = new EventEmitter<{dayInWeek:number, beginTime:string}>();
@@ -19,6 +20,7 @@ export class BusinessHoursComponent implements OnInit {
                     {day :"Tue", dayInWeek:3}, {day :"Wed", dayInWeek:4}, {day :"Thu", dayInWeek:5}, {day :"Fri", dayInWeek:6}, 
                     {day :"Sat", dayInWeek:7}]; 
   private disabled : boolean = false;
+  
 
   constructor() { }
 
@@ -37,8 +39,24 @@ export class BusinessHoursComponent implements OnInit {
     this.endItems.unshift("");
   }
 
-  activeItems() {
-    return "8:00 PM";
+  activeBeginItems(weekday : number){
+    let matchedBusHour = this.busHours.find( (busHour) => {
+         return busHour.day  === weekday;
+    });
+    if(matchedBusHour){
+      return [matchedBusHour.startTime];
+    }
+    return [""];
+  }
+
+  activeEndItems(weekday : number){
+    let matchedBusHour = this.busHours.find( (busHour) => {
+         return busHour.day  === weekday;
+    });
+    if(matchedBusHour){
+      return [matchedBusHour.endTime];
+    }
+    return [""];
   }
 
   toggleDisabled(){

@@ -54,6 +54,7 @@ export class AddBusinessComponent implements OnInit {
             this.facadeService.getBusiness(this.busId, false).subscribe(
               (business : Business) => {
                 this.businessData = business;
+                this.categorySelected = this.businessData.category;
                 this.update = true;
               },
               (error : string) => {
