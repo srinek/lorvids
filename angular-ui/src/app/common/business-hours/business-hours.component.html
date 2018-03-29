@@ -16,7 +16,7 @@
 
           <div style="width:130px">
               <ng-select [items]="endItems"
-                  [active]="endItems"
+                  [active]="beginItems"
                   [disabled]="disabled"
                   (selected)="endTimeSelected($event, weekDay.dayInWeek)"
                   (onBeginClosed)="closeEnd($event)"

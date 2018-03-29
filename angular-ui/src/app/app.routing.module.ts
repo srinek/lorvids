@@ -29,6 +29,7 @@ const appRoutes : Routes = [
     {path:'reviewbooking/:busId/:staffId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
     {path:'addb', component : AddBusinessComponent},
+    {path:'editb/:busId', component : AddBusinessComponent},
     {path:'addsvc/:busId', component : AddServiceComponent},
     {path:'addstaff/:busId', component : AddStaffComponent},
     {path:'bushome/:busId', component : BusinessPageComponent},

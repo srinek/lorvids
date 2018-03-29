@@ -45,6 +45,15 @@ module.exports.saveBusiness = (busData) => {
     return saveDataPromise;
 }
 
+module.exports.updateBusiness = (busId, busData) => {
+    var params = {
+        TableName: 'Business',
+        Item: JSON.parse(busData, util.sanitizeDBValue),
+        ConditionExpression: "attribute_exists(bus_id)"
+    };
+    return db.saveData(params); 
+}
+
 module.exports.getBusinessExpenses = (busId, month, year, isyearly) => {
     var params = {
         TableName: 'Expense',

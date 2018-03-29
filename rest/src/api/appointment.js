@@ -35,7 +35,7 @@ module.exports.createNew =  (event, context, callback) => {
 
 let afterCreateModifyAppointment = (event, context, callback, save_user, appt, userObj) => {
     if(save_user){
-        //emailService.sendConfirmationEmail(appt, userObj);
+        emailService.sendConfirmationEmail(appt, userObj);
         user.save(event, context, callback);
      }
      else{

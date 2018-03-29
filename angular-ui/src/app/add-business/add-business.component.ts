@@ -10,6 +10,7 @@ import { BusinessHoursComponent } from '../common/business-hours/business-hours.
 import { UploadMetadata } from 'angular2-image-upload/lib/image-upload/before-upload.interface';
 import { FileHolder } from 'angular2-image-upload/lib/image-upload/image-upload.component';
 import { environment } from '../../environments/environment';
+import { Category } from '../model/category.model';
 
 @Component({
   selector: 'app-add-business',
@@ -32,6 +33,9 @@ export class AddBusinessComponent implements OnInit {
   awsHeaders: { [name: string]: any } = {
     //"X-Amz-Content-Sha256": "UNSIGNED-PAYLOAD"
   };
+  private update : boolean = false;
+  private busId : string = "";
+  categorySelected : Category;
 
   //public error : boolean = false;
  //public errorMessage : string = "";
@@ -43,7 +47,22 @@ export class AddBusinessComponent implements OnInit {
     private logger: Logger) { }
 
   ngOnInit() {
-
+    this.route.params.subscribe(
+      (params : Params) => {
+         this.busId = params['busId'];
+         if(this.busId) {
+            this.facadeService.getBusiness(this.busId, false).subscribe(
+              (business : Business) => {
+                this.businessData = business;
+                this.update = true;
+              },
+              (error : string) => {
+                this.error = true;
+                this.errorMessage = "Yikes!!! something cramped our service "+error;
+              }
+            );
+        }
+    });
   }
 
   addBusines(){
@@ -57,6 +76,28 @@ export class AddBusinessComponent implements OnInit {
     business.appointment_instructions = this.busForm.value.apptInstructions;
     business.statement_notes = this.busForm.value.busStatement;
     business.awards = this.busForm.value.busAwards; */
+    this.businessData.category = this.categorySelected;
+    if(this.update){
+      this.updateBusiness();
+    }
+    else{
+      this.saveBusiness();
+    }
+  }
+  
+  private updateBusiness(){
+    this.facadeService.updateBusiness(this.busId, this.businessData).subscribe(
+      (busId : string) => {
+        this.logger.log(busId);
+      },
+      (error : string) => {
+        this.error = true;
+        this.errorMessage = "Yikes!!! something cramped our service "+error;
+      }
+    );
+  }
+
+  private saveBusiness(){
     this.facadeService.saveBusiness(this.businessData).subscribe(
       (busId : string) => {
         this.logger.log(busId);
@@ -72,12 +113,9 @@ export class AddBusinessComponent implements OnInit {
         this.error = true;
         this.errorMessage = "Yikes!!! something cramped our service "+error;
       }
-    ); 
+    );
   }
-  onClickBusCheckbox(){
-    console.log("busHoursComponent ", this.busHoursComponent);
-    this.busHoursComponent.toggleDisabled();
-  }
+
 
   onBeforeUpload(metadata: UploadMetadata) : Promise<UploadMetadata> {
     console.log(" before UploadMetadata" , metadata);
@@ -94,6 +132,9 @@ export class AddBusinessComponent implements OnInit {
     });
   }
 
+  getAllCategories() {
+    return this.facadeService.getAllCategories();
+  }
   onUploadFinished(file: FileHolder) {
     //console.log(JSON.stringify(file.serverResponse));
     console.log("upload response ", file.serverResponse._body);

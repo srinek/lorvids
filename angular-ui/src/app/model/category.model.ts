@@ -1,9 +1,9 @@
 export class Category{
 
-    private categoryName : string;
-    private categoryCode : string;
-    private image : string;
-    private description : string;
+    categoryName : string;
+    categoryCode : string;
+    image : string;
+    description : string;
 
     constructor(src){
         if(src){

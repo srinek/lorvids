@@ -116,9 +116,16 @@
                                   <div class="col-md-6">
                                           <label class="control-label" for="selectCategory">Business Category</label>
                                           <div>
-                                            <select id="idBusCategory" name="busCategory" class="form-control">
-                                              <option value="1">India</option>
-                                              <option value="2">United States</option>
+                                            <select name="busCategory" id="idBusCategory" 
+                                            class="form-control"
+                                            #category="ngModel"
+                                            [(ngModel)]="categorySelected" required>
+                                                <ng-container *ngFor="let category of getAllCategories()">
+                                                    <option 
+                                                        [ngValue]="category">
+                                                        {{category.categoryName}}
+                                                    </option>
+                                                </ng-container>
                                             </select>
                                           </div>
                                   </div>
@@ -127,10 +134,11 @@
                                       <label for="id-bus-phone" class="">Business Timezone </label>
                                       <input type="tel" class="form-control" 
                                         id="id-bus-timezone" 
-                                        name="busTimezone "
+                                        name="bus_time_zone "
                                         placeholder="Business Timezone"
+                                        [(ngModel)]="businessData.bus_time_zone"
                                         #busTimezone="ngModel"
-                                        ngModel required>
+                                        required>
                                       <span class="help-block" 
                                           *ngIf="!busTimezone.valid && busTimezone.touched">
                                           Business Timezone  is required.
@@ -231,7 +239,7 @@
 
         <div class="form-group margin-right-18-minus">
             <div class="col-md-12" align="right">
-            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red">NEXT</button>
+            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red cursor-pointer">NEXT</button>
             </div>
         </div>
 

@@ -2,6 +2,7 @@ import {Staff} from './staff.model';
 import {AppointmentSlot} from './appointment-slot.model';
 import { Service } from './service.model';
 import { weekdays } from 'moment';
+import { Category } from './category.model';
 
 export class Business{
 
@@ -29,6 +30,7 @@ export class Business{
     isOpenNow : boolean = false;
     openTime : Date;
     closeTime : Date;
+    category? : Category;
 
     constructor(private json? : string){
         if(json){
@@ -82,5 +84,13 @@ export class Business{
             });
         }
         return null;
+    }
+
+    getJson(){
+        this.json = null;
+        this.openTime = null;
+        this.closeTime = null;
+        this.isOpenNow = null;
+        return this;
     }
 }

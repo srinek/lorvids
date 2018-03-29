@@ -37,6 +37,10 @@ export class BusinessHoursComponent implements OnInit {
     this.endItems.unshift("");
   }
 
+  activeItems() {
+    return "8:00 PM";
+  }
+
   toggleDisabled(){
     this.disabled = !this.disabled;
     console.log("diabled called ", this.disabled);

@@ -34,7 +34,6 @@ export class BusinessService {
     }
 
     public saveBusiness(business : Business) : Observable<string>{
-        console.log("business ", business);
         return this.http.post(this.api + this.endpoint, business).map(
             (response : Response) => {
                 let result : string;
@@ -50,6 +49,25 @@ export class BusinessService {
               return Observable.throw(error);
             }
         ); 
+    }
+
+    public updateBusiness(busid : string, business : Business) : Observable<string>{
+        console.log("business ", business.getJson());
+        return this.http.post(this.api + this.endpoint+"/"+busid, business.getJson()).map(
+            (response : Response) => {
+                let result : string;
+                if(response.status === 200){
+                    let json = response.json();
+                    return json.Item.bus_id;
+                }
+                this.logger.consoleLog("error in save business ", response.json());
+                return response.json();
+            }
+        ).catch(
+            (error: Response) => {
+              return Observable.throw(error);
+            }
+        );
     }
 
     public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean)  : Observable<Expense[]>{

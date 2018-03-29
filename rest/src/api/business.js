@@ -7,7 +7,27 @@ module.exports.save = (event, context, callback) => {
     let saveDataPromise = businessService.saveBusiness(event.body, callback);
     saveDataPromise.then( (result) => {
         let response = util.success();
-        response.body = JSON.stringify(result);
+        response.body = JSON.stringify({"result" : "success"});
+        console.log("result ", result);
+        console.log("success callback ", response);
+        callback(null, response);
+      }
+    ).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
+      }
+    )
+}
+
+module.exports.update = (event, context, callback) => {
+    let busId = event.pathParameters.busId;
+    let saveDataPromise = businessService.updateBusiness(busId, event.body);
+    saveDataPromise.then( (result) => {
+        let response = util.success();
+        response.body = JSON.stringify({"result" : "success"});
+        console.log("result ", result);
         console.log("success callback ", response);
         callback(null, response);
       }

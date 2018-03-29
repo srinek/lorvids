@@ -57,7 +57,7 @@ let sendEmail = (emailData) => {
 
     sendPromise.then(
         function(data) {
-            console.log("--------- email sent ---------- ", data.MessageId);
+            console.log("--------- email sent ---------- ", data);
         }
     ).catch(
         function(err) {

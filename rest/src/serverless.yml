@@ -94,6 +94,14 @@ functions:
           path: business
           method: post
           cors: true
+  updateBusiness:
+    handler: api/business.update
+    description : update business
+    events:
+      - http:
+          path: business/{busId}
+          method: post
+          cors: true
   getBusinessExpenses:
     handler: api/business.getBusinessExpenses
     description : get business expenses by Id

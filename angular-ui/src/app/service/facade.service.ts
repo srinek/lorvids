@@ -60,6 +60,10 @@ export class FacadeService {
         return this.businessService.saveBusiness(business);
     }
 
+    public updateBusiness(busId: string, business : Business) : Observable<string> {
+        return this.businessService.updateBusiness(busId, business);
+    }
+
     public getBusinessExpenses(busId : string, month : string, year: string, isyearly : boolean) : Observable<Expense[]> {
         return this.businessService.getBusinessExpenses(busId, month, year, isyearly);
     }
