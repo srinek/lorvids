@@ -7,7 +7,7 @@ module.exports.save = (event, context, callback) => {
     let saveDataPromise = businessService.saveBusiness(event.body, callback);
     saveDataPromise.then( (result) => {
         let response = util.success();
-        response.body = JSON.stringify({"result" : "success"});
+        response.body = JSON.stringify({"result" : "success", "bus_id":result.Item.bus_id});
         console.log("result ", result);
         console.log("success callback ", response);
         callback(null, response);

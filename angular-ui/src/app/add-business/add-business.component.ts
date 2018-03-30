@@ -19,9 +19,9 @@ import { Category } from '../model/category.model';
 })
 export class AddBusinessComponent implements OnInit {
 
-  @ViewChild('addBusinessForm') private busForm : NgForm;
-  @ViewChild(BusinessHoursComponent)
-  private busHoursComponent: BusinessHoursComponent;
+  //@ViewChild('addBusinessForm') private busForm : NgForm;
+  //@ViewChild(BusinessHoursComponent)
+  //private busHoursComponent: BusinessHoursComponent;
   public error : boolean = false;
   public errorMessage : string = "";
   public startTime : Date = new Date(2018, 1, 7, 0, 0);
@@ -59,7 +59,7 @@ export class AddBusinessComponent implements OnInit {
               },
               (error : string) => {
                 this.error = true;
-                this.errorMessage = "Yikes!!! something cramped our service "+error;
+                this.errorMessage = "We didn't find the business with Id "+this.busId;
               }
             );
         }
@@ -88,8 +88,10 @@ export class AddBusinessComponent implements OnInit {
   
   private updateBusiness(){
     this.facadeService.updateBusiness(this.busId, this.businessData).subscribe(
-      (busId : string) => {
-        this.logger.log(busId);
+      (result : string) => {
+        this.router.navigate(['/editsvc', this.busId],
+          {relativeTo:this.route}
+        );
       },
       (error : string) => {
         this.error = true;
@@ -101,14 +103,9 @@ export class AddBusinessComponent implements OnInit {
   private saveBusiness(){
     this.facadeService.saveBusiness(this.businessData).subscribe(
       (busId : string) => {
-        this.logger.log(busId);
         this.router.navigate(['/addsvc', busId],
           {relativeTo:this.route}
         );
-        /* this.router.navigate(
-          ['/addstaff', busId],
-          {relativeTo:this.route}
-        ); */
       },
       (error : string) => {
         this.error = true;
@@ -138,7 +135,7 @@ export class AddBusinessComponent implements OnInit {
   }
   onUploadFinished(file: FileHolder) {
     //console.log(JSON.stringify(file.serverResponse));
-    console.log("upload response ", file.serverResponse._body);
+    //console.log("upload response ", file.serverResponse._body);
     this.businessData.images.push(file.serverResponse._body);
     this.businessData.defaultImage=this.businessData.images[0];
   }
@@ -156,7 +153,7 @@ export class AddBusinessComponent implements OnInit {
   }
 
   beginTimeSelected(value){
-    console.log("time selected", value);
+    //console.log("time selected", value);
     if(value.beginTime === "Closed"){
       this.addHoliday(value.dayInWeek);
       return;
@@ -173,7 +170,7 @@ export class AddBusinessComponent implements OnInit {
   }
   
   endTimeSelected(value){
-    console.log("time selected", value);
+    //console.log("time selected", value);
     if(value.endTime === "Closed"){
       this.addHoliday(value.dayInWeek);
       return;
@@ -188,7 +185,7 @@ export class AddBusinessComponent implements OnInit {
       busHour.endTime = value.endTime;
     }
 
-    console.log("business data", this.businessData);
+    //console.log("business data", this.businessData);
   }
 
   addHoliday(dayInWeek){

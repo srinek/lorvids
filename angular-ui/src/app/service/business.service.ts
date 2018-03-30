@@ -39,7 +39,7 @@ export class BusinessService {
                 let result : string;
                 if(response.status === 200){
                     let json = response.json();
-                    return json.Item.bus_id;
+                    return json.bus_id;
                 }
                 this.logger.consoleLog("error in save business ", response.json());
                 return response.json();
@@ -52,13 +52,12 @@ export class BusinessService {
     }
 
     public updateBusiness(busid : string, business : Business) : Observable<string>{
-        console.log("business ", business.getJson());
         return this.http.post(this.api + this.endpoint+"/"+busid, business.getJson()).map(
             (response : Response) => {
                 let result : string;
                 if(response.status === 200){
                     let json = response.json();
-                    return json.Item.bus_id;
+                    return json.result;
                 }
                 this.logger.consoleLog("error in save business ", response.json());
                 return response.json();
