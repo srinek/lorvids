@@ -19,7 +19,7 @@ module.exports.getBusinessById = (busId, loadStaff) => {
         if(loadStaff){
             let staffPromises = [];
             business.staffIds.forEach(staffId => {
-                staffPromises.push(staffService.getStaffByBusIdAndStaffId(business.bus_id, staffId));
+                staffPromises.push(staffService.getStaffByBusIdAndStaffId(business.bus_id, staffId.staff_id));
             });
             return Promise.all(staffPromises).then( (staffObjs) => {
                 business.addAllStaff(staffObjs);

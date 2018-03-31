@@ -36,6 +36,7 @@ export class AddBusinessComponent implements OnInit {
   private update : boolean = false;
   private busId : string = "";
   categorySelected : Category;
+  imageRoot : string = environment.imageRoot;
 
   //public error : boolean = false;
  //public errorMessage : string = "";

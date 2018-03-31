@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-6">
           <h2>
-              Let's add a new staff to {{businessName}}
+              Let's add staff to <span class="text-logo-letter-o font-weight-bold">{{businessData?.bus_name}}</span>
           </h2>
         </div>
     </div>
@@ -32,139 +32,171 @@
             <hr>
         </div>
     </div>
-    <form class="form-horizontal" 
-        (ngSubmit)="addStaff()" 
-        #addStaffForm="ngForm">
-      <div class="row">
-          <div class="col-md-7">
-              <div class="row form-group">
-                <div class="col">
-                    <label for="id-staff-name" class="">Staff Name: </label>
-                    <input type="text" class="form-control" 
-                      id="id-staff-name" 
-                      name="staffName"
-                      placeholder="Staff Name"
-                      #staffName="ngModel"
-                      ngModel required>
-                    <span class="form-text text-muted help-block" 
-                          *ngIf="!staffName.valid && staffName.touched">
-                        Staff Name is required
-                    </span>
-                </div>
 
-                <div class="col">
+    <div class="row">
+        <div class="col-md-7">
+           <form class="form-horizontal" 
+                 (ngSubmit)="addStaff()" 
+                 #addStaffForm="ngForm">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="id-staff-name" class="">Staff Name: </label>
+                        <input type="text" class="form-control" 
+                          id="id-staff-name" 
+                          name="staffName"
+                          placeholder="Staff Name"
+                          [(ngModel)]="staffData.staff_name"
+                          #staffName="ngModel"
+                          required>
+                        <span class="help-block" 
+                          [hidden]="staffName.valid || staffName.pristine">
+                            Staff Name is required
+                        </span>
+                    </div>
+                    <div class="col-md-6">
                         <label for="id-staff-email" class="">Staff Email: </label>
                         <input type="email" class="form-control" 
-                          id="id-staff-email" 
-                          name="staffEmail"
-                          placeholder="Staff Email"
-                          #staffEmail="ngModel"
-                          ngModel required>
+                           id="id-staff-email" 
+                           name="staffEmail"
+                           [(ngModel)]="staffData.staff_email"
+                           placeholder="Staff Email"
+                           #staffEmail="ngModel"
+                           required>
+                        <span class="help-block" 
+                              [hidden]="staffEmail.valid || staffEmail.pristine">
+                             Staff Email is required
+                         </span>
                     </div>
-              </div>
-              <!-- <div class="row form-group">
-                  <div class="col">
-                      <label for="id-staff-email" class="">Staff Email: </label>
-                      <input type="email" class="form-control" 
-                        id="id-staff-email" 
-                        name="staffEmail"
-                        placeholder="Staff Email"
-                        #staffEmail="ngModel"
-                        ngModel required>
-                  </div>
-              </div>
-              <div class="row form-group">
-                  <div class="col">
-                      <label for="id-staff-phone" class="">Staff Phone: </label>
-                      <input type="tel" class="form-control" 
-                        id="id-staff-phone" 
-                        name="staffPhone"
-                        placeholder="Staff Phone"
-                        #staffPhone="ngModel"
-                        ngModel required>
-                  </div>
-              </div>-->
-
-              <div class="row form-group">
-
-                    <div class="col">
-                        <label for="id-staff-salary" class="">Staff Salary: </label>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="id-staff-phone" class="">Staff Phone: </label>
                         <input type="text" class="form-control" 
-                          id="id-staff-salary" 
-                          name="staffSalary"
-                          placeholder="Staff Salary"
-                          #staffSalary="ngModel"
-                          ngModel>
+                          id="id-staff-phone" 
+                          name="staffPhone"
+                          placeholder="Staff Phone"
+                          [(ngModel)] = "staffData.staff_phone"
+                          #staffPhone="ngModel"
+                          required>
+                          <span class="help-block" 
+                                [hidden]="staffPhone.valid || staffPhone.pristine">
+                             Staff Phone is required
+                          </span>
                     </div>
-
+                    <!-- <div class="col-md-6">
+                        <label for="id-staff-email" class="">Staff Salary: </label>
+                        <input type="email" class="form-control" 
+                           id="id-staff-email" 
+                           name="staffEmail"
+                           placeholder="Staff Salary (Optional)"
+                           [(ngModel)]="staffData.staff_salary"
+                           #staffEmail="ngModel">
+                    </div> -->
+                </div>
+                <div class="row form-group">
                     <div class="col">
-                            <label for="id-staff-phone" class="">Staff Phone: </label>
-                            <input type="tel" class="form-control" 
-                              id="id-staff-phone" 
-                              name="staffPhone"
-                              placeholder="Staff Phone"
-                              #staffPhone="ngModel"
-                              ngModel required>
+                        <label for="id-staff-langs" class="">Languages Spoken (Enter comma seperated): </label>
+                        <input type="text" class="form-control" 
+                          id="id-staff-langs" 
+                          name="staffLangs"
+                          placeholder="Languages Spoken by Staff"
+                          [(ngModel)] = "staffData.staff_languages"
+                          #staffLangs="ngModel"
+                          required>
                     </div>
-
-              </div>
-              <div class="row form-group">
+                </div>
+                <div class="row form-group">
                     <div class="col">
-                        <label for="id-staff-salary" class="">Awards : </label>
-
+                        <label for="id-staff-stmt" class="">Peronal Statement: </label>
                         <textarea rows="2" class="form-control"
-                        id="id-staff-awards" 
-                          name="staffAwards"
-                          placeholder="Awards"
-                          #staffSalary="ngModel"
-                          ngModel>
-                                </textarea>
-
-                        <!-- <input type="text" class="form-control" 
-                          id="id-staff-salary" 
-                          name="staffSalary"
-                          placeholder="Staff Salary"
-                          #staffSalary="ngModel"
-                          ngModel> -->
+                            id="id-staff-stmt" 
+                            name="staffStmt"
+                            placeholder="Personal Statement"
+                            #staffStmt="ngModel"
+                            [(ngModel)]="staffData.personalStatement">
+                        </textarea>
                     </div>
-              </div>
-
-
-              <div class="row form-group">
-                <div class="col">
-                    <div>
-                        <label class="">Available Services: </label>
-                        <ul class="nav d-flex flex-wrap">
-                            <li class="nav-item flex-column align-items-start"
-                                *ngFor="let service of availableServices">
-                                <div>
-                                    <label class="custom-control custom-checkbox" >
-                                        <input type="checkbox" class="custom-control-input">
-                                        <span class="custom-control-indicator"></span>
-                                        <span class="custom-control-description">{{service.name}}</span>
-                                    </label>
-                                </div>
-                            </li>
-                        </ul>
+                    
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="id-staff-awards" class="">Awards (Enter comma seperated) : </label>
+                        <textarea rows="2" class="form-control"
+                            id="id-staff-awards" 
+                            name="staffAwards"
+                            placeholder="Awards"
+                            #staffAwards="ngModel"
+                            [(ngModel)]="staffData.awards">
+                        </textarea>
                     </div>
                 </div>
-              </div>
-              <div class="row form-group">
-                <div class="col">
-                    <div>
-                        <label class="">Upload Images: </label>
-                        <image-upload 
-                           url="https://kdmgdajlje.execute-api.us-east-1.amazonaws.com/dev/savepic/b-test-01"
-                           (removed)="onImageRemoved($event)"
-                           [headers]="awsHeaders"
-                           [beforeUpload]="onBeforeUpload"
-                           [uploadedFiles]="images">
-                        </image-upload>
+                <div class="row form-group" *ngIf="businessData?.category?.showStaffAffliations()">
+                    <div class="col">
+                        <label for="id-staff-affliations" class="">Affliations (Enter comma seperated) : </label>
+                        <textarea rows="2" class="form-control"
+                            id="id-staff-affliations" 
+                            name="staffAffliations"
+                            placeholder="Affliations"
+                            #staffAffliations="ngModel"
+                            [(ngModel)]="staffData.affliations">
+                        </textarea>
                     </div>
                 </div>
-              </div>
-          </div>
-          <div class="col-md-5">
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="id-staff-tags" class="">Tags (Enter comma seperated) : </label>
+                        <textarea rows="2" class="form-control"
+                            id="id-staff-tags" 
+                            name="staffTags"
+                            placeholder="Enter search tags"
+                            #staffTags="ngModel"
+                            [(ngModel)]="staffData.tags">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <div>
+                            <label class="">Available Services: </label>
+                            <ul class="nav d-flex flex-wrap">
+                                <li class="nav-item flex-column align-items-start"
+                                    *ngFor="let service of availableServices">
+                                    <div>
+                                        <label class="custom-control custom-checkbox" >
+                                            <input type="checkbox" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">{{service.name}}</span>
+                                        </label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <div>
+                            <label class="">Upload Images: </label>
+                            <image-upload 
+                                url="https://kdmgdajlje.execute-api.us-east-1.amazonaws.com/dev/savepic/b-test-01"
+                                (removed)="onImageRemoved($event)"
+                                [headers]="awsHeaders"
+                                [beforeUpload]="onBeforeUpload"
+                                [uploadedFiles]="images">
+                            </image-upload>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <button type="submit"
+                                name="addAnother" 
+                                class="btn yellow-button cursor-pointer">Add Staff</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
             <div class="d-flex flex-column align-items-center">
                 <div>
                     <h6>Working hours</h6>
@@ -172,57 +204,30 @@
                 <!-- <div class="w-50"><hr></div> -->
                 <div>
                     <label class="custom-control custom-checkbox" >
-                      <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">Same as business hours</span>
+                        <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description">Same as business hours</span>
                     </label>
                 </div>
-            
                 <div>
                     <app-business-hours 
-                       [startTime]="startTime"
-                       [endTime]="endTime"
-                       #busHours>
+                        [startTime]="startTime"
+                        [endTime]="endTime"
+                        #busHours>
                     </app-business-hours>
-                </div>
-                
+                </div>     
             </div>
-          </div>
-      </div><br/>
-
-      <div class="row form-group">
-
-            <!-- <div class="row margin-top-20">
-
-                    <div class="col-md-6">
-                           <button type="submit"  name="addAnother" class="btn yellow-button">Add Another</button>
-                       </div>
- 
-                       <div class="col-md-6 text-right">
- 
-                           <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
-                           
-                       </div>
- 
- 
-           </div> -->
-
-          <div class="col-md-6 text-center">
-            <button type="submit"
-                    name="addAnother" 
-                    class="btn btn-info w-75 yellow-button">Add Another</button>
-          </div>
-          <div class="col-md-6 text-right">
-
-            <button id="btnCancel" name="btnCancel" class="btn btn-default my-btn btn-ccc">BACK</button>
-              <button type="submit" 
-                      name="done"
-                      class="btn my-btn btn-red">DONE</button>
-                           
-          </div>
-      </div><br/><br/>
-
-    </form>
-  </div>  
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-12 text-right">
+            <button id="btnCancel" name="btnCancel" 
+                    class="btn btn-default my-btn btn-ccc cursor-pointer">BACK</button>
+            <button id="btnSubmit" name="btnSubmit" 
+                    class="btn btn-default my-btn btn-red cursor-pointer"
+                    (click)="addServices()">NEXT</button>
+        </div>
+    </div>
+</div>  
 
 

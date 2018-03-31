@@ -9,14 +9,14 @@ let testGetObj = { "pathParameters" :
                         "loadStaff": true
                     }
                  };
-/* business.get(testGetObj  , 
+business.get(testGetObj  , 
      null, 
      (error, response) => {
         console.log('-----------------------------GET RESPONSE START-----------------------------');
         console.log(response);
         console.log('-----------------------------GET RESPONSE END-----------------------------');
      }
-); */
+); 
 
 let testSaveObj = {
     "body" : 
@@ -250,11 +250,11 @@ let testUpdateObj = {
   })
 };
 
-business.update(testUpdateObj, 
+/* business.update(testUpdateObj, 
   null, 
   (error, response) => {
       console.log('-----------------------------SAVE RESPONSE START-----------------------------');
       console.log(response);
       console.log('-----------------------------SAVE RESPONSE END-----------------------------');
   }
-);
+); */

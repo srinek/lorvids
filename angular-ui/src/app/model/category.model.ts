@@ -33,4 +33,8 @@ export class Category{
         this.image = src.image;
         this.description = src.description;
     }
+
+    public showStaffAffliations(){
+        return this.categoryCode === "HEALTH";
+    }
 }
