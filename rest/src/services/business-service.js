@@ -54,6 +54,24 @@ module.exports.updateBusiness = (busId, busData) => {
     return db.saveData(params); 
 }
 
+module.exports.updateStaff = (businessData) => {
+    var params = {
+        "TableName": 'Business',
+        "Key": { "bus_id" : businessData.bus_id },
+        "UpdateExpression": `set #staff = :staff`,
+        "ExpressionAttributeNames" : {
+         '#staff' : "staff"
+        },
+        "ExpressionAttributeValues": {
+         ':staff' : businessData.staff
+       },
+       "ConditionExpression": "attribute_exists(bus_id)",
+       "ReturnValues": "ALL_NEW"
+     };
+     console.log("params_business_update_staff "+  JSON.stringify(params));
+     return db.updateData(params);
+}
+
 module.exports.getBusinessExpenses = (busId, month, year, isyearly) => {
     var params = {
         TableName: 'Expense',

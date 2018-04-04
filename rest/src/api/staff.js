@@ -74,21 +74,20 @@ let doAfterStaffGetAll = (response, callback) => {
 }
 
 module.exports.save = (event, context, callback) => {
-    
-      
-    var params = {
-        TableName: 'Staff',
-        Item: JSON.parse(event.body)
-    };
-     
-    console.log("params "+  JSON.stringify(params));
-        
-    db.nxtId(
-        (generatedId) => {
-           params.Item.staff_id = params.Item.bus_id+"-s-"+generatedId;
-           console.log("params "+  JSON.stringify(params));
-           db.saveData(params, callback);
-        }
-     );
-    
+   let businessData = JSON.parse(event.body, util.sanitizeDBValue);  //business data.
+   let saveStaffPromise = staffService.addNUpdateAllStaff(businessData);
+   saveStaffPromise.then( (results) => {
+        let response = util.success();
+        response.body = JSON.stringify({"result" : "success"});
+        console.log("result ", results);
+        console.log("success callback ", response);
+        callback(null, response);
+    }
+    ).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", error);
+        callback(null, response);
+    }
+    )
 }

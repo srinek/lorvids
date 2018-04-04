@@ -2,6 +2,41 @@ let db = require('../common/db');
 let util = require('../common/util');
 let businessService = require('./business-service');
 
+module.exports.addNUpdateAllStaff = (businessData) => {
+    let staffPromises = [];
+    /* return businessService.updateStaff(businessData).
+    then( (result) => {
+        let allStaff = businessData.staff; // staff array.
+        allStaff.forEach( (eachStaff) => {
+            eachStaff.bus_id = businessData.bus_id;
+            staffPromises.push(this.saveStaff(eachStaff));
+        });
+        return Promise.all(staffPromises);
+    }) */
+
+
+    let allStaff = businessData.staff; // staff array.
+    allStaff.forEach( (eachStaff) => {
+        eachStaff.bus_id = businessData.bus_id;
+        staffPromises.push(this.saveStaff(eachStaff));
+    });
+    return Promise.all(staffPromises).then( (values) => {
+        return businessService.updateStaff(businessData);
+    });
+}
+
+module.exports.saveStaff = (staffData) => {
+    if(!staffData.staff_id){
+        staffData.staff_id = staffData.bus_id+"-s-"+util.randomValueHex();
+    }
+    var params = {
+        TableName: 'Staff',
+        Item: staffData
+    };
+    console.log("save staff params "+  JSON.stringify(params));
+    return db.saveData(params);   
+}
+
 module.exports.getStaffByBusIdAndStaffId = (busId, staffId) => {
     var params = {
         TableName: 'Staff',

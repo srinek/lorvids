@@ -6,7 +6,7 @@
 
           <div style="width:130px" class="mr-2">
               <ng-select [items]="beginItems"
-                [active]="activeBeginItems(weekDay.dayInWeek)"
+                [active]="this.activeBeginItems.get(weekDay.dayInWeek)"
                 [disabled]="disabled"
                 (selected)="beginTimeSelected($event, weekDay.dayInWeek)"
                 (onEndClosed)="closeBegin($event)"
@@ -16,7 +16,7 @@
 
           <div style="width:130px">
               <ng-select [items]="endItems"
-                  [active]="activeEndItems(weekDay.dayInWeek)"
+                  [active]="this.activeEndItems.get(weekDay.dayInWeek)"
                   [disabled]="disabled"
                   (selected)="endTimeSelected($event, weekDay.dayInWeek)"
                   (onBeginClosed)="closeEnd($event)"

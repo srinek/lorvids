@@ -7,6 +7,7 @@ import {Logger} from './logger.service';
 
 import {Staff} from '../model/staff.model';
 import { environment } from '../../environments/environment';
+import { Business } from '../model/business.model';
 
 @Injectable()
 export class StaffService{
@@ -40,5 +41,17 @@ export class StaffService{
                 return staff;
             }
         );
+    }
+
+    public saveStaff(business : Business) : Observable<string>{
+        console.log( "business -- ", JSON.stringify(business.getJson()));
+        return this.http.post(this.api + this.endpoint, business.getJson()).map(
+            (response : Response) => {
+                let result = response.json();
+                return result;
+            }
+        ).catch((error: Response) => {
+           return Observable.throw(error);
+        });
     }
 }

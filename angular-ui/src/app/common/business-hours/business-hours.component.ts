@@ -20,6 +20,8 @@ export class BusinessHoursComponent implements OnInit {
                     {day :"Tue", dayInWeek:3}, {day :"Wed", dayInWeek:4}, {day :"Thu", dayInWeek:5}, {day :"Fri", dayInWeek:6}, 
                     {day :"Sat", dayInWeek:7}]; 
   private disabled : boolean = false;
+  private activeBeginItems : Map<number, Array<{id:string, text:string}>> = new Map();
+  private activeEndItems : Map<number, Array<{id:string, text:string}>> = new Map();
   
 
   constructor() { }
@@ -35,28 +37,36 @@ export class BusinessHoursComponent implements OnInit {
       this.beginItems.push(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
       this.endItems.unshift(newTime.toLocaleString('en-US', {hour:"2-digit", minute:"2-digit"}));
     }
+
+    this.weekdays.forEach((eachDay) => {
+       this.activeBeginItems.set(eachDay.dayInWeek, this.getActiveBeginItems(eachDay.dayInWeek));
+       this.activeEndItems.set(eachDay.dayInWeek, this.getActiveEndItems(eachDay.dayInWeek));
+    });
+
     this.endItems.unshift("Closed");
     this.endItems.unshift("");
   }
 
-  activeBeginItems(weekday : number){
+  getActiveBeginItems(weekday : number){
+    //console.log("@@@@@ active  BEGIN item called", weekday, this.beginCount++);
     let matchedBusHour = this.busHours.find( (busHour) => {
          return busHour.day  === weekday;
     });
     if(matchedBusHour){
-      return [matchedBusHour.startTime];
+      return [{"id":matchedBusHour.startTime, "text":matchedBusHour.startTime}];
     }
-    return [""];
+    return [{"id":"", "text":""}];
   }
 
-  activeEndItems(weekday : number){
+  getActiveEndItems(weekday : number){
+    //console.log("**** active  END item called", weekday);
     let matchedBusHour = this.busHours.find( (busHour) => {
          return busHour.day  === weekday;
     });
     if(matchedBusHour){
-      return [matchedBusHour.endTime];
+      return [{"id":matchedBusHour.endTime, "text":matchedBusHour.endTime}];
     }
-    return [""];
+    return [{"id":"", "text":""}];
   }
 
   toggleDisabled(){

@@ -21,7 +21,7 @@
 
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col">
           <h2>
               Let's add staff to <span class="text-logo-letter-o font-weight-bold">{{businessData?.bus_name}}</span>
           </h2>
@@ -39,7 +39,7 @@
                  (ngSubmit)="addStaff()" 
                  #addStaffForm="ngForm">
                 <div class="row form-group">
-                    <div class="col-md-6">
+                    <div class="col">
                         <label for="id-staff-name" class="">Staff Name: </label>
                         <input type="text" class="form-control" 
                           id="id-staff-name" 
@@ -53,7 +53,9 @@
                             Staff Name is required
                         </span>
                     </div>
-                    <div class="col-md-6">
+                </div>
+                <div class="row form-group">
+                    <div class="col">
                         <label for="id-staff-email" class="">Staff Email: </label>
                         <input type="email" class="form-control" 
                            id="id-staff-email" 
@@ -69,7 +71,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col-md-6">
+                    <div class="col">
                         <label for="id-staff-phone" class="">Staff Phone: </label>
                         <input type="text" class="form-control" 
                           id="id-staff-phone" 
@@ -101,8 +103,7 @@
                           name="staffLangs"
                           placeholder="Languages Spoken by Staff"
                           [(ngModel)] = "staffData.staff_languages"
-                          #staffLangs="ngModel"
-                          required>
+                          #staffLangs="ngModel">
                     </div>
                 </div>
                 <div class="row form-group">
@@ -130,7 +131,7 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="row form-group" *ngIf="businessData?.category?.showStaffAffliations()">
+                <div class="row form-group" *ngIf="">
                     <div class="col">
                         <label for="id-staff-affliations" class="">Affliations (Enter comma seperated) : </label>
                         <textarea rows="2" class="form-control"
@@ -178,44 +179,85 @@
                         <div>
                             <label class="">Upload Images: </label>
                             <image-upload 
-                                url="https://kdmgdajlje.execute-api.us-east-1.amazonaws.com/dev/savepic/b-test-01"
+                                url="{{uploadApi}}"
                                 (removed)="onImageRemoved($event)"
                                 [headers]="awsHeaders"
                                 [beforeUpload]="onBeforeUpload"
-                                [uploadedFiles]="images">
+                                [uploadedFiles]="staffUploadedImages">
                             </image-upload>
                         </div>
                     </div>
                 </div>
                 <div class="row form-group">
-                    <div class="col">
+                    <div class="d-flex flex-column align-items-center">
+                        <div>
+                            <h6>Working hours</h6>
+                        </div>
+                        <!-- <div class="w-50"><hr></div> -->
+                        <div>
+                            <label class="custom-control custom-checkbox" >
+                                <input type="checkbox" 
+                                name="sameAsBusinessHours"
+                                class="custom-control-input" 
+                                [(ngModel)]="sameAsBusiness"
+                                (change)="onClickBusCheckbox()">
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description">Same as business hours</span>
+                            </label>
+                        </div>
+                        <div>
+                            <app-business-hours 
+                                [startTime]="startTime"
+                                [endTime]="endTime"
+                                [busHours]="staffData.bus_hours"
+                                (onBeginTimeSelected)="beginTimeSelected($event)"
+                                (onEndTimeSelected)="endTimeSelected($event)">
+                            </app-business-hours>
+                        </div>     
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col" *ngIf="isAddStaff">
                         <button type="submit"
                                 name="addAnother" 
                                 class="btn yellow-button cursor-pointer">Add Staff</button>
+                    </div>
+                    <div class="col" *ngIf="!isAddStaff">
+                        <button type="submit"
+                                name="addAnother" 
+                                class="btn yellow-button cursor-pointer">Update Staff</button>
                     </div>
                 </div>
             </form>
         </div>
         <div class="col-md-5">
-            <div class="d-flex flex-column align-items-center">
-                <div>
-                    <h6>Working hours</h6>
-                </div>
-                <!-- <div class="w-50"><hr></div> -->
-                <div>
-                    <label class="custom-control custom-checkbox" >
-                        <input type="checkbox" class="custom-control-input" (change)="onClickBusCheckbox()">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Same as business hours</span>
-                    </label>
-                </div>
-                <div>
-                    <app-business-hours 
-                        [startTime]="startTime"
-                        [endTime]="endTime"
-                        #busHours>
-                    </app-business-hours>
-                </div>     
+            <div class="list-group">
+                <ng-container *ngFor="let eachStaff of staffList">
+                    <span class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                        <div class="text-center">
+                            <a href="staffpage" class="">    
+                                <img src="{{imageRoot}}/{{eachStaff.image}}" height="115" width="115" 
+                                        class="img-round img-photo d-inline-block " alt="">
+                            </a>
+                        </div>
+                        <div class="d-flex w-100 flex-column align-items-center mt-3">
+                        <h5 class="mb-1">{{eachStaff.staff_name}}</h5>
+                            <p class="mb-1">
+                                    {{eachStaff.staff_email}}.
+                            </p>
+                            <p class="mb-1">
+                                    {{eachStaff.staff_phone}}.
+                            </p>
+                        </div>
+                        </div>
+                        
+                        <small>
+                            <a [routerLink]="" class="btn btn-sm" (click)="modifyStaff(eachStaff)"> EDIT</a>
+                            <a [routerLink]="" class="btn btn-sm" (click)="removeStaff(eachStaff)"> REMOVE</a>
+                        </small>
+                    </span>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -225,7 +267,7 @@
                     class="btn btn-default my-btn btn-ccc cursor-pointer">BACK</button>
             <button id="btnSubmit" name="btnSubmit" 
                     class="btn btn-default my-btn btn-red cursor-pointer"
-                    (click)="addServices()">NEXT</button>
+                    (click)="saveStaff()">Done</button>
         </div>
     </div>
 </div>  

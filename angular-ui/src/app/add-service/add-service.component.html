@@ -85,7 +85,7 @@
                         [(ngModel)]="serviceData.cost"
                         #svcCost="ngModel" required>
                     <span class="help-block" 
-                        [hidden]="svcCost.valid || svcsvcCostTime.pristine">
+                        [hidden]="svcCost.valid || svcCost.pristine">
                         Service Cost is required
                     </span>
                 </div>
@@ -128,7 +128,6 @@
                       <a [routerLink]="" class="btn btn-sm"> REMOVE</a></small>
                     </span>
                 </ng-container>
-                
             </div>
         </div>
    </div>

@@ -77,7 +77,7 @@ let testSaveObj = {
       "statement_caption": "Practice Mission",
       "statement_notes": "kids are gods"
     })
-  };
+};
 
 let testSaveObj2 = 
 {"body" : 

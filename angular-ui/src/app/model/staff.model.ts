@@ -16,9 +16,11 @@ export class Staff {
     images : string[] = [];
     image : string = "";
     personalStatement : string = "";
-    affliations : string = "";
+    affiliations : string = "";
     awards : string = "";
     staff_languages : string = "";
+    bus_hours? : Array<{day:number, endTime?:string, startTime?:string}> = [];
+    holidays? : {dates?:Array<string>, weekdays?:Array<number>} = {dates:[], weekdays:[]};
 
     constructor(src?){
         if(Array.isArray(src)){
@@ -38,14 +40,16 @@ export class Staff {
         this.staff_phone = src.staff_phone;
         this.staff_salary = src.staff_salary;
         this.tags = src.tags;
-        this.images = src.imageUrl;
-        if(src.imageUrl && src.imageUrl.length > 0){
-            this.image = src.imageUrl[0];
+        this.images = src.images;
+        if(src.images && src.images.length > 0){
+            this.image = src.images[0];
         }
-        let practice = new StaffPractice(src);
-        this.practices.push(practice);
         this.personalStatement = src.profStatement;
-        this.affliations = src.affliations;
+        this.affiliations = src.affiliations;
+        this.bus_hours = src.bus_hours;
+        this.holidays = src.holidays;
+        let practice = new StaffPractice(src); // this is added for staff page.
+        //this.practices.push(practice);
     }
 
     public mapArray(src) : void {

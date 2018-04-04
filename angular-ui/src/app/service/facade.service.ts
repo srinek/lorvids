@@ -71,6 +71,10 @@ export class FacadeService {
     /**
      *  STAFF APIS
      */
+
+    public saveStaff(business : Business)  : Observable<string>{
+        return this.staffService.saveStaff(business);
+    }
     public getStaff(busId : string, staffId : string) : Observable<Staff> {
         return this.staffService.getStaff(busId, staffId);
     }
