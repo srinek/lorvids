@@ -61,6 +61,27 @@ import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ListBusinessComponent } from './home-page/list-business/list-business.component';
 
+import {
+  SocialLoginModule,
+  AuthServiceConfig,
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angular4-social-login';
+
+const CONFIG = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('549801603836-ld6feeqm8uishv9eqj0rsubt2r4haf8l.apps.googleusercontent.com')
+  },
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('927957124049275')
+  }
+]);
+export function provideConfig() {
+  return CONFIG;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -116,11 +137,18 @@ import { ListBusinessComponent } from './home-page/list-business/list-business.c
     SelectModule,
     ChartsModule,
     ImageUploadModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    SocialLoginModule
   ],
-  providers: [FacadeService, SearchService, 
+  providers: [
+    FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, S3ImageService, Logger, UserService],
+    ApptService, S3ImageService, Logger, UserService,
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
