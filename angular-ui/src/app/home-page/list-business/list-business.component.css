@@ -3,7 +3,7 @@
     background-size: cover!important;
     background-repeat: no-repeat!important;
     padding: 100px 50px 50px 50px;
-    height: 650px;
+    height: 685px;
     width: 100%;
   }
   
@@ -4569,3 +4569,62 @@
   
   
   
+/*
+    Note: It is best to use a less version of this file ( see http://css2less.cc
+    For the media queries use @screen-sm-min instead of 768px.
+    For .omb_spanOr use @body-bg instead of white.
+*/
+
+
+.omb_socialButtons a {
+  color: white;
+  opacity:0.9;
+}
+.omb_socialButtons a:hover {
+  color: white;
+  opacity:1;    	
+}
+.omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+.omb_loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #ccc;
+  margin-top: 1px;
+  margin-bottom: 8px;
+  padding-top: 15px;
+  padding-bottom:15px;
+}
+.omb_loginOr .omb_hrOr {
+//background-color: #cdcdcd;
+height: 1px;
+margin-top: 0px !important;
+margin-bottom: 0px !important;
+}
+.omb_loginOr .omb_spanOr {
+display: block;
+position: absolute;
+left: 50%;
+top: -19px;
+margin-left: -1.5em;
+background-color: white;
+width: 3em;
+text-align: center;
+}			
+
+.omb_loginForm .input-group.i {
+width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+  color: red;
+}
+
+
+@media (max-width: 767px) {
+  .omb_socialButtons a
+  {
+    margin: 5px;
+  }
+}

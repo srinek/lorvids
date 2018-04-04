@@ -137,8 +137,8 @@ export class AddBusinessComponent implements OnInit {
   onUploadFinished(file: FileHolder) {
     //console.log(JSON.stringify(file.serverResponse));
     //console.log("upload response ", file.serverResponse._body);
-    this.businessData.images.push(file.serverResponse._body);
-    this.businessData.defaultImage=this.businessData.images[0];
+   // this.businessData.images.push(file.serverResponse._body);
+   // this.businessData.defaultImage=this.businessData.images[0];
   }
   
   onImageRemoved(file: FileHolder) {
