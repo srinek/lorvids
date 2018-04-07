@@ -118,7 +118,7 @@
                                           <div>
                                             <select name="busCategory" id="idBusCategory" 
                                             class="form-control"
-                                            #category="ngModel"
+                                            #cat="ngModel"
                                             [(ngModel)]="categorySelected" required>
                                                 <ng-container *ngFor="let category of getAllCategories()">
                                                     <option 
@@ -200,7 +200,7 @@
                             </div>
                             <div class="row form-group">
                                 <div class="col">
-                                    <div>
+                                    <div *ngIf="businessLoaded">
                                         <label class="">Upload Images: </label>
                                         <image-upload 
                                            url="{{uploadApi}}"
@@ -222,7 +222,7 @@
             <div>
                 <h6>Working hours</h6>
             </div>
-            <div>
+            <div *ngIf="businessLoaded">
                 <app-business-hours 
                    [startTime]="startTime"
                    [endTime]="endTime"

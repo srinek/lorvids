@@ -63,6 +63,9 @@ class Business{
     opensAt(){
         let self = this;
         let today = moment.tz(new Date(), this.bus_time_zone);
+        if(self.isGivenDateHoliday(today)){
+            return "Closed";
+        }
         let retBusinessHours = self.getCurrentDay(today);
         let startTime = moment(today);
         startTime.hour(retBusinessHours.startTime.split(":")[0])
@@ -70,6 +73,20 @@ class Business{
         .seconds(0)
         .millisecond(0);
         return startTime.format("MM-D-YYYY hh:mm:ss a");
+    }
+    closesAt(){
+        let self = this;
+        let today = moment.tz(new Date(), this.bus_time_zone);
+        if(self.isGivenDateHoliday(today)){
+            return "Closed";
+        }
+        let retBusinessHours = self.getCurrentDay(today);
+        let endTime = moment(today);
+        endTime.hour(retBusinessHours.endTime.split(":")[0])
+        .minute(retBusinessHours.endTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        return endTime.format("MM-D-YYYY hh:mm:ss a");
     }
     getCurrentDay(today){
         let self = this;
@@ -88,17 +105,6 @@ class Business{
             });
         }
         return retBusinessHours;
-    }
-    closesAt(){
-        let self = this;
-        let today = moment.tz(new Date(), this.bus_time_zone);
-        let retBusinessHours = self.getCurrentDay(today);
-        let endTime = moment(today);
-        endTime.hour(retBusinessHours.endTime.split(":")[0])
-        .minute(retBusinessHours.endTime.split(":")[1])
-        .seconds(0)
-        .millisecond(0);
-        return endTime.format("MM-D-YYYY hh:mm:ss a");
     }
     getAllHours(){
         let self = this;

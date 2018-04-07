@@ -2,11 +2,11 @@ let business = require('../src/api/business');
 
 let testGetObj = { "pathParameters" : 
                     {
-                        "busId" : "b-test-01",
+                        "busId" : "b-test-60",
                     },
                     "queryStringParameters" : 
                     {
-                        "loadStaff": true
+                        "loadStaff": false
                     }
                  };
 business.get(testGetObj  , 

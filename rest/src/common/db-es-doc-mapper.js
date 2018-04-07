@@ -52,8 +52,13 @@ let mapToEsStaffObjFromDdbBusObj = (ddbBusObj) => {
   return esStaffObj;
 }
 
+let mapESCategory = (ddbDoc) => {
+    return ddbDoc.category.categoryCode;
+}
+
 module.exports.businessDocMapper = (ddbDoc) => {
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
+  ddbJsDoc.category = mapESCategory(ddbDoc);
   ddbJsDoc.staff = mapToEsStaffObjFromDdbBusObj(ddbJsDoc);
   console.log("business doc indexed %j -- ", ddbJsDoc);
   let indexdoc = {};

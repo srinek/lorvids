@@ -64,11 +64,11 @@
                                 #svc = "ngModel"
                                 [(ngModel)]="svcSelected" required>
                                 <ng-container *ngFor="let srvc of business.services; first as isFirst">
-                                        <option 
-                                            [ngValue]="srvc">
-                                            {{srvc.name}} ({{srvc.cost | currency}})
-                                        </option>
-                                    </ng-container>
+                                    <option 
+                                        [ngValue]="srvc">
+                                        {{srvc.name}} ({{srvc.cost | currency}})
+                                    </option>
+                                </ng-container>
                                 
                                 </select>
                                 <span class="help-block" 
