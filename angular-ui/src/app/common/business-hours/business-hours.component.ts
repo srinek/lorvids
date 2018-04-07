@@ -45,6 +45,7 @@ export class BusinessHoursComponent implements OnInit {
 
     this.endItems.unshift("Closed");
     this.endItems.unshift("");
+    console.log("business hours ", this.busHours)
   }
 
   getActiveBeginItems(weekday : number){

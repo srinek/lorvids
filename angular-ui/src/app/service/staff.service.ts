@@ -44,8 +44,8 @@ export class StaffService{
     }
 
     public saveStaff(business : Business) : Observable<string>{
-        console.log( "business -- ", JSON.stringify(business.getJson()));
-        return this.http.post(this.api + this.endpoint, business.getJson()).map(
+        //console.log( "business -- ", JSON.stringify(business.getBusinessJsonToSave()));
+        return this.http.post(this.api + this.endpoint, business.getBusinessJsonToSave()).map(
             (response : Response) => {
                 let result = response.json();
                 return result;

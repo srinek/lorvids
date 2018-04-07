@@ -52,7 +52,7 @@ export class BusinessService {
     }
 
     public updateBusiness(busid : string, business : Business) : Observable<string>{
-        return this.http.post(this.api + this.endpoint+"/"+busid, business.getJson()).map(
+        return this.http.post(this.api + this.endpoint+"/"+busid, business.getBusinessJsonToSave()).map(
             (response : Response) => {
                 let result : string;
                 if(response.status === 200){

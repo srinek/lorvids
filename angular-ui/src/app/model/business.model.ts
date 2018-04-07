@@ -87,7 +87,7 @@ export class Business{
         return null;
     }
 
-    getJson(){
+    getBusinessJsonToSave(){
         this.json = null;
         this.openTime = null;
         this.closeTime = null;

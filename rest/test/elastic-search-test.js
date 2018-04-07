@@ -38,22 +38,30 @@ let testRecord_bus = {
               "b-test-01-s-03"
             ],
             "services": [
-                {
-                    "cost": "100",
-                    "name": "Dental Cleaning"
-                },
-                {
-                    "cost": "200",
-                    "name": "Root Canal Treatment"
-                },
-                {
-                    "cost": "50",
-                    "name": "Cavities"
-                },
-                {
-                    "cost": "25",
-                    "name": "Teeth Pain"
-                }
+              {
+                "cost": "75",
+                "description": "full mouth dental cleaning",
+                "duration": "1",
+                "name": "Dental Cleaning"
+              },
+              {
+                "cost": "350",
+                "description": "fix root canal treatment",
+                "duration": "2",
+                "name": "Root Canal Treatment"
+              },
+              {
+                "cost": "400",
+                "description": "dentures fixing",
+                "duration": "2",
+                "name": "dentures"
+              },
+              {
+                "cost": "400",
+                "description": "setup amalgams",
+                "duration": "2",
+                "name": "Amalgams"
+              }
             ],
             "holidays": {
                 "weekdays": [
@@ -72,7 +80,11 @@ let testRecord_bus = {
             "statement_notes": "we treat your smile special",
             "specialized_in": "General Dentistry",
             "bus_id": "b-test-01",
-            "category": "Health Care",
+            "category": {
+              "categoryCode": "HEALTH",
+              "categoryName": "Dentists",
+              "image": "dentist-pain-borowac-cure-52527.jpeg"
+            },
             "bus_name": "Smile Dental",
             "defaultImage": "trendy_looks.jpg",
             "email": "info@smiledentalnj.com",

@@ -426,3 +426,6 @@ POST /business_docs/_search
     }
 	}
 }
+
+
+DELETE /business_docs/business_info/b-test-55

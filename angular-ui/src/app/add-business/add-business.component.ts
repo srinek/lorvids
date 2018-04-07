@@ -37,7 +37,7 @@ export class AddBusinessComponent implements OnInit {
   private busId : string = "";
   categorySelected : Category;
   imageRoot : string = environment.imageRoot;
-
+  businessLoaded : boolean = false;
   //public error : boolean = false;
  //public errorMessage : string = "";
 
@@ -56,7 +56,10 @@ export class AddBusinessComponent implements OnInit {
               (business : Business) => {
                 this.businessData = business;
                 this.categorySelected = this.businessData.category;
+                this.loadImages();
                 this.update = true;
+                this.businessLoaded = true;
+                console.log("categorySelected ", this.categorySelected);
               },
               (error : string) => {
                 this.error = true;
@@ -64,7 +67,17 @@ export class AddBusinessComponent implements OnInit {
               }
             );
         }
+        else{
+          this.businessLoaded = true;
+        }
     });
+  }
+
+  loadImages(){
+    this.businessData.images.forEach( (eachImage) => {
+      this.images.push(this.imageRoot+"/"+eachImage);
+    });
+    console.log("images ", this.images);
   }
 
   addBusines(){
@@ -90,7 +103,7 @@ export class AddBusinessComponent implements OnInit {
   private updateBusiness(){
     this.facadeService.updateBusiness(this.busId, this.businessData).subscribe(
       (result : string) => {
-        this.router.navigate(['/editsvc', this.busId],
+        this.router.navigate(['/addsvc', this.busId],
           {relativeTo:this.route}
         );
       },
@@ -135,17 +148,27 @@ export class AddBusinessComponent implements OnInit {
     return this.facadeService.getAllCategories();
   }
   onUploadFinished(file: FileHolder) {
-    //console.log(JSON.stringify(file.serverResponse));
-    //console.log("upload response ", file.serverResponse._body);
-   // this.businessData.images.push(file.serverResponse._body);
-   // this.businessData.defaultImage=this.businessData.images[0];
+    console.log(JSON.stringify(file.serverResponse));
+    console.log("upload response ", file.serverResponse._body);
+    let imageName : string = this.removequotes(file.serverResponse._body);
+    this.businessData.images.push(imageName);
+    this.businessData.defaultImage=this.businessData.images[0];
   }
-  
+
   onImageRemoved(file: FileHolder) {
-     console.log("file ", file);
+     //console.log("file ", file);
      this.facadeService.deleteFile(file.src).subscribe(
        (message : string) => {
           console.log("file deleted ", message);
+          let matchedIndex;
+          this.businessData.images.forEach( (eachImage) => {
+            let matches = file.src.match(/eachImage/);
+            if(matches){
+              matchedIndex = this.businessData.images.indexOf(matches[0]);
+            }
+          });
+          this.businessData.images.splice(matchedIndex, 1);
+          console.log(" images ", this.businessData.images);
        },
        (error : string) => {
           console.log("error deleting file ", error);
@@ -153,11 +176,23 @@ export class AddBusinessComponent implements OnInit {
      );
   }
 
+  removequotes(imageName:string) : string{
+    if(imageName.charAt(0) === '"')
+    {
+      imageName = imageName.substr(1);
+    }
+    if(imageName.charAt(imageName.length - 1) === '"')
+    {
+      imageName = imageName.substr(0, imageName.length - 1);
+    }
+    return imageName;
+  }
+
   beginTimeSelected(value){
     //console.log("time selected", value);
     if(value.beginTime === "Closed"){
       this.addHoliday(value.dayInWeek);
-      return;
+    //  return;
     }
     let busHour = this.businessData.bus_hours.find( (busHr)=> {
       return busHr.day === value.dayInWeek;

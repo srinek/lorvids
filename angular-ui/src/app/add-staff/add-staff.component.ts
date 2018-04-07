@@ -35,7 +35,7 @@ export class AddStaffComponent implements OnInit {
   private _availableServices : Array<Service> = [];
   busId : string = "";
   uploadApi : string = "";
-  staffUploadedImages : Array<string> = ["https://s3.amazonaws.com/lorvid-devlot/profile.jpg"];
+  staffUploadedImages : Array<string> = [];
   isAddStaff : boolean = true;
   sameAsBusiness : boolean = false;
   
@@ -109,9 +109,9 @@ export class AddStaffComponent implements OnInit {
     this.businessData.staff = this.staffList;
     this.facadeService.saveStaff(this.businessData).subscribe(
       (result : string) => {
-        /* this.router.navigate(['/addstaff', this.busId],
+        this.router.navigate(['/admin/dashboard', this.busId],
           {relativeTo:this.route}
-        ); */
+        );
         console.log(" success ", result);
       },
       (error : string) => {
