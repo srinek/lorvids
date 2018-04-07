@@ -47,7 +47,26 @@ export class ListBusinessComponent implements OnInit {
   }
 
   signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID) .then(
+      res => { // Success
+        alert("success")
+         this.authService.authState.subscribe(
+          (user) => {
+                console.log(user);
+                this.user = user;
+                this.loggedIn = (user != null);
+ 
+                //alert(this.user);
+            },
+            (err) => {
+              alert("err "+err)
+            }
+          );
+      },
+      err =>{
+        alert("error")
+      }
+    )
   }
 
   signOut(): void {
