@@ -7,94 +7,287 @@ let testRecord_bus = {
         "eventID": "1",
         "eventName": "test event",
         "dynamodb": {
-          "ApproximateCreationDateTime": 1510049340,
+          "ApproximateCreationDateTime": 1523266140,
           "Keys": {
-            "bus_id": {
-              "S": "b-test-01"
-            }
+              "bus_id": {
+                  "S": "b-test-60"
+              }
           },
           "NewImage": {
-            "bus_hours": [
-                {
-                    "startTime": "10:00",
-                    "endTime": "17:00",
-                    "day": -1
-                },
-                {
-                    "startTime": "09:00",
-                    "endTime": "13:00",
-                    "day": 7
-                }
-            ],
-            "images": [
-                "trendy_looks.jpg",
-                "image-2.jpg"
-            ],
-            "website": "wwww.smiledentalnj.com",
-            "address": "110 Main Street, Edison, NJ 08817",
-            "staff": [
-              "b-test-01-s-01",
-              "b-test-01-s-02",
-              "b-test-01-s-03"
-            ],
-            "services": [
-              {
-                "cost": "75",
-                "description": "full mouth dental cleaning",
-                "duration": "1",
-                "name": "Dental Cleaning"
+              "bus_hours": {
+                  "L": [
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "8:00 AM"
+                              },
+                              "endTime": {
+                                  "S": "5:00 PM"
+                              },
+                              "day": {
+                                  "N": "2"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "8:00 AM"
+                              },
+                              "endTime": {
+                                  "S": "5:00 PM"
+                              },
+                              "day": {
+                                  "N": "3"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "8:00 AM"
+                              },
+                              "endTime": {
+                                  "S": "5:00 PM"
+                              },
+                              "day": {
+                                  "N": "5"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "8:00 AM"
+                              },
+                              "endTime": {
+                                  "S": "5:00 PM"
+                              },
+                              "day": {
+                                  "N": "6"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "8:00 AM"
+                              },
+                              "endTime": {
+                                  "S": "1:00 PM"
+                              },
+                              "day": {
+                                  "N": "7"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "Closed"
+                              },
+                              "endTime": {
+                                  "S": "Closed"
+                              },
+                              "day": {
+                                  "N": "1"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "startTime": {
+                                  "S": "Closed"
+                              },
+                              "endTime": {
+                                  "S": "Closed"
+                              },
+                              "day": {
+                                  "N": "4"
+                              }
+                          }
+                      }
+                  ]
               },
-              {
-                "cost": "350",
-                "description": "fix root canal treatment",
-                "duration": "2",
-                "name": "Root Canal Treatment"
+              "images": {
+                  "L": [
+                      {
+                          "S": "5f2f24a2-1523098836225.jpg"
+                      },
+                      {
+                          "S": "f55d38ca-1523098836595.jpg"
+                      },
+                      {
+                          "S": "5d815e0f-1523098836594.jpg"
+                      }
+                  ]
               },
-              {
-                "cost": "400",
-                "description": "dentures fixing",
-                "duration": "2",
-                "name": "dentures"
+              "website": {
+                  "S": "www.lorvids-web.com"
               },
-              {
-                "cost": "400",
-                "description": "setup amalgams",
-                "duration": "2",
-                "name": "Amalgams"
+              "address": {
+                  "S": "1024 Waterford Drive"
+              },
+              "staff": {
+                  "L": [
+                      {
+                          "M": {
+                              "staff_name": {
+                                  "S": "Dr. Nanda"
+                              },
+                              "staff_languages": {
+                                  "S": "English"
+                              },
+                              "images": {
+                                  "L": []
+                              },
+                              "bus_hours": {
+                                  "L": []
+                              },
+                              "rating": {
+                                  "N": "5"
+                              },
+                              "personalStatement": {
+                                  "S": "Dr.Nanda graduated from Rutgers and has been working as dentist since 10 years"
+                              },
+                              "practices": {
+                                  "L": []
+                              },
+                              "tags": {
+                                  "S": "dentist, root canal"
+                              },
+                              "staff_phone": {
+                                  "S": "6766565656"
+                              },
+                              "holidays": {
+                                  "M": {
+                                      "weekdays": {
+                                          "L": []
+                                      },
+                                      "dates": {
+                                          "L": []
+                                      }
+                                  }
+                              },
+                              "awards": {
+                                  "S": "top dentis 2011"
+                              },
+                              "staff_id": {
+                                  "S": "b-test-60-s-8cd1bf11"
+                              },
+                              "bus_id": {
+                                  "S": "b-test-60"
+                              },
+                              "staff_email": {
+                                  "S": "nanda@lorvids-web.com"
+                              }
+                          }
+                      }
+                  ]
+              },
+              "services": {
+                  "L": [
+                      {
+                          "M": {
+                              "cost": {
+                                  "S": "75"
+                              },
+                              "name": {
+                                  "S": "Dental Cleaning"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "cost": {
+                                  "S": "350"
+                              },
+                              "name": {
+                                  "S": "Root Canal Treatment"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "cost": {
+                                  "S": "400"
+                              },
+                              "name": {
+                                  "S": "dentures"
+                              }
+                          }
+                      },
+                      {
+                          "M": {
+                              "cost": {
+                                  "S": "400"
+                              },
+                              "name": {
+                                  "S": "Amalgams"
+                              }
+                          }
+                      }
+                  ]
+              },
+              "holidays": {
+                  "M": {
+                      "weekdays": {
+                          "L": [
+                              {
+                                  "N": "1"
+                              },
+                              {
+                                  "N": "4"
+                              }
+                          ]
+                      },
+                      "dates": {
+                          "L": []
+                      }
+                  }
+              },
+              "phone": {
+                  "S": "7323182848"
+              },
+              "awards": {
+                  "S": "Top Dentist 2015, Top Dentist 2016"
+              },
+              "bus_time_zone": {
+                  "S": "America/new_york"
+              },
+              "bus_id": {
+                  "S": "b-test-60"
+              },
+              "category": {
+                  "M": {
+                      "image": {
+                          "S": "dentist-pain-borowac-cure-52527.jpeg"
+                      },
+                      "categoryCode": {
+                          "S": "HEALTH"
+                      },
+                      "categoryName": {
+                          "S": "Dentists"
+                      }
+                  }
+              },
+              "bus_name": {
+                  "S": "Lorvids Test Business"
+              },
+              "defaultImage": {
+                  "S": "5f2f24a2-1523098836225.jpg"
+              },
+              "email": {
+                  "S": "srinek@gmail.com"
+              },
+              "appointment_instructions": {
+                  "S": "insurance required, only dental PPO is accepted."
               }
-            ],
-            "holidays": {
-                "weekdays": [
-                    0,
-                    3
-                ],
-                "dates": [
-                    "07-04-2018",
-                    "09-04-2018",
-                    "11-25-2018"
-                ]
-            },
-            "phone": "7871111211",
-            "awards": "NJ Best Dental 2015",
-            "bus_time_zone": "America/New_York",
-            "statement_notes": "we treat your smile special",
-            "specialized_in": "General Dentistry",
-            "bus_id": "b-test-01",
-            "category": {
-              "categoryCode": "HEALTH",
-              "categoryName": "Dentists",
-              "image": "dentist-pain-borowac-cure-52527.jpeg"
-            },
-            "bus_name": "Smile Dental",
-            "defaultImage": "trendy_looks.jpg",
-            "email": "info@smiledentalnj.com",
-            "appointment_instructions": "insurance not required. walk-ins welcome",
-            "statement_caption": "Our Mission"
-        },
-          "SequenceNumber": "96767400000000004568984127",
-          "SizeBytes": 457,
+          },
+          "SequenceNumber": "824042000000000004419577653",
+          "SizeBytes": 1354,
           "StreamViewType": "NEW_IMAGE"
-        }
+      }
       }
     ]
   };

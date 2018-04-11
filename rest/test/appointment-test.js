@@ -1,7 +1,7 @@
 let appointment = require('../src/api/appointment');
 let appointmentService = require('../src/services/appointment-service');
 
-//appointmentService.findBookedSlots('b-test-01', 'b-test-01-s-01').then((result) => { console.log(result);});
+//appointmentService.findBookedSlots('b-test-60', 'b-test-60-s-8cd1bf11').then((result) => { console.log(result);});
 
 
 /* 
@@ -88,11 +88,11 @@ let createObj = {
   "body": JSON.stringify(creatReqBody)
 };
 
-appointment.createNew(createObj , null, (error, response) => {
+/* appointment.createNew(createObj , null, (error, response) => {
   console.log('-----------------------------SAVE RESPONSE START-----------------------------');
   console.log(response);
   console.log('-----------------------------SAVE RESPONSE END-----------------------------');
-});
+}); */
 
 let testGetObj = { "pathParameters" : 
   {
@@ -110,10 +110,10 @@ let testGetObj = { "pathParameters" :
 }); */
 
 
-/* appointment.getAllAppointments(
+appointment.getAllAppointments(
    {
      "queryStringParameters": { "d": "" },
-     "pathParameters": { "busId": "b-test-01", "staffId": "b-test-01-s-01" }
+     "pathParameters": { "busId": "b-test-60", "staffId": "b-test-60-s-8cd1bf11" }
      }, 
     null, 
     (error, response) => {
@@ -121,7 +121,7 @@ let testGetObj = { "pathParameters" :
      console.log(response);
      console.log('-----------------------------SAVE RESPONSE END-----------------------------');
    }
- ); */
+ );
 
 var _date = new Date();
 _date.setMonth(01); // Feb

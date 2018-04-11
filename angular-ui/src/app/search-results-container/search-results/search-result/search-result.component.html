@@ -16,10 +16,10 @@
         </div>
         <div class="row">
               <div class="col-sm-12 col-md-6 mt-2" id="staff-container">
-                <ng-select *ngIf="staffNames.length > 1" [items]="staffNames"
+                <ng-select [items]="staffNames"
                     [active]="staffNames" (selected)="selected($event)" class="w-100">
                 </ng-select>
-                <h6 *ngIf="staffNames.length==0"> {{staffNames[0]}}</h6>
+                <!-- <h6 *ngIf="staffNames.length==1"> {{staffNames[0].text}}</h6> -->
               </div>
               <div class="col-sm-12 col-md-6 mt-2">
                 <div class="input-group">

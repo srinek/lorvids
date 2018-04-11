@@ -1,5 +1,6 @@
 'use strict'
 var moment = require('moment-timezone');
+var Staff = require('./staff-model');
 class Business{
     
     constructor(src){
@@ -10,11 +11,12 @@ class Business{
 
     map(src){
         let self = this;
+        self.staff = [];
+        self.loadStaff(src);
         self.bus_name = src.bus_name;
         self.address = src.address;
         self.bus_id = src.bus_id;
-        self.staffIds = src.staff;
-        self.staff = [];
+        //self.staffIds = src.staff;
         self.holidays = src.holidays;
         self.specialized_in = src.specialized_in;
         self.appointment_instructions = src.appointment_instructions;
@@ -35,6 +37,19 @@ class Business{
         }
         if(src.email){
             self.email = src.email;
+        }
+    }
+
+    loadStaff(src){
+        let self = this;
+        if(src.staff){
+            src.staff.forEach( (eachStaff) => {
+                let tempStaff = new Staff(eachStaff);
+                if(!tempStaff.bus_hours || tempStaff.bus_hours.length === 0){
+                    tempStaff.bus_hours = src.bus_hours;
+                }
+                self.staff.push(tempStaff);
+            });
         }
     }
 
@@ -60,18 +75,24 @@ class Business{
         }
         return false;
     }
+    /* this doesn't work for holidays*/
+    getStartTimeOfDay(__day){
+        let self = this;
+        let retBusinessHours = self.getCurrentDay(__day);
+        let startTime = moment(__day);
+        startTime.hour(retBusinessHours.startTime.split(":")[0])
+        .minute(retBusinessHours.startTime.split(":")[1])
+        .seconds(0)
+        .millisecond(0);
+        return startTime;
+    }
     opensAt(){
         let self = this;
         let today = moment.tz(new Date(), this.bus_time_zone);
         if(self.isGivenDateHoliday(today)){
             return "Closed";
         }
-        let retBusinessHours = self.getCurrentDay(today);
-        let startTime = moment(today);
-        startTime.hour(retBusinessHours.startTime.split(":")[0])
-        .minute(retBusinessHours.startTime.split(":")[1])
-        .seconds(0)
-        .millisecond(0);
+        let startTime = self.getStartTimeOfDay(today);
         return startTime.format("MM-D-YYYY hh:mm:ss a");
     }
     closesAt(){
@@ -91,25 +112,33 @@ class Business{
     getCurrentDay(today){
         let self = this;
         let retBusinessHours = self.bus_hours.find((elem) => {
-            if(elem.day == today.day()){
+            if(elem.day === (today.day()+1)){
                 return true;
             }
             return false;
         });
-        if(!retBusinessHours){
+        /* if(!retBusinessHours){
             retBusinessHours = self.bus_hours.find((elem) => {
                 if(elem.day == "-1"){
                     return true;
                 }
                 return false;
             });
-        }
+        } */
         return retBusinessHours;
     }
     getAllHours(){
         let self = this;
         return {};
     }
+
+    getStaff(staff_id){
+        let self = this;
+        return self.staff.find((eachStaff) => {
+            return eachStaff.staff_id === staff_id;
+        });
+    }
+
     addStaff(staff) {
         let self = this;
         self.staff.push(staff);
@@ -123,12 +152,15 @@ class Business{
     getNextBusinessDayDefault(){
         let self = this;
         let defaultDate = moment.tz(this.bus_time_zone);
-        self.holidays.weekdays.forEach(weekholiday => {
+        /* self.holidays.weekdays.forEach(weekholiday => {
             if(weekholiday === defaultDate.day()){
                 return self.getNextBusinessDay(defaultDate);
             }
-        });
-        if(!self.isOpenNow()){
+        }); */
+        if(self.isGivenDateHoliday(defaultDate)){
+            return self.getNextBusinessDay(defaultDate);
+        }
+        if(!self.isOpenNow() && !defaultDate.isBefore(self.getStartTimeOfDay(defaultDate))){
             return self.getNextBusinessDay(defaultDate);
         }
         // TODO : add logic for other holidays
@@ -140,11 +172,9 @@ class Business{
         let self = this;
         let nextDay = from.clone();
         nextDay.add(1, 'd');
-        self.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === nextDay.day()){
-                nextDay = self.getNextBusinessDay(nextDay);
-            }
-        });
+        if(self.isGivenDateHoliday(nextDay)){
+            nextDay = self.getNextBusinessDay(nextDay);
+        }
         // TODO : add logic for other holidays
         return nextDay;
     }
@@ -171,7 +201,7 @@ class Business{
         let self = this;
         let isHoliday = false;
         self.holidays.weekdays.forEach(weekholiday => {
-            if(weekholiday === selectedDate.day()){
+            if(weekholiday === (selectedDate.day()+1)){
                 //console.log(" selectedDate %s is holiday", selectedDate);
                 isHoliday = true;
             }

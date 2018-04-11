@@ -7,18 +7,20 @@ module.exports.esBusinessIndexer = (event, context, callback) => {
     event.Records.forEach((record) => {
         //console.log(record.eventID);
         //console.log(record.eventName);
-        //console.log('DynamoDB Record: %j', record.dynamodb);
-        let esObj = docMapper.businessDocMapper(record.dynamodb.NewImage);
-        es.esIndex(esObj, (error, response) => { 
-            if(error){
-                console.log("error-- %j", error);
-                callback(null, error);
-            }
-            else{
-                console.log("success-- %j", response);
-                callback(null, response);
-            }
+        console.log('DynamoDB Record: %j', record.dynamodb);
+        if(record.dynamodb.NewImage){
+            let esObj = docMapper.businessDocMapper(record.dynamodb.NewImage);
+            es.esIndex(esObj, (error, response) => {
+                if(error){
+                    console.log("error-- %j", error);
+                    callback(null, error);
+                }
+                else{
+                    console.log("success-- %j", response);
+                    callback(null, response);
+                }
             });
+        }
     });
 }
 

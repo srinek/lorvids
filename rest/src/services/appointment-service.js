@@ -26,16 +26,17 @@ module.exports.findAvailableSlots = (bus_id, staff_id, date) => {
     return  businessService.getBusinessById(bus_id).then((businessResult) => {
         //console.log("businessResult ", businessResult);
         business = new Business(businessResult);
-        return staffService.getStaffByBusIdAndStaffId(bus_id, staff_id);
-    }).then((staffResult) => {
+        return self.findBookedSlots(bus_id, staff_id, date);
+        //return staffService.getStaffByBusIdAndStaffId(bus_id, staff_id);
+    })./* then((staffResult) => {
         staffobj = new Staff(staffResult);
-        if(!staffobj.bus_hours){ // if doesn;t have business hrs default to business hours
+        if(!staffobj.bus_hours || staffobj.bus_hours.length === 0){ // if doesn;t have business hrs default to business hours
             staffobj.bus_hours = business.bus_hours;
         }
         business.addStaff(staffobj);
         return self.findBookedSlots(bus_id, staff_id, date);
-    }).then((bookedSlots) => {
-
+    }). */then((bookedSlots) => {
+        staffobj = business.getStaff(staff_id);
         return  business.getAvailableSlots(staffobj, bookedSlots, date);
     }).catch((error) => {
         console.log(error);

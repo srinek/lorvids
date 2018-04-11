@@ -209,7 +209,6 @@ export class AddBusinessComponent implements OnInit {
     //console.log("time selected", value);
     if(value.endTime === "Closed"){
       this.addHoliday(value.dayInWeek);
-      return;
     }
     let busHour = this.businessData.bus_hours.find( (busHr)=> {
       return busHr.day === value.dayInWeek;

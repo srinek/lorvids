@@ -1,6 +1,6 @@
 'use strict'
 var moment = require('moment-timezone');
-
+let BusinessHour = require('./business-hour-model');
 class Staff{
     
     constructor(src){
@@ -19,7 +19,7 @@ class Staff{
         self.holidays = src.holidays;
         self.service_time = src.service_time;
         self.bus_hours = src.bus_hours;    
-        self.bus_id = src.bus_id;  
+        self.bus_id = src.bus_id;
     }
 
     isStaffWorkingDay(onDate){
@@ -38,12 +38,8 @@ class Staff{
         console.log("find slots for ", onDate);
         //console.log("service time ", self.service_time);
         let hoursOfOperation = self.findBusinessHours(onDate);
-        let splitTimes = hoursOfOperation.startTime.split(":");
-        let startTime =  onDate.clone();
-        let endTime =  onDate.clone();
-        startTime.hour(splitTimes[0]).minute(splitTimes[1]).seconds(0).millisecond(0);
-        splitTimes = hoursOfOperation.endTime.split(":");
-        endTime.hour(splitTimes[0]).minute(splitTimes[1]).seconds(0).millisecond(0);
+        let startTime =  hoursOfOperation.get24HrStartTime();
+        let endTime =  hoursOfOperation.get24HrEndTime();
         let currentTime = moment.tz(new Date(), timezone);
         let slot = startTime;
         console.log("slot ", slot.format());
@@ -66,6 +62,7 @@ class Staff{
             "staffid":self.staff_id, 
             "busid" : self.bus_id});
             slot = slot.add(self.service_time, 'm');
+            console.log("slot ", slot);
         }
         //find booked slots
 
@@ -92,21 +89,17 @@ class Staff{
     findBusinessHours(onDate){
         let self = this;
         let retBusinessHours = self.bus_hours.find((elem) => {
-            if(elem.day == onDate.day()){
+            if(elem.day == (onDate.day()+1)){
                 return true;
             }
             return false;
         });
-        if(!retBusinessHours){
-            retBusinessHours = self.bus_hours.find((elem) => {
-                if(elem.day == "-1"){
-                    return true;
-                }
-                return false;
-            });
-        }
-        return retBusinessHours;
+        retBusinessHours.date = onDate;
+        return new BusinessHour(retBusinessHours);
     }
+
+    
+
 }
 
 module.exports = Staff;

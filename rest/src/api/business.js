@@ -52,7 +52,7 @@ module.exports.get = (event, context, callback) => {
         callback(null, response);
     })
     .catch((error) => {
-        console.log("error "+error);
+        console.log("error "+error.stack);
         let response = util.error();
         response.body = JSON.stringify(error);
         callback(null, response);

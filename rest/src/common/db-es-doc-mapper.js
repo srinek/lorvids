@@ -34,7 +34,7 @@ var ddbToESAppointmentDoc = (ddbDoc) => {
 }
 
 var setAppoinmentIndexType = (indexdoc, refresh) => {
-  indexdoc.index = "business_docs";
+  indexdoc.index = "lorvids_docs";
   indexdoc.type = 'appointment_info';
   if(refresh){
     indexdoc.refresh = true;
@@ -57,9 +57,10 @@ let mapESCategory = (ddbDoc) => {
 }
 
 module.exports.businessDocMapper = (ddbDoc) => {
+  console.log("ddbDoc %j ***", ddbDoc);
   let ddbJsDoc =  DynamoDB.Converter.unmarshall(ddbDoc);
-  ddbJsDoc.category = mapESCategory(ddbDoc);
-  ddbJsDoc.staff = mapToEsStaffObjFromDdbBusObj(ddbJsDoc);
+  ddbJsDoc.category = mapESCategory(ddbJsDoc);
+  //ddbJsDoc.staff = mapToEsStaffObjFromDdbBusObj(ddbJsDoc);
   console.log("business doc indexed %j -- ", ddbJsDoc);
   let indexdoc = {};
   setDefaults(indexdoc,true);
@@ -69,7 +70,7 @@ module.exports.businessDocMapper = (ddbDoc) => {
 }
 
 var setDefaults = (indexdoc, refresh) => {
-  indexdoc.index = "business_docs";
+  indexdoc.index = "lorvids_docs";
   indexdoc.type = 'business_info';
   if(refresh){
     indexdoc.refresh = true;
