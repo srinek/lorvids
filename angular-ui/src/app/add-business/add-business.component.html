@@ -49,10 +49,13 @@
                                       #busName = "ngModel"
                                       placeholder="Business Name"
                                       required>
-                                    <span class="help-block" 
-                                          [hidden]="busName.valid || busName.pristine">
-                                        Business Name is required
-                                    </span>
+
+                                      <span *ngIf="busName.errors && (busName.dirty || busName.touched)" class="help-block">
+                                            <span [hidden]="!busName.errors.required">
+                                                Business Name is required!
+                                            </span>
+                                      </span>
+                                 
                             </div>
                           </div>
 
@@ -65,10 +68,18 @@
                                                 [(ngModel)]="businessData.address"
                                                 placeholder="Business Address"
                                                 #busAddr="ngModel"
+                                                minlength="10"
                                                 required>
-                                              <span class="help-block" 
-                                              [hidden]="busAddr.valid || busAddr.pristine">
-                                                  Business Address is required
+                                             
+                                              <span *ngIf="busAddr.errors && (busAddr.dirty || busAddr.touched)" class="help-block">
+                                                <span [hidden]="!busAddr.errors.required">
+                                                    Business Address is required!
+                                                </span>
+
+                                                <span [hidden]="!busAddr.errors.minlength">
+                                                    Business Address must be at least 10 characters long.
+                                                </span>
+
                                               </span>
                                     </div>
                                     <div class="col-md-6">
@@ -90,11 +101,19 @@
                                         placeholder="Business Phone"
                                         [(ngModel)]="businessData.phone"
                                         #busPhone="ngModel"
-                                        required phone>
-                                      <span class="help-block" 
-                                      [hidden]="busPhone.valid || busPhone.pristine">
-                                          Business Phone is required
-                                      </span>
+                                        required
+                                        minlength="10">
+
+                                        <span *ngIf="busPhone.errors && (busPhone.dirty || busPhone.touched)" class="help-block">
+                                            <span [hidden]="!busPhone.errors.required">
+                                                Business Phone is required!
+                                            </span>
+                                            
+                                            <span [hidden]="!busPhone.errors.minlength">
+                                                Business Phone must be at least 10 characters long.
+                                            </span>
+                                          </span>
+                                      
                                   </div>
 
                                   <div class="col-md-6">
@@ -105,11 +124,17 @@
                                       placeholder="Business Email"
                                       [(ngModel)]="businessData.email"
                                       #busEmail="ngModel"
-                                      required email>
-                                    <span class="help-block" 
-                                    [hidden]="busEmail.valid || busEmail.pristine">
-                                        Business Email  is required.
+                                      required email pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                                  
+                                    <span *ngIf="busEmail.errors && (busEmail.dirty || busEmail.touched)" class="help-block">
+                                        <span [hidden]="!busEmail.errors.required">
+                                            Business Email is required!
+                                        </span>
+                                        <span [hidden]="!busEmail.errors.pattern">
+                                            Not a valid email! 
+                                          </span>
                                     </span>
+
                                   </div>
                             </div>
                             <div class="row form-group">
@@ -139,10 +164,12 @@
                                         [(ngModel)]="businessData.bus_time_zone"
                                         #busTimezone="ngModel"
                                         required>
-                                      <span class="help-block" 
-                                          *ngIf="!busTimezone.valid && busTimezone.touched">
-                                          Business Timezone  is required.
-                                      </span>
+                                    
+                                      <span *ngIf="busTimezone.errors && (busTimezone.dirty || busTimezone.touched)" class="help-block">
+                                        <span [hidden]="!busTimezone.errors.required">
+                                            Business Timezone is required!
+                                        </span>
+                                     </span>
                                 </div>
                             </div>
                             <div class="row form-group">
@@ -239,7 +266,7 @@
 
         <div class="form-group margin-right-18-minus">
             <div class="col-md-12" align="right">
-            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red cursor-pointer">NEXT</button>
+            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red cursor-pointer" [disabled]="!addBusinessForm.form.valid">NEXT</button>
             </div>
         </div>
 
