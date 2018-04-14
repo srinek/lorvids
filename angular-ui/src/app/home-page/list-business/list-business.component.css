@@ -4479,9 +4479,9 @@
       line-height: 1.5;
   }
   .create-btn:hover{
-    background: none !important;
-    border: 1px solid #f5af02 !important;
-    color: black !important;
+    //background: none !important;
+    //border: 1px solid #f5af02 !important;
+    //color: black !important;
   }
   
   
@@ -4515,8 +4515,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 22px;
-    width: 22px;
+    height: 18px;
+    width: 18px;
     background-color: #eee;
     border: 1px solid #ccc;
   }
@@ -4545,8 +4545,8 @@
   
   /* Style the checkmark/indicator */
   .checkbox .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 6px;
+    top: 2px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -4627,4 +4627,13 @@ width: 2em;
   {
     margin: 5px;
   }
+}
+
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #86B817; /* green */
+}
+ 
+.ng-invalid:not(form)  {
+  border-left: 5px solid #E33238; /* red */
 }

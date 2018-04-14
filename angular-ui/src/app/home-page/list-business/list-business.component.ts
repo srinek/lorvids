@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
+//import { FormsModule } from '@angular/forms';
+import {  
+  FormBuilder,  
+  FormGroup,  
+  Validators,  
+  AbstractControl  ,ReactiveFormsModule 
+} from '@angular/forms';
 import {
   AuthService,
   FacebookLoginProvider,
@@ -18,9 +26,22 @@ export class ListBusinessComponent implements OnInit {
   private user: SocialUser;
   private loggedIn: boolean;
 
-  constructor(private router: Router,private authService: AuthService) { }
+  signUpForm: any; 
+  constructor(private router: Router,private authService: AuthService,private formBuilder: FormBuilder) {
+    this.signUpForm = {
+          "firstName":"",
+          "lastName":"",
+          "email":"",
+          "mobile":"",
+          "password":""
+    }
+   }
 
-
+  
+  // initiate component
+  public ngOnInit() {
+    //this.buildForm();
+  }
 
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
@@ -73,21 +94,7 @@ export class ListBusinessComponent implements OnInit {
     this.authService.signOut();
   }
 
-  ngOnInit() {
-    //alert("init")
-   /*this.authService.authState.subscribe(
-     (user) => {
-           console.log(user);
-           this.user = user;
-           this.loggedIn = (user != null);
-
-           alert(this.user);
-       },
-       (err) => {
-         alert("err "+err)
-       }
-     );*/
- }
+  
 
 
   createbtnClick= function () {

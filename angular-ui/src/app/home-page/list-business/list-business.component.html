@@ -18,47 +18,105 @@
               
                                   <div style="padding-top:30px" class="panel-body" >
               
-                                      <form id="loginform" class="form-horizontal" role="form">
+                                   <!--  <form [formGroup]="form">
+                                        <input type="password" formControlName="password"/>
+                                        <p *ngIf="form.controls.password.errors?.required">required error</p>
+                                        <input type="password" formControlName="certainPassword"/>
+                                        <p *ngIf="form.controls.certainPassword.errors?.equalTo">equalTo error</p>
+                                      </form>
+                                       -->
+                                       <form  name="signupForm" #bookForm="ngForm" (ngSubmit)="login()" class="form" novalidate>
+                                            
                                               <div class="row">
                                                       <div class="col-xs-12 col-sm-6 col-md-6">
                                                           <div class="form-group">
-                                                              <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                                                              <input type="text"
+                                                               name="firstName" 
+                                                               [(ngModel)]="signUpForm.firstName"
+                                                               class="form-control input-lg" placeholder="First Name" 
+                                                               #firstName="ngModel"
+                                                               tabindex="1" required>
+
+                                                               <span *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="help-block">
+                                                                <span [hidden]="!firstName.errors.required">
+                                                                  First name is required!
+                                                                </span>
+                                                                
+                                                               </span>
+
+
                                                           </div>
                                                       </div>
                                                       <div class="col-xs-12 col-sm-6 col-md-6">
                                                           <div class="form-group">
-                                                              <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                                                              <input type="text" name="lastName" 
+                                                              [(ngModel)]="signUpForm.lastName" class="form-control input-lg" placeholder="Last Name" tabindex="2"
+                                                              >
                                                           </div>
                                                       </div>
                                               </div>
                                           
                                               <div class="form-group">
-                                                      <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="3">
+                                                      <input type="email"
+                                                       name="email"
+                                                       [(ngModel)]="signUpForm.email"
+                                                       class="form-control input-lg" placeholder="Email Id" tabindex="3" required
+                                                       #email="ngModel"
+                                                       pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+
+                                                       <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                                                        <span [hidden]="!email.errors.required">
+                                                          Email is required!
+                                                        </span>
+                                                        <span [hidden]="!email.errors.pattern">
+                                                            Not a valid email! {{email.errors.valid}}
+                                                          </span>
+                                                        
+                                                       </span>
                                               </div>
 
                                               <div class="form-group">
-                                                      <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="4">
+                                                      <input type="password" name="password"
+                                                      [(ngModel)]="signUpForm.password" 
+                                                      class="form-control input-lg" placeholder="Password" tabindex="4" required
+                                                      #password = "ngModel"
+                                                      minlength="5">
+
+                                                      <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                                                        <span [hidden]="!password.errors.required">
+                                                          Password is required!
+                                                        </span>
+                                                        <span [hidden]="!password.errors.minlength">
+                                                            Password must be at least 5 characters long.
+                                                        </span>
+
+                                                     </span>
+                                                        
+
                                               </div>
 
                                               <div class="form-group">
-                                                      <input type="text" name="mobile" class="form-control input-lg" placeholder="Mobile No." tabindex="5">
+                                                      <input type="text" name="mobile"  [(ngModel)]="signUpForm.mobile" class="form-control input-lg" placeholder="Mobile No." tabindex="5">
                                               </div>
 
                                               <div class="row">
                                                       <div class="col-md-12">
                                                           <span class="button-checkbox">
                                                               <label class="checkbox">
-                                                                  <input type="checkbox" class="btn btn-primary">
+                                                                  <input type="checkbox" class="btn btn-primary"
+                                                                  checked>
                                                                   <span class="checkmark"></span>
                                                                   
                                                               </label>
                                                           </span>
-                                                      <a href="#" data-toggle="modal" data-target="#t_and_c_m" style="text-decoration:none;"> I accept Terms and Conditions</a>
+                                                      <a href="" style="text-decoration:none;">I accept Terms and Conditions</a>
                                                       </div>
                                               </div>
 
-                                              <div class="row margin-top-10 padding-10">
-                                                  <button type="button" class="btn btn-primary btn-lg btn-block yellow-button padding-10 create-btn" (click)="createbtnClick()">Create Account</button>
+                                             <!--  <button type="submit" class="btn btn-default" [disabled]="!bookForm.form.valid">Submit</button>
+ -->
+                                            <div class="row margin-top-10 padding-10">
+                                                  <button type="button" class="btn btn-primary btn-lg btn-block yellow-button padding-10 create-btn" (click)="createbtnClick()"  [disabled]="!bookForm.form.valid">Create Account</button>
                                               </div>
 
                                               <div class="row omb_loginOr">
@@ -95,7 +153,7 @@
 
                                               
 
-                                      </form>     
+                                      </form>   
               
                                   </div>                     
                           </div>  

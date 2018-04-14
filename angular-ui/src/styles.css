@@ -347,7 +347,10 @@ font-size: 20px;
     color: red;
     font-size: 13px;
 }
-
+.req-error{
+    color: #e75358;
+    font-size: 14px;
+}
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     opacity: 0.6 !important;

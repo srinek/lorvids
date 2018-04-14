@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -126,7 +127,7 @@ export function provideConfig() {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    FormsModule,ReactiveFormsModule ,CustomFormsModule ,
     HttpModule,
     CalendarModule.forRoot(),
     DatepickerModule.forRoot(),
