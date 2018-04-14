@@ -13,6 +13,7 @@ import { Staff } from '../model/staff.model';
 import { Service } from '../model/service.model';
 import { environment } from '../../environments/environment';
 
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-add-staff',
   templateUrl: './add-staff.component.html',
@@ -43,7 +44,8 @@ export class AddStaffComponent implements OnInit {
     private facadeService : FacadeService,
     private route : ActivatedRoute,
     private router : Router,
-    private logger: Logger) { 
+    private logger: Logger,
+    private location: Location) { 
 
   }
 
@@ -221,4 +223,10 @@ export class AddStaffComponent implements OnInit {
       this.staffData.holidays.weekdays.push(dayInWeek);
     }
   }
+
+  
+  back(){
+    this.location.back();
+  }
+  
 }

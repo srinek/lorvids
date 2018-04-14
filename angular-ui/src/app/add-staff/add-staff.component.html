@@ -287,10 +287,10 @@
     <div class="row mt-2">
         <div class="col-12 text-right">
             <button id="btnCancel" name="btnCancel" 
-                    class="btn btn-default my-btn btn-ccc cursor-pointer">BACK</button>
+                    class="btn btn-default my-btn btn-ccc cursor-pointer" (click)="back()">BACK</button>
             <button id="btnSubmit" name="btnSubmit" 
                     class="btn btn-default my-btn btn-red cursor-pointer"
-                    (click)="saveStaff()"  [disabled]="!addStaffForm.form.valid">Done</button>
+                    (click)="saveStaff()" [disabled]="!addStaffForm.form.valid">Done</button>
         </div>
     </div>
     <br/><br/>

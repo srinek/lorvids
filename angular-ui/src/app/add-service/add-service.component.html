@@ -53,10 +53,13 @@
                         placeholder="Service Name"
                         [(ngModel)]="serviceData.name"
                         #svcName="ngModel" required>
-                    <span class="help-block" 
-                        [hidden]="svcName.valid || svcName.pristine">
-                        Service Name is required
-                    </span>
+
+                        <span *ngIf="svcName.errors && (svcName.dirty || svcName.touched)" class="help-block">
+                                <span [hidden]="!svcName.errors.required">
+                                    Service Name is required!
+                                </span>
+                        </span>
+
                 </div>
             </div>
             <div class="row form-group">
@@ -69,10 +72,13 @@
                         [(ngModel)]="serviceData.duration"
                         #svcTime="ngModel"
                         required>
-                    <span class="help-block" 
-                        [hidden]="svcTime.valid || svcTime.pristine">
-                        Service Duration is required
-                    </span>
+
+                        <span *ngIf="svcTime.errors && (svcTime.dirty || svcTime.touched)" class="help-block">
+                                <span [hidden]="!svcTime.errors.required">
+                                        Service Duration is required!
+                                </span>
+                        </span>
+
                 </div>
             </div>
             <div class="row form-group">
@@ -84,10 +90,13 @@
                         placeholder="Service Cost"
                         [(ngModel)]="serviceData.cost"
                         #svcCost="ngModel" required>
-                    <span class="help-block" 
-                        [hidden]="svcCost.valid || svcCost.pristine">
-                        Service Cost is required
-                    </span>
+
+                        <span *ngIf="svcCost.errors && (svcCost.dirty || svcCost.touched)" class="help-block">
+                                <span [hidden]="!svcCost.errors.required">
+                                    Service Cost is required!
+                                </span>
+                        </span>
+
                 </div>
             </div>
             <div class="row form-group">
@@ -139,10 +148,10 @@
    <div class="row mt-2">
         <div class="col-12 text-right">
             <button id="btnCancel" name="btnCancel" 
-                    class="btn btn-default my-btn btn-ccc cursor-pointer">BACK</button>
+                    class="btn btn-default my-btn btn-ccc cursor-pointer" (click)="back()">BACK</button>
             <button id="btnSubmit" name="btnSubmit" 
                     class="btn btn-default my-btn btn-red cursor-pointer"
-                    (click)="addServices()">NEXT</button>
+                    (click)="addServices()" [disabled]="!addServiceForm.form.valid">NEXT</button>
         </div>
    </div>
 </div>

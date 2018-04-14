@@ -8,6 +8,8 @@ import {Logger} from '../service/logger.service';
 import {Business} from '../model/business.model';
 import { Service } from '../model/service.model';
 
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -28,7 +30,8 @@ export class AddServiceComponent implements OnInit {
   constructor(private facadeService : FacadeService,
     private route : ActivatedRoute,
     private router : Router,
-    private logger: Logger) { }
+    private logger: Logger,
+    private location: Location) { }
 
   ngOnInit() {
     this.duration.setHours(0);
@@ -98,5 +101,10 @@ export class AddServiceComponent implements OnInit {
   modifyService(service){
     this.serviceData = service;
     this.isAddService = false;
+  }
+
+
+  back(){
+    this.location.back();
   }
 }
