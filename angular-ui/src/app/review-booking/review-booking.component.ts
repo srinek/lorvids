@@ -69,7 +69,7 @@ export class ReviewBookingComponent implements OnInit {
       (params : Params) => {
         let staffId = params['staffId'];
         let businessId = params['busId'];
-        this.facadeService.getBusiness(businessId, false)
+        this.facadeService.getBusiness(businessId)
         .subscribe(
             (business : Business) => {
                 this.business = business;

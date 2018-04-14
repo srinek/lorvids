@@ -42,7 +42,7 @@ export class StaffPageComponent implements OnInit {
           ).catch((error) => {
             return Observable.throw(error);
           })
-          .flatMap((bus_id)=> this.facadeService.getBusiness(bus_id, false))
+          .flatMap((bus_id)=> this.facadeService.getBusiness(bus_id))
           .subscribe(
               (business : Business) => {
                  this.selectedBusiness = business;

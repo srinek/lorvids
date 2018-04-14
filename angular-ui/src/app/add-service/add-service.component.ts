@@ -40,7 +40,7 @@ export class AddServiceComponent implements OnInit {
       (params : Params) => {
          this.busId = params['busId'];
          if(this.busId) {
-            this.facadeService.getBusiness(this.busId, false).subscribe(
+            this.facadeService.getBusiness(this.busId).subscribe(
               (business : Business) => {
                 this.businessData = business;
                 this.services = business.services;

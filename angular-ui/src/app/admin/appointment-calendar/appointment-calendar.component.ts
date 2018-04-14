@@ -81,7 +81,7 @@ export class AppointmentCalendarComponent implements OnInit {
 
   ngOnInit() {
     Observable.forkJoin(
-      this.facadeService.getBusiness(this.businessId, true)
+      this.facadeService.getBusiness(this.businessId)
     ).subscribe(response => {
         this.business = <any>response[0];
         this.businessDataLoaded = true; 

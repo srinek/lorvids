@@ -21,7 +21,9 @@ export class Staff {
     staff_languages : string = "";
     bus_hours? : Array<{day:number, endTime?:string, startTime?:string}> = [];
     holidays? : {dates?:Array<string>, weekdays?:Array<number>} = {dates:[], weekdays:[]};
-
+    sameAsBusBusHours : boolean = false;
+    service_time : number = 30;
+    
     constructor(src?){
         if(Array.isArray(src)){
             this.mapArray(src);
@@ -44,12 +46,17 @@ export class Staff {
         if(src.images && src.images.length > 0){
             this.image = src.images[0];
         }
-        this.personalStatement = src.profStatement;
+        this.personalStatement = src.personalStatement;
+        this.awards = src.awards;
+        this.staff_languages = src.staff_languages;
         this.affiliations = src.affiliations;
         this.bus_hours = src.bus_hours;
         this.holidays = src.holidays;
         let practice = new StaffPractice(src); // this is added for staff page.
         //this.practices.push(practice);
+        if(this.bus_hours.length === 0){
+            this.sameAsBusBusHours = true;
+        }
     }
 
     public mapArray(src) : void {

@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-business-hours',
   templateUrl: './business-hours.component.html',
   styleUrls: ['./business-hours.component.css']
 })
-export class BusinessHoursComponent implements OnInit {
+export class BusinessHoursComponent implements OnInit, OnChanges {
 
   @Input() startTime : Date;
   @Input() endTime : Date;
@@ -46,6 +46,16 @@ export class BusinessHoursComponent implements OnInit {
     this.endItems.unshift("Closed");
     this.endItems.unshift("");
     console.log("business hours ", this.busHours)
+  }
+
+  ngOnChanges(changes : {busHours : SimpleChange}){
+    console.log("", changes.busHours);
+    this.busHours = changes.busHours.currentValue;
+    if(this.busHours.length > 0){
+      this.weekdays.push({day :"Nan", dayInWeek:1});
+    }
+    //console.log("", changes.staff.currentValue);
+    
   }
 
   getActiveBeginItems(weekday : number){

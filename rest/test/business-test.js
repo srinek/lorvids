@@ -3,10 +3,6 @@ let business = require('../src/api/business');
 let testGetObj = { "pathParameters" : 
                     {
                         "busId" : "b-test-60",
-                    },
-                    "queryStringParameters" : 
-                    {
-                        "loadStaff": false
                     }
                  };
 business.get(testGetObj  , 

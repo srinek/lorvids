@@ -53,7 +53,10 @@ let mapToEsStaffObjFromDdbBusObj = (ddbBusObj) => {
 }
 
 let mapESCategory = (ddbDoc) => {
-    return ddbDoc.category.categoryCode;
+    if(ddbDoc.category){
+      return ddbDoc.category.categoryCode;
+    }
+    return "";
 }
 
 module.exports.businessDocMapper = (ddbDoc) => {

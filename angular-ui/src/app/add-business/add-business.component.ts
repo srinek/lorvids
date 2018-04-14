@@ -52,7 +52,7 @@ export class AddBusinessComponent implements OnInit {
       (params : Params) => {
          this.busId = params['busId'];
          if(this.busId) {
-            this.facadeService.getBusiness(this.busId, false).subscribe(
+            this.facadeService.getBusiness(this.busId).subscribe(
               (business : Business) => {
                 this.businessData = business;
                 this.categorySelected = this.businessData.category;
@@ -150,7 +150,7 @@ export class AddBusinessComponent implements OnInit {
   onUploadFinished(file: FileHolder) {
     console.log(JSON.stringify(file.serverResponse));
     console.log("upload response ", file.serverResponse._body);
-    let imageName : string = this.removequotes(file.serverResponse._body);
+    let imageName : string = this.facadeService.removequotes(file.serverResponse._body);
     this.businessData.images.push(imageName);
     this.businessData.defaultImage=this.businessData.images[0];
   }
@@ -174,18 +174,6 @@ export class AddBusinessComponent implements OnInit {
           console.log("error deleting file ", error);
        }
      );
-  }
-
-  removequotes(imageName:string) : string{
-    if(imageName.charAt(0) === '"')
-    {
-      imageName = imageName.substr(1);
-    }
-    if(imageName.charAt(imageName.length - 1) === '"')
-    {
-      imageName = imageName.substr(0, imageName.length - 1);
-    }
-    return imageName;
   }
 
   beginTimeSelected(value){

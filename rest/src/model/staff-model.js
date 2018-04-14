@@ -14,12 +14,22 @@ class Staff{
         self.staff_id = src.staff_id;
         self.staff_name = src.staff_name;
         self.tags = src.tags;
-        self.images = src.imageUrl;
+        self.images = src.images;
         self.about = src.profStatement;
         self.holidays = src.holidays;
         self.service_time = src.service_time;
         self.bus_hours = src.bus_hours;    
         self.bus_id = src.bus_id;
+        self.staff_email = src.staff_email;
+        self.awards = src.awards;
+        self.bus_id = src.bus_id;
+        self.personalStatement = src.personalStatement;
+        self.practices = src.practices;
+        self.rating = src.rating;
+        self.service_time = src.service_time;
+        self.staff_email = src.staff_email;
+        self.staff_languages = src.staff_languages;
+        self.staff_phone = src.staff_phone;
     }
 
     isStaffWorkingDay(onDate){
