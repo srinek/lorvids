@@ -56,6 +56,11 @@ export class AddServiceComponent implements OnInit {
 
   addServices(){
      //console.log("service submitted", this.serviceForm);
+    if(this.services.length === 0){
+        this.error = true;
+        this.errorMessage = "Please add a service to proceed";
+        return;
+    }
     this.businessData.services = this.services;
     this.facadeService.updateBusiness(this.busId, this.businessData).subscribe(
       (result : string) => {

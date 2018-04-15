@@ -113,11 +113,11 @@
             <div class="row form-group">
                 <div class="col-12" *ngIf="isAddService">
                     <button type="submit" 
-                    class="btn yellow-button cursor-pointer">Add Service</button>
+                    class="btn yellow-button cursor-pointer" [disabled]="!addServiceForm.form.valid">Add Service</button>
                 </div>
                 <div class="col-12" *ngIf="!isAddService">
                     <button type="submit" 
-                    class="btn yellow-button cursor-pointer">Update Service</button>
+                    class="btn yellow-button cursor-pointer" [disabled]="!addServiceForm.form.valid">Update Service</button>
                 </div>
             </div>
           </form>
@@ -151,7 +151,7 @@
                     class="btn btn-default my-btn btn-ccc cursor-pointer" (click)="back()">BACK</button>
             <button id="btnSubmit" name="btnSubmit" 
                     class="btn btn-default my-btn btn-red cursor-pointer"
-                    (click)="addServices()" [disabled]="!addServiceForm.form.valid">NEXT</button>
+                    (click)="addServices()">NEXT</button>
         </div>
    </div>
 </div>
