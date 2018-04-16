@@ -86,6 +86,7 @@ export class AdminReportsComponent implements OnInit {
     private facadeService : FacadeService) { 
       var currentDate = new Date();
       this.month = "" + currentDate.getMonth();
+      // this.month = "1";
       this.currentMonth = this.month;
       this.year = "" + currentDate.getFullYear();
       this.currentYear = this.year;
