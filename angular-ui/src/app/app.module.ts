@@ -61,6 +61,7 @@ import { UserService } from './service/user.service';
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ListBusinessComponent } from './home-page/list-business/list-business.component';
+import { environment } from '../environments/environment';
 
 import {
   SocialLoginModule,
@@ -72,11 +73,11 @@ import {
 const CONFIG = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider('549801603836-ld6feeqm8uishv9eqj0rsubt2r4haf8l.apps.googleusercontent.com')
+    provider: new GoogleLoginProvider(environment.google_loging_provider_id)
   },
   {
     id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('927957124049275')
+    provider: new FacebookLoginProvider(environment.fb_login_provider_id)
   }
 ]);
 export function provideConfig() {

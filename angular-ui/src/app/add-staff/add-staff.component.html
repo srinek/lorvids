@@ -203,29 +203,14 @@
                                 (removed)="onImageRemoved($event)"
                                 [headers]="awsHeaders"
                                 [beforeUpload]="onBeforeUpload"
-                                [uploadedFiles]="staffUploadedImages">
+                                [uploadedFiles]="staffUploadedImages"
+                                (uploadFinished)="onUploadFinished($event)">
                             </image-upload>
                         </div>
                     </div>
                 </div>
-               
                 <div class="row form-group">
-                    <div class="col" *ngIf="isAddStaff">
-                        <button type="submit"
-                                name="addAnother" 
-                                class="btn yellow-button cursor-pointer">Add Staff</button>
-                    </div>
-                    <div class="col" *ngIf="!isAddStaff">
-                        <button type="submit"
-                                name="addAnother" 
-                                class="btn yellow-button cursor-pointer">Update Staff</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-5">
-
-                   
+                    <div class="col">
                         <div class="d-flex flex-column align-items-center">
                             <div>
                                 <h6>Working hours</h6>
@@ -242,7 +227,7 @@
                                     <span class="custom-control-description">Same as business hours</span>
                                 </label>
                             </div>
-                            <div>
+                            <div *ngIf="staffData.bus_hours">
                                 <app-business-hours 
                                     [startTime]="startTime"
                                     [endTime]="endTime"
@@ -252,17 +237,32 @@
                                 </app-business-hours>
                             </div>     
                         </div>
-                    
-
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col" *ngIf="isAddStaff">
+                        <button type="submit"
+                                name="addAnother" 
+                                class="btn yellow-button cursor-pointer" [disabled]="!addStaffForm.form.valid">Add Staff</button>
+                    </div>
+                    <div class="col" *ngIf="!isAddStaff">
+                        <button type="submit"
+                                name="addAnother" 
+                                class="btn yellow-button cursor-pointer" [disabled]="!addStaffForm.form.valid">Update Staff</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-5">
             <div class="list-group">
                 <ng-container *ngFor="let eachStaff of staffList">
                     <span class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                         <div class="text-center">
-                            <a href="staffpage" class="">    
+                            <div>    
                                 <img src="{{imageRoot}}/{{eachStaff.image}}" height="115" width="115" 
                                         class="img-round img-photo d-inline-block " alt="">
-                            </a>
+                            </div>
                         </div>
                         <div class="d-flex w-100 flex-column align-items-center mt-3">
                             <h5 class="mb-1">{{eachStaff.staff_name}}</h5>
@@ -290,7 +290,7 @@
                     class="btn btn-default my-btn btn-ccc cursor-pointer" (click)="back()">BACK</button>
             <button id="btnSubmit" name="btnSubmit" 
                     class="btn btn-default my-btn btn-red cursor-pointer"
-                    (click)="saveStaff()" [disabled]="!addStaffForm.form.valid">Done</button>
+                    (click)="saveStaff()">Done</button>
         </div>
     </div>
     <br/><br/>

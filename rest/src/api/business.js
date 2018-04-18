@@ -42,9 +42,8 @@ module.exports.update = (event, context, callback) => {
 
 module.exports.get = (event, context, callback) => {
     let busId = event.pathParameters.busId;
-    let loadStaff = event.queryStringParameters ? event.queryStringParameters.loadStaff : false;
     businessService
-    .getBusinessById(busId, loadStaff)
+    .getBusinessById(busId)
     .then( (data) => {
         console.log("data ", data);
         let response = util.success();

@@ -86,6 +86,7 @@ export class AdminReportsComponent implements OnInit {
     private facadeService : FacadeService) { 
       var currentDate = new Date();
       this.month = "" + currentDate.getMonth();
+      // this.month = "1";
       this.currentMonth = this.month;
       this.year = "" + currentDate.getFullYear();
       this.currentYear = this.year;
@@ -120,7 +121,7 @@ export class AdminReportsComponent implements OnInit {
   public initializeChartData(): void {
     console.log("yearly val:", this.isyearly);
     Observable.forkJoin(
-      this.facadeService.getBusiness(this.businessId, true),
+      this.facadeService.getBusiness(this.businessId),
       this.facadeService.getBusinessExpenses(this.businessId, this.month, this.year, this.isyearly)
     ).subscribe(response => {
         this.business = <any>response[0];

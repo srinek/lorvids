@@ -52,10 +52,13 @@
                   <div *ngIf= "!isyearly" class="month-picker">
                     <fieldset class="month-picker-fieldset">
                       <span *ngFor="let monthlist of monthNames">
-                        <input  type="radio" name="month"  [attr.checked]="month == monthlist.index ? true : null" 
+                        <input  type="radio" name="month"  [attr.checked]="month == monthlist.index ? true : null"
+                            [attr.disabled]="(year == currentYear && monthlist.index > currentMonth)? true : null"
+                            [ngClass]="{'remove-hand': (year == currentYear && monthlist.index > currentMonth) }"
                             (click)="reportMonthChangeEvent($event)" 
                               value="{{monthlist.index}}" id="{{monthlist.index}}">
-                        <label for="{{monthlist.index}}" class="month-picker-label">{{monthlist.shortName}}</label>
+                        <label [ngClass]="{'remove-hand': (year == currentYear && monthlist.index > currentMonth) }"
+                           for="{{monthlist.index}}" class="month-picker-label">{{monthlist.shortName}}</label>
                       </span>
                     </fieldset>
                   </div>

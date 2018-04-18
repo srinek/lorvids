@@ -51,8 +51,8 @@ export class FacadeService {
     /**
      *  BUSINESS APIS
      */
-    public getBusiness(busId : string, loadStaff : boolean) : Observable<Business> {
-        return this.businessService.getBusiness(busId, loadStaff);
+    public getBusiness(busId : string) : Observable<Business> {
+        return this.businessService.getBusiness(busId);
     }
     
 
@@ -164,5 +164,17 @@ export class FacadeService {
 
     public activateUser(hash : string) : Observable<string> {
         return this.userService.activateUser(hash);
+    }
+
+    public removequotes(imageName:string) : string{
+        if(imageName.charAt(0) === '"')
+        {
+          imageName = imageName.substr(1);
+        }
+        if(imageName.charAt(imageName.length - 1) === '"')
+        {
+          imageName = imageName.substr(0, imageName.length - 1);
+        }
+        return imageName;
     }
 }

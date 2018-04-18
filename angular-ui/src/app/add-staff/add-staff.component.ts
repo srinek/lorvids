@@ -54,7 +54,7 @@ export class AddStaffComponent implements OnInit {
       (params : Params) => {
          this.busId = params['busId'];
          if(this.busId) {
-            this.facadeService.getBusiness(this.busId, true).subscribe(
+            this.facadeService.getBusiness(this.busId).subscribe(
               (business : Business) => {
                 this.businessData = business;
                 this._availableServices = business.services;
@@ -149,6 +149,15 @@ export class AddStaffComponent implements OnInit {
        }
      );
   }
+
+  onUploadFinished(file: FileHolder) {
+    console.log(JSON.stringify(file.serverResponse));
+    console.log("upload response ", file.serverResponse._body);
+    let imageName : string = this.facadeService.removequotes(file.serverResponse._body);
+    this.staffData.images.push(imageName);
+    this.staffData.image=this.staffData.images[0];
+  }
+
   showStaffAffliations(){
     if(this.businessData){
       return this.businessData.category.showStaffAffliations();
@@ -156,12 +165,13 @@ export class AddStaffComponent implements OnInit {
     return false;
   }
 
-  modifyStaff(editStaff){
+  modifyStaff(editStaff : Staff){
     this.staffData = editStaff;
     this.isAddStaff= false;
     this.staffData.images.forEach( (eachImage) => {
       this.staffUploadedImages.push(this.imageRoot +"/"+ eachImage);
     });
+    this.sameAsBusiness = editStaff.sameAsBusBusHours;
     console.log("staffUploadedImages", this.staffUploadedImages);
   }
 

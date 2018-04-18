@@ -33,7 +33,7 @@ export class BusinessPageComponent implements OnInit {
     this.route.params.subscribe(
       (params : Params) => {
           let businessId = params['busId'];
-          this.facadeService.getBusiness(businessId, true)
+          this.facadeService.getBusiness(businessId)
           .subscribe(
               (business : Business) => {
                   this.business = business;

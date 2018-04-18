@@ -1,3 +1,6 @@
+.remove-hand {
+  cursor: pointer;
+}
 
 .datepicker-container {
   vertical-align: top; 
