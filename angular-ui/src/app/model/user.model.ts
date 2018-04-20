@@ -3,6 +3,9 @@ export class User{
     UserEmail : string = "";
     name : string = "";
     phone : string = "";
+    password : string = "";
+    role : string = "";
+
 
     constructor(src?) {
         if(src){
@@ -14,5 +17,7 @@ export class User{
         this.UserEmail = src.UserEmail;
         this.name = src.name;
         this.phone = src.phone;
+        this.password = src.password;
+        this.role = src.role;
     }
 }

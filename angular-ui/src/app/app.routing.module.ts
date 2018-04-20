@@ -21,28 +21,34 @@ import { SearchResultsComponent } from './search-results-container/search-result
 import { ActivateUserComponent } from './activate-user/activate-user.component';
 import { ViewAppointmentsComponent } from './view-appointments/view-appointments.component';
 import { ListBusinessComponent } from './home-page/list-business/list-business.component';
+import { AuthenticationGuard } from './auth/authentication.guard';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ConfirmUserComponent } from './auth/confirm-user/confirm-user.component';
 
 const appRoutes : Routes = [
     {path:'', component : HomePageComponent, pathMatch: 'full'},
+    {path:'login',  component : SignInComponent},
+    {path:'confirmuser',  component : ConfirmUserComponent},
     {path:'search', component : SearchResultsComponent},
     //{path:'search/:searchFor', component : SearchResultsContainerComponent},
     {path:'reviewbooking/:busId/:staffId', component : ReviewBookingComponent},
     {path:'confirm/:busId/:staffId/:bookingId', component : ConfirmBookingComponent},
-    {path:'addb', component : AddBusinessComponent},
-    {path:'editb/:busId', component : AddBusinessComponent},
-    {path:'addsvc/:busId', component : AddServiceComponent},
-    {path:'addstaff/:busId', component : AddStaffComponent},
-    {path:'bushome/:busId', component : BusinessPageComponent},
-    {path:'staff/:staffId', component : StaffPageComponent},
-    {path:'viewappts/:sId', component : ViewAppointmentsComponent},
-    { path: 'admin/dashboard', component : AdminDashboardComponent},
-    { path: 'admin/reports', component : AdminReportsComponent},
-    { path: 'admin/staff', component : AdminStaffComponent},
-    { path: 'admin/staff-details/:staffid', component : AdminStaffDetailsComponent},
-    { path: 'admin/settings', component : AdminSettingsComponent},
-    { path: 'admin/expense', component : AdminExpenseTrackerComponent},
+    {path:'bushome/:busId',  component : BusinessPageComponent},
+    {path:'staff/:staffId',  component : StaffPageComponent},
+    {path:'viewappts/:sId',  component : ViewAppointmentsComponent},
     { path : 'user/activate/:hash', component: ActivateUserComponent},
-    {path:'listb', component : ListBusinessComponent}
+    {path:'listb',  component : ListBusinessComponent},
+    {path:'addb', canActivate: [AuthenticationGuard], component : AddBusinessComponent},
+    {path:'editb/:busId', canActivate: [AuthenticationGuard], component : AddBusinessComponent},
+    {path:'addsvc/:busId', canActivate: [AuthenticationGuard], component : AddServiceComponent},
+    {path:'addstaff/:busId', canActivate: [AuthenticationGuard], component : AddStaffComponent},
+    { path: 'admin/dashboard', canActivate: [AuthenticationGuard], component : AdminDashboardComponent},
+    { path: 'admin/reports', canActivate: [AuthenticationGuard], component : AdminReportsComponent},
+    { path: 'admin/staff', canActivate: [AuthenticationGuard], component : AdminStaffComponent},
+    { path: 'admin/staff-details/:staffid', canActivate: [AuthenticationGuard], component : AdminStaffDetailsComponent},
+    { path: 'admin/settings', canActivate: [AuthenticationGuard], component : AdminSettingsComponent},
+    { path: 'admin/expense', canActivate: [AuthenticationGuard], component : AdminExpenseTrackerComponent},
+    { path: '**', component : HomePageComponent, pathMatch: 'full' },
     /* ,
     { path: '**', redirectTo: '/somewhere-else', pathMatch: 'full' } */  // catches all routes that are not defined in the routes.
   ];
@@ -52,7 +58,8 @@ const appRoutes : Routes = [
     // RouterModule.forRoot(appRoutes, {useHash: true})
     RouterModule.forRoot(appRoutes)
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthenticationGuard]
 })
 export class AppRoutingModule {
 

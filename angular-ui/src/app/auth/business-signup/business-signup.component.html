@@ -1,0 +1,142 @@
+<div class="sign-up-col">
+  <div class="panel panel-info" >
+    <div class="panel-heading red-background">
+        <div class="panel-title text-center">SIGN UP IT'S FREE</div>
+    </div>     
+    <div class="padding-top-30" class="panel-body" >
+        <form name="signupForm" #bookForm="ngForm" class="form" novalidate>
+                <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <input type="text"
+                                 name="bName" 
+                                 [(ngModel)]="signUpForm.name"
+                                 class="form-control input-lg" placeholder="Business Name" 
+                                 #firstName="ngModel"
+                                 tabindex="1">
+
+                                 <!-- <span *ngIf="bName.errors && (bName.dirty || bName.touched)" class="help-block">
+                                  <span [hidden]="!bName.errors.required">
+                                    Business Name is required!
+                                  </span> 
+                                  
+                                 </span>  -->
+
+
+                            </div>
+                        </div>
+                        <!-- <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="lastName" 
+                                [(ngModel)]="signUpForm.lastName" class="form-control input-lg" placeholder="Last Name" tabindex="2"
+                                >
+                            </div>
+                        </div> -->
+                </div>
+            
+                <div class="form-group">
+                        <input type="email"
+                         name="email"
+                         [(ngModel)]="signUpForm.email"
+                         class="form-control input-lg" placeholder="Business Email" tabindex="3" required
+                         #email="ngModel"
+                         pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+
+                        <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                          <span [hidden]="!email.errors.required">
+                            Email is required!
+                          </span>
+                          <span [hidden]="!email.errors.pattern">
+                              Not a valid email!
+                          </span>
+                        </span>
+                </div>
+
+                <div class="form-group">
+                        <input type="password" name="password"
+                        [(ngModel)]="signUpForm.password" 
+                        class="form-control input-lg" placeholder="Password" tabindex="4" required
+                        #password = "ngModel"
+                        minlength="8">
+
+                        <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                          <span [hidden]="!password.errors.required">
+                            Password is required!
+                          </span>
+                          <span [hidden]="!password.errors.minlength">
+                              Password must be at least 8 characters long with lower case, upper case letters and numbers.
+                          </span>
+
+                       </span>
+                          
+
+                </div>
+
+                <div class="form-group">
+                        <input type="tel" name="mobile"  
+                        [(ngModel)]="signUpForm.mobile" 
+                        class="form-control input-lg" 
+                        placeholder="Mobile No." tabindex="5">
+                </div>
+
+                <div class="row">
+                        <div class="col-md-12">
+                            <span class="button-checkbox">
+                                <label class="checkbox">
+                                    <input type="checkbox" class="btn btn-primary"
+                                    checked>
+                                    <span class="checkmark"></span>
+                                    
+                                </label>
+                            </span>
+                        <a href="" class="accept-terms">I accept Terms and Conditions</a>
+                        </div>
+                </div>
+
+              <div class="alert alert-danger mt-1" role="alert" *ngIf="error">
+                    {{errorMessage}}
+              </div>
+              <div class="row margin-top-10 padding-10">
+                    <button type="button" 
+                    class="btn btn-primary btn-lg btn-block yellow-button padding-10 create-btn cursor-pointer" 
+                    (click)="createbtnClick()" 
+                    [disabled]="!bookForm.form.valid">Sign up Account</button>
+                </div>
+
+                <div class="row omb_loginOr">
+                              <div class="col-sm-12 col-md-12">
+                                  <hr class="omb_hrOr">
+                                  <span class="omb_spanOr">or</span>
+                              </div>
+                 </div>
+                <div>
+                      
+                  <div class="row omb_socialButtons">
+                      <div class="col-xs-12 col-sm-6 col-md-6">
+                          <a href="javascript:void(0)" (click)="signInWithFB()" 
+                          class="btn btn-lg btn-block omb_btn-facebook">
+                              <i class="fa fa-facebook visible-xs"></i>
+                              <span class="hidden-xs">Facebook</span>
+                          </a>
+                      </div>
+                     
+                      <div class="col-xs-12 col-sm-6 col-md-6">
+                          <a href="javascript:void(0)" (click)="signInWithGoogle()" 
+                          class="btn btn-lg btn-block omb_btn-google">
+                              <i class="fa fa-google-plus visible-xs"></i>
+                              <span class="hidden-xs">Google+</span>
+                          </a>
+                      </div>	
+                  </div>
+
+                </div>
+                <br/>
+                <div class="text-center">
+                        Already have an account? <a href="">Login here!</a>
+                </div>
+        </form>   
+
+    </div>                     
+  </div>  
+</div>
+  

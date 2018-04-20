@@ -26,6 +26,7 @@ import { S3ImageService } from './s3image.service';
 import { User } from '../model/user.model';
 import { UserService } from './user.service';
 import { Category } from '../model/category.model';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class FacadeService {
@@ -40,7 +41,8 @@ export class FacadeService {
                 private staffService : StaffService,
                 private apptService : ApptService,
                 private s3ImageService : S3ImageService,
-                private userService : UserService
+                private userService : UserService,
+                private authenticationService : AuthenticationService
                ){
 
     }

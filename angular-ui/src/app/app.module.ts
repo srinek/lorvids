@@ -69,6 +69,10 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angular4-social-login';
+import { BusinessSignupComponent } from './auth/business-signup/business-signup.component';
+import { AuthenticationService } from './service/authentication.service';
+import { SignInComponent } from './auth/sign-in/sign-in.component';
+import { ConfirmUserComponent } from './auth/confirm-user/confirm-user.component';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -123,7 +127,10 @@ export function provideConfig() {
     SearchResultComponent,
     ActivateUserComponent,
     ViewAppointmentsComponent,
-    ListBusinessComponent
+    ListBusinessComponent,
+    BusinessSignupComponent,
+    SignInComponent,
+    ConfirmUserComponent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +152,8 @@ export function provideConfig() {
   providers: [
     FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, S3ImageService, Logger, UserService,
+    ApptService, S3ImageService, 
+    Logger, UserService, AuthenticationService,
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig

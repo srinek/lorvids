@@ -1,0 +1,178 @@
+.sign-up-col .panel-info{
+    background: white;
+}
+  .sign-up-col .panel-body{
+    padding: 15px;
+  }
+  .sign-up-col .panel-heading{
+    padding: 13px;
+    color: white;
+  }
+  
+  
+  .create-btn{
+    font-family: "Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+  }
+  .create-btn:hover{
+    /* background: none !important;
+    border: 1px solid #f5af02 !important;
+    color: black !important; */
+  }
+  
+  
+  .border-radius{
+    border-radius: 5px;
+  }
+  
+  /* The container */
+  .checkbox {
+    /*display: block;*/
+    position: relative;
+    padding-left: 28px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    font-size: 15px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .checkbox:hover input ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .checkbox input:checked ~ .checkmark {
+    background-color: #2196F3;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .checkbox input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .checkbox .checkmark:after {
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+  
+  .block-button{
+      display: block;
+      width: 100%;
+      border: none;
+      background-color: #4CAF50;
+      padding: 14px 28px;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+  }
+  
+  
+  
+/*
+    Note: It is best to use a less version of this file ( see http://css2less.cc
+    For the media queries use @screen-sm-min instead of 768px.
+    For .omb_spanOr use @body-bg instead of white.
+*/
+
+
+.omb_socialButtons a {
+  color: white;
+  opacity:0.9;
+}
+.omb_socialButtons a:hover {
+  color: white;
+  opacity:1;    	
+}
+.omb_socialButtons .omb_btn-facebook {background: #3b5998;}
+.omb_socialButtons .omb_btn-twitter {background: #00aced;}
+.omb_socialButtons .omb_btn-google {background: #c32f10;}
+
+.omb_loginOr {
+  position: relative;
+  font-size: 1.5em;
+  color: #ccc;
+  margin-top: 1px;
+  margin-bottom: 8px;
+  padding-top: 15px;
+  padding-bottom:15px;
+}
+.omb_loginOr .omb_hrOr {
+/*background-color: #cdcdcd;*/
+height: 1px;
+margin-top: 0px !important;
+margin-bottom: 0px !important;
+}
+
+.omb_loginOr .omb_spanOr {
+display: block;
+position: absolute;
+left: 50%;
+top: -19px;
+margin-left: -1.5em;
+background-color: white;
+width: 3em;
+text-align: center;
+}			
+
+.omb_loginForm .input-group.i {
+width: 2em;
+}
+.omb_login .omb_loginForm  .help-block {
+  color: red;
+}
+
+
+@media (max-width: 767px) {
+  .omb_socialButtons a
+  {
+    margin: 5px;
+  }
+}
+
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #86B817; /* green */
+}
+ 
+.ng-invalid:not(form)  {
+  border-left: 5px solid #E33238; /* red */
+}
