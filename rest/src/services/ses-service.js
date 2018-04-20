@@ -76,6 +76,7 @@ let populateAppointmentConfirmationTemplateData = (appointmentData, userData, bu
     templateData.bus_phone = business.phone;
     templateData.appointment_time = appointment.appointment_time;
     templateData.staff_name = staff.staff_name;
+    templateData.staff_image = staff.images ? staff.images[0] : "";
     templateData.service = appointmentData.service;
     templateData.user = userData.name;
     templateData.appointments_url = `${lorvid_url}/viewappts/${appointment.appointment_id}`;
