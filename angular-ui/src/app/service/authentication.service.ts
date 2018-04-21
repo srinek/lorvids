@@ -8,10 +8,11 @@ import {
     CognitoUserSession
   } from 'amazon-cognito-identity-js';
 import { Observable, BehaviorSubject, Subject } from "rxjs";
+import { environment } from '../../environments/environment';
 
 const POOL_DATA = {
-    UserPoolId: '',
-    ClientId: ''
+  UserPoolId: environment.cognito_user_pool.user_pool_id,
+  ClientId: environment.cognito_user_pool.client_id
 };
 const userPool = new CognitoUserPool(POOL_DATA);
 
@@ -19,6 +20,7 @@ const userPool = new CognitoUserPool(POOL_DATA);
 export class AuthenticationService{
 
     private registeredUser: CognitoUser;
+    tempSignupUser : User;
     signUpSubject = new BehaviorSubject<string>("");
 
     signUp(user: User): void {
@@ -39,6 +41,7 @@ export class AuthenticationService{
             return;
           }
           this.registeredUser = result.user;
+          this.tempSignupUser = user;
           this.signUpSubject.complete();
           console.log("registered user object ",  this.registeredUser);
         });
