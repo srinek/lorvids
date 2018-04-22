@@ -23,14 +23,34 @@
                         </span>
                     </div>
                     <div class="form-group">
-                        <label for="password">Confirmation Code</label>
+                        <label for="password">Password</label>
                         <input type="password" 
                             name="upassword"
                             [(ngModel)]="upassword" 
                             #password="ngModel" 
                             class="form-control" 
+                            placeholder="Password" 
+                            required>
+                        <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                            <span [hidden]="!password.errors.required">
+                                Password is required!
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Confirmation Code</label>
+                        <input type="code" 
+                            name="ucode"
+                            [(ngModel)]="ucode" 
+                            #code="ngModel" 
+                            class="form-control" 
                             placeholder="Confirmation Code" 
                             required>
+                        <span *ngIf="code.errors && (code.dirty || code.touched)" class="help-block">
+                            <span [hidden]="!code.errors.required">
+                                Confirmation Code is required! Check you email.
+                            </span>
+                        </span>
                     </div>
                 </div>
         </div>

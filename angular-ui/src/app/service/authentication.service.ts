@@ -43,23 +43,32 @@ export class AuthenticationService{
           this.registeredUser = result.user;
           this.tempSignupUser = user;
           this.signUpSubject.complete();
-          console.log("registered user object ",  this.registeredUser);
+          //console.log("registered user object ",  this.registeredUser);
         });
         return;
     }
 
-    confirmUser(email : string, confirmationCode : string) : void{
+    confirmUser(user : User) : Subject<string>{
       const userData = {
-        Username: email,
+        Username: user.UserEmail,
         Pool: userPool
       };
-      const cognitUser = new CognitoUser(userData);
-      cognitUser.confirmRegistration(confirmationCode, true, (err, result) => {
+      const cognitoUser = new CognitoUser(userData);
+      let confirmSubject = new Subject<string>();
+      cognitoUser.confirmRegistration(user.confirmationCode, true, (err, result) => {
         if (err) {
+          confirmSubject.error(err);
           return;
         }
-        
+        this.login(user).subscribe( 
+        (result) => {
+          confirmSubject.next("success");
+        },
+        (error) => {
+          confirmSubject.error(err);
+        });
       });
+      return confirmSubject;
     }
 
     login(user : User) : Subject<string>{

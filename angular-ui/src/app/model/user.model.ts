@@ -5,7 +5,7 @@ export class User{
     phone : string = "";
     password : string = "";
     role : string = "";
-
+    confirmationCode : string = "";
 
     constructor(src?) {
         if(src){
