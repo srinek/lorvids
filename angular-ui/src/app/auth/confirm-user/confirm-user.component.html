@@ -9,18 +9,47 @@
                         </div>
                         <div style="margin-top:20px;" class="panel-body padding-20">
 
-                                <form #confirmUserForm="ngForm" class="form form-horizontal" novalidate>
-                                    
-                                    <div class="form-group">
-                                        <!-- <label for="email">Email</label> -->
-                                        <input type="email"
-                                            class="form-control" 
-                                            name="email"
-                                            [(ngModel)]="uemail"
-                                            #email="ngModel"
-                                            placeholder="Email"
-                                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                                            required>
+                        <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                          <span [hidden]="!email.errors.required">
+                            Email is required!
+                          </span>
+                          <span [hidden]="!email.errors.pattern">
+                              Not a valid email!
+                          </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" 
+                            name="upassword"
+                            [(ngModel)]="upassword" 
+                            #password="ngModel" 
+                            class="form-control" 
+                            placeholder="Password" 
+                            required>
+                        <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                            <span [hidden]="!password.errors.required">
+                                Password is required!
+                            </span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="code">Confirmation Code</label>
+                        <input type="code" 
+                            name="ucode"
+                            [(ngModel)]="ucode" 
+                            #code="ngModel" 
+                            class="form-control" 
+                            placeholder="Confirmation Code" 
+                            required>
+                        <span *ngIf="code.errors && (code.dirty || code.touched)" class="help-block">
+                            <span [hidden]="!code.errors.required">
+                                Confirmation Code is required! Check you email.
+                            </span>
+                        </span>
+                    </div>
+                </div>
+        </div>
 
                                         <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
                                         <span [hidden]="!email.errors.required">
