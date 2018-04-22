@@ -1,32 +1,137 @@
-<section class="mt-5" id="confirm-appt">
-    <div class="container p-5">
-        
-        <div class="row d-flex justify-content-center">
-            <h5 class="text-blue">Hello {{user.name}},</h5>
-        </div>
-        <div class="row d-flex justify-content-center">
-            <h5 class="text-blue">Your Appointment with {{business.bus_name}} is confirmed.</h5>
-        </div>
-        <div class="row d-flex justify-content-center">
-            <p class="text-muted">{{business.address}}</p>
-        </div>
-    </div>
-    <div class="container d-flex justify-content-center align-items-center mb-3">
-        <div class="col-md-6 d-flex justify-content-center align-items-center staff-box">
-            <div class="text-center">
-                <img src="{{imageRoot}}/{{staff.image}}" height="115" width="115" 
-                            class="img-round img-photo d-inline-block " alt="">
-                <h6 class="text-blue p-1">{{staff.staff_name}}</h6>
-            </div>
-        </div>
-        <div class="col-md-6 ">
-                <p class="text-blue text-center">{{appointment.service}}</p> 
-           
-                <div  class="text-red text-center"><strong>{{appointment.time | date:'hh:mm a'}}</strong></div>    
-                <div class="text-blue text-center">{{ appointment.time | date:'fullDate'}}</div>
-        </div>
-    </div>
-    <div class="container  d-flex justify-content-center align-items-center">
-        links for create account, enter password etc
-    </div>
-</section>
+<div class="container">
+        <div class="row mt-5">
+                <div class="col-md-8 p-5">
+
+                        <div style="padding-left:10px;">
+                                <p style="margin-bottom: 4px;font-size:20px;color: #86b817;"><b>Hello Your Appointment with "Nanada" has Confirmed.</b></p>
+                                <p style="font-size:20px;margin-top:2px;"><b>Saturday ,December 2 at 9:30AM.</b></p>
+                        </div>
+                        
+                        
+                        <div style="padding-bottom:10px;padding-top:10px;border-top:1px solid #f1f1f1;border-bottom:1px solid #f1f1f1;">
+                            
+                            <div style="padding:10px;">
+                                    <div style="vertical-align: middle;display: table-cell;">
+                                        <img src="image-2.jpg" width="85" height="85">
+                                    </div>
+                                    <div style="display:inline;display: table-cell;">
+                                        <div style="padding-left:10px;">
+                                            <span>Hi your appointment has been fixed.If an element is taller than the element containing it, and it is floated, it will overflow outside of its container. You can use the "clearfix" hack to fix this (see example below).</span>
+                                        </div>
+                                    </div>
+                            </div>
+                            
+                        </div>
+    
+                        <div style="padding-bottom:10px;padding-top:10px;border-top:1px solid #f1f1f1;">
+                            
+                                <div style="padding:10px;">
+                                        <div style="vertical-align: middle;display: table-cell;width:40%;">
+                                                <strong style="color: #f4ae01;font-size: 20px;">Address:</strong>
+                                                <div style="font-size:16px;">
+                                                    <strong>Dr.Sujatha Muppala,MD,1 Ethel Rd,Edison</strong>
+                                                    <strong>abc@gmail.com</strong>
+                                                    <strong>90780945709</strong>
+                                                </div>
+                                        </div>
+                                       
+                                </div>
+                                
+                        </div>
+    
+                        
+
+                            
+                            <!-- <section id="confirm-appt">
+                                <div class="p-5">
+                                    
+                                    <div class="row d-flex justify-content-center">
+                                        <h5 class="text-blue">Hello {{user.name}},</h5>
+                                    </div>
+                                    <div class="row d-flex justify-content-center">
+                                        <h5 class="text-blue">Your Appointment with {{business.bus_name}} is confirmed.</h5>
+                                    </div>
+                                    <div class="row d-flex justify-content-center">
+                                        <p class="text-muted">{{business.address}}</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center mb-3">
+                                    <div class="col-md-6 d-flex justify-content-center align-items-center staff-box">
+                                        <div class="text-center">
+                                            <img src="{{imageRoot}}/{{staff.image}}" height="115" width="115" 
+                                                        class="img-round img-photo d-inline-block " alt="">
+                                            <h6 class="text-blue p-1">{{staff.staff_name}}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <p class="text-blue text-center">{{appointment.service}}</p> 
+                                        
+                                            <div  class="text-red text-center"><strong>{{appointment.time | date:'hh:mm a'}}</strong></div>    
+                                            <div class="text-blue text-center">{{ appointment.time | date:'fullDate'}}</div>
+                                    </div>
+                                </div>
+                               
+                            </section>
+             -->
+                </div>
+                <div class="col-md-4">
+                            <div style="margin-top:85px;">
+                               <!--  links for create account, enter password etc -->
+                               <form name="signupForm" #bookForm="ngForm" class="form" novalidate>
+                                   
+                                    <div class="form-group">
+                                            <input type="email"
+                                             name="email"
+                                             [(ngModel)]="signUpForm.email"
+                                             class="form-control input-lg" placeholder="Email" tabindex="3" required
+                                             #email="ngModel"
+                                             pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                    
+                                            <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                                              <span [hidden]="!email.errors.required">
+                                                Email is required!
+                                              </span>
+                                              <span [hidden]="!email.errors.pattern">
+                                                  Not a valid email!
+                                              </span>
+                                            </span>
+                                    </div>
+                    
+                                    <div class="form-group">
+                                            <input type="password" name="password"
+                                            [(ngModel)]="signUpForm.password" 
+                                            class="form-control input-lg" placeholder="Password" tabindex="4" required
+                                            #password = "ngModel"
+                                            minlength="8">
+                    
+                                            <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                                              <span [hidden]="!password.errors.required">
+                                                Password is required!
+                                              </span>
+                                              <span [hidden]="!password.errors.minlength">
+                                                  Password must be at least 8 characters long with lower case, upper case letters and numbers.
+                                              </span>
+                    
+                                           </span>
+                                              
+                    
+                                    </div>
+                    
+                                    <div class="row margin-top-10 padding-15">
+                                        <button type="button" 
+                                        class="btn btn-primary btn-lg btn-block yellow-button padding-8 create-btn cursor-pointer" 
+                                        (click)="createbtnClick()" 
+                                        [disabled]="!bookForm.form.valid">Login</button>
+                                    </div>
+                                    <br/>
+                                    <div class="text-center">
+                                            Create an account? <a href="">Signup here!</a>
+                                    </div>
+                                  
+                            </form>   
+                                  
+            
+                            </div>
+                </div>
+        </div>            
+</div>

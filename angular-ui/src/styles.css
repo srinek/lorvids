@@ -261,6 +261,9 @@ p {
     margin-top: 8%;
 }
 
+.margin-top-8-pr{
+    margin-top: 8%;
+}
 .margin-top-10-pr{
     margin-top: 10%;
 }
@@ -290,6 +293,21 @@ font-size: 20px;
 }
 .padding-top-30{
     padding-top: 30px;
+}
+.padding-8{
+    padding: 8px !important;
+}
+.padding-0{
+    padding:0px !important;
+}
+.padding-15{
+    padding: 15px;
+}
+.padding-13{
+    padding: 13px !important;
+}
+.padding-20{
+    padding: 20px !important;
 }
 
 /*Common Business Tabs Styles*/

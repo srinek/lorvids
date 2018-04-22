@@ -1,52 +1,72 @@
-<div class="container margin-top-10-pr">
-    <form #confirmUserForm="ngForm" class="form form-horizontal" novalidate>
-        <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email"
-                            class="form-control" 
-                            name="email"
-                            [(ngModel)]="uemail"
-                            #email="ngModel"
-                            placeholder="Email"
-                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
-                            required>
+<div class="container margin-top-8-pr margin-bottom-25">
+    
+    <div class="row">
+        <div class="col-md-4" style="float:none !important;margin:0 auto !important;">
+            
+            <div class="panel panel-info" style="border:1px solid #e75358;">
+                        <div class="panel-heading red-background padding-13" style="color: white;">
+                            <div class="panel-title text-center">CONFIRM ACCOUNT</div>
+                        </div>
+                        <div style="margin-top:20px;" class="panel-body padding-20">
 
-                        <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
-                          <span [hidden]="!email.errors.required">
-                            Email is required!
-                          </span>
-                          <span [hidden]="!email.errors.pattern">
-                              Not a valid email!
-                          </span>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Confirmation Code</label>
-                        <input type="password" 
-                            name="upassword"
-                            [(ngModel)]="upassword" 
-                            #password="ngModel" 
-                            class="form-control" 
-                            placeholder="Confirmation Code" 
-                            required>
-                    </div>
-                </div>
-        </div>
+                                <form #confirmUserForm="ngForm" class="form form-horizontal" novalidate>
+                                    
+                                    <div class="form-group">
+                                        <!-- <label for="email">Email</label> -->
+                                        <input type="email"
+                                            class="form-control" 
+                                            name="email"
+                                            [(ngModel)]="uemail"
+                                            #email="ngModel"
+                                            placeholder="Email"
+                                            pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" 
+                                            required>
 
-        <div class="alert alert-danger mt-1" role="alert" *ngIf="error">
-            {{errorMessage}}
+                                        <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                                        <span [hidden]="!email.errors.required">
+                                            Email is required!
+                                        </span>
+                                        <span [hidden]="!email.errors.pattern">
+                                            Not a valid email!
+                                        </span>
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                       <!--  <label for="password">Confirmation Code</label> -->
+                                        <input type="password" 
+                                            name="upassword"
+                                            [(ngModel)]="upassword" 
+                                            #password="ngModel" 
+                                            class="form-control" 
+                                            placeholder="Confirmation Code" 
+                                            required>
+                                    </div>
+
+
+                                    <div class="alert alert-danger mt-1" role="alert" *ngIf="error">
+                                            {{errorMessage}}
+                                    </div>
+                                    <div class="row margin-top-10 padding-13">
+                                            <button type="button" 
+                                            class="btn btn-primary btn-lg btn-block yellow-button padding-8 create-btn cursor-pointer" 
+                                            (click)="confirmUser()"
+                                            [disabled]="!confirmUserForm.form.valid">Confirm Account</button>
+                                    </div>
+                                    <div class="text-center">
+                                        
+                                        <p>Already have an account? <a href="">Login here!</a></p>
+                                        <p>New Users !!! <a href="">Create Free Account here!</a> </p>
+
+                                    </div>
+
+                                </form> 
+                        </div>         
+            </div>  
+                    
+                    
         </div>
-        <div class="row margin-top-10 padding-10">
-              <button type="button" 
-              class="btn btn-primary btn-lg btn-block yellow-button padding-10 create-btn cursor-pointer" 
-              (click)="confirmUser()"
-              [disabled]="!confirmUserForm.form.valid">Confirm Account</button>
-        </div>
-        <div class="text-center">
-            Already have an account? <a href="">Login here!</a>
-            New Users !!! <a href="">Create Free Account here!</a> 
-        </div>
-    </form> 
+    </div>
+
+        
+    
 </div>
