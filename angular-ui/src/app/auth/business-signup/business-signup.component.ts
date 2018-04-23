@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm, FormBuilder } from '@angular/forms';
 import {AuthService, FacebookLoginProvider, 
   GoogleLoginProvider, SocialUser} from 'angular4-social-login';
-import { FacadeService } from '../../service/facade.service';
 import { User } from '../../model/user.model';
 import { AuthenticationService } from '../../service/authentication.service';
 
@@ -22,9 +21,8 @@ export class BusinessSignupComponent implements OnInit {
 
   signUpForm: any; 
   constructor(private router: Router,
-    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private authService: AuthService,
-    private facadeService : FacadeService,
     private authenticationService : AuthenticationService
   ) {
     this.signUpForm = {
@@ -93,20 +91,20 @@ export class BusinessSignupComponent implements OnInit {
     user.role = "admin";
     user.password = this.signUpForm.password;
     user.phone = this.signUpForm.mobile;
-    this.authenticationService.signUpSubject.subscribe( (result) => {
-      
-    },
-    (error) => {
-       console.log("error in signup -- ", error);
-       this.error = true;
-       this.errorMessage = error.message;
-    },
-    () => {
-      console.log(" session user ", this.authenticationService.getRegisteredUser());
-      this.router.navigate(['confirmuser']);
-    }
-    );
     this.authenticationService.signUp(user);
-    //this.facadeService.signUp();
+    this.authenticationService.signUpSubject.subscribe( 
+      (result) => {
+      
+      },
+      (error) => {
+        console.log("error in signup -- ", error);
+        this.error = true;
+        this.errorMessage = error.message;
+      },
+      () => {
+        this.router.navigate(['confirmuser'], 
+        {queryParams : {'signup' : 'true'}});
+      }
+    );
   }
 }
