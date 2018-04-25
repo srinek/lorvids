@@ -94,6 +94,8 @@ functions:
           path: business
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:820202039892:userpool/us-east-1_H2JaRAdhV
   updateBusiness:
     handler: api/business.update
     description : update business
@@ -102,6 +104,8 @@ functions:
           path: business/{busId}
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:820202039892:userpool/us-east-1_H2JaRAdhV
   getBusinessExpenses:
     handler: api/business.getBusinessExpenses
     description : get business expenses by Id
@@ -149,6 +153,8 @@ functions:
           path: staff
           method: post
           cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:us-east-1:820202039892:userpool/us-east-1_H2JaRAdhV
   getAppointment:
     handler: api/appointment.getSlotDetails
     description : get the appointment details by id
@@ -237,6 +243,12 @@ functions:
           path: user
           method: post
           cors : true
+  postUserSignupConfirmation:
+    handler: api/user.saveCognitoUser
+    events:
+      - cognitoUserPool:
+          pool: lorvids-user-pool
+          trigger: PostConfirmation
   filter:
     handler: api/search.doFacetSearch
     description : facet search api
@@ -305,6 +317,31 @@ functions:
 # you can add CloudFormation resource templates here
 #resources:
 #  Resources:
+#    lorvids-user-pool:
+#      Type: AWS::Cognito::UserPool
+#      Properties:
+#        AliasAttributes: 
+#          - phone_number
+#          - email
+#        AutoVerifiedAttributes: email
+#        EmailVerificationMessage: verification code for your Lorvids account
+#        EmailVerificationSubject: "Verification code for your Lorvids account registration.\nGo to : http://localhost:4200/confirmuser\nVerification Code :  {####}"
+#        UserPoolName: "lorvids-user-pool-v1"
+#        Schema: 
+#          - AttributeDataType: string
+#          - DeveloperOnlyAttribute: true
+#          - Mutable: true
+#          - Name: "name"
+#          - StringAttributeConstraints:
+#            - MaxLength: 256
+#            - MinLength: 1
+#          - AttributeDataType: string
+#          - DeveloperOnlyAttribute: true
+#          - Mutable: true
+#          - Name: "name"
+#          - StringAttributeConstraints:
+#            - MaxLength: 256
+#            - MinLength: 1
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:

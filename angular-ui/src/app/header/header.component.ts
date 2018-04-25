@@ -5,6 +5,7 @@ import { FacadeService} from '../service/facade.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Category } from '../model/category.model';
 import { environment } from '../../environments/environment';
+import { AuthenticationService } from '../service/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -26,7 +27,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private facadeService : FacadeService) {
+    private facadeService : FacadeService, 
+    private authenticationService : AuthenticationService) {
 
    }
 
@@ -62,5 +64,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onSearch(searchVal) : void{
     console.log("searchVal", searchVal);
     this.router.navigate(['/search'],{relativeTo:this.route, queryParams : {'look_for' : searchVal}});
+  }
+
+  logout() : void {
+    this.authenticationService.logout();
+    this.router.navigate([''],{relativeTo:this.route, queryParams : {'signout' : true}});
   }
 }

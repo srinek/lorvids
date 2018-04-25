@@ -50,7 +50,7 @@ aws dynamodb create-table --table-name NxtId --attribute-definitions AttributeNa
 UserVerification
 ------------------------------------------------------------------------------------
 aws dynamodb delete-table --table-name UserVerification
-aws dynamodb create-table --table-name UserVerification --attribute-definitions AttributeName=use-email-hash,AttributeType=S --key-schema AttributeName=use-email-hash,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
+aws dynamodb create-table --table-name UserVerification --attribute-definitions AttributeName=user-email-hash,AttributeType=S --key-schema AttributeName=user-email-hash,KeyType=HASH --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1
 
 
 

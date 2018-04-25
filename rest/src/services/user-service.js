@@ -2,6 +2,11 @@
 let db = require('../common/db');
 let util = require('../common/util');
 let sesService = require('./ses-service');
+let config = require('config');
+let CognitoIdentityServiceProvider = require('aws-sdk/clients/cognitoidentityserviceprovider');
+var cognitoidentityserviceprovider = new CognitoIdentityServiceProvider({apiVersion: '2016-04-18', region:"us-east-1"});
+//var cognitoidentityserviceprovider = new CognitoIdentityServiceProvider(config.get('app.cognito-config'));
+
 
 
 
@@ -39,6 +44,29 @@ module.exports.saveUser = (userData) => {
     }
     // user already saved.
     return Promise.resolve("user email not exist in request");;
+}
+
+module.exports.saveCognitoUser = (data) => {
+   
+    console.log("data ", data);
+
+    const userData = {};
+    userData.UserEmail = data.email;
+    userData.name = data.name;
+    userData.status = "1";
+    userData.role = data['custom:role'];
+    var params = {
+        TableName: 'User',
+        Item: userData
+    };
+    console.log("params_user "+  JSON.stringify(params));
+    return db.saveData(params).then( (result) => {
+        //generate hash from email. 
+        const hash = util.generateHash(userData.UserEmail);
+        return saveVerificationCode(hash, userData.UserEmail);
+    }).catch( (error) => {
+        return error;
+    });
 }
 
 let saveVerificationCode = (emailHash, userEmail) => {

@@ -100,7 +100,11 @@ export class AuthenticationService{
         return loginSubject;
     }
 
-    getAuthenticatedUser() {
+    logout(){
+      this.getAuthenticatedUser().signOut();
+    }
+
+    getAuthenticatedUser() : CognitoUser {
       return userPool.getCurrentUser() || this.registeredUser;
     }
 
