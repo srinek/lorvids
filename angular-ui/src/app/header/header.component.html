@@ -36,8 +36,9 @@
           <div class="collapse navbar-collapse" [ngClass]="{show:showNav}">
             <div class="navbar-nav" id="h-navbar">
               <ul>
-                <li [ngClass]="{'d-none':loggedIn}"><a>Log In</a></li>
-                <li [ngClass]="{'d-none':loggedIn}"><a>Sign Up</a></li>
+                <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['/login']">Log In</a></li>
+                <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="" (click)="logout()">Log Out</a></li>
+                <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['/signup']">Sign Up</a></li>
                 <li><a>Help</a></li>
                 <li class="list" [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['listb']">LIST YOUR BUSINESS</a></li>
                 <li class="dropdown navbar-user" [ngClass]="{show:showProfile, 'd-block-inline':loggedIn, 'd-none':!loggedIn}" (click)="toggleProifle()">

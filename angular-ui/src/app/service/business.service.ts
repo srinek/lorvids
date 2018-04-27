@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Response} from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -9,6 +9,7 @@ import {Logger} from './logger.service';
 import { environment } from '../../environments/environment';
 import { Expense } from '../model/expense.model';
 import { Appointment } from '../model/appointment.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class BusinessService {
@@ -17,35 +18,38 @@ export class BusinessService {
     endpoint : string = "business";
     expenseEndpoint : string = "business/expense"
 
-    constructor(private http : Http,
+    constructor(private http : HttpClient,
         private logger : Logger){
 
     }
 
     public getBusiness(busid : string) : Observable<Business>{
         return this.http.get(this.api + this.endpoint+"/"+busid).map(
-            (response : Response) => {
+            (response : any) => {
                 let business : Business;
-                let busObj = response.json();
+                let busObj = response;
                 business = new Business(busObj);
                 return business;
+            }
+        ).catch(
+            (error) => {
+              return Observable.throw(error);
             }
         );
     }
 
     public saveBusiness(business : Business) : Observable<string>{
         return this.http.post(this.api + this.endpoint, business).map(
-            (response : Response) => {
+            (response : any) => {
                 let result : string;
-                if(response.status === 200){
-                    let json = response.json();
-                    return json.bus_id;
+                if(response.result === "success"){
+                    return response.bus_id;
                 }
-                this.logger.consoleLog("error in save business ", response.json());
-                return response.json();
+                this.logger.consoleLog("error in save business ", response);
+                return response;
             }
         ).catch(
-            (error: Response) => {
+            (error) => {
               return Observable.throw(error);
             }
         ); 
@@ -53,17 +57,17 @@ export class BusinessService {
 
     public updateBusiness(busid : string, business : Business) : Observable<string>{
         return this.http.post(this.api + this.endpoint+"/"+busid, business.getBusinessJsonToSave()).map(
-            (response : Response) => {
+            (response : any) => {
                 let result : string;
                 if(response.status === 200){
-                    let json = response.json();
+                    let json = response;
                     return json.result;
                 }
-                this.logger.consoleLog("error in save business ", response.json());
-                return response.json();
+                this.logger.consoleLog("error in save business ", response);
+                return response;
             }
         ).catch(
-            (error: Response) => {
+            (error) => {
               return Observable.throw(error);
             }
         );
@@ -77,9 +81,9 @@ export class BusinessService {
         console.log("getBusinessExpenses", apiUrl);
 
         return this.http.get(apiUrl).map(
-            (response : Response) => {
+            (response : any) => {
                 let expense : Expense[] = [];
-                let expenseArr = response.json();
+                let expenseArr = response;
 
                 if (expenseArr) {
                     expenseArr.forEach(element => {

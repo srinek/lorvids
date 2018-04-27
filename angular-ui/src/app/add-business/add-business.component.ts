@@ -122,6 +122,7 @@ export class AddBusinessComponent implements OnInit {
         );
       },
       (error : string) => {
+        console.error(error);
         this.error = true;
         this.errorMessage = "Yikes!!! something cramped our service "+error;
       }

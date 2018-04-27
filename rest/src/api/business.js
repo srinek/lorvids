@@ -1,11 +1,15 @@
 'use strict';
 let businessService = require('../services/business-service');
+let userService = require('../services/user-service');
 let util = require('../common/util');
 
 module.exports.save = (event, context, callback) => {
     //console.log("new business save is called ", event);
+    const accessToken = event.queryStringParameters.accessToken;
+    console.log("accessToken ", accessToken);
     let saveDataPromise = businessService.saveBusiness(event.body, callback);
     saveDataPromise.then( (result) => {
+        userService.updateBusinessRole(accessToken, result.Item.bus_id);
         let response = util.success();
         response.body = JSON.stringify({"result" : "success", "bus_id":result.Item.bus_id});
         console.log("result ", result);

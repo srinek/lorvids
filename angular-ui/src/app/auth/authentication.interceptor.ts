@@ -7,7 +7,7 @@ import { AuthenticationService } from '../service/authentication.service';
 export class AuthenticationInterceptor implements HttpInterceptor {
 
     constructor(private authenticationService : AuthenticationService){
-
+ 
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -15,12 +15,17 @@ export class AuthenticationInterceptor implements HttpInterceptor {
         currentUser.subscribe( (result) => {
             request = request.clone({
                 setHeaders: {
-                    Authorization: result
+                    Authorization: result.idToken
+                },
+                setParams: {
+                    "accessToken" : result.accessToken
                 }
             });
-        },(error) => {
+        },
+        (error) => {
 
-        }, () => {
+        }, 
+        () => {
 
         }); 
         return next.handle(request);

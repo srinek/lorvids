@@ -73,6 +73,8 @@ import { BusinessSignupComponent } from './auth/business-signup/business-signup.
 import { AuthenticationService } from './service/authentication.service';
 import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ConfirmUserComponent } from './auth/confirm-user/confirm-user.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthenticationInterceptor } from './auth/authentication.interceptor';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -133,6 +135,7 @@ export function provideConfig() {
     ConfirmUserComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,ReactiveFormsModule ,CustomFormsModule ,
@@ -157,6 +160,11 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationInterceptor,
+      multi: true
     }
   ],
     bootstrap: [AppComponent]

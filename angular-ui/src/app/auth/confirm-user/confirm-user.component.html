@@ -12,68 +12,71 @@
                                 
                                 <div style="margin-top:20px;" class="panel-body padding-20">
                                 
-                                        <form>
-                                               
-                                                <div class="form-group">
+                                        <form name="confirmUserForm" #confirmUserForm="ngForm" class="form" novalidate>
+                                              
+                                            <div class="form-group">
                                                     
-                                                    <input type="password" 
-                                                        name="upassword"
-                                                        [(ngModel)]="upassword" 
-                                                        #password="ngModel" 
-                                                        class="form-control" 
-                                                        placeholder="Password" 
-                                                        required>
-                                                    <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
-                                                        <span [hidden]="!password.errors.required">
-                                                            Password is required!
-                                                        </span>
-                                                    </span>
-                                                </div>
-                                                <div class="form-group">
-                                                    
-                                                    <input type="code" 
-                                                        name="ucode"
-                                                        [(ngModel)]="ucode" 
-                                                        #code="ngModel" 
-                                                        class="form-control" 
-                                                        placeholder="Confirmation Code" 
-                                                        required>
-                                                    <span *ngIf="code.errors && (code.dirty || code.touched)" class="help-block">
-                                                        <span [hidden]="!code.errors.required">
-                                                            Confirmation Code is required! Check you email.
-                                                        </span>
-                                                    </span>
-                                                </div>
-                           
-                                               <div>
-            
-                                                    <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
+                                                <input type="email" 
+                                                    name="email"
+                                                    [(ngModel)]="uemail" 
+                                                    #email="ngModel" 
+                                                    class="form-control" 
+                                                    placeholder="email" 
+                                                    required>
+                                                <span *ngIf="email.errors && (email.dirty || email.touched)" class="help-block">
                                                     <span [hidden]="!email.errors.required">
-                                                        Email is required!
+                                                        Enter email that you used to signup 
                                                     </span>
-                                                    <span [hidden]="!email.errors.pattern">
-                                                        Not a valid email!
-                                                    </span>
-                                                    </span>
-                                                </div>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
                                                 
-                                                <div class="alert alert-danger mt-1" role="alert" *ngIf="error">
-                                                        {{errorMessage}}
-                                                </div>
-                                                <div class="row margin-top-10 padding-13">
-                                                        <button type="button" 
-                                                        class="btn btn-primary btn-lg btn-block yellow-button padding-8 create-btn cursor-pointer" 
-                                                        (click)="confirmUser()"
-                                                        [disabled]="!confirmUserForm.form.valid">Confirm Account</button>
-                                                </div>
-                                                <div>
-                                                    
-                                                    <p>Already have an account? <a href="">Login here!</a></p>
-                                                    <p>New Users !!! <a href="">Create Free Account here!</a> </p>
+                                                <input type="password" 
+                                                    name="upassword"
+                                                    [(ngModel)]="upassword" 
+                                                    #password="ngModel" 
+                                                    class="form-control" 
+                                                    placeholder="Password" 
+                                                    required>
+                                                <span *ngIf="password.errors && (password.dirty || password.touched)" class="help-block">
+                                                    <span [hidden]="!password.errors.required">
+                                                        Password is required!
+                                                    </span>
+                                                </span>
+                                            </div>
+                                            <div class="form-group">
+                                                
+                                                <input type="code" 
+                                                    name="ucode"
+                                                    [(ngModel)]="ucode" 
+                                                    #code="ngModel" 
+                                                    class="form-control" 
+                                                    placeholder="Confirmation Code" 
+                                                    required>
+                                                <span *ngIf="code.errors && (code.dirty || code.touched)" class="help-block">
+                                                    <span [hidden]="!code.errors.required">
+                                                        Confirmation Code is required! Check your email.
+                                                    </span>
+                                                </span>
+                                            </div>
+                        
+                                            <div class="alert alert-danger mt-1" role="alert" *ngIf="error">
+                                                    {{errorMessage}}
+                                            </div>
+                                            <div class="row margin-top-10 padding-13">
+                                                    <button type="button" 
+                                                    class="btn btn-primary btn-lg btn-block yellow-button padding-8 create-btn cursor-pointer" 
+                                                    (click)="confirmUser()"
+                                                    [disabled]="!confirmUserForm.form.valid">Confirm Account</button>
+                                            </div>
+                                            <div>
+                                                
+                                                <p>Already have an account? <a href="">Login here!</a></p>
+                                                <p>New Users !!! <a href="">Create Free Account here!</a> </p>
+        
+                                            </div>
             
-                                                </div>
-            
-                                            </form> 
+                                        </form> 
                                 
                                 </div>         
                         </div>  

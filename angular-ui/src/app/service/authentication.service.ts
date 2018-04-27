@@ -105,7 +105,7 @@ export class AuthenticationService{
     }
 
     getAuthenticatedUser() : CognitoUser {
-      return userPool.getCurrentUser() || this.registeredUser;
+      return userPool.getCurrentUser();
     }
 
     getRegisteredUser(){
@@ -135,14 +135,14 @@ export class AuthenticationService{
         return obs;
     }
 
-    getCurrentUserJwtToken() : BehaviorSubject<string> {
-        let jwtTokenSubject = new BehaviorSubject<string>("");
+    getCurrentUserJwtToken() : BehaviorSubject<{idToken : string, accessToken : string }> {
+        let jwtTokenSubject = new BehaviorSubject<{idToken : string, accessToken : string }>({idToken : "", accessToken : ""});
         this.getAuthenticatedUser().getSession( (err, session) => {
           if (err) {
             jwtTokenSubject.error(err);
           } else {
             if (session.isValid()) {
-              jwtTokenSubject.next(session.getCurrentUserJwtToken());
+              jwtTokenSubject.next({idToken : session.idToken.jwtToken, accessToken : session.accessToken.jwtToken });
             } else {
               jwtTokenSubject.error("Invalid Session");
             }

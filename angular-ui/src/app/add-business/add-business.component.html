@@ -263,14 +263,19 @@
     </div>
 
 </div><!--row-->
+<div class="row alert alert-danger mt-2" role="alert" *ngIf="error">
+    <div class="col-12 text-right">
+        {{errorMessage}}
+    </div>
+</div>
+<div class="form-group margin-right-18-minus">
+    <div class="col-md-12" align="right">
+    <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red cursor-pointer" 
+    [disabled]="!addBusinessForm.form.valid">NEXT</button>
+    </div>
+</div>
 
-        <div class="form-group margin-right-18-minus">
-            <div class="col-md-12" align="right">
-            <button id="btnSubmit" name="btnSubmit" class="btn btn-default my-btn btn-red cursor-pointer" [disabled]="!addBusinessForm.form.valid">NEXT</button>
-            </div>
-        </div>
-
-  </form>
+</form>
   
 </div>
 

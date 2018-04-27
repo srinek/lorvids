@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { User } from '../../model/user.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,7 +13,9 @@ export class SignInComponent implements OnInit {
   userEmail : string;
   userPwd : string;
   
-  constructor( private authenticationService: AuthenticationService) { 
+  constructor( private authenticationService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute) { 
 
   }
 
@@ -27,6 +30,7 @@ export class SignInComponent implements OnInit {
     this.authenticationService.login(user).subscribe(
       (result)=>{
         console.log("login success");
+        this.router.navigate(['addb']);
       }, 
       (error) => {
         console.error("login error");

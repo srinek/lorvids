@@ -69,6 +69,45 @@ module.exports.saveCognitoUser = (data) => {
     });
 }
 
+module.exports.updateBusinessRole = (accessToken, businessId) => {
+   
+
+    var params = {
+        AccessToken: accessToken /* required */
+    };
+    cognitoidentityserviceprovider.getUser(params, function(err, cognitoUser) {
+        if (err) {
+            console.error(err, err.stack); // an error occurred
+        } 
+        else {
+            let emailAttr = cognitoUser.UserAttributes.find((attr) => { return attr.Name === "email"});
+            if(emailAttr){
+                var params = {
+                    "TableName": 'User',
+                    "Key": { "UserEmail" : emailAttr.Value },
+                    "UpdateExpression": `set #bus_id = :bus_id`,
+                    "ExpressionAttributeNames" : {
+                     '#bus_id' : "bus_id"
+                    },
+                    "ExpressionAttributeValues": {
+                     ':bus_id' : [businessId]
+                   },
+                   "ConditionExpression": "attribute_exists(UserEmail)",
+                   "ReturnValues": "ALL_NEW"
+                 };
+
+                console.log("params_user "+  JSON.stringify(params));
+                return db.updateData(params).then( (result) => {
+                    console.log("admin business details updated", result);
+                }).catch( (error) => {
+                    console.error("error updating admin business details ", error);
+                });
+            }
+        }
+    });
+      
+}
+
 let saveVerificationCode = (emailHash, userEmail) => {
     var params = {
         TableName: 'UserVerification',
@@ -100,10 +139,19 @@ module.exports.activateUser = (emailHash) => {
     let  userActivation = db.getData(params);
     userActivation.then( (result) => {
         var params = {
-            TableName: 'User',
-            Item: {"UserEmail": result.userEmail, "status" : "1"}
-        };
-        return db.saveData(params);
+            "TableName": 'User',
+            "Key": { "UserEmail" : result.userEmail },
+            "UpdateExpression": `set #status = :status`,
+            "ExpressionAttributeNames" : {
+             '#status' : "status"
+            },
+            "ExpressionAttributeValues": {
+             ':status' : "1"
+           },
+           "ConditionExpression": "attribute_exists(UserEmail)",
+           "ReturnValues": "ALL_NEW"
+         };
+        return db.updateData(params);
     }).catch( (error) => {
         return Promise.resolve("User Activation failed. User not exist");
     });

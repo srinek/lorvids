@@ -62,18 +62,13 @@ module.exports.activateUser = (event, context, callback) => {
   });
 }
 
-module.exports.saveCognitoUser = (event, context, callback) => {
+module.exports.saveCognitoUser = (event, context) => {
   console.log("cognito event ", event);
   userService.saveCognitoUser(event.request.userAttributes).then( (result) => {
       console.log("save user result ", result);
-      let response = util.success();
-      response.body = JSON.stringify({"status":"success"});
-      console.log("result ", response);
-      callback(null, response);
+      context.done(null, event);
   }).catch( (error) => {
-      let response = util.error();
-      response.body = JSON.stringify(error);
       console.log("error callback ", response);
-      callback(null, response);
+      context.done(error, event);
   });
 }

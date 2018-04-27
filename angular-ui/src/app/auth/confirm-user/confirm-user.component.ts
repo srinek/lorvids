@@ -19,7 +19,7 @@ export class ConfirmUserComponent implements OnInit {
 
   constructor(private authenticationService : AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute,) { 
+    private route: ActivatedRoute) { 
     /* this.confirmUserForm = {
       "email":"",
       "password":""
