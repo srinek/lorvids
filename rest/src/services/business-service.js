@@ -14,7 +14,6 @@ module.exports.getBusinessById = (busId) => {
     let businessData = db.getData(params).then( (result) => {
         console.log("business ", result);
         let business = new Business(result);
-        
         return business.toJson();
     });
     return businessData;

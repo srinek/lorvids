@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../service/authentication.service';
 import { User } from '../../model/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FacadeService } from '../../service/facade.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,8 +13,11 @@ export class SignInComponent implements OnInit {
 
   userEmail : string;
   userPwd : string;
+  error : boolean = false;
+  errorMessage : string;
   
   constructor( private authenticationService: AuthenticationService,
+    private facadeService : FacadeService,
     private router: Router,
     private route: ActivatedRoute) { 
 
@@ -30,14 +34,27 @@ export class SignInComponent implements OnInit {
     this.authenticationService.login(user).subscribe(
       (result)=>{
         console.log("login success");
-        this.router.navigate(['addb']);
-      }, 
-      (error) => {
-        console.error("login error");
+        //this.router.navigate(['addb']);
+        this.facadeService.findRouteForSuccessLogin().subscribe( (nextRoute : string) => {
+          if(nextRoute === "viewAppts"){
+            //this.router.navigate(['addb']);
+          }
+          else {
+            this.router.navigate([nextRoute]);
+          }
+        }),
+        (error) => {
+          console.error("login error");
+          this.error = true;
+          this.errorMessage = error;
+        }
       },
-      () => {
-
+      (error) => {
+        console.error("login error", error);
+        this.error = true;
+        this.errorMessage = error.message;
       }
+      
     );
 
   }

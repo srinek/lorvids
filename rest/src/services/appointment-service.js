@@ -1,5 +1,6 @@
 let businessService = require('./business-service');
 let staffService = require('./staff-service');
+let userService = require('./user-service');
 let Business = require('../model/business-model');
 let ResponseModel = require('../model/response-model');
 let Staff = require('../model/staff-model');
@@ -241,27 +242,39 @@ module.exports.cancelAppointment = (slot_id) => {
 }
 
 module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
+    let self = this;
     let slotDataPromise = this.findSlotDetails(slot_id);
-
     return slotDataPromise.then( (slotDetails) => {
         let userEmail = slotDetails.userEmail;
-
         console.log("userEmail:", userEmail);
-        var searchTerms = [];
+        return self.getAllAppointmentsByUserEmail(userEmail);
 
+    }).catch( (error) => {
+        return Promise.reject(error);
+    });
+}
+
+let getAllAppointmentsByUserEmail = (userEmail) => {
+    var searchTerms = [];
         searchTerms.push({"field":"user_email", "value":userEmail});
-
         let esObj = docMapper.findBookedAppointments(searchTerms);
         console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
-
         return es.esSearch(esObj).then( (result) => {
             let esResponse = new ResponseModel(result);
             return esResponse.hits;
         }).catch( (error) => {
             return error;
         });
+}
+
+module.exports.getAllAppointmentsOfUser = (accessToken) => {
+    let self = this;
+    return userService.getCognitoUser(accessToken).then( (cognitoUser) => {
+            let emailAttr = cognitoUser.UserAttributes.find((attr) => { return attr.Name === "email"});
+            console.log("userEmail:", emailAttr.Value);
+            return self.getAllAppointmentsByUserEmail(emailAttr.Value);
 
     }).catch( (error) => {
-        return Promise.reject(error);
+        return error;
     });
 }

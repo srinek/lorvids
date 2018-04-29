@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from 'rxjs/Observable';
 import {Logger} from './logger.service';
@@ -8,6 +7,7 @@ import {staff} from '../test-data/test-data';
 import { environment } from '../../environments/environment';
 import { SearchVO } from '../model/search-vo';
 import { SearchFacet } from '../model/search-facet';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class SearchService{
@@ -16,7 +16,7 @@ export class SearchService{
     searchEndpoint : string = "search";
     facetEndpoint : string = "facetfilter";
 
-    constructor( private http : Http,
+    constructor( private http : HttpClient,
                  private logger : Logger){
 
     }
@@ -25,12 +25,12 @@ export class SearchService{
         //this.logger.log("search invoked "+this.searchUrl + " search term "+searchTerm);
         
        return this.http.get(this.searchUrl+this.searchEndpoint+"?searchTerm="+searchTerm+"&_p="+prop)
-            .map((response : Response) => {
+            .map((response : any) => {
                return this.parseESResponse(response);
            }
        )
        .catch(
-           (error: Response) => {
+           (error: any) => {
              return Observable.throw(error);
            }
         );
@@ -47,28 +47,28 @@ export class SearchService{
         });
         //console.log(data);
         return this.http.post(this.searchUrl+this.facetEndpoint+"?searchTerm="+searchTerm+"&_p="+prop, 
-        data).map( (response : Response) => {
+        data).map( (response : any) => {
                     return this.parseESResponse(response);
                 }
         ).catch(
-            (error: Response) => {
+            (error: any) => {
               return Observable.throw(error);
             }
         ); 
         //return null;
     }
 
-    private parseESResponse(response : Response) : SearchVO {
+    private parseESResponse(response : any) : SearchVO {
         var retVo = new SearchVO();
         var businessList : Business[] = [];
-        for(const hit of response.json().hits.hits){
+        for(const hit of response.hits.hits){
             var business = new Business(hit._source);
             business.rating = [0 , 0 , 0 ,0 ];
             businessList[businessList.length] = business;
         }
         retVo.searchResults = businessList;
-        if(response.json().aggregations){
-            var langAggrs = response.json().aggregations.languages.languages.buckets;
+        if(response.aggregations){
+            var langAggrs = response.aggregations.languages.languages.buckets;
             if(langAggrs.length > 0){
                 var langFacet = new SearchFacet("staff.languages");
                 for(const langAggr of langAggrs){
@@ -76,7 +76,7 @@ export class SearchService{
                 }
                 retVo.facets.push(langFacet);
             }
-            var genderAggrs = response.json().aggregations.gender.gender.buckets;
+            var genderAggrs = response.aggregations.gender.gender.buckets;
             if(genderAggrs.length > 0){
                 var genderFacet = new SearchFacet("staff.gender");
                 for(const genderAggr of genderAggrs){
@@ -84,7 +84,7 @@ export class SearchService{
                 }
                 retVo.facets.push(genderFacet);
             }
-            var categories = response.json().aggregations.categories.buckets;
+            var categories = response.aggregations.categories.buckets;
             if(categories.length > 0){
                 var catFacet = new SearchFacet("Categories");
                 for(const catAggr of categories){

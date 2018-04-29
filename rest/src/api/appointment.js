@@ -138,7 +138,22 @@ module.exports.getAllAppointmentsByAppointmentId = (event, context, callback) =>
         console.log("error callback ", response);
         callback(null, response);
     });
-    
+ }
+
+ module.exports.getAllAppointmentsOfUser = (event, context, callback) => {
+    const accessToken = event.queryStringParameters.accessToken;
+    console.log("accessToken ", accessToken);
+    let allAppointmentsPromise = appointmentService.getAllAppointmentsOfUser(accessToken);
+    allAppointmentsPromise.then( (data) => {
+        let response = util.success();
+        response.body = JSON.stringify(data);
+        callback(null, response);
+    }).catch( (error) => {
+        let response = util.error();
+        response.body = JSON.stringify(error);
+        console.log("error callback ", response);
+        callback(null, response);
+    });
  }
 
  module.exports.cancel = (event, context, callback) => {

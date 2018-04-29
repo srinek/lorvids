@@ -119,11 +119,11 @@ functions:
     description: index busines docs from ddb to es
     events:
       -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Business/stream/2017-11-07T09:36:01.413
-  ddbESStaffIndexer:
-    handler: common/ddbEsIndexer.esStaffIndexer
-    description: index staff docs from ddb to es
-    events:
-      -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Staff/stream/2018-01-15T22:12:58.224    
+  #ddbESStaffIndexer:
+  #  handler: common/ddbEsIndexer.esStaffIndexer
+  #  description: index staff docs from ddb to es
+  #  events:
+  #    -  stream: arn:aws:dynamodb:us-east-1:820202039892:table/Staff/stream/2018-01-15T22:12:58.224    
   ddbESAppointmentIndexer:
     handler: common/ddbEsIndexer.appointmentIndexer
     description: index appointment information from ddb to ES
@@ -219,6 +219,14 @@ functions:
           path: appt/apptId/{sId}
           method: get
           cors : true
+  getAllAppointmentsOfUser:
+    handler: api/appointment.getAllAppointmentsOfUser
+    description : booked appointments for a user
+    events:
+      - http:
+          path: userappts
+          method: get
+          cors : true
   search:
     handler: api/search.doSearch
     description : search api
@@ -227,6 +235,14 @@ functions:
           path: search
           method: get
           cors : true
+  #filter:
+  #  handler: api/search.doFacetSearch
+  #  description : facet search api
+  #  events:
+  #    - http:
+  #        path: facetfilter
+  #        method: post
+  #        cors : true
   getUserDetails:
     handler: api/user.get
     description : booked appointments for a business and staff
@@ -249,14 +265,6 @@ functions:
       - cognitoUserPool:
           pool: lorvids-user-pool
           trigger: PostConfirmation
-  filter:
-    handler: api/search.doFacetSearch
-    description : facet search api
-    events:
-      - http:
-          path: facetfilter
-          method: post
-          cors : true
   uploadpic:
     handler: api/imageapi.upload
     description : upload to s3
@@ -287,6 +295,14 @@ functions:
     events:
       - http:
           path: user/activate/{emailHash}
+          method: get
+          cors : true
+  passLogin:
+    handler: api/user.loginRoute
+    description : decides the route after successful login
+    events:
+      - http:
+          path: user/loginpass
           method: get
           cors : true
 #      - s3: ${env:BUCKET}

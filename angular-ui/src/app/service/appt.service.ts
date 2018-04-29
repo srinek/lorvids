@@ -1,5 +1,4 @@
 import { Injectable }    from '@angular/core';
-import {Http, Response} from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -10,6 +9,7 @@ import { environment } from '../../environments/environment';
 import { Slots } from '../model/slots.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
 import { Appointment } from '../model/appointment.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class ApptService {
@@ -20,28 +20,28 @@ export class ApptService {
     endpointGetAppt : string = "appt";
     endpointslots : string = "slots";
 
-    constructor(private http : Http,
+    constructor(private http : HttpClient,
         private logger : Logger){
 
     }
 
     public getAppointment(apptId : string) : Observable<AppointmentSlot>{
         return this.http.get(this.api + this.endpointGetAppt+"/"+ apptId).map(
-            (response : Response) => {
-                let res = response.json();
+            (response : any) => {
+                let res = response;
                 let appointmentSlot = new AppointmentSlot(res);
                 return appointmentSlot;
             }
         ).catch(
-            (error: Response) => {
+            (error: any) => {
               return Observable.throw(error);
             }
         );
     }
     public saveAppointment(appt : any) : Observable<string>{
         return this.http.post(this.api + this.endpoint + "?saveuser=true", appt).map(
-            (response : Response) => {
-                let res = response.json();
+            (response : any) => {
+                let res = response;
                 return res;
             }
         );
@@ -49,13 +49,13 @@ export class ApptService {
 
     public createAppointment(appt : any) : Observable<AppointmentSlot>{
         return this.http.post(this.api + this.endpointNewAppt+ "?saveuser=true", appt).map(
-            (response : Response) => {
-                //let res = response.json();
+            (response : any) => {
+                //let res = response;
                 let appointmentSlot = new AppointmentSlot(appt);
                 return appointmentSlot;
             }
         ).catch(
-            (error: Response) => {
+            (error: any) => {
               return Observable.throw(error);
             }
         );
@@ -69,8 +69,8 @@ export class ApptService {
             date = date.getTime();
         }
         return this.http.get(this.api + this.endpointslots+"/"+busId+"/"+staffId+"?d="+date).map(
-            (response : Response) => {
-                let res = response.json();
+            (response : any) => {
+                let res = response;
                 let appointmentSlots : AppointmentSlot[] = [];
                 if(Array.isArray(res)){
                     res.forEach((elem) => {
@@ -84,8 +84,8 @@ export class ApptService {
 
     public slotsByUserId(slotId : string) : Observable<AppointmentSlot[]>{
         return this.http.get(this.api + this.endpointGetAppt+"/apptId/"+slotId).map(
-            (response : Response) => {
-                let res = response.json();
+            (response : any) => {
+                let res = response;
                 let appointmentSlots : AppointmentSlot[] = [];
                 if(Array.isArray(res)){
                     res.forEach((elem) => {
@@ -99,8 +99,8 @@ export class ApptService {
 
     public cancelAppointment(sId : string) : Observable<string> {
         return this.http.get(this.api + this.endpointslots+"/cancel/"+sId).map(
-            (response : Response) => {
-                let result = response.json();
+            (response : any) => {
+                let result = response;
                 return result;
             }
         );
@@ -123,9 +123,9 @@ export class ApptService {
         console.log("getBusinessBookedAppointments", apiUrl);
 
         return this.http.get(apiUrl).map(
-            (response : Response) => {
+            (response : any) => {
                 let appointments  : Appointment [] = [];
-                let appointmentArr  = response.json();
+                let appointmentArr  = response;
                 
                 console.log("appointmentArr:", appointmentArr);
 

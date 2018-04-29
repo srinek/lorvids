@@ -62,6 +62,22 @@ module.exports.activateUser = (event, context, callback) => {
   });
 }
 
+module.exports.loginRoute = (event, context, callback) => {
+  const accessToken = event.queryStringParameters.accessToken;
+  //console.log("accessToken ", accessToken);
+  userService.findRouteAfterLogin(accessToken).then( (result) => {
+    let response = util.success();
+    response.body = JSON.stringify({"route":result});
+    console.log("success callback ", response);
+    callback(null, response);
+  }).catch( (error) => {
+    let response = util.error();
+    response.body = JSON.stringify(error);
+    console.error("error callback ", response);
+    callback(null, response);
+  });
+}
+
 module.exports.saveCognitoUser = (event, context) => {
   console.log("cognito event ", event);
   userService.saveCognitoUser(event.request.userAttributes).then( (result) => {

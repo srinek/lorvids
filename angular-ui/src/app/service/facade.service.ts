@@ -168,6 +168,10 @@ export class FacadeService {
         return this.userService.activateUser(hash);
     }
 
+    public findRouteForSuccessLogin() : Observable<string> {
+        return this.userService.findRouteForSuccessLogin();
+    }
+
     public removequotes(imageName:string) : string{
         if(imageName.charAt(0) === '"')
         {

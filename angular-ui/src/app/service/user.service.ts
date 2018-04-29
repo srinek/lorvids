@@ -1,5 +1,4 @@
 import { Injectable }    from '@angular/core';
-import {Http, Response} from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
 
@@ -10,53 +9,63 @@ import { environment } from '../../environments/environment';
 import { Slots } from '../model/slots.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
 import { User } from '../model/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class UserService {
 
     api : string = environment.appurl;
-    endpoint : string = "user";
+    endpointPrefix : string = "user";
 
-    constructor(private http : Http,
+    constructor(private http : HttpClient,
         private logger : Logger){
 
     }
 
     public getUser(userEmail : string) : Observable<User>{
-        return this.http.get(this.api + this.endpoint+"/"+ userEmail).map(
-            (response : Response) => {
-                let res = response.json();
+        return this.http.get(this.api + this.endpointPrefix+"/"+ userEmail).map(
+            (response : any) => {
+                let res = response;
                 let userData = new User(res);
                 return userData;
             }
         ).catch(
-            (error: Response) => {
+            (error: any) => {
               return Observable.throw(error);
             }
         );
     }
     public saveAppointment(appt : any) : Observable<string>{
-        return this.http.post(this.api + this.endpoint + "?saveuser=true", appt).map(
-            (response : Response) => {
-                let res = response.json();
+        return this.http.post(this.api + this.endpointPrefix + "?saveuser=true", appt).map(
+            (response : any) => {
+                let res = response;
                 return res;
             }
         );
     }
 
     public activateUser(hash:string) : Observable<string>{
-        return this.http.get(this.api + this.endpoint+"/activate/"+ hash).map(
-            (response : Response) => {
-                let res = response.json();
+        return this.http.get(this.api + this.endpointPrefix+"/activate/"+ hash).map(
+            (response : any) => {
+                let res = response;
                 if(res.status && res.status === "success"){
                     return "success";
                 }
-                return Observable.throw(response.json());
+                return Observable.throw(response);
             }
         ).catch(
-            (error: Response) => {
+            (error: any) => {
               return Observable.throw(error);
             }
         );
+    }
+
+    public findRouteForSuccessLogin() : Observable<string> {
+        return this.http.get(this.api + this.endpointPrefix + '/loginpass').
+        map( (response : any) => {
+            return response.route;
+        }).catch( (error : any) => {
+            return Observable.throw(error);
+        });
     }
 }
