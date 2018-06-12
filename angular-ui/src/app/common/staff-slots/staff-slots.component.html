@@ -1,17 +1,33 @@
+<ng-container *ngIf="slotsLoaded">
+  <ng-container *ngIf="slots.length > 0">
+    <div class="d-flex flex-wrap align-items-center">
+      <div class="text-black slots-div" *ngFor="let slot of slots">
+        <button class="btn btn-sm border-black slot-button bg-none align-self-start fw-normal" style="width: 94px !important;"
+           title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.slotTimeInMillis)">
+          {{slot.slotTime | date:'h:mm a'}}
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="slots.length === 0">
+      We have no availability. Please choose a different date.
+  </ng-container>
+</ng-container>
 
+<!-- 
   <div class="d-inline-flex flex-wrap justify-content-center">  
       <div class="col-12 d-flex  justify-content-center" *ngIf="!selectedDate"><h4 class="text-blue">Select Time</h4></div>
       <div class="col-12 d-flex  justify-content-center" *ngIf="selectedDate"><h4 class="text-blue">{{ selectedDate | date:'fullDate'}}</h4></div>
   
 
     <div class="col-lg-6 d-flex  justify-content-center">
-      <div class="d-inline-block date-picker-block">
-        <datepicker
-        [(ngModel)]="selectedDate" 
-        [showWeeks]="false" 
-        [minDate]="minDate"
-        (ngModelChange)="onDateChange($event)"></datepicker>
-    </div>
+          <div class="d-inline-block date-picker-block">
+            <datepicker
+            [(ngModel)]="selectedDate" 
+            [showWeeks]="false" 
+            [minDate]="minDate"
+            (ngModelChange)="onDateChange($event)"></datepicker>
+          </div>
     </div>
     <div class="col-lg-4 ">
       <ng-container *ngIf="slotsLoaded">
@@ -36,3 +52,4 @@
     
   </div>
 
+ -->

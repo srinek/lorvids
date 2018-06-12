@@ -29,14 +29,7 @@
     }
 }
 
-.slot-button{
-    font-weight: bold;
-    cursor: pointer;
-}
-.slot-button:hover {
-    background :  #F5AF02  !important;
-    color: #0064d3  !important;
-}
+
 
 .btn-more-slots{
    position : absolute !important;

@@ -17,6 +17,9 @@ export class BusinessPageComponent implements OnInit {
 
   public error : boolean = false;
   public errorMessage : string = "";
+  private nextdate:number = 0;
+  private horzDates:any;
+
   business : Business;
   prevAppointment : AppointmentSlot;
   businessLoaded : boolean;
@@ -30,6 +33,7 @@ export class BusinessPageComponent implements OnInit {
 
   ngOnInit() {
 
+    this.horzDates = this.getMonthName(this.nextdate);
     this.route.params.subscribe(
       (params : Params) => {
           let businessId = params['busId'];
@@ -75,4 +79,39 @@ export class BusinessPageComponent implements OnInit {
       }
     );
   }
+
+
+  next(){
+    this.nextdate++;
+    this.horzDates = this.getMonthName(this.nextdate);
+    //this.getMonthName(this.nextdate);
+  }
+
+  previous(){
+    if(this.nextdate != 0){
+      this.nextdate--;
+      this.horzDates = this.getMonthName(this.nextdate);
+    }
+  }
+
+    getMonthName(num){
+    
+      let d = new Date();
+      d.setDate(d.getDate() + num);
+    
+      let obj:any = {};
+    
+      let months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    
+      let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      
+      obj.month = months[d.getMonth()];
+      obj.day   = days[d.getDay()];
+      obj.date = d.getDate();
+    
+      console.log(obj)
+    
+      return obj;
+    }
+  
 }

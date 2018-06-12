@@ -64,6 +64,18 @@ p {
     border-style: dashed;
 }
 
+.border-right-1px{
+    border-right: 1px solid;
+}
+.border-bottom-1px{
+    border-bottom: 1px solid;
+}
+.border-color-black{
+    border-color: black;
+}
+.border-color-ccc{
+    border-color: #ccc;
+}
 
 /************************************/
 
@@ -244,6 +256,9 @@ p {
 .margin-top-20{
     margin-top: 20px !important;
 }
+.margin-top-75{
+    margin-top: 75px !important;
+}
 .margin-bottom-25{
     margin-bottom: 25px;
 }
@@ -293,6 +308,9 @@ font-size: 20px;
 .padding-right-15{
     padding-right: 15px;
 }
+.padding-top-15{
+    padding-top: 15px !important;
+}
 .padding-top-30{
     padding-top: 30px;
 }
@@ -311,11 +329,23 @@ font-size: 20px;
 .padding-20{
     padding: 20px !important;
 }
+.width-100-prt{
+    width: 100% !important;
+}
+
 .date-picker-block .btn-sm{
     padding: 11px 13px !important;
 }
 .slot-button{
-    padding: 12px 13px !important;
+    padding: 8px 10px !important;
+}
+.slot-button{
+    font-weight: bold;
+    cursor: pointer;
+}
+.slot-button:hover {
+    background-color :  #ccc  !important;
+    color: black  !important;
 }
 
 /*Common Business Tabs Styles*/
@@ -376,6 +406,9 @@ font-size: 20px;
 .border-yellow{
     border:1px solid #f5bb41 !important;
   }
+  .border-black{
+      border: 1px solid #989696 !important;
+  }
 .help-block{
     color: red;
     font-size: 13px;
@@ -398,12 +431,18 @@ font-size: 20px;
     opacity: 0.6 !important;
   }
 
-  .img-round {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    border: 2px solid #fff;
-  }
+    .img-round {
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+
+    .img-round-dimentions{
+        width: 130px;
+        height: 130px;
+    }
+
   .img-photo {
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
