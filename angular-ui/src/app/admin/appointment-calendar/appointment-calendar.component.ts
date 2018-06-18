@@ -79,6 +79,19 @@ export class AppointmentCalendarComponent implements OnInit {
 
   @Output() eventClicked = new EventEmitter();
 
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+  
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private facadeService : FacadeService,
+    private eventService:EventService) { 
+      var currentDate = new Date();
+      this.month = "" + currentDate.getMonth();
+      this.currentMonth = this.month;
+      this.year = "" + currentDate.getFullYear();
+      this.currentYear = this.year;
+  }
+  
   ngOnInit() {
     Observable.forkJoin(
       this.facadeService.getBusiness(this.businessId)
@@ -144,25 +157,13 @@ export class AppointmentCalendarComponent implements OnInit {
       draggable: true
     }
   ];
-
-  constructor(private route: ActivatedRoute,
-    private router: Router,
-    private facadeService : FacadeService,
-    private eventService:EventService) { 
-      var currentDate = new Date();
-      this.month = "" + currentDate.getMonth();
-      this.currentMonth = this.month;
-      this.year = "" + currentDate.getFullYear();
-      this.currentYear = this.year;
-    }
+ 
 
   modalData: {
     action: string;
     event: CalendarEvent;
   };
-  @ViewChild('modalContent') modalContent: TemplateRef<any>;
   
-
   handleEvent(action: string, event: CalendarEvent): void {
 
     this.eventClicked.emit();

@@ -2,7 +2,7 @@ let business = require('../src/api/business');
 
 let testGetObj = { "pathParameters" : 
                     {
-                        "busId" : "b-test-60",
+                        "busId" : "b-test-01",
                     }
                  };
 business.get(testGetObj  , 

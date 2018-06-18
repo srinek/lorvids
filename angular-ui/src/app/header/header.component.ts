@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   categorySelected : string = "";
 
   private mainPageUnloadedSubscription : Subscription;
+  private loginSubscription : Subscription;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -45,12 +46,41 @@ export class HeaderComponent implements OnInit, OnDestroy {
            }
          }
       );
+
+      this.loginSubscription = this.facadeService.loginSubject.subscribe(
+        (loginSucess : boolean) => {
+          if(loginSucess){
+            this.loggedIn = true;
+          }
+          else{
+            this.loggedIn = false;
+          }
+        },
+        (error : Error) => {
+          this.loggedIn = false;
+        }
+      ); 
+
+      this.authenticationService.isAuthenticated().subscribe(
+        (result : boolean) => {
+          if(result){
+            this.loggedIn = true;
+          }
+          else{
+            this.loggedIn = false;
+          }
+        },
+        (error : Error) => {
+          this.loggedIn = false;
+        }
+      );
       
   }
 
   ngOnDestroy(){
     console.log("header component destroyed");
     this.mainPageUnloadedSubscription.unsubscribe();
+    this.loginSubscription.unsubscribe();
   }
 
   toggleNav(){
@@ -68,6 +98,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() : void {
     this.authenticationService.logout();
+    this.facadeService.triggerLoginSubject(false);
     this.router.navigate([''],{relativeTo:this.route, queryParams : {'signout' : true}});
   }
 }

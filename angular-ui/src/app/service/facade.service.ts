@@ -34,6 +34,7 @@ export class FacadeService {
     mainPageUnLoaded = new Subject<boolean>();
     searchResults : Business[];
     businessSubject = new Subject<Business>();
+    loginSubject = new Subject<boolean>();
 
     constructor(private logger: Logger,
                 private searchService : SearchService,
@@ -154,6 +155,10 @@ export class FacadeService {
 
     public triggerBusinessSubject(business : Business){
         this.businessSubject.next(business);
+    }
+
+    public triggerLoginSubject(result:boolean){
+        this.loginSubject.next(result);
     }
 
     /***

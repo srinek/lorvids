@@ -33,6 +33,7 @@ export class SignInComponent implements OnInit {
     console.log(" loginForm form ", user);
     this.authenticationService.login(user).subscribe(
       (result)=>{
+        this.facadeService.triggerLoginSubject(true);
         console.log("login success");
         //this.router.navigate(['addb']);
         this.facadeService.findRouteForSuccessLogin().subscribe( (nextRoute : string) => {

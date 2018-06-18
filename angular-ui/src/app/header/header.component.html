@@ -37,13 +37,14 @@
             <div class="navbar-nav" id="h-navbar">
               <ul>
                 <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['/login']">Log In</a></li>
-                <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="" (click)="logout()">Log Out</a></li>
                 <li [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['/signup']">Sign Up</a></li>
-                <li><a>Help</a></li>
+                <li><a [ngClass]="{'d-none':loggedIn}" [routerLink]="['/contact']">Contact</a></li>
                 <li class="list" [ngClass]="{'d-none':loggedIn}"><a [routerLink]="['listb']">LIST YOUR BUSINESS</a></li>
-                <li class="dropdown navbar-user" [ngClass]="{show:showProfile, 'd-block-inline':loggedIn, 'd-none':!loggedIn}" (click)="toggleProifle()">
+                <li class="dropdown navbar-user" 
+                    [ngClass]="{show:showProfile, 'd-block-inline':loggedIn, 'd-none':!loggedIn}" 
+                    (click)="toggleProifle()">
                   <a href="/dashboard/home" id="user__img">
-                    <img alt="Nandakishore" style="border-radius: 50%;" src="">
+                    <img alt="Nandakishore" style="border-radius: 50%;" src="https://s3.us-east-2.amazonaws.com/4stay/users/profile_pictures/000/003/759/mini/picture?1519688675">
                   </a>
                   <a href="javascript:;" class="dropdown-toggle">
                     <span class="hidden-xs">Nandakishore<b class="caret"></b></span>
@@ -51,7 +52,8 @@
                   <ul class="dropdown-menu animated fadeInRight show">
                     <li><a target="_self" href="/dashboard/settings/personal_info">Edit profile</a></li>
                     <li><a target="_self" href="/dashboard/home">Dashboard</a></li>
-                    <li><a rel="nofollow" data-method="delete" href="/users/sign_out">Log Out</a></li>
+                    <li><a [routerLink]="['/contact']">Contact</a></li>
+                    <li><a [routerLink]="" (click)="logout()">Log Out</a></li>
                   </ul>
                 </li>
               </ul>
