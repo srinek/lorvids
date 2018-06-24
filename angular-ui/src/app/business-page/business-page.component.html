@@ -2,9 +2,9 @@
     
     <div class="container width-100-prt margin-top-75">
 
-        <div class="row">
+        <div class="row d-flex flex-column-reverse flex-sm-column-reverse flex-md-row justify-content-around">
             <div class="col-md-8 padding-0 left-col">
-                <div align="center" class="border-bottom-1px border-color-ccc">
+                <div align="center" class="d-none d-md-block border-bottom-1px border-color-ccc">
                     <div>
                         <img src="{{imageRoot}}/{{staffSelected?.image}}" class="img-round img-photo">
                         <h4>{{staffSelected?.staff_name}} <ng-container *ngIf="staffSelected?.professional_degree != ''">, {{staffSelected?.professional_degree}} </ng-container></h4>
@@ -56,6 +56,22 @@
                 </div>
             </div>
             <div class="col-md-4 padding-0 right-col">
+                <div align="center" class="d-md-none border-bottom-1px border-color-ccc">
+                    <div>
+                        <img src="{{imageRoot}}/{{staffSelected?.image}}" class="img-round img-photo">
+                        <h4>{{staffSelected?.staff_name}} <ng-container *ngIf="staffSelected?.professional_degree != ''">, {{staffSelected?.professional_degree}} </ng-container></h4>
+                        <p>{{staffSelected?.staff_profession}}</p>
+                        <div>{{business.bus_name}} </div>
+                        <div>{{business.address}}</div>
+                        <p>
+                            <i class="fa fa-clock-o"></i>
+                            <span *ngIf="business.isOpenNow">Open </span> 
+                            <span *ngIf="!business.isOpenNow">Closed </span> 
+                            ({{business.openTime | date:'hh:mma'}} - 
+                            {{business.closeTime | date:'hh:mma'}})
+                        </p>
+                    </div>
+                </div>
                 <div class="padding-15">
                     <div align="center">
                         <h4>Schedule appointment at {{business.bus_name}}</h4>

@@ -8,6 +8,13 @@ import { AppointmentSlot } from '../../model/appointment-slot.model';
 import { Appointment } from '../../model/appointment.model';
 import { User } from '../../model/user.model';
 
+
+/*
+flex column reverse
+edit appointment
+staff page details
+default staff setting
+*/
 @Component({
   selector: 'app-staff-slots',
   templateUrl: './staff-slots.component.html',
