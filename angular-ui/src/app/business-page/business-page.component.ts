@@ -7,6 +7,7 @@ import { Staff } from '../model/staff.model';
 import { AppointmentSlot } from '../model/appointment-slot.model';
 import { ParamMap } from '@angular/router/src/shared';
 import { environment } from '../../environments/environment';
+import { Service } from '../model/service.model';
 
 @Component({
   selector: 'app-business-page',
@@ -23,6 +24,7 @@ export class BusinessPageComponent implements OnInit {
   prevAppointment : AppointmentSlot;
   businessLoaded : boolean;
   staffSelected : Staff;
+  srvcSelected : Service;
   imageRoot : string = environment.imageRoot;
 
   constructor(private facadeService : FacadeService,
@@ -40,6 +42,7 @@ export class BusinessPageComponent implements OnInit {
               (business : Business) => {
                   this.business = business;
                   this.staffSelected = business.defaultStaff;
+                  this.srvcSelected = business.services[0];
                   this.loadPreviousAppointment();
                   this.businessLoaded = true;
                   console.log("this.staffSelected ", this.staffSelected);

@@ -7,6 +7,7 @@ import { FacadeService } from '../../service/facade.service';
 import { AppointmentSlot } from '../../model/appointment-slot.model';
 import { Appointment } from '../../model/appointment.model';
 import { User } from '../../model/user.model';
+import { Service } from '../../model/service.model';
 
 
 /*
@@ -14,6 +15,7 @@ flex column reverse
 edit appointment
 staff page details
 default staff setting
+set service in appointment page
 */
 @Component({
   selector: 'app-staff-slots',
@@ -26,14 +28,15 @@ export class StaffSlotsComponent implements OnInit, OnChanges {
   @Input() business : Business;
   @Input() previousSlotId : string;
   @Input() pUserEmail : User;
+  @Input() srvcSelected : Service;
   slots : AppointmentSlot[];
   selectedDate : Date;
   today : Date;
-  minDate: Date = void 0;
+  //minDate: Date = void 0;
   public error : boolean = false;
   public errorMessage : string = "";
   slotsLoaded : boolean = false;
-  appointment : Appointment;
+  //appointment : Appointment;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -68,8 +71,13 @@ export class StaffSlotsComponent implements OnInit, OnChanges {
         this.errorMessage = "Yikes!!! something cramped our service. Please contact "+this.business.phone;
       }); */
       //[routerLink]="['/reviewbooking', this.business.bus_id, this.staff.staff_id]"
+      console.log("this.srvcSelected ", this.srvcSelected);
       this.router.navigate(['/reviewbooking', this.business.bus_id, this.staff.staff_id],
-                      {relativeTo:this.route, queryParams : {'sid' : slotTimeInMillis, 'pid':this.previousSlotId,'u':this.pUserEmail}});
+                      {relativeTo:this.route, 
+                        queryParams : {'sid' : slotTimeInMillis, 
+                        'pid':this.previousSlotId, 
+                        'u':this.pUserEmail,
+                        'srvc':this.srvcSelected.name}});
   }
 
   /* onDateChange(date: Date){
@@ -94,8 +102,10 @@ export class StaffSlotsComponent implements OnInit, OnChanges {
   ngOnChanges(changes : {staff : SimpleChange}){
     //console.log("", changes.staff);
     //console.log("", changes.staff.currentValue);
-    this.staff = changes.staff.currentValue;
-    this.loadNewSlots(true);
+    if(changes.staff){
+      this.staff = changes.staff.currentValue;
+      this.loadNewSlots(true);
+    }
   }
 
   loadNewSlots(onInit){

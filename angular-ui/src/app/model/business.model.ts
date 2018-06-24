@@ -80,6 +80,15 @@ export class Business{
         }
     }
 
+    public findService(svcName : string){
+        if(svcName){
+            return this.services.find( (eachSvc) => {
+                return eachSvc.name === svcName;
+            });
+        }
+        return null;
+    }
+
     public findStaff(staffId : string) : Staff{
         if(this.staff){
             return this.staff.find( (eachStaff) => {

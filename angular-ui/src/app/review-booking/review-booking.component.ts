@@ -48,6 +48,7 @@ export class ReviewBookingComponent implements OnInit {
 
   ngOnInit() {
     
+    let lcl_svc;
     this.route.queryParamMap.subscribe(
       (paramMap: ParamMap) => {
         this.bookingTime.setTime(+paramMap.get('sid'));
@@ -57,6 +58,7 @@ export class ReviewBookingComponent implements OnInit {
         if(this.prevSlotId){
            this.updateAppointment = true;
         }
+        lcl_svc = paramMap.get('srvc');
         this.userEmail = paramMap.get('u');
         if(this.userEmail){
           this.loadUser();
@@ -73,9 +75,10 @@ export class ReviewBookingComponent implements OnInit {
         .subscribe(
             (business : Business) => {
                 this.business = business;
-                if(this.business.services && 
-                  this.business.services.length >0){
-                    this.svcSelected = this.business.services[0];
+                this.staff = this.business.findStaff(staffId);
+                this.svcSelected = this.business.findService(lcl_svc);
+                if(!this.svcSelected){
+                  this.svcSelected = this.business.services[0];
                 }
             },
             (error : string) => {
@@ -83,7 +86,7 @@ export class ReviewBookingComponent implements OnInit {
               this.errorMessage = "Yikes!!! something cramped our service "+error;
             }
         )
-        this.facadeService.getStaff(businessId, staffId)
+        /* this.facadeService.getStaff(businessId, staffId)
         .subscribe(
             (staff : Staff) => {
                 this.staff = staff;
@@ -92,7 +95,7 @@ export class ReviewBookingComponent implements OnInit {
               this.error = true;
               this.errorMessage = "Yikes!!! something cramped our service "+error;
             }
-        )
+        ) */
       }
     );
 

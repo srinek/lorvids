@@ -93,14 +93,18 @@
 
                     <div class="form-group">
                         <label><strong>What's the reason for your visit?</strong></label>
-                        <select class="form-control">
+                        <select class="form-control" [(ngModel)]="srvcSelected">
                             <option *ngFor="let srvc of business.services;" [ngValue]="srvc">
                                 {{srvc.name}}
                             </option>
                         </select>
                     </div>
                     <div align="center">
-                        <app-staff-slots [business]="business" [staff]="staffSelected" [previousSlotId]="prevAppointment?.appointmentId" [pUserEmail]="prevAppointment?.userEmail"></app-staff-slots>
+                        <app-staff-slots [business]="business" 
+                        [staff]="staffSelected" 
+                        [previousSlotId]="prevAppointment?.appointmentId" 
+                        [pUserEmail]="prevAppointment?.userEmail"
+                        [srvcSelected]="srvcSelected"></app-staff-slots>
                     </div>
                     <!-- <div class="dates-block">
                             <div class="horz-dates" align="center">
