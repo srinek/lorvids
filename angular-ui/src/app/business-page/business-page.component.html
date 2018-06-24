@@ -3,90 +3,112 @@
     <div class="container width-100-prt margin-top-75">
 
         <div class="row">
-            
             <div class="col-md-8 padding-0 left-col">
-                
                 <div align="center" class="border-bottom-1px border-color-ccc">
                     <div>
-                        <img src="assets/dentist-pain-borowac-cure-52527.jpeg" class="img-round img-round-dimentions">
-                        <h4>Dr. Mahnaz Baghaei, DMD</h4>
-                        <p>Dentist</p>
+                        <img src="{{imageRoot}}/{{staffSelected?.image}}" class="img-round img-photo">
+                        <h4>{{staffSelected?.staff_name}} <ng-container *ngIf="staffSelected?.professional_degree != ''">, {{staffSelected?.professional_degree}} </ng-container></h4>
+                        <p>{{staffSelected?.staff_profession}}</p>
+                        <div>{{business.bus_name}} </div>
+                        <div>{{business.address}}</div>
+                        <p>
+                            <i class="fa fa-clock-o"></i>
+                            <span *ngIf="business.isOpenNow">Open </span> 
+                            <span *ngIf="!business.isOpenNow">Closed </span> 
+                            ({{business.openTime | date:'hh:mma'}} - 
+                            {{business.closeTime | date:'hh:mma'}})
+                        </p>
                     </div>
                 </div>
 
                 <div class="bus-overviewcontent">
-                    <h4>Professional statement</h4>
-                    <p>
-                        Dr. Mahnaz Baghaei is a warm and attentive dentist who is passionate about creating beautiful smiles by focusing on details and seeing dentistry as art. She is a member of the American
-                    </p>
-
-                    <h4>Specialties</h4>
-                    <p>Dentist</p>
-
-                    <h4>Education and training</h4>
-                    <p>
-                         Dental School - University of Alabama, Birmingham, Doctor of Dental Medicine Montefiore Medical Center, Residency in General Practice
-                    </p>
-                           
+                    <ng-container *ngIf="staffSelected?.personalStatement != ''">
+                        <h4>Professional statement</h4>
+                        <p>
+                            {{staffSelected?.personalStatement}}
+                        </p>
+                    </ng-container>
+                    
+                    <ng-container *ngIf="staffSelected?.service_specialities">
+                        <h4>Specialties</h4>
+                        <p *ngFor="let svc of staffSelected?.service_specialities.split(',')">
+                            {{svc}}
+                        </p>
+                    </ng-container>
+                    <ng-container *ngIf="staffSelected?.education">
+                        <h4>Education and Training</h4>
+                        <p *ngFor="let edu of staffSelected?.education.split(',')">
+                            {{edu}}
+                        </p>
+                    </ng-container>
+                    <ng-container *ngIf="staffSelected?.awards">
+                        <h4>Awards</h4>
+                        <p *ngFor="let award of staffSelected?.awards.split(',')">
+                            {{award}}
+                        </p>
+                    </ng-container>
+                    <ng-container *ngIf="staffSelected?.affiliations">
+                        <h4>Affiliations</h4>
+                        <p *ngFor="let affliation of staffSelected?.affiliations.split(',')">
+                            {{affliation}}
+                        </p>
+                    </ng-container>
                 </div>
-
             </div>
-
-
             <div class="col-md-4 padding-0 right-col">
-                    
-                    <div class="padding-15">
-                        <div align="center">
-                            <h4>Book an appointment for free</h4>
-                        </div><br/>
-
-                        <div class="form-group">
-                            <label for="sel1"><strong>Select Staff</strong></label>
-                            <select class="form-control" id="sel1">
-                                <option>Mahnaz Baghaei</option>
-                                <option>Mahnaz Baghaei</option>
-                                <option>Mahnaz Baghaei</option>
-                                <option>Mahnaz Baghaei</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                                <label><strong>What's the reason for your visit?</strong></label>
-                                <select class="form-control">
-                                    <option>Dental cleaning</option>
-                                    <option>Consulatation</option>
-                                </select>
-                        </div>
-
-                        <div class="dates-block">
-                                <div class="horz-dates" align="center">
-                                        <ul style="border-bottom: 1px solid #ccc;">
-                                            <li class="previous-li">
-                                                <a href="javascript:void(0);" (click)="previous()"><i class="fa fa-arrow-circle-left"></i></a>
-                                            </li>
-
-                                            <li class="today-date-li">
-                                                <a href="javascript:void(0);">
-                                                    <p style="margin:0px !important;padding:0px !important;">{{horzDates.day}}</p>
-                                                    <span>{{horzDates.month}} {{horzDates.date}}</span>
-                                                </a>
-                                            </li>
-
-                                            <li class="next-li">
-                                                    <a href="javascript:void(0);" (click)="next()"><i class="fa fa-arrow-circle-right"></i></a>
-                                            </li>
-                                        </ul>
-
-                                </div><br/>
-
-                                <div align="center">
-                                    <app-staff-slots [business]="business" [staff]="staffSelected" [previousSlotId]="prevAppointment?.appointmentId" [pUserEmail]="prevAppointment?.userEmail"></app-staff-slots>
-                                </div>
-                        </div>
-                        
-
+                <div class="padding-15">
+                    <div align="center">
+                        <h4>Schedule appointment at {{business.bus_name}}</h4>
                     </div>
-                    
+                    <br/>
+
+                    <div class="form-group">
+                        <label for="staffSelect">
+                            <strong>Choose Staff</strong>
+                        </label>
+                        <select class="form-control" 
+                                id="staffSelect"
+                                [(ngModel)]="staffSelected">
+                            <option *ngFor="let estaff of business.staff;" [ngValue]="estaff">
+                                {{estaff.staff_name}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><strong>What's the reason for your visit?</strong></label>
+                        <select class="form-control">
+                            <option *ngFor="let srvc of business.services;" [ngValue]="srvc">
+                                {{srvc.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div align="center">
+                        <app-staff-slots [business]="business" [staff]="staffSelected" [previousSlotId]="prevAppointment?.appointmentId" [pUserEmail]="prevAppointment?.userEmail"></app-staff-slots>
+                    </div>
+                    <!-- <div class="dates-block">
+                            <div class="horz-dates" align="center">
+                                <ul style="border-bottom: 1px solid #ccc;">
+                                    <li class="previous-li">
+                                        <a href="javascript:void(0);" (click)="previous()"><i class="fa fa-arrow-circle-left"></i></a>
+                                    </li>
+                                    <li class="today-date-li">
+                                        <a href="javascript:void(0);">
+                                            <p style="margin:0px !important;padding:0px !important;">{{horzDates.day}}</p>
+                                            <span>{{horzDates.month}} {{horzDates.date}}</span>
+                                        </a>
+                                    </li>
+                                    <li class="next-li">
+                                        <a href="javascript:void(0);" (click)="next()"><i class="fa fa-arrow-circle-right"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br/>
+                            <div align="center">
+                                <app-staff-slots [business]="business" [staff]="staffSelected" [previousSlotId]="prevAppointment?.appointmentId" [pUserEmail]="prevAppointment?.userEmail"></app-staff-slots>
+                            </div>
+                    </div> -->
+                </div>
             </div>
 
         </div>

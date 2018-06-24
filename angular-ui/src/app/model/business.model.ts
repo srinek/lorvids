@@ -17,6 +17,7 @@ export class Business{
     defaultImage : string;
     rating : number[];
     staff? : Staff[] =[];
+    defaultStaff : Staff;
     bus_time_zone? : string = "America/new_york";
     bus_hours? : Array<{day:number, endTime?:string, startTime?:string}> = [];
     holidays? : {dates?:Array<string>, weekdays?:Array<number>} = {dates:[], weekdays:[]};
@@ -48,6 +49,7 @@ export class Business{
               this.staff.push(staff);
            });
         }
+        this.defaultStaff = this.staff[0];
         this.phone = src.phone;
         this.email = src.email;
         this.holidays = src.holidays;

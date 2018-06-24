@@ -28,45 +28,7 @@ select.form-control:not([size]):not([multiple]) {
     height: unset;
 }
 
-.dates-block{
-    background: #fdfdfd;
-}
-.horz-dates ul {
-    list-style-type: none;
-    margin: 10px 0px 0px 0px;
-    padding: 0;
-}
 
-.horz-dates li {
-    display: inline;
-}
-
-.previous-li a,.next-li a{
-    color: #797979;
-}
-.previous-li .fa,.next-li .fa{
-    font-size: 32px;
-}
-.previous-li{
-    position: relative;
-    left: 10px;
-    top: 18px;
-    float: left;
-}
-.next-li{
-    position: relative;
-    right: 10px;
-    top: 18px;
-    float: right;
-}
-.today-date-li a{
-    text-decoration: none;
-    width: 78px;padding:10px;
-    text-align: center;
-    display: inline-block;
-    color: black;
-    font-weight: bold;
-}
 /* below styles are moved to styles.css*/
 /* .img-round {
     -webkit-border-radius: 50%;
