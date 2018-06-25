@@ -30,6 +30,10 @@ class Staff{
         self.staff_email = src.staff_email;
         self.staff_languages = src.staff_languages;
         self.staff_phone = src.staff_phone;
+        self.affiliations = src.affiliations;
+        self.education = src.education;
+        self.service_specialities = src.service_specialities;
+        self.staff_profession = src.staff_profession;
     }
 
     isStaffWorkingDay(onDate){

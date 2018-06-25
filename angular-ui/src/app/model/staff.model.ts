@@ -23,7 +23,7 @@ export class Staff {
     holidays? : {dates?:Array<string>, weekdays?:Array<number>} = {dates:[], weekdays:[]};
     sameAsBusBusHours : boolean = false;
     service_time : number = 30;
-    professional_degree : string = ""; // DMD, MD etc
+    //professional_degree : string = ""; // DMD, MD etc
     staff_profession : string = ""; // Dentist, pediatrician etc
     service_specialities : string = "";
     education : string = "";
@@ -54,6 +54,8 @@ export class Staff {
         this.awards = src.awards ? src.awards : "";
         this.staff_languages = src.staff_languages;
         this.affiliations = src.affiliations ? src.affiliations : "";
+        this.education = src.education ? src.education : "";
+        this.staff_profession = src.staff_profession;
         this.bus_hours = src.bus_hours;
         this.holidays = src.holidays;
         let practice = new StaffPractice(src); // this is added for staff page.

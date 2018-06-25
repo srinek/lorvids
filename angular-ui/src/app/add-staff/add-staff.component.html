@@ -58,6 +58,24 @@
                 </div>
                 <div class="row form-group">
                     <div class="col">
+                        <label for="id-staff-name" class="">Profession: </label>
+                        <input type="text" class="form-control" 
+                          id="id-staff-profession" 
+                          name="staffProfession"
+                          placeholder="Staff Profession such as Dentist, Pediatrician etc"
+                          [(ngModel)]="staffData.staff_profession"
+                          #staffProfession="ngModel"
+                          required>
+
+                          <span *ngIf="staffProfession.errors && (staffProfession.dirty || staffProfession.touched)" class="help-block">
+                                <span [hidden]="!staffProfession.errors.required">
+                                  Staff Profession is required!
+                                </span>
+                          </span>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
                         <label for="id-staff-email" class="">Staff Email: </label>
                         <input type="email" class="form-control" 
                            id="id-staff-email" 
@@ -151,15 +169,39 @@
                         </textarea>
                     </div>
                 </div>
-                <div class="row form-group" *ngIf="">
+                <div class="row form-group">
                     <div class="col">
-                        <label for="id-staff-affliations" class="">Affliations (Enter comma seperated) : </label>
+                        <label for="id-staff-affiliations" class="">Affiliations (Enter comma seperated) : </label>
                         <textarea rows="2" class="form-control"
-                            id="id-staff-affliations" 
-                            name="staffAffliations"
-                            placeholder="Affliations"
+                            id="id-staff-affiliations" 
+                            name="staffAffiliations"
+                            placeholder="Professional affiliations"
                             #staffAffliations="ngModel"
-                            [(ngModel)]="staffData.affliations">
+                            [(ngModel)]="staffData.affiliations">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="id-staff-education" class="">Education (Enter comma seperated) : </label>
+                        <textarea rows="2" class="form-control"
+                            id="id-staff-education" 
+                            name="staffEducation"
+                            placeholder="Professional Degrees"
+                            #staffAffliations="ngModel"
+                            [(ngModel)]="staffData.education">
+                        </textarea>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col">
+                        <label for="id-staff-specialities" class="">Professional Specialisties (Enter comma seperated) : </label>
+                        <textarea rows="2" class="form-control"
+                            id="id-staff-specialities" 
+                            name="staffSpecialities"
+                            placeholder="Professional specialities"
+                            #staffAffliations="ngModel"
+                            [(ngModel)]="staffData.service_specialities">
                         </textarea>
                     </div>
                 </div>

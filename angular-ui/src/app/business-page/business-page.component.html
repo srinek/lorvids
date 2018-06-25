@@ -7,7 +7,7 @@
                 <div align="center" class="d-none d-md-block border-bottom-1px border-color-ccc">
                     <div>
                         <img src="{{imageRoot}}/{{staffSelected?.image}}" class="img-round img-photo">
-                        <h4>{{staffSelected?.staff_name}} <ng-container *ngIf="staffSelected?.professional_degree != ''">, {{staffSelected?.professional_degree}} </ng-container></h4>
+                        <h4>{{staffSelected?.staff_name}}</h4>
                         <p>{{staffSelected?.staff_profession}}</p>
                         <div>{{business.bus_name}} </div>
                         <div>{{business.address}}</div>
@@ -38,19 +38,25 @@
                     <ng-container *ngIf="staffSelected?.education">
                         <h4>Education and Training</h4>
                         <p *ngFor="let edu of staffSelected?.education.split(',')">
-                            {{edu}}
+                            {{edu.trim()}}
                         </p>
                     </ng-container>
                     <ng-container *ngIf="staffSelected?.awards">
                         <h4>Awards</h4>
                         <p *ngFor="let award of staffSelected?.awards.split(',')">
-                            {{award}}
+                            {{award.trim()}}
                         </p>
                     </ng-container>
                     <ng-container *ngIf="staffSelected?.affiliations">
                         <h4>Affiliations</h4>
                         <p *ngFor="let affliation of staffSelected?.affiliations.split(',')">
-                            {{affliation}}
+                            {{affliation.trim()}}
+                        </p>
+                    </ng-container>
+                    <ng-container *ngIf="staffSelected?.staff_languages">
+                        <h4>Languages Spoken</h4>
+                        <p *ngFor="let language of staffSelected?.staff_languages.split(',')">
+                            {{language.trim()}}
                         </p>
                     </ng-container>
                 </div>
@@ -59,7 +65,7 @@
                 <div align="center" class="d-md-none border-bottom-1px border-color-ccc">
                     <div>
                         <img src="{{imageRoot}}/{{staffSelected?.image}}" class="img-round img-photo">
-                        <h4>{{staffSelected?.staff_name}} <ng-container *ngIf="staffSelected?.professional_degree != ''">, {{staffSelected?.professional_degree}} </ng-container></h4>
+                        <h4>{{staffSelected?.staff_name}}</h4>
                         <p>{{staffSelected?.staff_profession}}</p>
                         <div>{{business.bus_name}} </div>
                         <div>{{business.address}}</div>
