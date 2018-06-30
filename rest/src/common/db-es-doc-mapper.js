@@ -14,11 +14,13 @@ module.exports.appointmentDocMapper = (ddbDoc) => {
 var ddbToESAppointmentDoc = (ddbDoc) => {
 
   var esObj = {};
-  var fieldsToCopy = ["checkin","checkout","cost","location","notes","service","status","time"];
+  var fieldsToCopy = ["checkin","checkout","cost","location",
+             "notes","service","status","time", "staffImage", "staffName", 
+             "busImage", "staffImage", "bus_address", "bus_phone"];
   // ddbColumnName:ESAttributeName
   var fieldsToMap = {"AppointmentId" : "appointment_id", "busId":"bus_id", "staffId":"staff_id", "userEmail":"user_email",
                       "creationDate" : "creation_date", "createdBy":"created_by", "updateDate":"update_date",
-                      "updatedBy":"updated_by" }
+                      "updatedBy":"updated_by", "busName":"bus_name" }
 
   fieldsToCopy.forEach(function(element){
     esObj[element] = ddbDoc[element]; 

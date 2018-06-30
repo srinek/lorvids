@@ -29,12 +29,12 @@ export class AppointmentSlot{
         this.busId = this.getBusinessId(src);
         this.userEmail = src.userEmail;
         this.status = src.status;
-        this.bus_name = "Smile Dental";
-        this.staff_name = "Dr. Susan";
-        this.bus_image =  "trendy_looks.jpg";
-        this.staff_image = "profile.jpg";
-        this.bus_address = "110 Main Street, Edison, NJ 08817";
-        this.bus_phone = "7323321121";
+        this.bus_name = src.bus_name ? src.bus_name : "old data";
+        this.staff_name = src.staffName ? src.staffName : "old data";
+        this.bus_image = src.busImage ? src.busImage : "old data";
+        this.staff_image = src.staffImage ? src.staffImage : "profile.jpg";
+        this.bus_address = src.location ? src.location : "110 Main Street, Edison, NJ 08817";
+        this.bus_phone = src.bus_phone ? src.bus_phone : "old data";
     }
 
     private getAppointmentId(src){

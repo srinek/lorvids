@@ -36,28 +36,47 @@ PUT /business_docs/appointment_info/_mapping
                     "type" :  "text"
                 },
                 "time" : {
-                    "type" :  "date",
-                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                  "type" :  "date",
+                  "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "user_email" : {
-                    "type" :  "keyword"
+                  "type" :  "keyword"
                 },
                 "creation_date" : {
-                    "type" :  "date",
-                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                  "type" :  "date",
+                  "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "created_by" : {
-                    "type" :  "keyword"
+                  "type" :  "keyword"
                 },
                 "update_date" : {
-                    "type" :  "date",
-                    "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+                  "type" :  "date",
+                  "format" : "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
                 },
                 "updated_by" : {
-                    "type" :  "keyword"
+                  "type" :  "keyword"
                 },
                 "coords": {
-                    "type":"geo_point"
+                  "type":"geo_point"
+                },
+                "bus_phone" : {
+                  "type" : "long",
+                  "index": false
+                },
+                "bus_name":{
+                  "type": "text"
+                },
+                "staffName":{
+                  "type": "text"
+                },
+                "busImage":{
+                  "type": "text"  
+                },
+                "staffImage":{
+                  "type": "text"
+                },
+                "bus_address":{
+                  "type": "text"
                 }                 				  
         }
     }

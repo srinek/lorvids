@@ -247,24 +247,26 @@ module.exports.getAllAppointmentsByAppointmentId = (slot_id) => {
     return slotDataPromise.then( (slotDetails) => {
         let userEmail = slotDetails.userEmail;
         console.log("userEmail:", userEmail);
-        return self.getAllAppointmentsByUserEmail(userEmail);
+        console.log("self", self);
+        return getAllAppointmentsByUserEmail(userEmail);
 
     }).catch( (error) => {
+        console.error(error);
         return Promise.reject(error);
     });
 }
 
 let getAllAppointmentsByUserEmail = (userEmail) => {
     var searchTerms = [];
-        searchTerms.push({"field":"user_email", "value":userEmail});
-        let esObj = docMapper.findBookedAppointments(searchTerms);
-        console.log("getAllAppointmentsByAppointmentId search query:", JSON.stringify(esObj));
-        return es.esSearch(esObj).then( (result) => {
-            let esResponse = new ResponseModel(result);
-            return esResponse.hits;
-        }).catch( (error) => {
-            return error;
-        });
+    searchTerms.push({"field":"user_email", "value":userEmail});
+    let esObj = docMapper.findBookedAppointments(searchTerms);
+    console.log("getAllAppointmentsByUserEmail search query:", JSON.stringify(esObj));
+    return es.esSearch(esObj).then( (result) => {
+        let esResponse = new ResponseModel(result);
+        return esResponse.hits;
+    }).catch( (error) => {
+        return error;
+    });
 }
 
 module.exports.getAllAppointmentsOfUser = (accessToken) => {
@@ -272,7 +274,7 @@ module.exports.getAllAppointmentsOfUser = (accessToken) => {
     return userService.getCognitoUser(accessToken).then( (cognitoUser) => {
             let emailAttr = cognitoUser.UserAttributes.find((attr) => { return attr.Name === "email"});
             console.log("userEmail:", emailAttr.Value);
-            return self.getAllAppointmentsByUserEmail(emailAttr.Value);
+            return getAllAppointmentsByUserEmail(emailAttr.Value);
 
     }).catch( (error) => {
         return error;

@@ -21,7 +21,7 @@
   <ng-container *ngIf="slots.length > 0">
     <div class="d-flex flex-wrap align-items-center">
       <div class="text-black slots-div" *ngFor="let slot of slots">
-        <button class="btn btn-sm border-black slot-button bg-none align-self-start fw-normal" style="width: 94px !important;"
+        <button class="btn btn-sm border-black slot-button bg-logo-image-color align-self-start fw-normal" style="width: 94px !important;"
            title="{{slot.specialInstruction}}" (click)="bookAppointment(slot.slotTimeInMillis)">
           {{slot.slotTime | date:'h:mm a'}}
         </button>

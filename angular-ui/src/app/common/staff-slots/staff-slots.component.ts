@@ -11,11 +11,9 @@ import { Service } from '../../model/service.model';
 
 
 /*
-flex column reverse
 edit appointment
-staff page details
 default staff setting
-set service in appointment page
+
 */
 @Component({
   selector: 'app-staff-slots',
