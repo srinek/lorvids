@@ -3,8 +3,12 @@
                 <div class="col-md-8 p-5">
 
                         <div style="padding-left:10px;">
-                                <p style="margin-bottom: 4px;font-size:20px;color: #86b817;"><b>Hello Your Appointment with "Nanada" has Confirmed.</b></p>
-                                <p style="font-size:20px;margin-top:2px;"><b>Saturday ,December 2 at 9:30AM.</b></p>
+                                <p style="margin-bottom: 4px;font-size:20px;color: #86b817;">
+                                    <b>Hello {{user.name}}, Your booking at {{business.bus_name}} has been confirmed.</b>
+                                </p>
+                                <p style="font-size:20px;margin-top:2px;">
+                                    <b>{{appointment.time | date:'h:mm a'}} on {{ appointment.time | date:'EEEE, MMM d y'}}</b>
+                                </p>
                         </div>
                         
                         
@@ -12,11 +16,15 @@
                             
                             <div style="padding:10px;">
                                     <div style="vertical-align: middle;display: table-cell;">
-                                        <img src="image-2.jpg" width="85" height="85">
+                                        <img src="{{imageRoot}}/{{staff.image}}" width="85" height="85">
                                     </div>
                                     <div style="display:inline;display: table-cell;">
                                         <div style="padding-left:10px;">
-                                            <span>Hi your appointment has been fixed.If an element is taller than the element containing it, and it is floated, it will overflow outside of its container. You can use the "clearfix" hack to fix this (see example below).</span>
+                                            <span>
+                                                <strong>{{appointment.service}}</strong> <br>
+                                                with <br>
+                                                <strong>{{staff.staff_name}} </strong>
+                                            </span>
                                         </div>
                                     </div>
                             </div>
@@ -29,9 +37,10 @@
                                         <div style="vertical-align: middle;display: table-cell;width:40%;">
                                                 <strong style="color: #f4ae01;font-size: 20px;">Address:</strong>
                                                 <div style="font-size:16px;">
-                                                    <strong>Dr.Sujatha Muppala,MD,1 Ethel Rd,Edison</strong>
-                                                    <strong>abc@gmail.com</strong>
-                                                    <strong>90780945709</strong>
+                                                    <div><strong>{{business.bus_name}}</strong></div>
+                                                    <div>{{business.address}}</div>
+                                                    <div>{{business.email}}</div> 
+                                                    <div>{{business.phone}}</div> 
                                                 </div>
                                         </div>
                                        
@@ -74,9 +83,8 @@
                             </section>
              -->
                 </div>
-                <div class="col-md-4">
+                <!-- <div class="col-md-4">
                             <div style="margin-top:85px;">
-                               <!--  links for create account, enter password etc -->
                                <form name="signupForm" #bookForm="ngForm" class="form" novalidate>
                                    
                                     <div class="form-group">
@@ -132,6 +140,6 @@
                                   
             
                             </div>
-                </div>
+                </div> -->
         </div>            
 </div>

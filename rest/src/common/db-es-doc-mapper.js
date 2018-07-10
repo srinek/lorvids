@@ -15,7 +15,7 @@ var ddbToESAppointmentDoc = (ddbDoc) => {
 
   var esObj = {};
   var fieldsToCopy = ["checkin","checkout","cost","location",
-             "notes","service","status","time", "staffImage", "staffName", 
+             "notes","service","status","time", "staffName", 
              "busImage", "staffImage", "bus_address", "bus_phone"];
   // ddbColumnName:ESAttributeName
   var fieldsToMap = {"AppointmentId" : "appointment_id", "busId":"bus_id", "staffId":"staff_id", "userEmail":"user_email",

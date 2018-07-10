@@ -30,6 +30,11 @@ export class ConfirmBookingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    console.log("business ", this.business);
+    console.log("appointment ", this.appointment);
+    console.log("staff ", this.staff);
+
     /* this.route.params.subscribe(
       (params : Params) => {
           this.bookingId = params['bookingId'];

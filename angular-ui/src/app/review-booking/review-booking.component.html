@@ -44,12 +44,16 @@
                             <label for="id-phone" class="col-12 col-form-label">Phone</label>
                             <div class="col-12">
                                 <input 
+                                type="phone"
                                 name="uphone" 
                                 id="id-phone" 
                                 [(ngModel)]="userData.phone"
                                 class="form-control"
                                 #uphone = "ngModel"
-                                required phone>
+                                pattern="[0-9]*"
+                                minlength="10"
+                                maxlength="10" 
+                                required>
                                 <span class="help-block" 
                                 [hidden]="uphone.valid || uphone.pristine">
                                 we need your phone number to book the appointment

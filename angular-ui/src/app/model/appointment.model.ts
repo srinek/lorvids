@@ -11,6 +11,12 @@ export class Appointment {
     service : string;
     checkin: Date;
     checkout: Date;
+    busName : string;
+    staffName : string;
+    busImage : string;
+    staffImage : string;
+    bus_address : string;
+    bus_phone : string;
 
     constructor(private json? : string){
         if(json){

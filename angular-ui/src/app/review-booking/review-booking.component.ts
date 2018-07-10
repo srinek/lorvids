@@ -133,6 +133,12 @@ export class ReviewBookingComponent implements OnInit {
     if(this.appointmentForm.value.splInstr){
       this.appointment.notes = this.appointmentForm.value.splInstr;
     }
+    this.appointment.busName = this.business.bus_name;
+    this.appointment.busImage = this.business.defaultImage;
+    this.appointment.bus_address = this.business.address;
+    this.appointment.bus_phone = this.business.phone+"";
+    this.appointment.staffName = this.staff.staff_name;
+    this.appointment.staffImage = this.staff.image;
     this.appointment.service = this.svcSelected.name;
     apptData.user = this.user;
     apptData.appt = this.appointment;
