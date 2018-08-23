@@ -2,3 +2,4 @@
 .vscode/settings.json
 rest/src/config/default.json
 .vscode/launch.json
+google-calendar

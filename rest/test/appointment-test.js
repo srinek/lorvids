@@ -168,7 +168,7 @@ let cancelReq = {
 let appointmentByIdReq = {
   "pathParameters" : 
   {
-      "sId" : "b-test-70-s-f6de196a-1530196200000-bd0a14c2"
+      "sId" : "b-test-70-s-f6de196a-1531409400000-97302aca"
   }
 }
 appointment.getAllAppointmentsByAppointmentId(appointmentByIdReq, null, (error, response) => {
