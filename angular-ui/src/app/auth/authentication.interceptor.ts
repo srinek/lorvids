@@ -23,7 +23,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
             });
         },
         (error) => {
-
+            console.error("no authentication ", error);
         }, 
         () => {
 

@@ -27,6 +27,7 @@ import { User } from '../model/user.model';
 import { UserService } from './user.service';
 import { Category } from '../model/category.model';
 import { AuthenticationService } from './authentication.service';
+import { GoogleAPIService } from './google-api.service';
 
 @Injectable()
 export class FacadeService {
@@ -43,6 +44,7 @@ export class FacadeService {
                 private apptService : ApptService,
                 private s3ImageService : S3ImageService,
                 private userService : UserService,
+                private googleApiService : GoogleAPIService,
                 private authenticationService : AuthenticationService
                ){
 
@@ -175,6 +177,14 @@ export class FacadeService {
 
     public findRouteForSuccessLogin() : Observable<string> {
         return this.userService.findRouteForSuccessLogin();
+    }
+
+    public saveGoogleAPIAuthCode(authCode : string) {
+        
+    }
+
+    public getGoogleAuthUrl() : Observable<string>{
+        return this.googleApiService.getGoogleAuthUrl();
     }
 
     public removequotes(imageName:string) : string{

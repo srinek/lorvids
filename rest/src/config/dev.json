@@ -1,0 +1,11 @@
+{
+    "app" : {
+        "googleapi" : {
+            "auth" : {
+                "client_id" : "37163939861-9e9e52m0kuqsoc7mocqb9mu60ab2ulql.apps.googleusercontent.com",
+                "client_secret" : "aCxRj6S_IGc1fMHZiZKWq53j",
+                "redirect_url" : "http://localhost:4200/addb"
+            }
+        }
+    }
+}

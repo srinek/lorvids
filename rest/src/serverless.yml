@@ -265,30 +265,30 @@ functions:
       - cognitoUserPool:
           pool: lorvids-user-pool
           trigger: PostConfirmation
-  uploadpic:
-    handler: api/imageapi.upload
-    description : upload to s3
-    events:
-      - http:
-          path: savepic/{picid}
-          method: post
-          cors : true
-  uploadBusPic:
-    handler: api/imageapi.uploadBusPic
-    description : upload to s3
-    events:
-      - http:
-          path: saveBusPic
-          method: post
-          cors : true
-  deletepic:
-    handler: api/imageapi.delete
-    description : delete file from s3
-    events:
-      - http:
-          path: pic/{picid}
-          method: delete
-          cors : true
+  #uploadpic:
+  #  handler: api/imageapi.upload
+  #  description : upload to s3
+  #  events:
+  #    - http:
+  #        path: savepic/{picid}
+  #        method: post
+  #        cors : true
+  #uploadBusPic:
+  #  handler: api/imageapi.uploadBusPic
+  #  description : upload to s3
+  #  events:
+  #    - http:
+  #        path: saveBusPic
+  #        method: post
+  #        cors : true
+  #deletepic:
+  #  handler: api/imageapi.delete
+  #  description : delete file from s3
+  #  events:
+  #    - http:
+  #        path: pic/{picid}
+  #        method: delete
+  #        cors : true
   activateUser:
     handler: api/user.activateUser
     description : activate user
@@ -297,14 +297,27 @@ functions:
           path: user/activate/{emailHash}
           method: get
           cors : true
-  passLogin:
-    handler: api/user.loginRoute
-    description : decides the route after successful login
+#  passLogin:
+#    handler: api/user.loginRoute
+#    description : decides the route after successful login
+#    events:
+#      - http:
+#          path: user/loginpass
+#          method: get
+#          cors : true
+  #### google calendar support #########
+  misc:
+    handler: api/misc.misc
+    description : a set of miscellaneous apis
     events:
       - http:
-          path: user/loginpass
-          method: get
-          cors : true
+           path: /
+           method: ANY
+           cors : true
+      - http:
+           path: /{proxy+}
+           method: ANY
+           cors : true
 #      - s3: ${env:BUCKET}
 #      - schedule: rate(10 minutes)
 #      - sns: greeter-topic

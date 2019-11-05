@@ -75,6 +75,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { ConfirmUserComponent } from './auth/confirm-user/confirm-user.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthenticationInterceptor } from './auth/authentication.interceptor';
+import { GoogleAPIService } from './service/google-api.service';
 
 const CONFIG = new AuthServiceConfig([
   {
@@ -155,7 +156,7 @@ export function provideConfig() {
   providers: [
     FacadeService, SearchService, 
     BusinessService, StaffService, 
-    ApptService, S3ImageService, 
+    ApptService, S3ImageService, GoogleAPIService, 
     Logger, UserService, AuthenticationService,
     {
       provide: AuthServiceConfig,

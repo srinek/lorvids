@@ -57,6 +57,9 @@ module.exports.saveCognitoUser = (data) => {
     userData.name = data.name;
     userData.status = "1";
     userData.role = data['custom:role'];
+    if(data.saveAccessToken){
+        userData.tokens = data.tokens;
+    }
     var params = {
         TableName: 'User',
         Item: userData

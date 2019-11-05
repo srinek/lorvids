@@ -5,6 +5,7 @@ import {AuthService, FacebookLoginProvider,
   GoogleLoginProvider, SocialUser} from 'angular4-social-login';
 import { User } from '../../model/user.model';
 import { AuthenticationService } from '../../service/authentication.service';
+import { FacadeService } from '../../service/facade.service';
 
 
 @Component({
@@ -18,12 +19,14 @@ export class BusinessSignupComponent implements OnInit {
   private loggedIn: boolean;
   error : boolean = false ;
   errorMessage : string = "";
+  googleAuthUrl : string = "";
 
   signUpForm: any; 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private authenticationService : AuthenticationService
+    private authenticationService : AuthenticationService,
+    private facadeService : FacadeService
   ) {
     this.signUpForm = {
           "name":"",
@@ -36,27 +39,17 @@ export class BusinessSignupComponent implements OnInit {
   
   // initiate component
   public ngOnInit() {
+    this.facadeService.getGoogleAuthUrl().subscribe( 
+      (url : string ) => {
+        this.googleAuthUrl = url;
+      },
+      (error) => {
+        // error fetching google auth url
+      }
+    );
   }
 
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    .then( res => { // Success
-        this.authService.authState.subscribe(
-         (user) => {
-               console.log(user);
-               this.user = user;
-               this.loggedIn = (user != null);
-           },
-           (err) => {
-             console.error(err);
-           }
-         );
-     }).
-     catch( (error) =>  {
-         console.error(error);
-     });
-   
-  }
+ 
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID)

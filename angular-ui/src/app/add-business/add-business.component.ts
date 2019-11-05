@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {ActivatedRoute, Router, Params} from '@angular/router';
+import {ActivatedRoute, Router, Params, ParamMap} from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import {FacadeService} from '../service/facade.service';
@@ -69,6 +69,15 @@ export class AddBusinessComponent implements OnInit {
         }
         else{
           this.businessLoaded = true;
+        }
+    });
+
+    this.route.queryParamMap.subscribe( 
+      (qParamMap: ParamMap) => {
+        let authCode = qParamMap.get('code');
+        if(authCode){
+          // get auth token and refresh token.
+          
         }
     });
   }
