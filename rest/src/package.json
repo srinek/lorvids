@@ -17,7 +17,7 @@
     "file-type": "^7.4.0",
     "googleapis": "^33.0.0",
     "moment": "^2.20.1",
-    "moment-timezone": "^0.5.14",
+    "moment-timezone": "^0.5.35",
     "serverless-http": "^1.6.0"
   }
 }
